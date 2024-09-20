@@ -8,9 +8,8 @@
  *
  *}
  {* 20150618 LS Adding an outage message *}
-<div id="outageMessage">
-
-</div>
+<!--<div id="outageMessage" style="color: red; margin-bottom: 15px;">DOI assignment unavailable 5/20/2022 5pm PT to 5/21/2022 5pm PT; please do not publish during that time.
+</div>-->
 <div id="navbar">
 	<ul class="menu">
 		{* 20110824 BLH comment out HOME menu item link b/c we aren't using this. *}
@@ -67,6 +66,7 @@
 				<li id="navItem"><a href="{if $navItem.isAbsolute}{$navItem.url|escape}{else}{$navItem.url|escape}{/if}">{if $navItem.isLiteral}{$navItem.name|escape}{else}{translate key=$navItem.name}{/if}</a></li>
 			{/if}
 		{/foreach}
+                
 	</ul>
 </div>
 
