@@ -343,7 +343,7 @@ class TinyMCEPlugin extends GenericPlugin {
 			$baseUrl = $templateManager->get_template_vars('baseUrl');
 			$additionalHeadData = $templateManager->get_template_vars('additionalHeadData');
 			$enableFields = join(',', $enableFields);
-			$allLocales = Locale::getAllLocales();
+			$allLocales = \OjsLocale::getAllLocales();
 			$localeList = array();
 			foreach ($allLocales as $key => $locale) {
 				$localeList[] = OjsString::substr($key, 0, 2);
@@ -401,7 +401,7 @@ class TinyMCEPlugin extends GenericPlugin {
 					entity_encoding : "raw",
 					plugins : "paste,fullscreen",
 					mode : "exact",
-					language : "' . OjsString::substr(Locale::getLocale(), 0, 2) . '",
+					language : "' . OjsString::substr(\OjsLocale::getLocale(), 0, 2) . '",
 					elements : "' . $enableFields . '",
 					relative_urls : false,
 					forced_root_block : false,
@@ -424,7 +424,7 @@ class TinyMCEPlugin extends GenericPlugin {
 	 * @return string
 	 */
 	function getDisplayName() {
-		return Locale::translate('plugins.generic.tinymce.name');
+		return \OjsLocale::translate('plugins.generic.tinymce.name');
 	}
 
 	/**
@@ -432,8 +432,8 @@ class TinyMCEPlugin extends GenericPlugin {
 	 * @return string
 	 */
 	function getDescription() {
-		if ($this->isMCEInstalled()) return Locale::translate('plugins.generic.tinymce.description');
-		return Locale::translate('plugins.generic.tinymce.descriptionDisabled', array('tinyMcePath' => TINYMCE_INSTALL_PATH));
+		if ($this->isMCEInstalled()) return \OjsLocale::translate('plugins.generic.tinymce.description');
+		return \OjsLocale::translate('plugins.generic.tinymce.descriptionDisabled', array('tinyMcePath' => TINYMCE_INSTALL_PATH));
 	}
 
 	/**

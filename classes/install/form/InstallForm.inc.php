@@ -51,10 +51,10 @@ class InstallForm extends Form {
 		parent::Form('install/install.tpl');
 
 		// FIXME Move the below options to an external configuration file?
-		$this->supportedLocales = Locale::getAllLocales();
+		$this->supportedLocales = \OjsLocale::getAllLocales();
 		$this->localesComplete = array();
 		foreach ($this->supportedLocales as $key => $name) {
-			$this->localesComplete[$key] = Locale::isLocaleComplete($key);
+			$this->localesComplete[$key] = \OjsLocale::isLocaleComplete($key);
 		}
 
 		$this->supportedClientCharsets = array (
@@ -63,12 +63,12 @@ class InstallForm extends Form {
 		);
 
 		$this->supportedConnectionCharsets = array (
-			'' => Locale::translate('common.notApplicable'),
+			'' => \OjsLocale::translate('common.notApplicable'),
 			'utf8' => 'Unicode (UTF-8)'
 		);
 
 		$this->supportedDatabaseCharsets = array (
-			'' => Locale::translate('common.notApplicable'),
+			'' => \OjsLocale::translate('common.notApplicable'),
 			'utf8' => 'Unicode (UTF-8)'
 		);
 
@@ -121,7 +121,7 @@ class InstallForm extends Form {
 		$templateMgr->assign('databaseCharsetOptions', $this->supportedDatabaseCharsets);
 		$templateMgr->assign('encryptionOptions', $this->supportedEncryptionAlgorithms);
 		$templateMgr->assign('databaseDriverOptions', $this->checkDBDrivers());
-		$templateMgr->assign('supportsMBString', OjsString::hasMBString() ? Locale::translate('common.yes') : Locale::translate('common.no'));
+		$templateMgr->assign('supportsMBString', OjsString::hasMBString() ? \OjsLocale::translate('common.yes') : \OjsLocale::translate('common.no'));
 		$templateMgr->assign('phpIsSupportedVersion', version_compare(PHP_REQUIRED_VERSION, PHP_VERSION) != 1);
 		$templateMgr->assign('phpRequiredVersion', PHP_REQUIRED_VERSION);
 		$templateMgr->assign('phpVersion', PHP_VERSION);
@@ -141,7 +141,7 @@ class InstallForm extends Form {
 		}
 
 		$this->_data = array(
-			'locale' => Locale::getLocale(),
+			'locale' => \OjsLocale::getLocale(),
 			'additionalLocales' => array(),
 			'clientCharset' => 'utf-8',
 			'connectionCharset' => '',
@@ -259,7 +259,7 @@ class InstallForm extends Form {
 	 */
 	function dbInstallError($errorMsg) {
 		$templateMgr =& TemplateManager::getManager();
-		if (empty($errorMsg)) $errorMsg = Locale::translate('common.error.databaseErrorUnknown');
+		if (empty($errorMsg)) $errorMsg = \OjsLocale::translate('common.error.databaseErrorUnknown');
 		$templateMgr->assign(array('isInstallError' => true, 'dbErrorMsg' => $errorMsg));
 		error_log($errorMsg);
 		$this->display();

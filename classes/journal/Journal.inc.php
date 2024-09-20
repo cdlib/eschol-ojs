@@ -64,7 +64,7 @@ class Journal extends DataObject {
 
 		if (!isset($supportedLocales)) {
 			$supportedLocales = array();
-			$localeNames =& Locale::getAllLocales();
+			$localeNames =& \OjsLocale::getAllLocales();
 
 			$locales = $this->getSetting('supportedLocales');
 			if (!isset($locales) || !is_array($locales)) {
@@ -89,7 +89,7 @@ class Journal extends DataObject {
 
 		if (!isset($supportedLocales)) {
 			$supportedLocales = array();
-			$localeNames =& Locale::getAllLocales();
+			$localeNames =& \OjsLocale::getAllLocales();
 
 			$locales = $this->getSetting('supportedFormLocales');
 			if (!isset($locales) || !is_array($locales)) {
@@ -117,7 +117,7 @@ class Journal extends DataObject {
 
 		$title = null;
 
-		foreach (array(Locale::getLocale(), Locale::getPrimaryLocale()) as $locale) {
+		foreach (array(\OjsLocale::getLocale(), \OjsLocale::getPrimaryLocale()) as $locale) {
 			if (isset($typeArray[$locale]) && $typeArray[$locale]) {
 				if (isset($imageArray[$locale])) $title = $imageArray[$locale];
 			}
@@ -140,7 +140,7 @@ class Journal extends DataObject {
 	function getLocalizedPageHeaderLogo($home = false) {
 		$prefix = $home ? 'home' : 'page';
 		$logoArray = $this->getSetting($prefix . 'HeaderLogoImage');
-		foreach (array(Locale::getLocale(), Locale::getPrimaryLocale()) as $locale) {
+		foreach (array(\OjsLocale::getLocale(), \OjsLocale::getPrimaryLocale()) as $locale) {
 			if (isset($logoArray[$locale])) return $logoArray[$locale];
 		}
 		return null;
@@ -157,7 +157,7 @@ class Journal extends DataObject {
 	 */
 	function getLocalizedFavicon() {
 		$faviconArray = $this->getSetting('journalFavicon');
-		foreach (array(Locale::getLocale(), Locale::getPrimaryLocale()) as $locale) {
+		foreach (array(\OjsLocale::getLocale(), \OjsLocale::getPrimaryLocale()) as $locale) {
 			if (isset($faviconArray[$locale])) return $faviconArray[$locale];
 		}
 		return null;
@@ -250,7 +250,7 @@ class Journal extends DataObject {
 	 * @return string
 	 */
 	function getLocalizedDescription() {
-		return $this->getDescription(Locale::getLocale());
+		return $this->getDescription(\OjsLocale::getLocale());
 	}
 
 	function getJournalDescription() {
@@ -309,10 +309,10 @@ class Journal extends DataObject {
 	}
 
 	function &getLocalizedSetting($name) {
-		$returner = $this->getSetting($name, Locale::getLocale());
+		$returner = $this->getSetting($name, \OjsLocale::getLocale());
 		if ($returner === null) {
 			unset($returner);
-			$returner = $this->getSetting($name, Locale::getPrimaryLocale());
+			$returner = $this->getSetting($name, \OjsLocale::getPrimaryLocale());
 		}
 		return $returner;
 	}

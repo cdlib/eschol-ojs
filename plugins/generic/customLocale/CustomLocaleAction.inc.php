@@ -18,9 +18,9 @@
 class CustomLocaleAction {
 
 	function getLocaleFiles($locale) {
-		if (!Locale::isLocaleValid($locale)) return null;
+		if (!\OjsLocale::isLocaleValid($locale)) return null;
 
-		$localeFiles =& Locale::makeComponentMap($locale);
+		$localeFiles =& \OjsLocale::makeComponentMap($locale);
 		$plugins =& PluginRegistry::loadAllPlugins();
 		foreach (array_keys($plugins) as $key) {
 			$plugin =& $plugins[$key];

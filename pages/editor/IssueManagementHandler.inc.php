@@ -270,7 +270,7 @@ class IssueManagementHandler extends EditorHandler {
 		$this->validate($issueId, true);
 
 		$formLocale = $args[1];
-		if (!Locale::isLocaleValid($formLocale)) {
+		if (!\OjsLocale::isLocaleValid($formLocale)) {
 			Request::redirect(null, null, 'issueData', $issueId);
 		}
 
@@ -379,8 +379,8 @@ class IssueManagementHandler extends EditorHandler {
 		$templateMgr->assign_by_ref('sections', $sections);
 
 		$templateMgr->assign('accessOptions', array(
-			ARTICLE_ACCESS_ISSUE_DEFAULT => Locale::Translate('editor.issues.default'),
-			ARTICLE_ACCESS_OPEN => Locale::Translate('editor.issues.open')
+			ARTICLE_ACCESS_ISSUE_DEFAULT => \OjsLocale::Translate('editor.issues.default'),
+			ARTICLE_ACCESS_OPEN => \OjsLocale::Translate('editor.issues.open')
 		));
 
 		import('classes.issue.IssueAction');
@@ -733,7 +733,7 @@ class IssueManagementHandler extends EditorHandler {
 		import('plugins.importexport.native.NativeExportDom');
 		$issueNode =& NativeExportDom::generateIssueDom($doc, $journal, $issue);
 		XMLCustomWriter::appendChild($doc, $issueNode);
-		
+
 		//
 		//OUTPUT XML TO FILE SYSTEM
 		//
@@ -741,7 +741,7 @@ class IssueManagementHandler extends EditorHandler {
 		if (($h = fopen($outputFile, 'wb'))===false) return false;
 		fwrite($h, XMLCustomWriter::getXML($doc));
 		fclose($h);
-		
+
 		//
 		// CONVERT XML TO ESCHOL FORMAT
 		//
@@ -757,8 +757,8 @@ class IssueManagementHandler extends EditorHandler {
 		//$issueNumber = $issue->get;
         //find out if it has already been published:
         $isBackIssue = $issue->getPublished() > 0 ? true: false;
-		
-		
+
+
 
 		if (($issueVolume == 1) && ($issueNumber == 1) && ((gethostname() == 'pub-submit2-prd'))){
 		    $message = $journalTitle . ' has just published its first issue, Volume ' . $issueVolume . ' Issue ' . $issueNumber;
@@ -772,8 +772,8 @@ class IssueManagementHandler extends EditorHandler {
 		else {
 		  error_log("AIP publication only");
 		}
-		
-		
+
+
 		//
 		//FOR JOURNALS WITH A DOI, GENERATE CROSSREF FILES by submitting each article to the plugin AND SEND TO EZID
 		//
@@ -822,13 +822,13 @@ class IssueManagementHandler extends EditorHandler {
 					 $ezidIdentifier = 'https://ezid.cdlib.org/id/doi:' . $articleDOI;
 					 error_log("EZID IDENTIFIER $ezidIdentifier");
                      //now pass this to EZID:
-					
+
                     if ($crossRefXML !=""){
 					   //First escape % and newlines
 					   $crossRefXML = str_replace("\n", "%0A", str_replace("%", "%25", $crossRefXML));
 					   //error_log("Cleaned CrossRefFile $crossRefXML");
 					   error_log("crossRefXML is not empty so sending to EZID using create operation");
-                       
+
 					  $input = "_crossref: yes\n" . "_profile: crossref\n" . "_target: $escholURL\n" ."_owner: $owner[$journalPath]\n" . "crossref: $crossRefXML";
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_URL, $ezidIdentifier);
@@ -869,8 +869,8 @@ class IssueManagementHandler extends EditorHandler {
 		else {
 		   error_log("$journalTitle does not have a DOI, so no CrossRef/EZID export.");		   
 		}
-		
-		
+
+
 		return true;
 		//exec("/apps/eschol/subi/ojsConvert/convert.py $outputFile",$conversionOutput,$returnValue); //returns 0 on success
 		//if(!$returnValue) {

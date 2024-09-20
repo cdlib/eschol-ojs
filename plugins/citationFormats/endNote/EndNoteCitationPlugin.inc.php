@@ -34,15 +34,15 @@ class EndNoteCitationPlugin extends CitationPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.citationFormats.endNote.displayName');
+		return \OjsLocale::translate('plugins.citationFormats.endNote.displayName');
 	}
 
 	function getCitationFormatName() {
-		return Locale::translate('plugins.citationFormats.endNote.citationFormatName');
+		return \OjsLocale::translate('plugins.citationFormats.endNote.citationFormatName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.citationFormats.endNote.description');
+		return \OjsLocale::translate('plugins.citationFormats.endNote.description');
 	}
 
 	/**

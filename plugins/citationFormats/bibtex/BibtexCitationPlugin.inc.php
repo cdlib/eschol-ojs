@@ -38,15 +38,15 @@ class BibtexCitationPlugin extends CitationPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.citationFormats.bibtex.displayName');
+		return \OjsLocale::translate('plugins.citationFormats.bibtex.displayName');
 	}
 
 	function getCitationFormatName() {
-		return Locale::translate('plugins.citationFormats.bibtex.citationFormatName');
+		return \OjsLocale::translate('plugins.citationFormats.bibtex.citationFormatName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.citationFormats.bibtex.description');
+		return \OjsLocale::translate('plugins.citationFormats.bibtex.description');
 	}
 
 	/**

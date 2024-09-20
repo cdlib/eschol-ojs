@@ -540,25 +540,25 @@ class NativeExportDom {
 
 		// FIXME: These should be constants!
 		switch ($suppFile->getType()) {
-			case Locale::translate('author.submit.suppFile.researchInstrument'):
+			case \OjsLocale::translate('author.submit.suppFile.researchInstrument'):
 				$suppFileType = 'research_instrument';
 				break;
-			case Locale::translate('author.submit.suppFile.researchMaterials'):
+			case \OjsLocale::translate('author.submit.suppFile.researchMaterials'):
 				$suppFileType = 'research_materials';
 				break;
-			case Locale::translate('author.submit.suppFile.researchResults'):
+			case \OjsLocale::translate('author.submit.suppFile.researchResults'):
 				$suppFileType = 'research_results';
 				break;
-			case Locale::translate('author.submit.suppFile.transcripts'):
+			case \OjsLocale::translate('author.submit.suppFile.transcripts'):
 				$suppFileType = 'transcripts';
 				break;
-			case Locale::translate('author.submit.suppFile.dataAnalysis'):
+			case \OjsLocale::translate('author.submit.suppFile.dataAnalysis'):
 				$suppFileType = 'data_analysis';
 				break;
-			case Locale::translate('author.submit.suppFile.dataSet'):
+			case \OjsLocale::translate('author.submit.suppFile.dataSet'):
 				$suppFileType = 'data_set';
 				break;
-			case Locale::translate('author.submit.suppFile.sourceText'):
+			case \OjsLocale::translate('author.submit.suppFile.sourceText'):
 				$suppFileType = 'source_text';
 				break;
 			default:

@@ -324,7 +324,7 @@ class UserManagementForm extends Form {
 
 		$locales = array();
 		foreach ($this->getData('userLocales') as $locale) {
-			if (Locale::isLocaleValid($locale) && in_array($locale, $availableLocales)) {
+			if (\OjsLocale::isLocaleValid($locale) && in_array($locale, $availableLocales)) {
 				array_push($locales, $locale);
 			}
 		}

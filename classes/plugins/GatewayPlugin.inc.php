@@ -57,12 +57,12 @@ class GatewayPlugin extends Plugin {
 		if ($this->getEnabled()) {
 			$verbs[] = array(
 				'disable',
-				Locale::translate('manager.plugins.disable')
+				\OjsLocale::translate('manager.plugins.disable')
 			);
 		} else {
 			$verbs[] = array(
 				'enable',
-				Locale::translate('manager.plugins.enable')
+				\OjsLocale::translate('manager.plugins.enable')
 			);
 		}
 		return $verbs;

@@ -37,9 +37,9 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 	$dupCtr = 0;
 	$n = 0;
 	foreach ($importParentDir as $dir) {
-		
+
 		$journalPath = $dir[0];
-	
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// GET ARRAY OF ARTICLE DIRS
 		//
@@ -90,13 +90,13 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 								}
 							}
 						}
-						
+
 					}
 				}
 			}
 		}
-		
-		
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		//
@@ -104,9 +104,9 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 		//
 		$article_settings_exists = 1;
 		foreach($parentDirs as $dir) {
-			
+
 			if(substr($dir,0,1) != '.') {
-				
+
 				//set full file path
 				if($unpublished) {
 					$currImportFile = $importHome . $journalPath . 'unpublished/' . $dir . '/' . $fileName;
@@ -114,7 +114,7 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 				} else {
 					$currImportFile = $grandparentPath . $dir . '/' . $fileName;
 				}
-				
+
 				//echo "\ncurrImportFile: $currImportFile\n";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 				//
@@ -125,22 +125,22 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 				if (file_exists($currImportFile)) {
 					//open file
 					$handle = fopen($currImportFile, "r");
-					
+
 					//clear variables
 					$article_id = 0;				
 					$article_settings_exists = 1;
 					$status_id = 1; //default 1, 'queued'
 					$numRows = count(file($currImportFile));
-					
+
 					//echo "\n**** $journalPath$dir **** \n";
 					//echo "\neschol_articleid: $eschol_articleid\n";
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////								
 					//FOR EACH ROW IN THE HISTORY FILE
 					while (($data = fgetcsv($handle, 1000, "\t")) !== FALSE) {
-						
+
 						if($article_settings_exists==0) continue;
-						
+
 						$user_id = 0;
 						$date_logged = 'NULL';
 						$origMessage = '';
@@ -148,9 +148,9 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 						$adminEmail = 'NULL';
 						$forEmail = '';
 						$num = count($data);
-						
+
 						if($row > 1) {
-							
+
 							//GET DATA VALUES
 							if($historyType == "E") {
 								$date_logged = $data[0];
@@ -172,7 +172,7 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 							} else {
 								die("\nERROR: historyType = $historyType. historyType must be 'E' or 'R'");
 							}
-							
+
 							//CHECK FOR REQUIRED DATA VALUES
 							if($adminEmail == '' or $adminEmail == 'NULL') {
 								//echo "\nERROR: Admin Email not populated for $currImportFile Line: $row NumFields in Line: $num Not importing this line.\n";
@@ -187,7 +187,7 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 								echo "\nERROR: Event Message not populated for $currImportFile Line: $row NumFields in Line: $num Not importing this line.\n";
 								continue;
 							}
-							
+
 							//ADD RECIPIENT NAME & EMAIL TO EVENT MESSAGE
 							if($forEmail != '') {
 								$message .= " ($forLName $forFName, $forEmail)";
@@ -216,13 +216,13 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 								if(!$result) {
 									die("\nInvalid query: " . mysql_error() . "\n");
 								} 
-								
+
 								if (mysql_num_rows($result)==0) {
 									echo "\n**ALERT** No article_settings record exists with eschol article ID or eschol_submission_path = '$article_link'.\nQuery: $articleid_query\nNo history created for this article.\n";
 									$article_settings_exists = 0;
 									continue;
 								}
-								
+
 								$article_id = mysql_result($result,0);								
 								//echo "\narticle_id: $article_id\n";
 							}
@@ -233,21 +233,21 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 							//
 							$userid_query = 'SELECT user_id FROM users ';
 							$userid_query .= "WHERE email = '$adminEmail'";
-							
+
 							//echo "\nuserid_query: $userid_query\n";
-							
+
 							$userid_query_result = mysql_query($userid_query);
-							
+
 							if(!$userid_query_result) {
 								die("\nInvalid query: " . mysql_error() . "\n");
 							} 
-							
+
 							$num_userid_rows = mysql_num_rows($userid_query_result); //not sure i need this
 							if ($num_userid_rows > 0) {
 								$user_id = mysql_result($userid_query_result, 0);
 								//echo "\nuser_id after userid_query: $user_id\n";
 							}							
-							
+
 							//echo "\nuser_id: $user_id\n";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
@@ -265,8 +265,8 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 								}
 								//echo "article_id: $article_id\ncurrDbStatus: $currDbStatus\n";
 							}
-							
-							
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 							//
 							// UPDATE ARTICLE STATUS
@@ -283,7 +283,7 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 										$status_id = 1; //queued
 									}
 								}
-								
+
 								$status_insert_stmt = "UPDATE articles SET status = $status_id WHERE article_id = $article_id";
 								//echo "origMessage: $origMessage\nstatus_insert_stmt: $status_insert_stmt\n\n";
 								$result = mysql_query($status_insert_stmt);
@@ -292,7 +292,7 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 								}			
 								$statusesUpdated++;
 							}
-		
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 							//CHECK FOR KEY DATA BEFORE RUNNING QUERY
 							//
@@ -313,7 +313,7 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 							$dup_check_stmt = "SELECT * FROM article_event_log ";
 							$dup_check_stmt .= "WHERE article_id = $article_id AND user_id = $user_id AND date_logged = '$date_logged' AND message LIKE '%" . mysql_real_escape_string($origMessage) . "%'";
 							//echo "\ndup_check_stmt: $dup_check_stmt\n";
-							
+
 							$dup_check_result = mysql_query($dup_check_stmt);
 							if(!$dup_check_result) {
 								die("\nInvalid query: " . mysql_error() . "\n");
@@ -330,10 +330,10 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 							$insert_stmt = 'INSERT INTO article_event_log ';
 							$insert_stmt .= '(article_id, user_id, date_logged, log_level, event_type, assoc_type, assoc_id, message)';
 							$insert_stmt .= " VALUES ($article_id, $user_id, '$date_logged', 'N', 0, 0, $user_id, '" . mysql_real_escape_string($message) . "')";
-							
+
 							//echo "\ndup_check_stmt: $dup_check_stmt\n";
 							//echo "insert_stmt: $insert_stmt\n";
-							
+
 							$result = mysql_query($insert_stmt);
 							if(!$result) {
 								die("\nInvalid query: " . mysql_error() . "\n");
@@ -345,7 +345,7 @@ function import_history($importHome,$importParentDir,$unpublished,$historyType) 
 						$row++;
 
 					}
-					
+
 					fclose($handle);
 				}
 			} //end if($dir != '.' && $dir != '..')

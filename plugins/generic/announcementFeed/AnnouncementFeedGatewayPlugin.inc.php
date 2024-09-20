@@ -45,11 +45,11 @@ class AnnouncementFeedGatewayPlugin extends GatewayPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.generic.announcementfeed.displayName');
+		return \OjsLocale::translate('plugins.generic.announcementfeed.displayName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.generic.announcementfeed.description');
+		return \OjsLocale::translate('plugins.generic.announcementfeed.description');
 	}
 
 	/**

@@ -61,8 +61,8 @@ class Install extends PKPInstall {
 			// Add insert statements for default data
 			// FIXME use ADODB data dictionary?
 			$this->executeSQL(sprintf('INSERT INTO site (primary_locale, installed_locales) VALUES (\'%s\', \'%s\')', $this->getParam('locale'), join(':', $this->installedLocales)));
-			$this->executeSQL(sprintf('INSERT INTO site_settings (setting_name, setting_type, setting_value, locale) VALUES (\'%s\', \'%s\', \'%s\', \'%s\')', 'title', 'string', addslashes(Locale::translate(INSTALLER_DEFAULT_SITE_TITLE)), $this->getParam('locale')));
-			$this->executeSQL(sprintf('INSERT INTO site_settings (setting_name, setting_type, setting_value, locale) VALUES (\'%s\', \'%s\', \'%s\', \'%s\')', 'contactName', 'string', addslashes(Locale::translate(INSTALLER_DEFAULT_SITE_TITLE)), $this->getParam('locale')));
+			$this->executeSQL(sprintf('INSERT INTO site_settings (setting_name, setting_type, setting_value, locale) VALUES (\'%s\', \'%s\', \'%s\', \'%s\')', 'title', 'string', addslashes(\OjsLocale::translate(INSTALLER_DEFAULT_SITE_TITLE)), $this->getParam('locale')));
+			$this->executeSQL(sprintf('INSERT INTO site_settings (setting_name, setting_type, setting_value, locale) VALUES (\'%s\', \'%s\', \'%s\', \'%s\')', 'contactName', 'string', addslashes(\OjsLocale::translate(INSTALLER_DEFAULT_SITE_TITLE)), $this->getParam('locale')));
 			$this->executeSQL(sprintf('INSERT INTO site_settings (setting_name, setting_type, setting_value, locale) VALUES (\'%s\', \'%s\', \'%s\', \'%s\')', 'contactEmail', 'string', addslashes($this->getParam('adminEmail')), $this->getParam('locale')));
 			$this->executeSQL(sprintf('INSERT INTO users (username, first_name, last_name, password, email, date_registered, date_last_login) VALUES (\'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\')', $this->getParam('adminUsername'), $this->getParam('adminUsername'), $this->getParam('adminUsername'), Validation::encryptCredentials($this->getParam('adminUsername'), $this->getParam('adminPassword'), $this->getParam('encryption')), $this->getParam('adminEmail'), Core::getCurrentDate(), Core::getCurrentDate()));
 			$this->executeSQL(sprintf('INSERT INTO roles (journal_id, user_id, role_id) VALUES (%d, (SELECT user_id FROM users WHERE username = \'%s\'), %d)', 0, $this->getParam('adminUsername'), ROLE_ID_SITE_ADMIN));
@@ -94,8 +94,8 @@ class Install extends PKPInstall {
 			}
 
 			$siteSettingsDao =& DAORegistry::getDAO('SiteSettingsDAO');
-			$siteSettingsDao->updateSetting('title', array($locale => Locale::translate(INSTALLER_DEFAULT_SITE_TITLE)), null, true);
-			$siteSettingsDao->updateSetting('contactName', array($locale => Locale::translate(INSTALLER_DEFAULT_SITE_TITLE)), null, true);
+			$siteSettingsDao->updateSetting('title', array($locale => \OjsLocale::translate(INSTALLER_DEFAULT_SITE_TITLE)), null, true);
+			$siteSettingsDao->updateSetting('contactName', array($locale => \OjsLocale::translate(INSTALLER_DEFAULT_SITE_TITLE)), null, true);
 			$siteSettingsDao->updateSetting('contactEmail', array($locale => $this->getParam('adminEmail')), null, true);
 
 			// Add initial site administrator user

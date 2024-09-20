@@ -44,8 +44,8 @@ class StudentThesisForm extends Form {
 		$thesisPlugin->import('Thesis');
 
 		$this->validDegrees = array (
-			THESIS_DEGREE_MASTERS => Locale::translate('plugins.generic.thesis.manager.degree.masters'),
-			THESIS_DEGREE_DOCTORATE => Locale::translate('plugins.generic.thesis.manager.degree.doctorate')
+			THESIS_DEGREE_MASTERS => \OjsLocale::translate('plugins.generic.thesis.manager.degree.masters'),
+			THESIS_DEGREE_DOCTORATE => \OjsLocale::translate('plugins.generic.thesis.manager.degree.doctorate')
 		);
 
 		import('lib.pkp.classes.captcha.CaptchaManager');
@@ -260,13 +260,13 @@ class StudentThesisForm extends Form {
 				$thesisContactSignature .= "\n" . $thesisMailingAddress;
 			}
 			if (!empty($thesisPhone)) {
-				$thesisContactSignature .= "\n" . Locale::Translate('user.phone') . ': ' . $thesisPhone;
+				$thesisContactSignature .= "\n" . \OjsLocale::Translate('user.phone') . ': ' . $thesisPhone;
 			}
 			if (!empty($thesisFax)) {
-				$thesisContactSignature .= "\n" . Locale::Translate('user.fax') . ': ' . $thesisFax;
+				$thesisContactSignature .= "\n" . \OjsLocale::Translate('user.fax') . ': ' . $thesisFax;
 			}
 
-			$thesisContactSignature .= "\n" . Locale::Translate('user.email') . ': ' . $thesisEmail;
+			$thesisContactSignature .= "\n" . \OjsLocale::Translate('user.email') . ': ' . $thesisEmail;
 			$studentName = $thesis->getStudentFirstName() . ' ' . $thesis->getStudentLastName();
 			$supervisorName = $thesis->getSupervisorFirstName() . ' ' . $thesis->getSupervisorLastName();
 
@@ -276,7 +276,7 @@ class StudentThesisForm extends Form {
 				'thesisEmail' => $thesisEmail,
 				'title' => $thesis->getTitle(),
 				'studentName' => $studentName,
-				'degree' => Locale::Translate($thesis->getDegreeString()),
+				'degree' => \OjsLocale::Translate($thesis->getDegreeString()),
 				'degreeName' => $thesis->getDegreeName(),
 				'department' => $thesis->getDepartment(),
 				'university' =>	$thesis->getUniversity(),

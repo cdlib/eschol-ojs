@@ -48,7 +48,7 @@ class DOAJPlugin extends ImportExportPlugin {
 	 * @return string
 	 */
 	function getDisplayName() {
-		return Locale::translate('plugins.importexport.doaj.displayName');
+		return \OjsLocale::translate('plugins.importexport.doaj.displayName');
 	}
 
 	/**
@@ -56,7 +56,7 @@ class DOAJPlugin extends ImportExportPlugin {
 	 * @return string
 	 */
 	function getDescription() {
-		return Locale::translate('plugins.importexport.doaj.description');
+		return \OjsLocale::translate('plugins.importexport.doaj.description');
 	}
 
 	/**
@@ -132,7 +132,7 @@ class DOAJPlugin extends ImportExportPlugin {
 			'issn' => $issn,
 			'eissn' => $journal->getSetting('onlineIssn'),
 			'pub' => $journal->getSetting('publisherInstitution'),
-			'language' => Locale::getLocale(),
+			'language' => \OjsLocale::getLocale(),
 			'keywords' => $journal->getLocalizedSetting('searchKeywords'),
 			'contact_person' => $journal->getSetting('contactName'),
 			'contact_email' => $journal->getSetting('contactEmail')

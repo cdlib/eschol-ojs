@@ -68,14 +68,14 @@ class FontSizeBlockPlugin extends BlockPlugin {
 	 * @return String
 	 */
 	function getDisplayName() {
-		return Locale::translate('plugins.block.fontSize.displayName');
+		return \OjsLocale::translate('plugins.block.fontSize.displayName');
 	}
 
 	/**
 	 * Get a description of the plugin.
 	 */
 	function getDescription() {
-		return Locale::translate('plugins.block.fontSize.description');
+		return \OjsLocale::translate('plugins.block.fontSize.description');
 	}
 
 	/**

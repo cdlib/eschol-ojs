@@ -67,14 +67,14 @@ class DevelopedByBlockPlugin extends BlockPlugin {
 	 * @return String
 	 */
 	function getDisplayName() {
-		return Locale::translate('plugins.block.developedBy.displayName');
+		return \OjsLocale::translate('plugins.block.developedBy.displayName');
 	}
 
 	/**
 	 * Get a description of the plugin.
 	 */
 	function getDescription() {
-		return Locale::translate('plugins.block.developedBy.description');
+		return \OjsLocale::translate('plugins.block.developedBy.description');
 	}
 }
 

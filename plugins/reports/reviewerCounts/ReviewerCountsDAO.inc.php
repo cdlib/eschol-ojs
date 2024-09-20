@@ -26,8 +26,8 @@ class ReviewerCountsDAO extends DAO {
 	 * @return array
 	 */
 	function getReviewerCounts($journalId) {
-		$primaryLocale = Locale::getPrimaryLocale();
-		$locale = Locale::getLocale();
+		$primaryLocale = \OjsLocale::getPrimaryLocale();
+		$locale = \OjsLocale::getLocale();
 
 		$result =& $this->retrieve(
 			'SELECT users.user_id AS reviewerid,

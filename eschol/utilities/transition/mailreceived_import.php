@@ -148,7 +148,7 @@ function import_emails($importHome,$importParentDir,$unpublished) {
 									$firstSpacePos = strpos($line,' ',5); //22
 									$fromAddress = substr($line,5,$firstSpacePos - 5); //17
 									//echo "senderEmail: $fromAddress\n";
-								
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 									//
 									// 	GET DATE SENT
@@ -158,7 +158,7 @@ function import_emails($importHome,$importParentDir,$unpublished) {
 									$dateSent = strtotime($dateSent);
 									$dateSent = date('Y-m-d H:i:s',$dateSent);
 									//echo "dateSent: $dateSent\n";
-								
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 									//
 									// 	GET SENDER ID
@@ -167,19 +167,19 @@ function import_emails($importHome,$importParentDir,$unpublished) {
 									if($fromAddress != '') {
 										$userid_query = 'SELECT user_id FROM users ';
 										$userid_query .= "WHERE email = '$fromAddress'";
-										
+
 										//echo "\nuserid_query: $userid_query\n";
-										
+
 										$userid_query_result = mysql_query($userid_query);
-										
+
 										if(!$userid_query_result) {
 											die("\nInvalid query: " . mysql_error() . "\nuserid_query: $userid_query\n");
 										} 
-										
+
 										$num_userid_rows = mysql_num_rows($userid_query_result); //not sure i need this
 										if ($num_userid_rows > 0) {
 											$senderId = mysql_result($userid_query_result, 0);
-											
+
 										}
 										//echo "senderId: $senderId\n";
 									}
@@ -216,7 +216,7 @@ function import_emails($importHome,$importParentDir,$unpublished) {
 									$subject = "[bp email log] " . trim(substr($line,8));
 									//echo "subject: $subject\n";
 								}
-								
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 							//
 							// 	BODY

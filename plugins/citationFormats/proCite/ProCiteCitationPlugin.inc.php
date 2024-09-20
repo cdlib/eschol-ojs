@@ -34,15 +34,15 @@ class ProCiteCitationPlugin extends CitationPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.citationFormats.proCite.displayName');
+		return \OjsLocale::translate('plugins.citationFormats.proCite.displayName');
 	}
 
 	function getCitationFormatName() {
-		return Locale::translate('plugins.citationFormats.proCite.citationFormatName');
+		return \OjsLocale::translate('plugins.citationFormats.proCite.citationFormatName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.citationFormats.proCite.description');
+		return \OjsLocale::translate('plugins.citationFormats.proCite.description');
 	}
 
 	/**

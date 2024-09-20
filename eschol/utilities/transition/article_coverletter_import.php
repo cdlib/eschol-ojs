@@ -40,13 +40,13 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 		$journalPath = $currJournalInfo[0];
 		$eschol_articleid_begin = $currJournalInfo[1];
 		$journalId = $currJournalInfo[2];
-		
+
 		$journalDirs = array();
 		$journalDirs = get_import_dirs($journalPath,$journalId,$importHome,$unpublished);
-		
+
 		//echo "\njournalDirs:\n";
 		//print_r($journalDirs);
-		
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//
 		// walk the directories & do the import
@@ -54,11 +54,11 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 		$emailLogsCreated = 0;
 		$dupCtr = 0;
 		$n = 0;
-		
+
 		foreach($journalDirs as $dir) {	
 			$eschol_articleid = '';
 			if(substr($dir,0,1) != '.') {	
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//
 				// get OJS article ID
@@ -75,7 +75,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 				//
 				// PROCESS cover.[fileType].[timestamp] files
 				//
-				
+
 				$articleFileListing = array();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
@@ -99,9 +99,9 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 					$fileType = '';
 					$timestamp = '';
 					$dateUploaded = '';
-					
+
 					if(substr($fileName,0,6) != 'cover.') continue;
-					
+
 					$filePath = $fullDirPath . '/' . $fileName;
 					//echo "\nfilePath: $filePath\n";
 
@@ -115,7 +115,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 					}	
 					//echo "\nfileNameElements: $fileNameElements\n";
 					//print_r($fileNameElements);
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 					//
 					// GET FILE TYPE & EXTENSION
@@ -130,7 +130,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 					} else {
 						echo "\n**ALERT** File Type not recognized. \nfilePath: $filePath\nfileType: $fileType\n";
 					}
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 					//
 					// GET DATE UPLOADED
@@ -144,7 +144,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 					// GET FILE SIZE
 					//
 					$fileSize = sprintf("%u",filesize($filePath));
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 					//
 					// GET ASSOCIATED ARTICLE FILE ID
@@ -170,7 +170,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 							}
 						}
 					}
-					
+
 					//echo "\nassocFileId: $assocFileId\nassocFileType:$assocFileType\n";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
@@ -184,9 +184,9 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 						$newFileName = '';	
 						$newFileId = 0;
 						$newType = '';	
-						
+
 						if($fileType == 'application/msword') {
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 							//
 							// UPLOAD FILE TO article_files
@@ -200,9 +200,9 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 								$newType = 'note';
 								$typeAbbr = 'NT';	
 							}
-					
+
 							if($newType != '') {
-	
+
 								//echo "\n----------------------------------------------------------------------------------\n";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -211,12 +211,12 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 								//
 								$articleFileDupQuery = "SELECT * FROM article_files WHERE article_id = $article_id AND original_file_name = '" . mysql_real_escape_string($fileName) . "' AND date_uploaded = '$dateUploaded'";
 								//echo "\narticleFileDupQuery: $articleFileDupQuery\n";
-								
+
 								$articleFileDupResult = mysql_query($articleFileDupQuery);
 								if($articleFileDupResult === FALSE) {
 									die("\nInvalid query: " . mysql_error() . "\narticleFileDupQuery: $articleFileDupQuery\n");
 								}
-								
+
 								if(mysql_num_rows($articleFileDupResult) > 0) {
 									$dupCtr++;
 								} else {
@@ -228,9 +228,9 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 									$insertArticleFileQuery = "INSERT INTO article_files ";
 									$insertArticleFileQuery .= "(revision, article_id, file_name, file_type, file_size, original_file_name, type, date_uploaded, date_modified, round) ";
 									$insertArticleFileQuery .= "VALUES ($revision, $article_id, '" . mysql_real_escape_string($fileName) . "', '$fileType', $fileSize, '" . mysql_real_escape_string($fileName) . "', '$newType', '$dateUploaded', '$dateUploaded', 1)";							
-									
+
 									//echo "\ninsertArticleFileQuery: $insertArticleFileQuery\n";
-									
+
 									$insertArticleFileResult = mysql_query($insertArticleFileQuery);
 									if(!$insertArticleFileResult) {
 										die("\nInvalid query: " . mysql_error() . "\n");
@@ -238,9 +238,9 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 										$newFileId = mysql_insert_id();
 										$articleFilesImported++;
 									}
-									
+
 									//echo "\nnewFileId: $newFileId\n";
-									
+
 									if($newFileId == 0) {
 										die("ERROR: Could not get newFileId after INSERT INTO article_files for file: $filePath");
 									}
@@ -251,10 +251,10 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 									$newFileName = $article_id . '-' . $newFileId . '-' . $revision . '-' . $typeAbbr . '.' . $extension;
 									//echo "Current Import File: $filePath\n";
 									//echo "New File name: $newFileName\n";
-									
+
 									$updateFileNameQuery = "UPDATE article_files SET file_name = '$newFileName' WHERE file_id = $newFileId AND article_id = $article_id AND type = '$newType'";
 									//echo "\nupdateFileNameQuery: $updateFileNameQuery\n";
-									
+
 									$updateFileNameResult = mysql_query($updateFileNameQuery);
 									if(!$updateFileNameResult) {
 										die("\nInvalid query: " . mysql_error() . "\n");
@@ -266,7 +266,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 									//	
 									$uploadPath = $baseUploadDir . '/journals/' . $journalId . '/articles/' . $article_id . '/' . $newType . '/';
 									//echo "\nuploadPath: $uploadPath\n";
-									
+
 									//
 									// create dirs and subdirs if necessary
 									//
@@ -274,7 +274,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 										//echo "\n     Creating Directory!!!\n\n";
 										mkdir($uploadPath,0755,1);
 									}
-									
+
 									//
 									// copy file to dir
 									//
@@ -291,7 +291,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 										// CHECK FOR DUPLICATES BEFORE CREATING SUPP FILE REC
 										//
 										$suppFileDupQuery = "SELECT * FROM article_supplementary_files WHERE file_id = $newFileId AND article_id = $article_id AND date_submitted = '$dateUploaded'";
-										
+
 										$suppFileDupResult = mysql_query($suppFileDupQuery);
 										if($suppFileDupResult === FALSE) {
 											die("\nInvalid query: " . mysql_error() . "\nsuppFileDupQuery: $suppFileDupQuery\n");
@@ -304,7 +304,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 											$suppFileQuery .= "(file_id, article_id, type, show_reviewers, date_submitted) ";
 											$suppFileQuery .= "VALUES ($newFileId, $article_id, 'Cover Letter', 0, '$dateUploaded')";
 											//echo "\nsuppFileQuery: $suppFileQuery\n";
-											
+
 											$suppFileResult = mysql_query($suppFileQuery);
 											if($suppFileResult === FALSE) {
 												die("\nInvalid query: " . mysql_error() . "\nsuppFileQuery: $suppFileQuery\n");
@@ -341,7 +341,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 							if(file_exists($filePath)) {
 								$commentText = "[bp coverletter]\n" . file_get_contents($filePath);
 								//echo "\ncommentText after file_get_contents: $commentText\n";
-								
+
 								if($commentText == '') {
 									echo "\n**ALERT** Txt file $filePath was empty.\n";
 								}									
@@ -351,9 +351,9 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 						} else {
 							echo "ALERT: unrecognized fileType: $fileType\nfilePath: $filePath\n";
 						}
-						
+
 						//echo "\ncommentText: $commentText\n";	
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 						//
 						// POPULATE articles.comments_to_ed
@@ -365,14 +365,14 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 							//  CHECK FOR DUPLICATES BEFORE POPULATING articles.comments_to_ed
 							//	
 							$coverLetterDupQuery = "SELECT * FROM articles WHERE article_id = $article_id AND comments_to_ed != '' AND comments_to_ed IS NOT NULL AND comments_to_ed NOT LIKE '%" . mysql_real_escape_string($commentText) . "%'";
-							
+
 							//echo "\ncoverLetterDupQuery: $coverLetterDupQuery\n";
-							
+
 							$coverLetterDupResult = mysql_query($coverLetterDupQuery);
 							if($coverLetterDupResult === FALSE) {
 								die("\nInvalid query: " . mysql_error() . "\ncoverLetterDupQuery: $coverLetterDupQuery\n");
 							}
-							
+
 							if(mysql_num_rows($coverLetterDupResult) > 0) {
 								$dupCtr++;
 							} else {
@@ -397,7 +397,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 						//
 						} elseif($assocFileType == 'submission/editor' OR $assocFileType == 'submission/review') {
 							$title = "[bp coverletter] Cover Letter for $assocFileName";
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							//
 							// CHECK FOR DUPLICATES BEFORE CREATING notes RECORD
@@ -408,7 +408,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 							if($notesDupResult === FALSE) {
 								die("\nInvalid query: " . mysql_error() . "\nnotesDupQuery: $notesDupQuery\n");
 							}
-							
+
 							if(mysql_num_rows($notesDupResult) > 0) {
 								$dupCtr++;
 							} else {
@@ -420,7 +420,7 @@ function import_coverletters($importHome,$importParentDir,$unpublished,$baseUplo
 								$notesImportQuery .= "(assoc_type, assoc_id, user_id, date_created, date_modified, title, file_id, context_id, contents) ";
 								$notesImportQuery .= "VALUES (257, $article_id, 1, '$dateUploaded', '$dateUploaded', '$title', $newFileId, $journalId, '" . mysql_real_escape_string($commentText) . "')";
 								//echo "\nnotesImportQuery: $notesImportQuery\n";
-								
+
 								$notesImportResult = mysql_query($notesImportQuery);
 								if($notesImportResult === FALSE) {
 									die("\nInvalid query: " . mysql_error() . "\nnotesImportQuery\n$notesImportQuery\n");

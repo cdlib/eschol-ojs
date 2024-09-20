@@ -47,11 +47,11 @@ class ThesisPlugin extends GenericPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.generic.thesis.displayName');
+		return \OjsLocale::translate('plugins.generic.thesis.displayName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.generic.thesis.description');
+		return \OjsLocale::translate('plugins.generic.thesis.description');
 	}
 
 	/**
@@ -120,8 +120,8 @@ class ThesisPlugin extends GenericPlugin {
 	 */
 	function getManagementVerbs($verbs = array()) {
 		if ($this->getEnabled()) {
-			$verbs[] = array('theses', Locale::translate('plugins.generic.thesis.manager.theses'));
-			$verbs[] = array('settings', Locale::translate('plugins.generic.thesis.manager.settings'));
+			$verbs[] = array('theses', \OjsLocale::translate('plugins.generic.thesis.manager.theses'));
+			$verbs[] = array('settings', \OjsLocale::translate('plugins.generic.thesis.manager.settings'));
 		}
 		return parent::getManagementVerbs($verbs);
 	}
@@ -176,7 +176,7 @@ class ThesisPlugin extends GenericPlugin {
 	function manage($verb, $args, &$message) {
 		if (!parent::manage($verb, $args, $message)) return false;
 
-		Locale::requireComponents(array(LOCALE_COMPONENT_APPLICATION_COMMON,  LOCALE_COMPONENT_PKP_MANAGER, LOCALE_COMPONENT_PKP_USER));
+		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_APPLICATION_COMMON,  LOCALE_COMPONENT_PKP_MANAGER, LOCALE_COMPONENT_PKP_USER));
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->register_function('plugin_url', array(&$this, 'smartyPluginUrl'));
 		$journal =& Request::getJournal();

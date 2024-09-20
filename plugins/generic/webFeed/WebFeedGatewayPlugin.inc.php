@@ -44,11 +44,11 @@ class WebFeedGatewayPlugin extends GatewayPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.generic.webfeed.displayName');
+		return \OjsLocale::translate('plugins.generic.webfeed.displayName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.generic.webfeed.description');
+		return \OjsLocale::translate('plugins.generic.webfeed.description');
 	}
 
 	/**

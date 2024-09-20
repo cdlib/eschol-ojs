@@ -30,11 +30,11 @@ class OAIMetadataFormatPlugin_MARC extends OAIMetadataFormatPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.OAIMetadata.marc.displayName');
+		return \OjsLocale::translate('plugins.OAIMetadata.marc.displayName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.OAIMetadata.marc.description');
+		return \OjsLocale::translate('plugins.OAIMetadata.marc.description');
 	}
 
 	function getFormatClass() {

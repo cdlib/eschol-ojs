@@ -41,7 +41,7 @@ class SubscriptionReportPlugin extends ReportPlugin {
 	 * @return String display name of plugin
 	 */
 	function getDisplayName() {
-		return Locale::translate('plugins.reports.subscriptions.displayName');
+		return \OjsLocale::translate('plugins.reports.subscriptions.displayName');
 	}
 
 	/**
@@ -49,7 +49,7 @@ class SubscriptionReportPlugin extends ReportPlugin {
 	 * @return String description text for this plugin
 	 */
 	function getDescription() {
-		return Locale::translate('plugins.reports.subscriptions.description');
+		return \OjsLocale::translate('plugins.reports.subscriptions.description');
 	}
 
 	/**
@@ -70,28 +70,28 @@ class SubscriptionReportPlugin extends ReportPlugin {
 		$fp = fopen('php://output', 'wt');
 
 		// Columns for individual subscriptions
-		$columns = array(Locale::translate('subscriptionManager.individualSubscriptions'));
+		$columns = array(\OjsLocale::translate('subscriptionManager.individualSubscriptions'));
 		OjsString::fputcsv($fp, array_values($columns));
 
 		$columnsCommon = array(
-			'subscription_id' => Locale::translate('common.id'),
-			'status' => Locale::translate('subscriptions.status'),
-			'type' => Locale::translate('common.type'),
-			'format' => Locale::translate('subscriptionTypes.format'),
-			'date_start' => Locale::translate('manager.subscriptions.dateStart'),
-			'date_end' => Locale::translate('manager.subscriptions.dateEnd'),
-			'membership' => Locale::translate('manager.subscriptions.membership'),
-			'reference_number' => Locale::translate('manager.subscriptions.referenceNumber'),
-			'notes' => Locale::translate('common.notes')
+			'subscription_id' => \OjsLocale::translate('common.id'),
+			'status' => \OjsLocale::translate('subscriptions.status'),
+			'type' => \OjsLocale::translate('common.type'),
+			'format' => \OjsLocale::translate('subscriptionTypes.format'),
+			'date_start' => \OjsLocale::translate('manager.subscriptions.dateStart'),
+			'date_end' => \OjsLocale::translate('manager.subscriptions.dateEnd'),
+			'membership' => \OjsLocale::translate('manager.subscriptions.membership'),
+			'reference_number' => \OjsLocale::translate('manager.subscriptions.referenceNumber'),
+			'notes' => \OjsLocale::translate('common.notes')
 		);
 
 		$columnsIndividual = array(
-			'name' => Locale::translate('user.name'),
-			'mailing_address' => Locale::translate('common.mailingAddress'),
-			'country' => Locale::translate('common.country'),
-			'email' => Locale::translate('user.email'),
-			'phone' => Locale::translate('user.phone'),
-			'fax' => Locale::translate('user.fax')
+			'name' => \OjsLocale::translate('user.name'),
+			'mailing_address' => \OjsLocale::translate('common.mailingAddress'),
+			'country' => \OjsLocale::translate('common.country'),
+			'email' => \OjsLocale::translate('user.email'),
+			'phone' => \OjsLocale::translate('user.phone'),
+			'fax' => \OjsLocale::translate('user.fax')
 		);
 
 		$columns = array_merge($columnsCommon, $columnsIndividual);
@@ -117,7 +117,7 @@ class SubscriptionReportPlugin extends ReportPlugin {
 						$columns[$index] = $subscription->getSubscriptionTypeSummaryString();
 						break;
 					case 'format':
-						$columns[$index] = Locale::translate($subscriptionType->getFormatString());
+						$columns[$index] = \OjsLocale::translate($subscriptionType->getFormatString());
 						break;
 					case 'date_start':
 						$columns[$index] = $subscription->getDateStart();
@@ -164,20 +164,20 @@ class SubscriptionReportPlugin extends ReportPlugin {
 		$columns = array('');
 		OjsString::fputcsv($fp, array_values($columns));
 
-		$columns = array(Locale::translate('subscriptionManager.institutionalSubscriptions'));
+		$columns = array(\OjsLocale::translate('subscriptionManager.institutionalSubscriptions'));
 		OjsString::fputcsv($fp, array_values($columns));
 
 		$columnsInstitution = array(
-			'institution_name' => Locale::translate('manager.subscriptions.institutionName'),
-			'institution_mailing_address' => Locale::translate('plugins.reports.subscriptions.institutionMailingAddress'),
-			'domain' => Locale::translate('manager.subscriptions.domain'),
-			'ip_ranges' => Locale::translate('plugins.reports.subscriptions.ipRanges'),
-			'contact' => Locale::translate('manager.subscriptions.contact'),
-			'mailing_address' => Locale::translate('common.mailingAddress'),
-			'country' => Locale::translate('common.country'),
-			'email' => Locale::translate('user.email'),
-			'phone' => Locale::translate('user.phone'),
-			'fax' => Locale::translate('user.fax')
+			'institution_name' => \OjsLocale::translate('manager.subscriptions.institutionName'),
+			'institution_mailing_address' => \OjsLocale::translate('plugins.reports.subscriptions.institutionMailingAddress'),
+			'domain' => \OjsLocale::translate('manager.subscriptions.domain'),
+			'ip_ranges' => \OjsLocale::translate('plugins.reports.subscriptions.ipRanges'),
+			'contact' => \OjsLocale::translate('manager.subscriptions.contact'),
+			'mailing_address' => \OjsLocale::translate('common.mailingAddress'),
+			'country' => \OjsLocale::translate('common.country'),
+			'email' => \OjsLocale::translate('user.email'),
+			'phone' => \OjsLocale::translate('user.phone'),
+			'fax' => \OjsLocale::translate('user.fax')
 		);
 
 		$columns = array_merge($columnsCommon, $columnsInstitution);
@@ -203,7 +203,7 @@ class SubscriptionReportPlugin extends ReportPlugin {
 						$columns[$index] = $subscription->getSubscriptionTypeSummaryString();
 						break;
 					case 'format':
-						$columns[$index] = Locale::translate($subscriptionType->getFormatString());
+						$columns[$index] = \OjsLocale::translate($subscriptionType->getFormatString());
 						break;
 					case 'date_start':
 						$columns[$index] = $subscription->getDateStart();

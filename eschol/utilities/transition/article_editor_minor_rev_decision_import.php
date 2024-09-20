@@ -23,9 +23,9 @@ mysql_close($conn);
 function import_editor_decisions($importHome,$importParentDir,$unpublished,$baseUploadDir) {
 
 	$unpubString = $unpublished ? "UNPUBLISHED" : "PUBLISHED";
-	
+
 	echo "\n**** IMPORTING DECISIONS FOR $unpubString ARTICLES ***\n";
-		
+
 	//
 	// LOOP THROUGH JOURNALS
 	//
@@ -35,10 +35,10 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 	$dupCtr = 0;
 	$n = 0;
 	foreach ($importParentDir as $dir) {
-				
+
 		$journalPath = $dir[0];
 		$journalId = $dir[2]; //FIXME look this up in the database rather than passing as parameter
-		
+
 		//
 		// GET ARRAY OF ARTICLE DIRS
 		//
@@ -77,7 +77,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 								}
 							}
 						}
-						
+
 					}
 				}
 			}
@@ -89,11 +89,11 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 		//
 		$article_settings_exists = 1;
 		foreach($parentDirs as $dir) {
-			
+
 			if(substr($dir,0,1) != '.') {
 
 				$eschol_articleid = $eschol_articleid_begin . '_' . $dir;							
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//set full dir path
 				//
@@ -102,7 +102,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 				} else {
 					$fullPath = $grandparentPath . $dir . '/';
 				}
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 				//
 				// QUERY DB FOR article_id
@@ -118,21 +118,21 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 					$article_link = $dir;
 					$articleid_query .= "WHERE setting_name = 'eschol_submission_path' AND setting_value LIKE '%$article_link%'";
 				}
-	
+
 				//echo "\narticleid_query: $articleid_query\n";
 				$articleIdResult = 0;
 				$articleIdResult = mysql_query($articleid_query);
 				if(!$articleIdResult) {
 					die("\nInvalid query: " . mysql_error() . "\n");
 				} 
-				
+
 				if (mysql_num_rows($articleIdResult)==0) {
 					echo "\n**ERROR** No article_settings record exists with setting_name 'title' for this article.\nQuery: $articleid_query\n";
 					continue;
 				} else {
 					$article_id = mysql_result($articleIdResult,0);	
 				}
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 				// 
 				// QUERY DB FOR Author ID
@@ -149,7 +149,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 				} else {
 					$authorId = mysql_result($authorIdResult,0);
 				}		
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 				//
 				// IMPORT EDITOR DECISIONS AND BUILD ARRAY OF EDITOR DECISIONS FROM ARTICLE EVENT LOG
@@ -159,7 +159,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 				$decisionNum = 0;
 				$eventHistoryDecisions = array();
 				$eventHistoryCtr = 0;
-				
+
 				$articleEventLogQuery = "SELECT * FROM article_event_log WHERE article_id = $article_id";
 				//$articleEventLogQuery .= " AND (message LIKE '%Minor revisions required')";
 				$articleEventLogQuery .= " AND (message LIKE '%Accepted' OR message LIKE '%Accepted with a request for minor revisions' OR message LIKE '%Major revisions required' OR message LIKE '%Minor revisions required' OR message LIKE '%Rejected')";
@@ -170,28 +170,28 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 				} else {
 					while($articleEventLogRow = mysql_fetch_object($articleEventLogResult)) {
 						$decisionNum++;
-						
+
 						$eventLogId = $articleEventLogRow->log_id;
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 						//
 						// GET EDITOR ID 
 						//
 						$editorId = $articleEventLogRow->user_id;
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 						//
 						// GET DATE LOGGED
 						//
 						$dateLogged = $articleEventLogRow->date_logged;
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 						//
 						// GET DECISION TYPE ID
 						//
 						$message = $articleEventLogRow->message;
 						$round = 1;
-						
+
 						switch($message) {
 							case '[bp event history] Accepted':
 								$decisionId = 1; //1 = Accept Submission
@@ -246,11 +246,11 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 							//
 							// CHECK FOR DUPLICATES BEFORE IMPORTING
 							//
-							
+
 							$editDecisionsDupStmt = "SELECT * FROM edit_decisions ";
 							$editDecisionsDupStmt .= "WHERE article_id = $article_id AND round = $round AND editor_id = $editorId AND decision = $decisionId AND date_decided = '$dateLogged'";
 							//echo "\ndup_check_stmt: $editDecisionsDupStmt\n";
-							
+
 							$editDecisionsDupResult = mysql_query($editDecisionsDupStmt);
 							if(!$editDecisionsDupResult) {
 								die("\nInvalid query: " . mysql_error() . "\nQuery: $editDecisionsDupStmt\n");
@@ -258,7 +258,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 							if(mysql_num_rows($editDecisionsDupResult) > 0) {
 								$dupCtr++;
 							} else {						
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 								//
 								// IMPORT DECISIONS INTO edit_decisions table
@@ -267,7 +267,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 								$editDecisionsQuery .= "(article_id, round, editor_id, decision, date_decided)";
 								$editDecisionsQuery .= " VALUES ($article_id, $round, $editorId, $decisionId, '$dateLogged')";
 								//echo "\neditDecisionsQuery: $editDecisionsQuery\n";
-								
+
 								$edit_decisions_result = mysql_query($editDecisionsQuery);
 								if(!$edit_decisions_result) {
 									die("\nInvalid query: " . mysql_error() . "\n");
@@ -278,13 +278,13 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 						}
 					}
 				}
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 				//
 				// GET LIST OF FILENAMES FOR EACH ARTICLE
 				//
 				$fileListing = scandir($grandparentPath . $dir);
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//
 				// GET ARRAY OF DECISION MESSAGE DATA
@@ -297,20 +297,20 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 					$filePath = '';
 					$fileType = '';
 					$fileLastModified = '';
-					
+
 					if(substr($currImportFile,0,9)=="decision-") {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 						//
 						// GET FILE NAME
 						//	
 						$fileName = $currImportFile;
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 						//
 						// GET FILE PATH
 						//	
 						$filePath = $grandparentPath . $dir . '/' . $fileName;
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 						//
 						// GET DECISION NUMBER
@@ -320,7 +320,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 							continue;
 						}
 						$decisionNum = substr($fileName,9,($first_dot_pos - 9));
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 						//
 						// GET FILE TYPE
@@ -347,7 +347,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 								$message = file_get_contents($filePath);
 								//echo "\nreviewText: $message\n";
 								fclose($handle);
-								
+
 								if($message == '') {
 									echo "\n**ALERT** Txt file $filePath was empty.\n";
 								}									
@@ -355,7 +355,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 								die("**ERROR** Txt file $filePath does not exist.\n");
 							}
 						} 						
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 						//
 						// BUILD ARRAY
@@ -364,7 +364,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 						$decisionTextCtr++;
 					}					
 				}
-				
+
 				//echo "\narticle_id: $article_id\neventHistoryCtr: $eventHistoryCtr\n";
 				//echo "Num Event HistoryeventHistoryDecisions:";
 				//print_r($eventHistoryDecisions);
@@ -377,7 +377,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 					$message = $decisionText['message'];
 					$message = mysql_real_escape_string($message);
 					$fileLastModified = $decisionText['fileLastModified'];
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 					//
 					// GET EDITOR ID, EDITOR EMAIL, DATE LOGGED
@@ -406,7 +406,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 						//echo "\ndecisionTexts:\n";
 						//print_r($decisionTexts);						
 					}
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 					//
 					// SET SUBJECT
@@ -425,7 +425,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 						$subject .= " $title";
 					}
 					$subject = mysql_real_escape_string($subject);
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 					//
 					// GET AUTHOR EMAIL ADDRESS(ES) FROM AUTHORS TABLE
@@ -459,7 +459,7 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 						$articleEmailLogDupStmt .= "WHERE article_id = $article_id AND (date_sent = '0000-00-00 00:00:00' OR date_sent IS NULL)";
 					}
 					//echo "\ndup_check_stmt: $articleEmailLogDupStmt\n";
-					
+
 					$articleEmailLogDupResult = mysql_query($articleEmailLogDupStmt);
 					if(!$articleEmailLogDupResult) {
 						die("\nInvalid query: " . mysql_error() . "\narticleEmailLogDupStmt: $articleEmailLogDupStmt\n");
@@ -532,19 +532,19 @@ function import_editor_decisions($importHome,$importParentDir,$unpublished,$base
 			}//end if(substr($dir,0,1) != '.')
 		}//end foreach($parentDirs as $dir)
 	} //end foreach ($importParentDir as $dir)
-	
+
 	//
 	//PRINT RESULTS
 	//
 	if($dupCtr > 0) {
 		echo "\nCount of records that already existed in the DB and were therefore not recreated: $dupCtr\n"; 
 	}
-	
+
 	echo "\nedit_decisions records created: $editDecisionsCreated\n";
 	echo "\nDecision texts imported into email log: $decisionFilesUploaded\n";
 	echo "\nDecision texts imported into article_comments: $commentsCreated\n";
 	echo "\nIMPORT OF EDITOR DECISIONS FOR $unpubString ARTICLES FINISHED.\n\n";	
-	
+
 } //end function import_reviews
-	
+
 ?>

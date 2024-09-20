@@ -85,7 +85,7 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 					$bp_due_date = $data[15];	
 					$bp_uploaded = $data[16];	
 					$bp_rereview = $data[17];
-					
+
 					//
 					//TRANSLATE VALUES AS NECESSARY
 					//
@@ -94,20 +94,20 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 					$bp_committed = ($bp_committed == '0000:00:00' OR $bp_committed == '') ? 'NULL': $bp_committed;
 					$bp_reviewed = ($bp_reviewed == '0000:00:00' OR $bp_reviewed == '') ? 'NULL': $bp_reviewed;
 					$bp_due_date = ($bp_due_date == '0000:00:00' OR $bp_due_date == '') ? 'NULL': $bp_due_date;
-					
+
 					$bp_declined_bool = ($bp_declined == '0000:00:00' OR $bp_declined == '') ? 0 : 1;
 					$bp_abrogated_bool = ($bp_abrogated == '0000:00:00' OR $bp_abrogated == '') ? 0 : 1;
-					
+
 					//echo "\nbp_declined: $bp_declined bp_declined_bool: $bp_declined_bool\n";
 					//echo "\bp_abrogated: $bp_abrogated bp_abrogated_bool: $bp_abrogated_bool\n";
-					
+
 					//
 					// If review was declined but is also completed, set declined to 0 (zero).
 					//
 					if($bp_declined_bool && $bp_reviewed != 'NULL') {
 						$bp_declined_bool = 0;
 					}
-					
+
 					//CHECK FOR REQUIRED DATA VALUES
 					if($bp_email == '' or $bp_email == 'NULL') {
 						echo "\nERROR: Email not populated for $currImportFile Line: $row NumFields in Line: $num Not importing this line.\n";
@@ -125,40 +125,40 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 					$article_link = $eschol_article_id_begin . '_' . $bp_manuscriptid;
 					$articleid_query = 'SELECT article_id FROM article_settings ';
 					$articleid_query .= "WHERE setting_name = 'eschol_articleid' AND setting_value = '$article_link'";
-	
-	
+
+
 					//echo "\narticleid_query: $articleid_query\n";
 					$articleIdResult = 0;
 					$articleIdResult = mysql_query($articleid_query);
 					if(!$articleIdResult) {
 						die("\nInvalid query: " . mysql_error() . "\n");
 					} 
-					
+
 					if (mysql_num_rows($articleIdResult)==0) {
 						echo "\n**ALERT** No article_settings record exists with eschol article ID or eschol_submission_path = '$article_link'.\nQuery: $articleid_query\nNo history created for this article.\n";
 						$article_settings_exists = 0;
 						continue;
 					}
-					
+
 					$article_id = mysql_result($articleIdResult,0);								
 					//echo "\narticle_id: $article_id\n";
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 					//
 					//get OJS user_id for reviewer
 					//
 					$userid_query = 'SELECT user_id FROM users ';
 					$userid_query .= "WHERE email = '$bp_email'";
-					
+
 					//echo "\nuserid_query: $userid_query\n";
 					unset($userid_query_result);
-					
+
 					$userid_query_result = mysql_query($userid_query);
-					
+
 					if(!$userid_query_result) {
 						die("\nInvalid query: " . mysql_error() . "\n");
 					} 
-					
+
 					if (mysql_num_rows($userid_query_result) > 0) {
 						$user_id = mysql_result($userid_query_result,0);
 					} else {
@@ -167,7 +167,7 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 						//////////////////////
 						$usersCreateQuery = "INSERT INTO users (username, first_name, last_name, email) ";
 						$usersCreateQuery .= "VALUES('$bp_email', '[FIXME]', '" . mysql_real_escape_string($bp_name) . "', '$bp_email')";
-						
+
 						//echo "\nusersCreateQuery: $usersCreateQuery\n";
 						$usersCreateResult = mysql_query($usersCreateQuery);
 						if(!$usersCreateResult) {
@@ -177,7 +177,7 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 							$reviewersCreated++;
 						}
 						echo "\nNames need fixing for new users record with user_id: $user_id\nusersCreateQuery was: $usersCreateQuery";
-						
+
 						if($user_id == 0) {
 							die("ERROR: Could not get user_id after query: $usersCreateQuery\n");
 						}	
@@ -187,9 +187,9 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 						/////////////////////////////////////////////	
 						$findFixRecordQuery = "SELECT * FROM review_assignments ";
 						$findFixRecordQuery .= "WHERE submission_id = $article_id AND date_assigned = '$bp_suggested'";
-						
+
 						//echo "\nfindFixRecordQuery: $findFixRecordQuery\n";
-						
+
 						$findFixRecordResult = mysql_query($findFixRecordQuery);
 						if($findFixRecordResult === FALSE) {
 							die("\nInvalid query: " . mysql_error() . "\nfindFixRecordQuery: $findFixRecordQuery\n");
@@ -198,7 +198,7 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 								$fixReviewQuery = "UPDATE review_assignments SET reviewer_id = $user_id ";
 								$fixReviewQuery .= "WHERE submission_id = $article_id AND date_assigned = '$bp_suggested'";
 								echo "\nfixReviewQuery: $fixReviewQuery\n";
-								
+
 								$fixReviewResult = mysql_query($fixReviewQuery);
 								if(!$fixReviewResult) {
 									die("\nInvalid query: " . mysql_error() . "\nfixReviewQuery: $fixReviewQuery\n");
@@ -207,10 +207,10 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 								}
 							}
 						}
-						
+
  					}
 					//echo "\nuser_id after userid_query: $user_id\n";
-					
+
 					if($article_id && $user_id) {					
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//
@@ -223,7 +223,7 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 						AND date_assigned = '$bp_suggested'	
 						";
 						//echo "\ndup_check_stmt: $dup_check_stmt\n";
-						
+
 						$dup_check_result = mysql_query($dup_check_stmt);
 						if(!$dup_check_result) {
 							die("\nInvalid query: " . mysql_error() . "\n");
@@ -231,7 +231,7 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 						if(mysql_num_rows($dup_check_result) != 0) {
 							$dupCtr++;
 						} else {
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							//
 							//INSERT RECORD INTO review_assignments
@@ -253,41 +253,41 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 							(
 							$user_id,
 							$article_id,";
-							
+
 							if($bp_suggested == 'NULL') {
 								$insert_stmt .= "NULL, ";
 							} else {
 								$insert_stmt .= "'$bp_suggested', ";
 							}
-							
+
 							if($bp_requested == 'NULL') {
 								$insert_stmt .= "NULL, ";
 							} else {
 								$insert_stmt .= "'$bp_requested', ";
 							}
-							
+
 							$insert_stmt .= "$bp_declined_bool, ";
-							
+
 							if($bp_committed == 'NULL') {
 								$insert_stmt .= "NULL, ";
 							} else {
 								$insert_stmt .= "'$bp_committed', ";
 							}
-							
+
 							$insert_stmt .= "$bp_abrogated_bool, ";
-							
+
 							if($bp_reviewed == 'NULL') {
 								$insert_stmt .= "NULL, ";
 							} else {
 								$insert_stmt .= "'$bp_reviewed', ";
 							}
-							
+
 							if($bp_due_date == 'NULL') {
 								$insert_stmt .= "NULL";
 							} else {
 								$insert_stmt .= "'$bp_due_date'";
 							}
-							
+
 							$insert_stmt .= ")";				
 							//echo "\ninsert_stmt: $insert_stmt\n";
 							$reviewInsertResult = mysql_query($insert_stmt);
@@ -296,16 +296,16 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 							} else {
 								$recsCreated++;
 							}
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							//
 							// CHECK FOR DUPLICATES BEFORE CREATING roles RECORD
 							//
 							$roleDupQuery = "SELECT * FROM roles ";
 							$roleDupQuery .= "WHERE journal_id = $journalId AND user_id = $user_id AND role_id = 4096";
-							
+
 							//echo "\nroleDupQuery: $roleDupQuery\n";
-							
+
 							$roleDupResult = mysql_query($roleDupQuery);
 							if(!$roleDupResult) {
 								die("\nInvalid query: " . mysql_error() . "\nroleDupQuery: $roleDupQuery");
@@ -320,7 +320,7 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 								$rolesQuery = "INSERT INTO roles ";
 								$rolesQuery .= "(journal_id, user_id, role_id)";
 								$rolesQuery .= " VALUES ($journalId, $user_id, 4096)";
-								
+
 								//echo "\nrolesQuery: $rolesQuery\n";
 								$rolesCreateResult = mysql_query($rolesQuery);
 								if(!$rolesCreateResult) {
@@ -330,9 +330,9 @@ function import_reviewer_rpt($importHome,$importParentDir) {
 								}	
 							}
 						}
-						
+
 					} 
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 				} //end if($row > 1)
 				$row++;

@@ -34,9 +34,9 @@ class SubscriptionTypeForm extends Form {
 	function SubscriptionTypeForm($typeId = null) {
 
 		$this->validFormats = array (
-			SUBSCRIPTION_TYPE_FORMAT_ONLINE => Locale::translate('subscriptionTypes.format.online'),
-			SUBSCRIPTION_TYPE_FORMAT_PRINT => Locale::translate('subscriptionTypes.format.print'),
-			SUBSCRIPTION_TYPE_FORMAT_PRINT_ONLINE => Locale::translate('subscriptionTypes.format.printOnline')
+			SUBSCRIPTION_TYPE_FORMAT_ONLINE => \OjsLocale::translate('subscriptionTypes.format.online'),
+			SUBSCRIPTION_TYPE_FORMAT_PRINT => \OjsLocale::translate('subscriptionTypes.format.print'),
+			SUBSCRIPTION_TYPE_FORMAT_PRINT_ONLINE => \OjsLocale::translate('subscriptionTypes.format.printOnline')
 		);
 
 		$currencyDao =& DAORegistry::getDAO('CurrencyDAO');

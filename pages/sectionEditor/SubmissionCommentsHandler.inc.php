@@ -293,7 +293,7 @@ class SubmissionCommentsHandler extends SectionEditorHandler {
 		$this->addCheck(new HandlerValidatorSubmissionComment($this, $commentId));
 		$this->validate();
 		$comment =& $this->comment;
-		
+
 		$this->setupTemplate(true);
 
 		$submissionEditHandler = new SubmissionEditHandler();

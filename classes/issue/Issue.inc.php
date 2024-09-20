@@ -674,8 +674,8 @@ class Issue extends DataObject {
 			$showTitle = 0;
 		}
 
-		$volLabel = Locale::translate('issue.vol');
-		$numLabel = Locale::translate('issue.no');
+		$volLabel = \OjsLocale::translate('issue.vol');
+		$numLabel = \OjsLocale::translate('issue.no');
 
 		$vol = $this->getData('volume');
 		$num = $this->getData('number');

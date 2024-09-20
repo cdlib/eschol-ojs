@@ -56,14 +56,14 @@ class DonationBlockPlugin extends BlockPlugin {
 	 * @return String
 	 */
 	function getDisplayName() {
-		return Locale::translate('plugins.block.donation.displayName');
+		return \OjsLocale::translate('plugins.block.donation.displayName');
 	}
 
 	/**
 	 * Get a description of the plugin.
 	 */
 	function getDescription() {
-		return Locale::translate('plugins.block.user.description');
+		return \OjsLocale::translate('plugins.block.user.description');
 	}
 
 	function getContents(&$templateMgr) {

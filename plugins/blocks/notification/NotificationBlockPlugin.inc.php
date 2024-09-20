@@ -48,14 +48,14 @@ class NotificationBlockPlugin extends BlockPlugin {
 	 * @return String
 	 */
 	function getDisplayName() {
-		return Locale::translate('plugins.block.notification.displayName');
+		return \OjsLocale::translate('plugins.block.notification.displayName');
 	}
 
 	/**
 	 * Get a description of the plugin.
 	 */
 	function getDescription() {
-		return Locale::translate('plugins.block.notification.description');
+		return \OjsLocale::translate('plugins.block.notification.description');
 	}
 
 

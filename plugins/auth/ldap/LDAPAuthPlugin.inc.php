@@ -55,7 +55,7 @@ class LDAPAuthPlugin extends AuthPlugin {
 	 * @return string
 	 */
 	function getDisplayName() {
-		return Locale::translate('plugins.auth.ldap.displayName');
+		return \OjsLocale::translate('plugins.auth.ldap.displayName');
 	}
 
 	/**
@@ -63,7 +63,7 @@ class LDAPAuthPlugin extends AuthPlugin {
 	 * @return string
 	 */
 	function getDescription() {
-		return Locale::translate('plugins.auth.ldap.description');
+		return \OjsLocale::translate('plugins.auth.ldap.description');
 	}
 
 
@@ -319,7 +319,7 @@ class LDAPAuthPlugin extends AuthPlugin {
 		if (isset($lastName))
 			$user->setLastName($lastName);
 		if (isset($affiliation))
-			$user->setAffiliation($affiliation, Locale::getLocale());
+			$user->setAffiliation($affiliation, \OjsLocale::getLocale());
 		if (isset($email))
 			$user->setEmail($email);
 		if (isset($phone))
@@ -329,9 +329,9 @@ class LDAPAuthPlugin extends AuthPlugin {
 		if (isset($mailingAddress))
 			$user->setMailingAddress($mailingAddress);
 		if (isset($biography))
-			$user->setBiography($biography, Locale::getLocale());
+			$user->setBiography($biography, \OjsLocale::getLocale());
 		if (isset($interests))
-			$user->setInterests($interests, Locale::getLocale());
+			$user->setInterests($interests, \OjsLocale::getLocale());
 	}
 
 	/**
@@ -349,7 +349,7 @@ class LDAPAuthPlugin extends AuthPlugin {
 		if ($user->getLastName())
 			$attr['sn'] = $user->getLastName();
 		if ($user->getAffiliation())
-			$attr['organizationName'] = $user->getAffiliation(Locale::getLocale());
+			$attr['organizationName'] = $user->getAffiliation(\OjsLocale::getLocale());
 		if ($user->getEmail())
 			$attr['mail'] = $user->getEmail();
 		if ($user->getPhone())

@@ -149,7 +149,7 @@ class PeopleHandler extends ManagerHandler {
 		if ($roleId == ROLE_ID_REVIEWER) $fieldOptions = array_merge(array(USER_FIELD_INTERESTS => 'user.interests'), $fieldOptions);
 		$templateMgr->assign('fieldOptions', $fieldOptions);
 		$templateMgr->assign('rolePath', $roleDao->getRolePath($roleId));
-		$templateMgr->assign('alphaList', explode(' ', Locale::translate('common.alphaList')));
+		$templateMgr->assign('alphaList', explode(' ', \OjsLocale::translate('common.alphaList')));
 		$templateMgr->assign('roleSymbolic', $roleSymbolic);
 		$templateMgr->assign('sort', $sort);
 		$templateMgr->assign('isSiteAdmin',Validation::isSiteAdmin()); // 20110919 BLH Added
@@ -225,7 +225,7 @@ class PeopleHandler extends ManagerHandler {
 		$templateMgr->assign('fieldOptions', $fieldOptions);
 		$templateMgr->assign_by_ref('users', $users);
 		$templateMgr->assign_by_ref('thisUser', Request::getUser());
-		$templateMgr->assign('alphaList', explode(' ', Locale::translate('common.alphaList')));
+		$templateMgr->assign('alphaList', explode(' ', \OjsLocale::translate('common.alphaList')));
 		$templateMgr->assign('helpTopicId', 'journal.users.index');
 		$templateMgr->assign('sort', $sort);
 
@@ -629,7 +629,7 @@ class PeopleHandler extends ManagerHandler {
 			USER_FIELD_EMAIL => 'user.email',
 			USER_FIELD_INTERESTS => 'user.interests'
 		));
-		$templateMgr->assign('alphaList', explode(' ', Locale::translate('common.alphaList')));
+		$templateMgr->assign('alphaList', explode(' ', \OjsLocale::translate('common.alphaList')));
 		$templateMgr->assign('oldUserIds', $oldUserIds);
 		$templateMgr->assign('rolePath', $roleDao->getRolePath($roleId));
 		$templateMgr->assign('roleSymbolic', $roleSymbolic);
@@ -826,7 +826,7 @@ class PeopleHandler extends ManagerHandler {
 			$templateMgr->assign('country', $country);
 
 			$templateMgr->assign_by_ref('user', $user);
-			$templateMgr->assign('localeNames', Locale::getAllLocales());
+			$templateMgr->assign('localeNames', \OjsLocale::getAllLocales());
 			$templateMgr->display('manager/people/userProfile.tpl');
 		}
 	}

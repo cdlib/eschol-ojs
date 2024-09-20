@@ -163,7 +163,7 @@ class SectionHandler extends ManagerHandler {
 	}
 
 	function setupTemplate($subclass = false) {
-		Locale::requireComponents(array(LOCALE_COMPONENT_PKP_SUBMISSION, LOCALE_COMPONENT_PKP_READER));
+		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_PKP_SUBMISSION, LOCALE_COMPONENT_PKP_READER));
 		parent::setupTemplate(true);
 		if ($subclass) {
 			$templateMgr =& TemplateManager::getManager();

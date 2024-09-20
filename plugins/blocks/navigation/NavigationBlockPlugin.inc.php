@@ -39,14 +39,14 @@ class NavigationBlockPlugin extends BlockPlugin {
 	 * @return String
 	 */
 	function getDisplayName() {
-		return Locale::translate('plugins.block.navigation.displayName');
+		return \OjsLocale::translate('plugins.block.navigation.displayName');
 	}
 
 	/**
 	 * Get a description of the plugin.
 	 */
 	function getDescription() {
-		return Locale::translate('plugins.block.navigation.description');
+		return \OjsLocale::translate('plugins.block.navigation.description');
 	}
 
 	/**

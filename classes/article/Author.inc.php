@@ -84,7 +84,7 @@ class Author extends PKPAuthor {
 	function getEscholSuffix($locale) {
 		return $this->getData('eschol_suffix');
 	}
-	
+
 	/**
 	 * Get author organization (added for eScholarship).
 	 * @return string
@@ -93,7 +93,7 @@ class Author extends PKPAuthor {
 		return $this->getData('eschol_organization');
 	}	
 	// 20111020 BLH End Add
-	
+
     // EXPERIMENTAL IMPORT CODE
 	function setEscholSuffix($suffix, $locale) {
 		return $this->setData('eschol_suffix', $suffix, $locale);

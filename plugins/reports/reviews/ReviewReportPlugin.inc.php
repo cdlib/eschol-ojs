@@ -45,11 +45,11 @@ class ReviewReportPlugin extends ReportPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.reports.reviews.displayName');
+		return \OjsLocale::translate('plugins.reports.reviews.displayName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.reports.reviews.description');
+		return \OjsLocale::translate('plugins.reports.reviews.description');
 	}
 
 	function display(&$args) {
@@ -57,7 +57,7 @@ class ReviewReportPlugin extends ReportPlugin {
 
 		header('content-type: text/comma-separated-values');
 		header('content-disposition: attachment; filename=reviews-' . date('Ymd') . '.csv');
-		Locale::requireComponents(array(LOCALE_COMPONENT_PKP_SUBMISSION));
+		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_PKP_SUBMISSION));
 
 		$reviewReportDao =& DAORegistry::getDAO('ReviewReportDAO');
 		list($commentsIterator, $reviewsIterator) = $reviewReportDao->getReviewReport($journal->getId());
@@ -71,32 +71,32 @@ class ReviewReportPlugin extends ReportPlugin {
 			}
 		}
 
-		$yesnoMessages = array( 0 => Locale::translate('common.no'), 1 => Locale::translate('common.yes'));
+		$yesnoMessages = array( 0 => \OjsLocale::translate('common.no'), 1 => \OjsLocale::translate('common.yes'));
 
 		import('classes.submission.reviewAssignment.ReviewAssignment');
 		$recommendations = ReviewAssignment::getReviewerRecommendationOptions();
 
 		$columns = array(
-			'round' => Locale::translate('plugins.reports.reviews.round'),
-			'article' => Locale::translate('article.articles'),
-			'articleid' => Locale::translate('article.submissionId'),
-			'articlestatus' => Locale::translate('article.status'),
-			'reviewerid' => Locale::translate('plugins.reports.reviews.reviewerId'),
-			'reviewer' => Locale::translate('plugins.reports.reviews.reviewer'),
-			'firstname' => Locale::translate('user.firstName'),
-			'middlename' => Locale::translate('user.middleName'),
-			'lastname' => Locale::translate('user.lastName'),
-			'affiliation' =>Locale::translate('user.affiliations'),
-			'dateassigned' => Locale::translate('plugins.reports.reviews.dateAssigned'),
-			'datenotified' => Locale::translate('plugins.reports.reviews.dateNotified'),
-			'dateconfirmed' => Locale::translate('plugins.reports.reviews.dateConfirmed'),
-			'datecompleted' => Locale::translate('plugins.reports.reviews.dateCompleted'),
-			'datereminded' => Locale::translate('plugins.reports.reviews.dateReminded'),
-			'declined' => Locale::translate('submissions.declined'),
-			'cancelled' => Locale::translate('common.cancelled'),
-			'recommendation' => Locale::translate('reviewer.article.recommendation'),
-			'quality' => Locale::translate('plugins.reports.reviews.quality'),            
-			'comments' => Locale::translate('comments.commentsOnArticle')
+			'round' => \OjsLocale::translate('plugins.reports.reviews.round'),
+			'article' => \OjsLocale::translate('article.articles'),
+			'articleid' => \OjsLocale::translate('article.submissionId'),
+			'articlestatus' => \OjsLocale::translate('article.status'),
+			'reviewerid' => \OjsLocale::translate('plugins.reports.reviews.reviewerId'),
+			'reviewer' => \OjsLocale::translate('plugins.reports.reviews.reviewer'),
+			'firstname' => \OjsLocale::translate('user.firstName'),
+			'middlename' => \OjsLocale::translate('user.middleName'),
+			'lastname' => \OjsLocale::translate('user.lastName'),
+			'affiliation' =>\OjsLocale::translate('user.affiliations'),
+			'dateassigned' => \OjsLocale::translate('plugins.reports.reviews.dateAssigned'),
+			'datenotified' => \OjsLocale::translate('plugins.reports.reviews.dateNotified'),
+			'dateconfirmed' => \OjsLocale::translate('plugins.reports.reviews.dateConfirmed'),
+			'datecompleted' => \OjsLocale::translate('plugins.reports.reviews.dateCompleted'),
+			'datereminded' => \OjsLocale::translate('plugins.reports.reviews.dateReminded'),
+			'declined' => \OjsLocale::translate('submissions.declined'),
+			'cancelled' => \OjsLocale::translate('common.cancelled'),
+			'recommendation' => \OjsLocale::translate('reviewer.article.recommendation'),
+			'quality' => \OjsLocale::translate('plugins.reports.reviews.quality'),            
+			'comments' => \OjsLocale::translate('comments.commentsOnArticle')
 		);
 		$yesNoArray = array('declined', 'cancelled');
 
@@ -108,7 +108,7 @@ class ReviewReportPlugin extends ReportPlugin {
 				if (in_array($index, $yesNoArray)) {
 					$columns[$index] = $yesnoMessages[$row[$index]];
 				} elseif ($index == "recommendation") {
-					$columns[$index] = (!isset($row[$index])) ? Locale::translate('common.none') : Locale::translate($recommendations[$row[$index]]);
+					$columns[$index] = (!isset($row[$index])) ? \OjsLocale::translate('common.none') : \OjsLocale::translate($recommendations[$row[$index]]);
 				} elseif ($index == "comments") {
 					if (isset($comments[$row['articleid']][$row['reviewerid']])) {
 						$columns[$index] = $comments[$row['articleid']][$row['reviewerid']];

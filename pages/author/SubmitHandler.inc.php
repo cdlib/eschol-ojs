@@ -208,7 +208,7 @@ class SubmitHandler extends AuthorHandler {
 
 		import('classes.author.form.submit.AuthorSubmitSuppFileForm');
 		$submitForm = new AuthorSubmitSuppFileForm($article, $journal);
-		$submitForm->setData('title', array($article->getLocale() => Locale::translate('common.untitled')));
+		$submitForm->setData('title', array($article->getLocale() => \OjsLocale::translate('common.untitled')));
 		$suppFileId = $submitForm->execute();
 
 		Request::redirect(null, null, 'submitSuppFile', $suppFileId, array('articleId' => $articleId));

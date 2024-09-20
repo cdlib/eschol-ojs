@@ -82,8 +82,8 @@ class ArticleDAO extends DAO {
 			return $returner;
 		}
 
-		$primaryLocale = Locale::getPrimaryLocale();
-		$locale = Locale::getLocale();
+		$primaryLocale = \OjsLocale::getPrimaryLocale();
+		$locale = \OjsLocale::getLocale();
 		$params = array(
 			'title',
 			$primaryLocale,
@@ -399,8 +399,8 @@ class ArticleDAO extends DAO {
 	 * @return DAOResultFactory containing matching Articles
 	 */
 	function &getArticlesByJournalId($journalId = null) {
-		$primaryLocale = Locale::getPrimaryLocale();
-		$locale = Locale::getLocale();
+		$primaryLocale = \OjsLocale::getPrimaryLocale();
+		$locale = \OjsLocale::getLocale();
 		$articles = array();
 
 		$params = array(
@@ -453,8 +453,8 @@ class ArticleDAO extends DAO {
 	 * @return array Articles
 	 */
 	function &getArticlesByUserId($userId, $journalId = null) {
-		$primaryLocale = Locale::getPrimaryLocale();
-		$locale = Locale::getLocale();
+		$primaryLocale = \OjsLocale::getPrimaryLocale();
+		$locale = \OjsLocale::getLocale();
 		$params = array(
 			'title',
 			$primaryLocale,

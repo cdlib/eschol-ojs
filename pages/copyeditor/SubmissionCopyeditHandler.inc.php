@@ -268,7 +268,7 @@ class SubmissionCopyeditHandler extends CopyeditorHandler {
 		$articleId = (int) array_shift($args);
 		$journal =& $request->getJournal();
 		$this->validate($articleId);
-		Locale::requireComponents(array(LOCALE_COMPONENT_OJS_AUTHOR));
+		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_OJS_AUTHOR));
 		$submission =& $this->submission;
 		$this->setupTemplate(true, $articleId, 'editing');
 		CopyeditorAction::viewMetadata($submission, $journal);
@@ -293,7 +293,7 @@ class SubmissionCopyeditHandler extends CopyeditorHandler {
 		$this->validate($articleId);
 
 		$formLocale = $args[1];
-		if (!Locale::isLocaleValid($formLocale)) {
+		if (!\OjsLocale::isLocaleValid($formLocale)) {
 			$request->redirect(null, null, 'viewMetadata', $articleId);
 		}
 

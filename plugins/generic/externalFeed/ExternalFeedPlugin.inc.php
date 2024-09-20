@@ -49,11 +49,11 @@ class ExternalFeedPlugin extends GenericPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.generic.externalFeed.displayName');
+		return \OjsLocale::translate('plugins.generic.externalFeed.displayName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.generic.externalFeed.description');
+		return \OjsLocale::translate('plugins.generic.externalFeed.description');
 	}
 
 	/**
@@ -158,8 +158,8 @@ class ExternalFeedPlugin extends GenericPlugin {
 	 */
 	function getManagementVerbs($verbs = array()) {
 		if ($this->getEnabled()) {
-			$verbs[] = array('feeds', Locale::translate('plugins.generic.externalFeed.manager.feeds'));
-			$verbs[] = array('settings', Locale::translate('plugins.generic.externalFeed.manager.settings'));
+			$verbs[] = array('feeds', \OjsLocale::translate('plugins.generic.externalFeed.manager.feeds'));
+			$verbs[] = array('settings', \OjsLocale::translate('plugins.generic.externalFeed.manager.settings'));
 		}
 		return parent::getManagementVerbs($verbs);
 	}
@@ -219,10 +219,10 @@ class ExternalFeedPlugin extends GenericPlugin {
 						$output .= '</tr>';
 						$output .= '<tr class="details">';
 						$output .= '<td class="posted">';
-						$output .= Locale::Translate('plugins.generic.externalFeed.posted') . ': ' . date('Y-m-d', strtotime($item->get_date()));
+						$output .= \OjsLocale::Translate('plugins.generic.externalFeed.posted') . ': ' . date('Y-m-d', strtotime($item->get_date()));
 						$output .= '</td>';
 						$output .= '<td class="more">';
-						$output .= '<a href="' . $item->get_permalink() . '" target="_blank">' . Locale::Translate('plugins.generic.externalFeed.more') . '</a>';
+						$output .= '<a href="' . $item->get_permalink() . '" target="_blank">' . \OjsLocale::Translate('plugins.generic.externalFeed.more') . '</a>';
 						$output .= '</td>';
 						$output .= '</tr>';
 
@@ -266,7 +266,7 @@ class ExternalFeedPlugin extends GenericPlugin {
 	function manage($verb, $args, &$message) {
 		if (!parent::manage($verb, $args, $message)) return false;
 
-		Locale::requireComponents(
+		\OjsLocale::requireComponents(
 			array(
 				LOCALE_COMPONENT_APPLICATION_COMMON,
 				LOCALE_COMPONENT_PKP_MANAGER,

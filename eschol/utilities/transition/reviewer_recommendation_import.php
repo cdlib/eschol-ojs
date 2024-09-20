@@ -23,9 +23,9 @@ mysql_close($conn);
 function import_reviewer_recommendations($importHome,$importParentDir,$unpublished,$baseUploadDir) {
 
 	$unpubString = $unpublished ? "UNPUBLISHED" : "PUBLISHED";
-	
+
 	echo "\n**** IMPORTING REVIEWER RECOMMENDATIONS FOR $unpubString ARTICLES ***\n";
-		
+
 	//
 	// LOOP THROUGH JOURNALS
 	//
@@ -33,10 +33,10 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 	$dupCtr = 0;
 	$n = 0;
 	foreach ($importParentDir as $dir) {
-		
+
 		$journalPath = $dir[0];
 		$journalId = $dir[2]; //FIXME look this up in the database rather than passing as parameter
-		
+
 		//
 		// GET ARRAY OF ARTICLE DIRS
 		//
@@ -75,7 +75,7 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 								}
 							}
 						}
-						
+
 					}
 				}
 			}
@@ -87,11 +87,11 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 		//
 		$article_settings_exists = 1;
 		foreach($parentDirs as $dir) {
-			
+
 			if(substr($dir,0,1) != '.') {
-				
+
 				$eschol_articleid = $eschol_articleid_begin . '_' . $dir;
-				
+
 				//
 				//set full dir path
 				//
@@ -100,7 +100,7 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 				} else {
 					$fullPath = $grandparentPath . $dir . '/';
 				}
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 				//
 				// QUERY DB FOR article_id
@@ -116,14 +116,14 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 					$article_link = $dir;
 					$articleid_query .= "WHERE setting_name = 'eschol_submission_path' AND setting_value LIKE '%$article_link%'";
 				}
-	
+
 				//echo "\narticleid_query: $articleid_query\n";
 				$result = 0;
 				$result = mysql_query($articleid_query);
 				if(!$result) {
 					die("\nInvalid query: " . mysql_error() . "\n");
 				} 
-				
+
 				if (mysql_num_rows($result)==0) {
 					echo "\n**ALERT** No article_settings record exists with setting_name 'title' for this article.\nQuery: $articleid_query\n";
 					continue;
@@ -136,7 +136,7 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 				// LOOP THROUGH FILES AND ACT ON 'reviews.tsv'
 				//
 				$fileListing = scandir($grandparentPath . $dir);
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//
 				// GET ARRAY OF FILENAMES & FILE PATHS
@@ -145,13 +145,13 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 				foreach($fileListing as $fileOrDir) {
 					$fileName = '';
 					$filePath = '';
-					
+
 					//we only want files named 'reviews.tsv'
 					if($fileOrDir=='reviews.tsv') {		
 						$fileName = $fileOrDir;
 						$filePath = $grandparentPath . $dir . '/' . $fileName;
 						//echo "\nfileName: $fileName\nfilePath: $filePath\n";
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 						//
 						// READ IN REVIEWS FILE
@@ -180,7 +180,7 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 									$bpReviewDate = date('Y-m-d H:i:s',$timestamp);
 									$bpRecommendation = $data[6];
 									$bpFiles = $data[7];
-									
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 									//
 									// GET RECOMMENDATION ID
@@ -192,7 +192,7 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 									// Resubmit Elsewhere = 4
 									// Decline Submission = 5
 									// See Comments = 6
-									
+
 									switch($bpRecommendation) {
 										case "Accept":
 											$recommendationId = 1;
@@ -215,12 +215,12 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 										default:
 											$recommendationId = 0;
 									}
-									
+
 									if(!$recommendationId) {
 										echo "\nALERT: Could not determine recommendation ID for line $row file $filePath\n";
 										echo "bpRecommendation: $bpRecommendation\n";
 									}
-									
+
 									//echo "\nfileName: $fileName\nfilePath: $filePath\n";
 									//echo "bpRecommendation: $bpRecommendation\n";
 									//echo "recommendationId: $recommendationId\n";
@@ -231,7 +231,7 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 									//
 									$reviewId = 0;
 									$reviewIdQuery = "SELECT * FROM review_assignments WHERE submission_id = $article_id AND date_completed = '$bpReviewDate'";
-									
+
 									$result = mysql_query($reviewIdQuery);
 									if(!$result) {
 										die("\nInvalid query: " . mysql_error() . "\n");
@@ -240,13 +240,13 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 											$reviewId = $review_assignments_rec->review_id;
 										}
 									}
-									
+
 									//look in article_files
 									if(!$reviewId) {
 										echo "\nALERT: Could not determine review ID for line $row file $filePath\nQuery: $reviewIdQuery\n";
 										continue;
 									}
-									
+
 									//echo "\nreviewIdQuery: $reviewIdQuery\nreviewId: $reviewId\n";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 									//
@@ -271,7 +271,7 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 										} else {
 											$reviewerRecsCtr++;
 										}
-										
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 										//
 										// UPDATE article_event_log
@@ -285,8 +285,8 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 										}
 									}									
 								} //end if($row > 1)
-								
-								
+
+
 								$row++;
 							} //end while (($data = fgetcsv($handle, 1000, "\t")) !== FALSE)
 						}// end if (file_exists($filePath))
@@ -295,14 +295,14 @@ function import_reviewer_recommendations($importHome,$importParentDir,$unpublish
 			}//end if(substr($dir,0,1) != '.')
 		}//end foreach($parentDirs as $dir)
 	} //end foreach ($importParentDir as $dir)
-	
+
 	//
 	//PRINT RESULTS
 	//
 	if($dupCtr > 0) {
 		echo "\nCount of reviewer recommendations that were already recorded and therefore not overwritten by this import: $dupCtr\n"; 
 	}
-	
+
 	echo "\nReviewer recommendations imported: $reviewerRecsCtr\n";
 	echo "\nIMPORT OF REVIEWER RECOMMENDATIONS FOR $unpubString ARTICLES FINISHED.\n\n";
 } //end function

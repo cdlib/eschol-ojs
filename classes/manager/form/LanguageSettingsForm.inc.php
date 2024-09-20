@@ -103,7 +103,7 @@ class LanguageSettingsForm extends Form {
 		foreach (array('supportedLocales', 'supportedSubmissionLocales', 'supportedFormLocales') as $name) {
 			$$name = array();
 			foreach ($this->getData($name) as $locale) {
-				if (Locale::isLocaleValid($locale) && in_array($locale, $this->availableLocales)) {
+				if (\OjsLocale::isLocaleValid($locale) && in_array($locale, $this->availableLocales)) {
 					array_push($$name, $locale);
 				}
 			}

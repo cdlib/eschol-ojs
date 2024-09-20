@@ -28,10 +28,10 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 	$dupCtr = 0;
 	$n = 0;
 	foreach ($importParentDir as $dir) {
-		
+
 		$journalPath = $dir[0];
 		$journalId = $dir[2]; //FIXME look this up in the database rather than passing as parameter
-		
+
 		//
 		// GET ARRAY OF ARTICLE DIRS
 		//
@@ -70,7 +70,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 								}
 							}
 						}
-						
+
 					}
 				}
 			}
@@ -82,11 +82,11 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 		//
 		$article_settings_exists = 1;
 		foreach($parentDirs as $dir) {
-			
+
 			if(substr($dir,0,1) != '.') {
-				
+
 				$eschol_articleid = $eschol_articleid_begin . '_' . $dir;
-				
+
 				//
 				//set full dir path
 				//
@@ -95,7 +95,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 				} else {
 					$fullPath = $grandparentPath . $dir . '/';
 				}
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 				//
 				// QUERY DB FOR article_id
@@ -111,25 +111,25 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 					$article_link = $dir;
 					$articleid_query .= "WHERE setting_name = 'eschol_submission_path' AND setting_value LIKE '%$article_link%'";
 				}
-	
+
 				//echo "\narticleid_query: $articleid_query\n";
 				$result = 0;
 				$result = mysql_query($articleid_query);
 				if(!$result) {
 					die("\nInvalid query: " . mysql_error() . "\n");
 				} 
-				
+
 				if (mysql_num_rows($result)==0) {
 					echo "\n**ERROR** No article_settings record exists with setting_name 'title' for this article.\nQuery: $articleid_query\nNo data will be imported for this article.";
 				} else {
 					$article_id = mysql_result($result,0);	
 				}
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 				//
 				// QUERY DB FOR Article Title
 				//	
-				
+
 				$articleTitle = '';
 				$articleTitleQuery = "SELECT setting_value FROM article_settings WHERE article_id = $article_id AND setting_name = 'title'";
 				$result = 0;
@@ -142,7 +142,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 				} else {
 					$articleTitle = mysql_result($result,0);
 				}
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 				// 
 				// QUERY DB FOR Author ID
@@ -166,7 +166,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 				//GET LIST OF FILENAMES FOR EACH ARTICLE
 				//
 				$fileListing = scandir($grandparentPath . $dir);
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//
 				// GET ARRAY OF FILENAMES & FILE PATHS
@@ -176,11 +176,11 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 					$fileName = '';
 					$filePath = '';
 					$isAttachment = 0;
-					
+
 					//we only want files named 'review-*'
 					if(substr($fileOrDir,0,7)=="review-") {
 						$listingFullPath = $grandparentPath . $dir . '/' . $fileOrDir;
-						
+
 						if(is_dir($listingFullPath)) {
 							// deal with any attachments - they are in a sub-dir named 'review-[reviewNum]-[timestamp]'. filename = [reviewNum]
 							$subDirFiles = scandir($listingFullPath);
@@ -203,10 +203,10 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 							$isAttachment = 0;
 							$fullFileListing[] = array('fileName' => $fileName, 'filePath' => $filePath, 'commentName' => $commentName, 'isAttachment' => $isAttachment);
 						}
-						
+
 					}
 				}
-				
+
 				//echo "\nfullFileListing: \n";
 				//print_r($fullFileListing);
 
@@ -214,23 +214,23 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 				//
 				// GET HASH OF VALUES FOR EACH REVIEW FILE
 				//	
-				
+
 
 				$decision_key = 0;
 				$num_review_files = 0;
 				$num_decision_files = 0;
 				$review_files = array();
 				$decision_files = array();
-				
+
 				foreach($fullFileListing as $articleFileArray) {
-				
+
 					$fileName = $articleFileArray['fileName'];
 					$filePath = $articleFileArray['filePath'];
 					$commentName = $articleFileArray['commentName'];
 					$isAttachment = $articleFileArray['isAttachment'];
-					
+
 					//if($isAttachment) echo "\nfileName: $fileName\nfilePath: $filePath\ncommentName: $commentName\nisAttachment: $isAttachment\n";
-					
+
 
 					$second_dash_pos = strpos($commentName,"-",8); //9
 					$first_dot_pos = strpos($commentName,".",$first_dash_pos + 1); //19
@@ -240,7 +240,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 						$first_dot_pos = strlen($commentName);
 					}
 					$review_num = substr($commentName,7,($second_dash_pos - 7));
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					//
 					// GET TIMESTAMP & DATE UPLOADED
@@ -254,7 +254,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 					// GET FILE SIZE
 					//						
 					$fileSize = sprintf("%u",filesize($filePath));
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					//
 					// GET FILE TYPE & CATEGORY
@@ -283,9 +283,9 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 						default:
 							$fileType = "unknown";
 							$fileCategory = "unknown";
-							
+
 					}
-					
+
 					if($isAttachment) {
 						$fileType = "pdf";
 						$fileCategory = "main";
@@ -297,7 +297,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 					//					
 					//if($isAttachment) echo "\nfileName: $fileName\nfilePath: $filePath\ncommentName: $commentName\nisAttachment: $isAttachment\n";
 					array_push($review_files,array('fileName' => $fileName, 'filePath' => $filePath, 'commentName' => $commentName, 'isAttachment' => $isAttachment, 'reviewNum' => $review_num, 'timestamp' => $timestamp, 'dateUploaded' => $dateUploaded, 'fileType' => $fileType, 'fileCategory' => $fileCategory, 'fileSize' => $fileSize));
-											
+
 					$num_review_files++;
 
 					//echo "Dir Name = $grandparentPath$dir\nCount of ReviewFiles: $num_review_files\n";				
@@ -319,12 +319,12 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 						if(array_search($currReviewNum,$distinctReviewNums) === FALSE) {					
 							array_push($distinctReviewNums, $currReviewNum);
 						}
-						
+
 					}
 					//echo "reviewIds array:\n";
 					//print_r($distinctReviewNums);
 				}				
-						
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//
@@ -334,11 +334,11 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 					//echo "\nreviewNum: $reviewNum\n";
 					$reviewId = 0;
 					$reviewIdQueryRun = 0;
-					
+
 					//iterate through review_file array. act on files that have this review number.
 					foreach($review_files as $currReviewArray) {
 						if($currReviewArray['reviewNum'] == $reviewNum) {
-												
+
 							$fileName = $currReviewArray['fileName'];
 							$filePath = $currReviewArray['filePath'];
 							$commentName = $currReviewArray['commentName'];
@@ -354,12 +354,12 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 							$roleId = 4096;					
 							$revision = 1;
 							$round = 1;
-							
+
 							//if($isAttachment) {
 							//	echo "currReviewArray:\n";
 							//	print_r($currReviewArray);
 							//}
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							//
 							// SET VIEWABLE
@@ -375,7 +375,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 							} else {
 								$viewable = 0;
 							}
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							//
 							// QUERY OJS DB FOR REVIEW ID
@@ -394,7 +394,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 									$reviewId = mysql_result($result,0);
 								}
 							}
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							//
 							// GET TEXT OF REVIEW IF TXT FILE
@@ -409,7 +409,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 									$reviewText = file_get_contents($filePath);
 									//echo "\nreviewText: $reviewText\n";
 									//fclose($handle);
-									
+
 									if($reviewText == '') {
 										echo "\n**ALERT** Txt file $filePath was empty.\n";
 									}									
@@ -417,7 +417,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 									die("**ERROR** Txt file $filePath does not exist.\n");
 								}
 							} 
-							
+
 							if($fileType == 'txt') {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 								//
@@ -446,9 +446,9 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 									}		
 								}
 							} 
-							
+
 							if($fileType == 'pdf' OR ($fileType == 'txt' AND $viewable)) {
-								
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 								//
 								// IMPORT TXT AND PDF FILES INTO article_files
@@ -467,21 +467,21 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 								} elseif($fileType == 'txt') {
 									$extension = 'txt';
 								}
-								
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 								//
 								// CHECK FOR DUPLICATES BEFORE CREATING RECORD
 								//
 								$dup_check_stmt = "SELECT file_id FROM article_files ";
 								$dup_check_stmt .= "WHERE article_id = $article_id AND type = '$type' AND original_file_name = '$fileName' AND date_uploaded = '$dateUploaded'";
-		
+
 								$dup_check_result = mysql_query($dup_check_stmt);
 								if(mysql_num_rows($dup_check_result) > 0) {
 									//echo "Current Import File: $filePath\n";
 									//echo "dup_check_stmt: $dup_check_stmt\n";
 									$file_id = mysql_result($dup_check_result,0);	
 									$dupCtr++;
-									
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 									//
 									// ENTER FILE ID IN REVIEW_ASSIGNMENTS TABLE AS REVIEWER_FILE_ID (EVEN IF THIS IS A DUP, JUST IN CASE)
@@ -506,9 +506,9 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 									VALUES
 									($revision, $article_id, '$fileName', '$fileType', $fileSize, '" . mysql_real_escape_string($fileName) . "', '$type', $viewable, '$dateUploaded', '$dateUploaded', $round)								
 									";
-									
+
 									//echo "     insertArticleFileQuery: $insertArticleFileQuery\n";
-	
+
 									$result = mysql_query($insertArticleFileQuery);
 									if(!$result) {
 										die("\nInvalid query: " . mysql_error() . "\n");
@@ -517,9 +517,9 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 										$recsCreated++;
 										$articlesCreated++;
 									}
-									
+
 									//echo "\nfile_id: $file_id\n";
-									
+
 									if($file_id == 0) {
 										die("ERROR: Could not get file_id after INSERT INTO article_files for file: $filePath");
 									}
@@ -532,14 +532,14 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 									$newFileName = $article_id . '-' . $file_id . '-' . $revision . '-' . $typeAbbr . '.' . $extension;
 									//echo "Current Import File: $filePath\n";
 									//echo "New File name: $newFileName\n";
-									
+
 									$updateFileNameQuery = "UPDATE article_files SET file_name = '$newFileName' WHERE file_id = $file_id AND article_id = $article_id AND type = '$type'";
 									//echo "\nupdateFileNameQuery: $updateFileNameQuery\n";
 									$result = mysql_query($updateFileNameQuery);
 									if(!$result) {
 										die("\nInvalid query: " . mysql_error() . "\n");
 									}
-									
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 									//
 									// ENTER FILE ID IN REVIEW_ASSIGNMENTS TABLE AS REVIEWER_FILE_ID
@@ -552,7 +552,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 											die("\nInvalid query: " . mysql_error() . "\n");
 										}
 									}
-								
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 									//
 									// UPLOAD FILE TO FILESYSTEM
@@ -561,7 +561,7 @@ function import_reviews($importHome,$importParentDir,$unpublished,$baseUploadDir
 									//echo "Current Import File: $filePath\n";	
 									//echo "     Upload Path: $uploadPath\n";
 									//die("DIE - testing\n\n");
-									
+
 									//
 									// create dirs and subdirs if necessary
 									//

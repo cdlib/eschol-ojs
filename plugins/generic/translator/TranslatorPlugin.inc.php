@@ -45,11 +45,11 @@ class TranslatorPlugin extends GenericPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.generic.translator.name');
+		return \OjsLocale::translate('plugins.generic.translator.name');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.generic.translator.description');
+		return \OjsLocale::translate('plugins.generic.translator.description');
 	}
 
 	function isSitePlugin() {
@@ -59,7 +59,7 @@ class TranslatorPlugin extends GenericPlugin {
 	function getManagementVerbs($verbs = array()) {
 		$verbs = array();
 		if ($this->getEnabled()) {
-			$verbs[] = array('translate', Locale::translate('plugins.generic.translator.translate'));
+			$verbs[] = array('translate', \OjsLocale::translate('plugins.generic.translator.translate'));
 		}
 		return parent::getManagementVerbs($verbs);
 	}

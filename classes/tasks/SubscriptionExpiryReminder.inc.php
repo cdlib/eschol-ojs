@@ -46,19 +46,19 @@ class SubscriptionExpiryReminder extends ScheduledTask {
 
 		$subscriptionContactSignature = $subscriptionName;
 
-		Locale::requireComponents(array(LOCALE_COMPONENT_PKP_USER, LOCALE_COMPONENT_APPLICATION_COMMON));
+		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_PKP_USER, LOCALE_COMPONENT_APPLICATION_COMMON));
 		
 		if ($subscriptionMailingAddress != '') {
 			$subscriptionContactSignature .= "\n" . $subscriptionMailingAddress;
 		}
 		if ($subscriptionPhone != '') {
-			$subscriptionContactSignature .= "\n" . Locale::Translate('user.phone') . ': ' . $subscriptionPhone;
+			$subscriptionContactSignature .= "\n" . \OjsLocale::Translate('user.phone') . ': ' . $subscriptionPhone;
 		}
 		if ($subscriptionFax != '') {
-			$subscriptionContactSignature .= "\n" . Locale::Translate('user.fax') . ': ' . $subscriptionFax;
+			$subscriptionContactSignature .= "\n" . \OjsLocale::Translate('user.fax') . ': ' . $subscriptionFax;
 		}
 
-		$subscriptionContactSignature .= "\n" . Locale::Translate('user.email') . ': ' . $subscriptionEmail;
+		$subscriptionContactSignature .= "\n" . \OjsLocale::Translate('user.email') . ': ' . $subscriptionEmail;
 
 		$paramArray = array(
 			'subscriberName' => $user->getFullName(),

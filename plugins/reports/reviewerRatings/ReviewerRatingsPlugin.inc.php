@@ -45,11 +45,11 @@ class ReviewerRatingsPlugin extends ReportPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.reports.reviewerRatings.displayName');
+		return \OjsLocale::translate('plugins.reports.reviewerRatings.displayName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.reports.reviewerRatings.description');
+		return \OjsLocale::translate('plugins.reports.reviewerRatings.description');
 	}
 
 	function display(&$args) {
@@ -57,24 +57,24 @@ class ReviewerRatingsPlugin extends ReportPlugin {
 
 		header('content-type: text/comma-separated-values');
 		header('content-disposition: attachment; filename=reviewerRatings-' . date('Ymd') . '.csv');
-		Locale::requireComponents(array(LOCALE_COMPONENT_PKP_SUBMISSION));
+		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_PKP_SUBMISSION));
 
 		$reviewerRatingsDao =& DAORegistry::getDAO('ReviewerRatingsDAO');
 		$reviewerIterator = $reviewerRatingsDao->getReviewerRatings($journal->getId());
 
 
-		$yesnoMessages = array( 0 => Locale::translate('common.no'), 1 => Locale::translate('common.yes'));
+		$yesnoMessages = array( 0 => \OjsLocale::translate('common.no'), 1 => \OjsLocale::translate('common.yes'));
 
 		import('classes.submission.reviewAssignment.ReviewAssignment');
 		$recommendations = ReviewAssignment::getReviewerRecommendationOptions();
 
 		$columns = array(
-			'reviewerid' => Locale::translate('plugins.reports.reviewerRatings.reviewerId'),
-			'lastname' => Locale::translate('user.lastName'),
-			'firstname' => Locale::translate('user.firstName'),
-			'email' =>Locale::translate('user.email'),
-			'totalreviews' => Locale::translate('plugins.reports.reviewerRatings.totalReviews'),
-			'averagerating' => Locale::translate('plugins.reports.reviewerRatings.averageRating'),            
+			'reviewerid' => \OjsLocale::translate('plugins.reports.reviewerRatings.reviewerId'),
+			'lastname' => \OjsLocale::translate('user.lastName'),
+			'firstname' => \OjsLocale::translate('user.firstName'),
+			'email' =>\OjsLocale::translate('user.email'),
+			'totalreviews' => \OjsLocale::translate('plugins.reports.reviewerRatings.totalReviews'),
+			'averagerating' => \OjsLocale::translate('plugins.reports.reviewerRatings.averageRating'),            
 		);
 		$yesNoArray = array('declined', 'cancelled');
 
@@ -86,7 +86,7 @@ class ReviewerRatingsPlugin extends ReportPlugin {
 				if (in_array($index, $yesNoArray)) {
 					$columns[$index] = $yesnoMessages[$row[$index]];
 				} elseif ($index == "recommendation") {
-					$columns[$index] = (!isset($row[$index])) ? Locale::translate('common.none') : Locale::translate($recommendations[$row[$index]]);
+					$columns[$index] = (!isset($row[$index])) ? \OjsLocale::translate('common.none') : \OjsLocale::translate($recommendations[$row[$index]]);
 				} elseif ($index == "comments") {
 					if (isset($comments[$row['articleid']][$row['reviewerid']])) {
 						$columns[$index] = $comments[$row['articleid']][$row['reviewerid']];

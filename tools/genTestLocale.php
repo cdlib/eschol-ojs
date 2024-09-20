@@ -75,8 +75,8 @@ class genTestLocale extends CommandLineTool {
 	 * Create the test locale file.
 	 */
 	function execute() {
-		Locale::initialize();
-		$localeFiles = Locale::makeComponentMap($this->inLocale);
+		\OjsLocale::initialize();
+		$localeFiles = \OjsLocale::makeComponentMap($this->inLocale);
 
 		foreach($localeFiles as $localeFilePath) {
 			$localeFile = basename($localeFilePath);

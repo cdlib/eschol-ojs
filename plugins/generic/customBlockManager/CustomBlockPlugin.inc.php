@@ -78,16 +78,16 @@ class CustomBlockPlugin extends BlockPlugin {
 		if ($this->getEnabled()) {
 			$verbs[] = array(
 				'disable',
-				Locale::translate('manager.plugins.disable')
+				\OjsLocale::translate('manager.plugins.disable')
 			);
 			$verbs[] = array(
 				'edit',
-				Locale::translate('plugins.generic.customBlock.edit')
+				\OjsLocale::translate('plugins.generic.customBlock.edit')
 			);
 		} else {
 			$verbs[] = array(
 				'enable',
-				Locale::translate('manager.plugins.enable')
+				\OjsLocale::translate('manager.plugins.enable')
 			);
 		}
 		return $verbs;
@@ -126,7 +126,7 @@ class CustomBlockPlugin extends BlockPlugin {
 			case 'edit':
 				$pageCrumbs[] = array(
 					Request::url(null, 'manager', 'plugins'),
-					Locale::translate('manager.plugins'),
+					\OjsLocale::translate('manager.plugins'),
 					true
 				);
 
@@ -197,14 +197,14 @@ class CustomBlockPlugin extends BlockPlugin {
 	 * @return String
 	 */
 	function getDisplayName() {
-		return $this->blockName . ' ' . Locale::translate('plugins.generic.customBlock.nameSuffix');
+		return $this->blockName . ' ' . \OjsLocale::translate('plugins.generic.customBlock.nameSuffix');
 	}
 
 	/**
 	 * Get a description of the plugin.
 	 */
 	function getDescription() {
-		return Locale::translate('plugins.generic.customBlock.description');
+		return \OjsLocale::translate('plugins.generic.customBlock.description');
 	}
 }
 

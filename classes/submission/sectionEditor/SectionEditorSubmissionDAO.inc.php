@@ -62,8 +62,8 @@ class SectionEditorSubmissionDAO extends DAO {
 	 * @return EditorSubmission
 	 */
 	function &getSectionEditorSubmission($articleId) {
-		$primaryLocale = Locale::getPrimaryLocale();
-		$locale = Locale::getLocale();
+		$primaryLocale = \OjsLocale::getPrimaryLocale();
+		$locale = \OjsLocale::getLocale();
 		$result =& $this->retrieve(
 			'SELECT	a.*,
 				COALESCE(stl.setting_value, stpl.setting_value) AS section_title,
@@ -276,8 +276,8 @@ class SectionEditorSubmissionDAO extends DAO {
 	 * @return array SectionEditorSubmission
 	 */
 	function &getSectionEditorSubmissions($sectionEditorId, $journalId, $status = true) {
-		$primaryLocale = Locale::getPrimaryLocale();
-		$locale = Locale::getLocale();
+		$primaryLocale = \OjsLocale::getPrimaryLocale();
+		$locale = \OjsLocale::getLocale();
 
 		$sectionEditorSubmissions = array();
 
@@ -327,8 +327,8 @@ class SectionEditorSubmissionDAO extends DAO {
 	 * Retrieve unfiltered section editor submissions
 	 */
 	function &_getUnfilteredSectionEditorSubmissions($sectionEditorId, $journalId, $sectionId = 0, $searchField = null, $searchMatch = null, $search = null, $dateField = null, $dateFrom = null, $dateTo = null, $additionalWhereSql = '', $rangeInfo = null, $sortBy = null, $sortDirection = SORT_DIRECTION_ASC) {
-		$primaryLocale = Locale::getPrimaryLocale();
-		$locale = Locale::getLocale();
+		$primaryLocale = \OjsLocale::getPrimaryLocale();
+		$locale = \OjsLocale::getLocale();
 
 		$params = array(
 			ASSOC_TYPE_ARTICLE,

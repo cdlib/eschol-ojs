@@ -56,15 +56,15 @@ function import_readers($importHome,$importParentDir) {
 					$bp_email = $data[0];
 					$bp_subscribed = $data[1];
 					$bp_unsub_date = $data[2];
-					
+
 					//
 					//TRANSLATE VALUES AS NECESSARY
 					//
 					$bp_unsub_date = ($bp_unsub_date == '0000:00:00' OR $bp_unsub_date == '') ? 'NULL': $bp_unsub_date;
-					
+
 					//echo "----------------------------\n";
 					//echo "bp_email: $bp_email, bp_subscribed: $bp_subscribed, bp_unsub_date: $bp_unsub_date\n";
-					
+
 					//CHECK FOR REQUIRED DATA VALUES
 					if($bp_email == '' or $bp_email == 'NULL') {
 						echo "\nERROR: Email not populated for $currImportFile Line: $row NumFields in Line: $num Not importing this line.\n";
@@ -74,7 +74,7 @@ function import_readers($importHome,$importParentDir) {
 						echo "\nERROR: BP Subscribed not populated for $currImportFile Line: $row NumFields in Line: $num Not importing this line.\n";
 						continue;
 					}
-					
+
 					if($bp_subscribed == "1") {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 					//
@@ -83,16 +83,16 @@ function import_readers($importHome,$importParentDir) {
 					$user_id = 0;
 					$userid_query = 'SELECT user_id FROM users ';
 					$userid_query .= "WHERE email = '" . mysql_real_escape_string($bp_email) . "'";
-					
+
 					//echo "\nuserid_query: $userid_query\n";
 					unset($userid_query_result);
-					
+
 					$userid_query_result = mysql_query($userid_query);
-					
+
 					if(!$userid_query_result) {
 						die("\nInvalid query: " . mysql_error() . "\n");
 					} 
-					
+
 					if (mysql_num_rows($userid_query_result) > 0) {
 						$user_id = mysql_result($userid_query_result,0);
 					} else {
@@ -101,7 +101,7 @@ function import_readers($importHome,$importParentDir) {
 						//////////////////////
 						$usersCreateQuery = "INSERT INTO users (username, email) ";
 						$usersCreateQuery .= "VALUES('" . mysql_real_escape_string($bp_email) . "', '" . mysql_real_escape_string($bp_email) . "')";
-						
+
 						#echo "\nusersCreateQuery: $usersCreateQuery\n";
 						$usersCreateResult = mysql_query($usersCreateQuery);
 						if(!$usersCreateResult) {
@@ -110,25 +110,25 @@ function import_readers($importHome,$importParentDir) {
 							$user_id = mysql_insert_id();
 							$reviewersCreated++;
 						}
-						
+
 						if($user_id == 0) {
 							die("ERROR: Could not get user_id after query: $usersCreateQuery\n");
 						}	
 
  					}
 					//echo "\nuser_id after userid_query: $user_id\n";
-					
+
 					if($bp_subscribed && $user_id) {					
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//
 						// CHECK FOR DUPLICATES BEFORE CREATING roles RECORD
 						//
 						$roleDupQuery = "SELECT * FROM roles ";
 						$roleDupQuery .= "WHERE journal_id = $journalId AND user_id = $user_id AND role_id = 1048576";
-						
+
 						//echo "\nroleDupQuery: $roleDupQuery\n";
-						
+
 						$roleDupResult = mysql_query($roleDupQuery);
 						if(!$roleDupResult) {
 							die("\nInvalid query: " . mysql_error() . "\nroleDupQuery: $roleDupQuery");
@@ -143,7 +143,7 @@ function import_readers($importHome,$importParentDir) {
 							$rolesQuery = "INSERT INTO roles ";
 							$rolesQuery .= "(journal_id, user_id, role_id)";
 							$rolesQuery .= " VALUES ($journalId, $user_id, 1048576)";
-							
+
 							#echo "\nrolesQuery: $rolesQuery\n";
 							$rolesCreateResult = mysql_query($rolesQuery);
 							if(!$rolesCreateResult) {

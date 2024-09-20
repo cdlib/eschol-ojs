@@ -42,13 +42,13 @@ class ThesisForm extends Form {
 		$thesisPlugin->import('Thesis');
 
 		$this->validStatus = array (
-			THESIS_STATUS_INACTIVE => Locale::translate('plugins.generic.thesis.manager.status.inactive'),
-			THESIS_STATUS_ACTIVE => Locale::translate('plugins.generic.thesis.manager.status.active')
+			THESIS_STATUS_INACTIVE => \OjsLocale::translate('plugins.generic.thesis.manager.status.inactive'),
+			THESIS_STATUS_ACTIVE => \OjsLocale::translate('plugins.generic.thesis.manager.status.active')
 		);
 
 		$this->validDegrees = array (
-			THESIS_DEGREE_MASTERS => Locale::translate('plugins.generic.thesis.manager.degree.masters'),
-			THESIS_DEGREE_DOCTORATE => Locale::translate('plugins.generic.thesis.manager.degree.doctorate')
+			THESIS_DEGREE_MASTERS => \OjsLocale::translate('plugins.generic.thesis.manager.degree.masters'),
+			THESIS_DEGREE_DOCTORATE => \OjsLocale::translate('plugins.generic.thesis.manager.degree.doctorate')
 		);
 
 		$this->thesisId = isset($thesisId) ? (int) $thesisId : null;

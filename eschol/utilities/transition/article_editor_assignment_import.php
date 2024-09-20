@@ -30,7 +30,7 @@ function import_history($importHome,$importParentDir,$unpublished) {
 	$dupCtr = 0;
 	$n = 0;
 	foreach ($importParentDir as $dir) {
-		
+
 		$journalPath = $dir[0];
 		$journalId = $dir[2]; //FIXME look this up in the database rather than passing as parameter?
 
@@ -68,7 +68,7 @@ function import_history($importHome,$importParentDir,$unpublished) {
 			die("ERROR: Could not set chiefEditorId for Journal ID $dir[2]!");
 		}
 		//echo "\nchiefEditorId: $chiefEditorId\n";
-		
+
 		//OLD: get all of the editors for this journal as assigned in the DB
 		/********
 		$editorIds = array();
@@ -80,23 +80,23 @@ function import_history($importHome,$importParentDir,$unpublished) {
 			$edUserId = 0;
 			$edEmail = '';
 			while($editorRecord = mysql_fetch_array($journalEditorsResult)) {
-			
+
 				$edUserId = $editorRecord[0];
 				$edEmail = $editorRecord[1];
 				//echo "\nedUserId: $edUserId\n";
 				//echo "\nedEmail: $edEmail\n";
-				
+
 				if($edUserId != 0 && $edUserId > 15 && substr($edEmail,-11) != 'bepress.com') {
 					$editorIds[] = $edUserId;
 				}
 			}			
 		}
-		
+
 		echo "\nEditors for journal $journalPath\n";
 		print_r($editorIds);
 		die();
 		********/
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// GET ARRAY OF ARTICLE DIRS
 		//
@@ -147,7 +147,7 @@ function import_history($importHome,$importParentDir,$unpublished) {
 								}
 							}
 						}
-						
+
 					}
 				}
 			}
@@ -159,9 +159,9 @@ function import_history($importHome,$importParentDir,$unpublished) {
 		//
 		$article_settings_exists = 1;
 		foreach($parentDirs as $dir) {
-			
+
 			if(substr($dir,0,1) != '.') {
-				
+
 				//set full file path
 				if($unpublished) {
 					$currImportFile = $importHome . $journalPath . 'unpublished/' . $dir . '/' . $fileName;
@@ -169,7 +169,7 @@ function import_history($importHome,$importParentDir,$unpublished) {
 				} else {
 					$currImportFile = $grandparentPath . $dir . '/' . $fileName;
 				}
-				
+
 				//echo "\ncurrImportFile: $currImportFile\n";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 				//
@@ -180,22 +180,22 @@ function import_history($importHome,$importParentDir,$unpublished) {
 				if (file_exists($currImportFile)) {
 					//open file
 					$handle = fopen($currImportFile, "r");
-					
+
 					//clear variables
 					$article_id = 0;				
 					$article_settings_exists = 1;
 					$status_id = 1; //default 1, 'queued'
 					$numRows = count(file($currImportFile));
-					
+
 					//echo "\n**** $journalPath$dir **** \n";
 					//echo "\neschol_articleid: $eschol_articleid\n";
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////								
 					//FOR EACH ROW IN THE HISTORY FILE
 					while (($data = fgetcsv($handle, 1000, "\t")) !== FALSE) {
-						
+
 						if($article_settings_exists==0) continue;
-						
+
 						$user_id = 0;
 						$date_logged = 'NULL';
 						$origMessage = '';
@@ -204,11 +204,11 @@ function import_history($importHome,$importParentDir,$unpublished) {
 						$forEmail = '';
 						$editorEmail = '';
 						$editorId = 0;
-						
+
 						$num = count($data);
-						
+
 						if($row > 1) {
-							
+
 							//GET DATA VALUES
 							$date_logged = $data[0];
 							$origMessage = $data[1];
@@ -241,13 +241,13 @@ function import_history($importHome,$importParentDir,$unpublished) {
 								if(!$result) {
 									die("\nInvalid query: " . mysql_error() . "\narticleid_query: $articleid_query");
 								} 
-								
+
 								if (mysql_num_rows($result)==0) {
 									echo "\n**ALERT** No article_settings record exists with eschol article ID or eschol_submission_path = '$article_link'.\nQuery: $articleid_query\nNo history created for this article.\n";
 									$article_settings_exists = 0;
 									continue;
 								}
-								
+
 								$article_id = mysql_result($result,0);								
 								//echo "\narticle_id: $article_id\n";
 							}
@@ -256,36 +256,36 @@ function import_history($importHome,$importParentDir,$unpublished) {
 							//
 							// ASSIGN EDITOR IN DB
 							//				
-		
+
 							if(substr($origMessage,0,15) == 'Editor assigned') {
-								
+
 								if($forEmail != '') {
 									$editorEmail = $forEmail;
 								} elseif ($adminEmail != '') {
 									$editorEmail = $adminEmail;
 								}
 								//echo "\norigMessage: $origMessage\nadminEmail: $adminEmail\nforEmail: $forEmail\neditorEmail: $editorEmail\n";
-								
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 								//
 								// QUERY DB FOR user_id
 								//
-									
+
 								if($editorEmail != '') {
 									if($editorEmail == 'bepress_editor@bepress.com') $editorEmail = 'help@escholarship.org';
-									
+
 									$userid_query = 'SELECT user_id FROM users ';
 									$userid_query .= "WHERE email = '$editorEmail'";
-									
+
 									//echo "\nuserid_query: $userid_query\n";
 									unset($userid_query_result);
-									
+
 									$userid_query_result = mysql_query($userid_query);
-									
+
 									if(!$userid_query_result) {
 										die("\nInvalid query: " . mysql_error() . "\nuserid_query_result: $userid_query_result");
 									} 
-									
+
 									$num_userid_rows = mysql_num_rows($userid_query_result);
 									if ($num_userid_rows > 0) {
 										$editorId = mysql_result($userid_query_result, 0);
@@ -307,7 +307,7 @@ function import_history($importHome,$importParentDir,$unpublished) {
 							$dupEditAssignCheck = "SELECT * FROM edit_assignments ";
 							$dupEditAssignCheck .= "WHERE article_id = $article_id AND editor_id = $editorId";
 							//echo "\ndupEditAssignCheck: $dupEditAssignCheck\n";
-							
+
 							$dupEditAssignResult = mysql_query($dupEditAssignCheck);
 							if($dupEditAssignResult === FALSE) {
 								die("\nInvalid query: " . mysql_error() . "\ndupEditAssignCheck: $dupEditAssignCheck\n");
@@ -323,7 +323,7 @@ function import_history($importHome,$importParentDir,$unpublished) {
 								$existingEditId = 0;
 								$editAssignmentsQuery = '';
 								$editAssignCheckQuery = "SELECT edit_id FROM edit_assignments WHERE article_id = $article_id";
-								
+
 								$editAssignmentsCheckResult = mysql_query($editAssignCheckQuery);
 								if(!$editAssignmentsCheckResult) {
 									die("\nInvalid query: " . mysql_error() . "\neditAssignCheckQuery: $editAssignCheckQuery");
@@ -355,9 +355,9 @@ function import_history($importHome,$importParentDir,$unpublished) {
 							//
 							$dup_check_stmt = "SELECT * FROM roles ";
 							$dup_check_stmt .= "WHERE journal_id = $journalId AND user_id = $editorId AND role_id = 256";
-							
+
 							//echo "\ndup_check_stmt: $dup_check_stmt\n";
-							
+
 							$dup_check_result = mysql_query($dup_check_stmt);
 							if(!$result) {
 								die("\nInvalid query: " . mysql_error() . "\ndup_check_result: $dup_check_result");
@@ -372,7 +372,7 @@ function import_history($importHome,$importParentDir,$unpublished) {
 								$rolesQuery = "INSERT INTO roles ";
 								$rolesQuery .= "(journal_id, user_id, role_id)";
 								$rolesQuery .= " VALUES ($journalId, $editorId, 256)";
-								
+
 								//echo "\nrolesQuery: $rolesQuery\n";
 								$result = mysql_query($rolesQuery);
 								if(!$result) {
@@ -382,11 +382,11 @@ function import_history($importHome,$importParentDir,$unpublished) {
 								}	
 							}
 						}
-						
+
 						$row++;
 					} //end if($row > 1)
 				} //end while (($data = fgetcsv($handle, 1000, "\t")) !== FALSE)
-				
+
 				fclose($handle);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
@@ -403,9 +403,9 @@ function import_history($importHome,$importParentDir,$unpublished) {
 						$editAssignmentsQuery = "INSERT INTO edit_assignments ";
 						$editAssignmentsQuery .= "(article_id, editor_id, can_edit, can_review, date_notified, date_underway)";
 						$editAssignmentsQuery .= " VALUES ($article_id, $chiefEditorId, 1, 1, now(), now())";
-						
+
 						//echo "\neditAssignmentsQuery: $editAssignmentsQuery\n";
-						
+
 						$editAssignmentsResult = mysql_query($editAssignmentsQuery);
 						if(!$editAssignmentsResult) {
 							die("\nInvalid query: " . mysql_error() . "\neditAssignmentsQuery: $editAssignmentsQuery\n");

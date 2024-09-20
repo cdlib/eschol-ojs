@@ -40,11 +40,11 @@ class ThesisFeedGatewayPlugin extends GatewayPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.generic.thesisfeed.displayName');
+		return \OjsLocale::translate('plugins.generic.thesisfeed.displayName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.generic.thesisfeed.description');
+		return \OjsLocale::translate('plugins.generic.thesisfeed.description');
 	}
 
 	/**

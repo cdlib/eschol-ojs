@@ -59,7 +59,7 @@ class InformationHandler extends Handler {
 				$pageTitle = $pageCrumbTitle = 'navigation.competingInterestGuidelines';
 				break;
 			case 'sampleCopyrightWording':
-				Locale::requireComponents(array(LOCALE_COMPONENT_OJS_MANAGER));				
+				\OjsLocale::requireComponents(array(LOCALE_COMPONENT_OJS_MANAGER));				
 				//$content = Locale::translate('manager.setup.authorCopyrightNotice.sample');
 				//What we want is to get the copyrightNotice from the journal settings
 				$content= $journal->getLocalizedSetting('copyrightNotice');

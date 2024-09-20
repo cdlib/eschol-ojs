@@ -25,7 +25,7 @@ foreach($importParentDir as $currJournalInfo) {
 	$bpAdminFilepath = $importHome . $journalPath . $bpAdminFilename;
 	$bpUserIds = array();
 	$bpEmails = array();
-	
+
 	$row = 1;
 	$numRows = 0;				
 	if (file_exists($bpAdminFilepath)) {
@@ -47,10 +47,10 @@ foreach($importParentDir as $currJournalInfo) {
 	} else {
 		echo "\nadministrators file does not exist!: $bpAdminFilepath\n";
 	}
-	
+
 	//echo "\nbpUserIds:\n";
 	//print_r($bpUserIds);
-	
+
 	//echo "\nbpEmails:\n";
 	//print_r($bpEmails);
 
@@ -80,7 +80,7 @@ foreach($importParentDir as $currJournalInfo) {
 				$ojsEditors[] = array('ojsEditorId' => $ojsEditorId, 'bpId' => $bpId, 'ojsEditorEmail' => $ojsEditorEmail, 'ojsRoleId' => $ojsRoleId);
 			}
 		}
-		
+
 		//echo "\nojsEditors:\n";
 		//print_r($ojsEditors);
 
@@ -94,7 +94,7 @@ foreach($importParentDir as $currJournalInfo) {
 			$currBpId = $ojsEditor['bpId'];
 			$currEdEmail = $ojsEditor['ojsEditorEmail'];
 			$currRoleId = $ojsEditor['ojsRoleId'];
-			
+
 			if(!in_array($currBpId,$bpUserIds) && !(in_array($currEdEmail,$bpEmails))) {
 				// 16 = journal manager
 				// 256 = editor
@@ -109,9 +109,9 @@ foreach($importParentDir as $currJournalInfo) {
 					$rolesDeleted++;
 				}	
 			}
-			
+
 		}
-			
+
 		// GET LIST OF REVIEWER BP IDS FROM REVIEWERS.TSV
 		// FOR EACH ROLES WHERE JOURNAL_ID = X AND ROLE_ID = REVIEWER
 			// CHECK THAT user_settings 'eschol_bpid' IS LISTED IN ADMINISTRATORS.TSV

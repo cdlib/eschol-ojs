@@ -23,14 +23,14 @@ class ReadingToolsBlockPlugin extends BlockPlugin {
 	 * @return String
 	 */
 	function getDisplayName() {
-		return Locale::translate('plugins.block.readingTools.displayName');
+		return \OjsLocale::translate('plugins.block.readingTools.displayName');
 	}
 
 	/**
 	 * Get a description of the plugin.
 	 */
 	function getDescription() {
-		return Locale::translate('plugins.block.readingTools.description');
+		return \OjsLocale::translate('plugins.block.readingTools.description');
 	}
 
 	/**

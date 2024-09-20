@@ -158,8 +158,8 @@ class StatisticsHandler extends ManagerHandler {
 
 		$plugin =& $reportPlugins[$pluginName];
 		$plugin->display($args);
-		
-		
+
+
 		$templateMgr->assign('isSiteAdmin',Validation::isSiteAdmin()); //20111026 BLH Added
 		$templateMgr->assign('journalPath',$journal->getPath()); // 20111201 BLH added
 	}

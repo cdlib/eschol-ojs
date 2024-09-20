@@ -71,7 +71,7 @@ class JournalLanguagesHandler extends ManagerHandler {
 	function reloadLocalizedDefaultSettings($args, &$request) {
 		// make sure the locale is valid
 		$locale = $request->getUserVar('localeToLoad');
-		if ( !Locale::isLocaleValid($locale) ) {
+		if ( !\OjsLocale::isLocaleValid($locale) ) {
 			$request->redirect(null, null, 'languages');
 		}
 

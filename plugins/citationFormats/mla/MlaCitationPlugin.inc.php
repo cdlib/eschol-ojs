@@ -34,15 +34,15 @@ class MlaCitationPlugin extends CitationPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.citationFormats.mla.displayName');
+		return \OjsLocale::translate('plugins.citationFormats.mla.displayName');
 	}
 
 	function getCitationFormatName() {
-		return Locale::translate('plugins.citationFormats.mla.citationFormatName');
+		return \OjsLocale::translate('plugins.citationFormats.mla.citationFormatName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.citationFormats.mla.description');
+		return \OjsLocale::translate('plugins.citationFormats.mla.description');
 	}
 
 }

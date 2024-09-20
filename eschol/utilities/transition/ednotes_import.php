@@ -89,7 +89,7 @@ function import_ednotes($importHome,$importParentDir,$unpublished) {
 					//					
 					$handle = fopen($currImportFile, "r");
 					$numRows = count(file($currImportFile));
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 					//					
 					// ITERATE THROUGH LINES IN FILE
@@ -101,7 +101,7 @@ function import_ednotes($importHome,$importParentDir,$unpublished) {
 					$noteId = 0;
 					while (($data = fgets($handle)) !== FALSE) {
 						$midDelimiterStart = 0;
-						
+
 						//sample line:
 						//===-:1088331:==:1234495033:-===
 						if(substr($data,0,5) == $firstDelimiter) {
@@ -112,14 +112,14 @@ function import_ednotes($importHome,$importParentDir,$unpublished) {
 							if($noteId > 0) {
 								$notesArray[] = array('ojsUserId' => $ojsUserId,'ojsUserName' => $ojsUserName,'dateCreated' => $dateCreated,'notesText' => $notesText);
 							}
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 							//					
 							// START NEW NOTE
 							//
 							$noteId++;
 							$notesText = '';
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 							//					
 							// GET NOTE DATE
@@ -132,7 +132,7 @@ function import_ednotes($importHome,$importParentDir,$unpublished) {
 							$timestamp = substr($data,$timestampBegin,$timestampLength);
 							date_default_timezone_set('America/Los_Angeles');
 							$dateCreated = date('Y-m-d H:i:s',$timestamp);
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 							//					
 							// GET BP USER ID
@@ -141,7 +141,7 @@ function import_ednotes($importHome,$importParentDir,$unpublished) {
 							$bpUserIdBegin = strlen($firstDelimiter);
 							$bpUserIdLength = $midDelimiterStart - $bpUserIdBegin;
 							$bpUserId = substr($data,$bpUserIdBegin,$bpUserIdLength);
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 							//					
 							// GET OJS USER ID
@@ -150,7 +150,7 @@ function import_ednotes($importHome,$importParentDir,$unpublished) {
 							$ojsUserIdQuery = "SELECT user_id FROM user_settings ";
 							$ojsUserIdQuery .= "WHERE setting_name = 'eschol_bpid' AND setting_value = '$bpUserId'";
 							$ojsUserIdResult = mysql_query($ojsUserIdQuery);
-					
+
 							if($ojsUserIdResult === FALSE) {
 								die("\nInvalid query: " . mysql_error() . "\nojsUserIdQuery: $ojsUserIdQuery\n");
 							} elseif (mysql_num_rows($ojsUserIdResult)==0) {
@@ -159,7 +159,7 @@ function import_ednotes($importHome,$importParentDir,$unpublished) {
 							} else {
 								$ojsUserId = mysql_result($ojsUserIdResult,0);	
 							}
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 							//					
 							// IF USER ID NOT FOUND, SET TO 1 (help@escholarship.org)
@@ -185,7 +185,7 @@ function import_ednotes($importHome,$importParentDir,$unpublished) {
 									$ojsUserName = str_replace('  ',' ',$ojsUserName);
 									//echo "\nojsUserName: $ojsUserName\n";
 								}							
-								
+
 							}
 						} else {
 							$notesText .= $data;
@@ -195,12 +195,12 @@ function import_ednotes($importHome,$importParentDir,$unpublished) {
 
 					//echo "\nNotesArray:\n";
 					//print_r($notesArray);
-					
-					
+
+
 					if($notesText == '') {
 						//echo "\n**ALERT** Txt file $currImportFile was empty.\n";
 					}	
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 					//
 					//  ITERATE THROUGH NOTES AND IMPORT TO DB
@@ -217,34 +217,34 @@ function import_ednotes($importHome,$importParentDir,$unpublished) {
 
 						//if userId couldn't be determined, use help@escholarship.org
 						if($ojsUserId == 0) $userId = 1;
-						
+
 						//if date created couldn't be determined, use now
 						if($dateCreated == '') $dateCreated = date('Y-m-d H:i:s');
-						
+
 						//create title
 						$title = "[bp ednote] $ojsUserName for #$article_id";
-						
+
 						//echo "\n---------------------------------------------------------\n";
 						//echo "ojsUserId: $ojsUserId\ndateCreated: $dateCreated\nnotesText:\ntitle: $title\n$notesText\n";
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 						//
 						//  CHECK FOR DUPLICATES BEFORE CREATING DB REC
 						//	
 						$ednotesDupQuery = "SELECT * FROM notes ";
 						$ednotesDupQuery .= "WHERE assoc_type = 257 AND assoc_id = $article_id AND context_id = $journalId AND contents = '" . mysql_real_escape_string($notesText) . "'";
-						
+
 						//echo "\nednotesDupQuery: $ednotesDupQuery\n";
-						
+
 						$ednotesDupResult = mysql_query($ednotesDupQuery);
 						if($ednotesDupResult === FALSE) {
 							die("\nInvalid query: " . mysql_error() . "\nednotesDupQuery: $ednotesDupQuery\n");
 						}
-						
+
 						if(mysql_num_rows($ednotesDupResult) > 0) {
 							$dupCtr++;
 						} else {
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 							//
 							// 	CREATE article_email_log RECORD
@@ -252,9 +252,9 @@ function import_ednotes($importHome,$importParentDir,$unpublished) {
 							$insertEdnoteQuery = "INSERT INTO notes ";
 							$insertEdnoteQuery .= "(assoc_type, assoc_id, user_id, date_created, date_modified, title, context_id, contents) ";
 							$insertEdnoteQuery .= "VALUES (257, $article_id, $ojsUserId, '$dateCreated', '$dateCreated', '$title', $journalId, '" . mysql_real_escape_string($notesText) . "')";
-							
+
 							//echo "\ninsertEdnoteQuery: $insertEdnoteQuery\n";
-						
+
 							$insertEdnoteResult = mysql_query($insertEdnoteQuery);
 							if(!$insertEdnoteResult) {
 								die("\nInvalid query: " . mysql_error() . "\ninsertEdnoteQuery: $insertEdnoteQuery\n");

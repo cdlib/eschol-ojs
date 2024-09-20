@@ -239,7 +239,7 @@ class AuthPlugin extends Plugin {
 		return array(
 			array(
 				'authSources',
-				Locale::translate('admin.authSources')
+				\OjsLocale::translate('admin.authSources')
 			)
 		);
 	}

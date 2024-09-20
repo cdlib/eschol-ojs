@@ -55,7 +55,7 @@ class EditorHandler extends SectionEditorHandler {
 		$sectionDao =& DAORegistry::getDAO('SectionDAO');
 
 		$sections =& $sectionDao->getSectionTitles($journal->getId());
-		$templateMgr->assign('sectionOptions', array(0 => Locale::Translate('editor.allSections')) + $sections);
+		$templateMgr->assign('sectionOptions', array(0 => \OjsLocale::Translate('editor.allSections')) + $sections);
 		$templateMgr->assign('fieldOptions', $this->getSearchFieldOptions());
 		$templateMgr->assign('dateFieldOptions', $this->getDateFieldOptions());
 
@@ -176,12 +176,12 @@ class EditorHandler extends SectionEditorHandler {
 		$sortDirection = (isset($sortDirection) && ($sortDirection == 'ASC' || $sortDirection == 'DESC')) ? $sortDirection : 'ASC';
 
 		$filterEditorOptions = array(
-			FILTER_EDITOR_ALL => Locale::Translate('editor.allEditors'),
-			FILTER_EDITOR_ME => Locale::Translate('editor.me')
+			FILTER_EDITOR_ALL => \OjsLocale::Translate('editor.allEditors'),
+			FILTER_EDITOR_ME => \OjsLocale::Translate('editor.me')
 		);
 
 		$filterSectionOptions = array(
-			FILTER_SECTION_ALL => Locale::Translate('editor.allSections')
+			FILTER_SECTION_ALL => \OjsLocale::Translate('editor.allSections')
 		) + $sections;
 
 		// Get the user's search conditions, if any
@@ -397,7 +397,7 @@ class EditorHandler extends SectionEditorHandler {
 	 */
 	function assignEditor($args) {
 		$this->validate();
-		Locale::requireComponents(array(LOCALE_COMPONENT_PKP_MANAGER)); // manager.people.noneEnrolled
+		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_PKP_MANAGER)); // manager.people.noneEnrolled
 
 		$journal =& Request::getJournal();
 		$articleId = Request::getUserVar('articleId');
@@ -477,7 +477,7 @@ class EditorHandler extends SectionEditorHandler {
 				USER_FIELD_USERNAME => 'user.username',
 				USER_FIELD_EMAIL => 'user.email'
 			));
-			$templateMgr->assign('alphaList', explode(' ', Locale::translate('common.alphaList')));
+			$templateMgr->assign('alphaList', explode(' ', \OjsLocale::translate('common.alphaList')));
 			$templateMgr->assign('helpTopicId', 'editorial.editorsRole.submissionSummary.submissionManagement');
 			$templateMgr->display('editor/selectSectionEditor.tpl');
 		}

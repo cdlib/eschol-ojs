@@ -49,7 +49,7 @@ class IndividualSubscriptionForm extends SubscriptionForm {
 
 		$subscriptionTypeCount = count($this->subscriptionTypes);
 		if ($subscriptionTypeCount == 0) {
-			$this->addError('typeId', Locale::translate('manager.subscriptions.form.typeRequired'));
+			$this->addError('typeId', \OjsLocale::translate('manager.subscriptions.form.typeRequired'));
 			$this->addErrorField('typeId');
 		}
 

@@ -76,8 +76,8 @@ class SectionEditorAction extends Action {
 			// Add log
 			import('classes.article.log.ArticleLog');
 			import('classes.article.log.ArticleEventLogEntry');
-			Locale::requireComponents(array(LOCALE_COMPONENT_APPLICATION_COMMON, LOCALE_COMPONENT_OJS_EDITOR));
-			ArticleLog::logEvent($sectionEditorSubmission->getArticleId(), ARTICLE_LOG_EDITOR_DECISION, ARTICLE_LOG_TYPE_EDITOR, $user->getId(), 'log.editor.decision', array('editorName' => $user->getFullName(), 'articleId' => $sectionEditorSubmission->getArticleId(), 'decision' => Locale::translate($decisions[$decision])));
+			\OjsLocale::requireComponents(array(LOCALE_COMPONENT_APPLICATION_COMMON, LOCALE_COMPONENT_OJS_EDITOR));
+			ArticleLog::logEvent($sectionEditorSubmission->getArticleId(), ARTICLE_LOG_EDITOR_DECISION, ARTICLE_LOG_TYPE_EDITOR, $user->getId(), 'log.editor.decision', array('editorName' => $user->getFullName(), 'articleId' => $sectionEditorSubmission->getArticleId(), 'decision' => \OjsLocale::translate($decisions[$decision])));
 		}
 	}
 
@@ -257,7 +257,7 @@ class SectionEditorAction extends Action {
 						'editorialContactSignature' => $user->getContactSignature(),
 						'reviewGuidelines' => OjsString::html2text($journal->getLocalizedSetting('reviewGuidelines')),
 						'submissionReviewUrl' => $submissionUrl,
-						'abstractTermIfEnabled' => ($sectionEditorSubmission->getLocalizedAbstract() == ''?'':Locale::translate('article.abstract')),
+						'abstractTermIfEnabled' => ($sectionEditorSubmission->getLocalizedAbstract() == ''?'':\OjsLocale::translate('article.abstract')),
 						'passwordResetUrl' => Request::url(null, 'login', 'resetPassword', $reviewer->getUsername(), array('confirm' => Validation::generatePasswordResetHash($reviewer->getId())))
 					);
 					$email->assignParams($paramArray);
@@ -2060,7 +2060,7 @@ class SectionEditorAction extends Action {
 						$articleComments =& $articleCommentDao->getArticleComments($sectionEditorSubmission->getArticleId(), COMMENT_TYPE_PEER_REVIEW, $reviewAssignment->getId());
 						if($articleComments) {
 							$body .= "------------------------------------------------------\n";
-							$body .= Locale::translate('submission.comments.importPeerReviews.reviewerLetter', array('reviewerLetter' => chr(ord('A') + $reviewIndexes[$reviewAssignment->getId()]))) . "\n";
+							$body .= \OjsLocale::translate('submission.comments.importPeerReviews.reviewerLetter', array('reviewerLetter' => chr(ord('A') + $reviewIndexes[$reviewAssignment->getId()]))) . "\n";
 							if (is_array($articleComments)) {
 								foreach ($articleComments as $comment) {
 									// If the comment is viewable by the author, then add the comment.
@@ -2076,7 +2076,7 @@ class SectionEditorAction extends Action {
 							$reviewFormElements =& $reviewFormElementDao->getReviewFormElements($reviewFormId);
 							if(!$articleComments) {
 								$body .= "------------------------------------------------------\n";
-								$body .= Locale::translate('submission.comments.importPeerReviews.reviewerLetter', array('reviewerLetter' => chr(ord('A') + $reviewIndexes[$reviewAssignment->getId()]))) . "\n\n";
+								$body .= \OjsLocale::translate('submission.comments.importPeerReviews.reviewerLetter', array('reviewerLetter' => chr(ord('A') + $reviewIndexes[$reviewAssignment->getId()]))) . "\n\n";
 							}
 							foreach ($reviewFormElements as $reviewFormElement) if ($reviewFormElement->getIncluded()) {
 								$body .= OjsString::html2text($reviewFormElement->getLocalizedQuestion()) . ": \n";

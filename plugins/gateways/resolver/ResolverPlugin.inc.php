@@ -49,11 +49,11 @@ class ResolverPlugin extends GatewayPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.gateways.resolver.displayName');
+		return \OjsLocale::translate('plugins.gateways.resolver.displayName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.gateways.resolver.description');
+		return \OjsLocale::translate('plugins.gateways.resolver.description');
 	}
 
 	/**
@@ -120,7 +120,7 @@ class ResolverPlugin extends GatewayPlugin {
 		// Failure.
 		header("HTTP/1.0 500 Internal Server Error");
 		$templateMgr =& TemplateManager::getManager();
-		Locale::requireComponents(array(LOCALE_COMPONENT_APPLICATION_COMMON));
+		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_APPLICATION_COMMON));
 		$templateMgr->assign('message', 'plugins.gateways.resolver.errors.errorMessage');
 		$templateMgr->display('common/message.tpl');
 		exit;
@@ -179,7 +179,7 @@ class ResolverPlugin extends GatewayPlugin {
 		if (Validation::isSiteAdmin() && $this->getEnabled()) {
 			$verbs[] = array(
 				'exportHoldings',
-				Locale::translate('plugins.gateways.resolver.exportHoldings')
+				\OjsLocale::translate('plugins.gateways.resolver.exportHoldings')
 			);
 		}
 		return $verbs;

@@ -32,10 +32,10 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 	$dupCtr = 0;
 	$n = 0;
 	foreach ($importParentDir as $dir) {
-		
+
 		$journalPath = $dir[0];
 		$journalId = $dir[2]; //FIXME look this up in the database rather than passing as parameter
-		
+
 		//
 		// GET ARRAY OF ARTICLE DIRS
 		//
@@ -74,7 +74,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 								}
 							}
 						}
-						
+
 					}
 				}
 			}
@@ -86,14 +86,14 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 		//
 		$article_settings_exists = 1;
 		foreach($parentDirs as $dir) {
-			
+
 			if(substr($dir,0,1) != '.') {
-				
+
 				//
 				//get eschol_articleid value (stored in article_settings table)
 				//				
 				$eschol_articleid = $eschol_articleid_begin . '_' . $dir;
-				
+
 				//
 				//set full dir path
 				//
@@ -102,15 +102,15 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 				} else {
 					$fullPath = $grandparentPath . $dir . '/';
 				}
-				
+
 				//echo "\nFull Path: $fullPath\n";
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
 				//
 				//QUERY DB FOR article_id
 				//
 				$article_link = '';
-	
+
 				if($unpublished) {
 					$articleid_query = 'SELECT article_id FROM article_settings ';
 					$article_link = $eschol_articleid;
@@ -120,20 +120,20 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 					$article_link = $dir;
 					$articleid_query .= "WHERE setting_name = 'eschol_submission_path' AND setting_value LIKE '%$article_link%'";
 				}
-	
+
 				//echo "\narticleid_query: $articleid_query\n";
 				$result = 0;
 				$result = mysql_query($articleid_query);
 				if(!$result) {
 					die("\nInvalid query: " . mysql_error() . "\n");
 				} 
-				
+
 				if (mysql_num_rows($result)==0) {
 					echo "\n**ALERT** No article_settings record exists with eschol article ID or eschol_submission_path = '$article_link'.\nQuery: $articleid_query\nNo history created for this article.\n";
 					$article_settings_exists = 0;
 					continue;
 				}
-				
+
 				$article_id = mysql_result($result,0);								
 				//echo "\narticle_id: $article_id\n";			
 
@@ -142,7 +142,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 				// GET LISTING OF FILES IN DIRECTORY
 				// 
 				$dirListing = scandir($fullPath);
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//
 				// BUILD ARRAY OF ALL FILES
@@ -151,7 +151,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 				$PDFctr = 0;
 				foreach($dirListing as $currListing) {
 					if(substr($currListing,0,5) == 'text.' && substr($currListing,-7) != 'stamped' && substr($currListing,-3) != 'tmp' && substr($currListing,-5) != 'error') {
-						
+
 						if(substr($currListing,0,8) == 'text.pdf') $PDFctr++;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -183,13 +183,13 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							$fileType = '';
 							$extension = 'unknown';
 						}
-						
+
 						$fileSize = sprintf("%u",filesize($fullPath.$currListing));
-						
+
 						$articleFiles[] = array('currListing' => $currListing, 'pdfNum' => $PDFctr, 'timestamp' => $timestamp, 'dateUploaded' => $dateUploaded, 'fileType' => $fileType, 'extension' => $extension, 'fileSize' => $fileSize, 'isReview' => 0, 'isOrig' => 0, 'isGalley' => 0);
 					}
 				}
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//
 				// MARK LAST PDF FILE AS REVIEW FILE
@@ -198,7 +198,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 					if($file[pdfNum] == $PDFctr) $file[isReview] = 1;
 				}
 				unset($file);
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//
 				// MARK LAST PDF FILE AS GALLEY VERSION FOR UNPUBLISHED 'Accepted' ARTICLES 
@@ -211,26 +211,26 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							// check to see if article has event history line of 'Accepted'
 							$acceptedQuery = "SELECT message FROM article_event_log ";
 							$acceptedQuery .= "WHERE article_id = $article_id";
-							
+
 							//echo "acceptedQuery: $acceptedQuery\n";
 							$acceptedResult = mysql_query($acceptedQuery);
 							if(!$acceptedResult) {
 								die("\nInvalid query: " . mysql_error() . "\nacceptedQuery: $acceptedQuery\n");
 							}
-							
+
 							while($acceptedRow = mysql_fetch_array($acceptedResult)) {
 								$acceptedMessage = $acceptedRow[0];
 								if(trim($acceptedMessage) == '[bp event history] Accepted') {
 									$isGalley = 1;
 								}
 							}
-							
+
 							if($isGalley) $file[isGalley] = 1;
 						}
 					}
 					unset($file);
 				}
-				
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				//
 				// MARK ORIGINAL SUBMISSION FILE
@@ -241,7 +241,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 					$isOrig = 0;
 					$versionQuery = "SELECT message FROM article_event_log ";
 					$versionQuery .= "WHERE article_id = $article_id AND date_logged = '$file[dateUploaded]'";
-					
+
 					//echo "Version Query: $versionQuery\n";
 					$result = mysql_query($versionQuery);
 					if(!$result) {
@@ -254,12 +254,12 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							$isOrig = 1;
 						}
 					}
-					
+
 					if($isOrig) $file[isOrig] = 1;
 				}
 
 				unset($file);
-				
+
 				//print_r($articleFiles);
 				//echo "PDF Count: $PDFctr\n\n";
 
@@ -272,7 +272,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 				// BEGIN IMPORT
 				//
 				foreach($articleFiles as $currFile) {
-				
+
 					$currImportFile = $currFile[currListing];
 					$timestamp = $currFile[timestamp];
 					$dateUploaded = $currFile[dateUploaded];
@@ -282,7 +282,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 					$isReview = $currFile[isReview];
 					$isOrig = $currFile[isOrig];
 					$isGalley = $currFile[isGalley];
-				
+
 					$currFullPathImportFile = $fullPath . $currImportFile;
 
 					//echo "\ncurrFullPathImportFile: $currFullPathImportFile\nisReview: $isReview\n";
@@ -293,7 +293,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 					//		
 					$importOrig = 1;
 					if($importOrig && $isOrig) {
-																						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//
 						// SET METADATA VALUES
@@ -303,7 +303,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 						$type = 'submission/original';
 						$typeAbbr = 'SM';
 						$round = 1;
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//
 						// CHECK FOR DUPLICATES BEFORE CREATING RECORD
@@ -327,9 +327,9 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							VALUES
 							($revision, $article_id, '$currImportFile', '$fileType', $fileSize, '" . mysql_real_escape_string($currImportFile) . "', '$type', '$dateUploaded', '$dateUploaded', $round)								
 							";
-							
+
 							//echo "     insertArticleFileQuery: $insertArticleFileQuery\n";
-							
+
 							$result = mysql_query($insertArticleFileQuery);
 							if(!$result) {
 								die("\nInvalid query: " . mysql_error() . "\n");
@@ -339,7 +339,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 								$typeOrigRecsCreated++;
 							}
 							//echo "\nfile_id: $file_id\n";
-							
+
 							if($file_id == 0) {
 								die("ERROR: Could not get file_id after INSERT INTO article_files for file: $fullPath$currImportFile");
 							}
@@ -351,7 +351,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							$newFileName = $article_id . '-' . $file_id . '-' . $revision . '-' . $typeAbbr . '.' . $extension;
 							//echo "Current Import File: $currImportFile\n";
 							//echo "New File name: $newFileName\n";
-							
+
 							$updateFileNameQuery = "UPDATE article_files SET file_name = '$newFileName' WHERE file_id = $file_id AND article_id = $article_id AND type = '$type'";
 							//echo "\nupdateFileNameQuery: $updateFileNameQuery\n";
 							$result = mysql_query($updateFileNameQuery);
@@ -363,7 +363,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							// 
 							// ENTER FILE ID IN ARTICLES TABLE AS ORIGINAL SUBMISSION VERSION
 							//								
-							
+
 							$updateSubFileIdQuery = "UPDATE articles SET submission_file_id = $file_id where article_id = $article_id";
 							//echo "\nupdateSubFileIdQuery: $updateSubFileIdQuery\n";
 							$result = mysql_query($updateSubFileIdQuery);
@@ -379,7 +379,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							//echo "Current Import File: $currFullPathImportFile\n";							
 							//echo "     Upload Path: $uploadPath\n";
 							//die("DIE - testing\n\n");
-							
+
 							//
 							// create dirs and subdirs if necessary
 							//
@@ -387,7 +387,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 								//echo "\n     Creating Directory!!!\n\n";
 								mkdir($uploadPath,0755,1);
 							}
-							
+
 							//
 							// copy file to dir
 							//
@@ -399,7 +399,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 					//
 					// END ORIGINAL VERSION IMPORT
 					//
-						
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 					//
 					// IMPORT REVIEW VERSION
@@ -415,7 +415,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 						$type = 'submission/review';
 						$typeAbbr = 'RV';
 						$round = 1;
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//
 						// CHECK FOR DUPLICATES BEFORE CREATING RECORD
@@ -439,9 +439,9 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							VALUES
 							($revision, $article_id, '$currImportFile', '$fileType', $fileSize, '" . mysql_real_escape_string($currImportFile) . "', '$type', '$dateUploaded', '$dateUploaded', $round)								
 							";
-							
+
 							//echo "     insertArticleFileQuery: $insertArticleFileQuery\n";
-							
+
 							$result = mysql_query($insertArticleFileQuery);
 							if(!$result) {
 								die("\nInvalid query: " . mysql_error() . "\n");
@@ -451,7 +451,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 								$typeReviewRecsCreated++;
 							}
 							//echo "\nfile_id: $file_id\n";
-							
+
 							if($file_id == 0) {
 								die("ERROR: Could not get file_id after INSERT INTO article_files for file: $fullPath$currImportFile");
 							}
@@ -462,19 +462,19 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							$newFileName = $article_id . '-' . $file_id . '-' . $revision . '-' . $typeAbbr . '.' . $extension;
 							//echo "Current Import File: $currImportFile\n";
 							//echo "New File name: $newFileName\n";
-							
+
 							$updateFileNameQuery = "UPDATE article_files SET file_name = '$newFileName' WHERE file_id = $file_id AND article_id = $article_id AND type = '$type'";
 							//echo "\nupdateFileNameQuery: $updateFileNameQuery\n";
 							$result = mysql_query($updateFileNameQuery);
 							if(!$result) {
 								die("\nInvalid query: " . mysql_error() . "\n");
 							}
-								
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							// 
 							// ENTER FILE ID IN ARTICLES TABLE AS REVIEW VERSION
 							//								
-							
+
 							$updateReviewFileIdQuery = "UPDATE articles SET review_file_id = $file_id where article_id = $article_id";
 							//echo "\nupdateReviewFileIdQuery: $updateReviewFileIdQuery\n";
 							$result = mysql_query($updateReviewFileIdQuery);
@@ -500,7 +500,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 									die("\nInvalid query: " . mysql_error() . "\n");
 								}	
 							}
-							
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							//
@@ -510,7 +510,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							//echo "Current Import File: $currFullPathImportFile\n";							
 							//echo "     Upload Path: $uploadPath\n";
 							//die("DIE - testing\n\n");
-							
+
 							//
 							// create dirs and subdirs if necessary
 							//
@@ -518,12 +518,12 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 								//echo "\n     Creating Directory!!!\n\n";
 								mkdir($uploadPath,0755,1);
 							}
-							
+
 							//
 							// copy file to dir
 							//
 							copy($currFullPathImportFile,$uploadPath.$newFileName);		
-							
+
 						}
 					} //end if($isReview)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -546,7 +546,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 						$type = 'public';
 						$typeAbbr = 'PB';
 						$round = 1;
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//
 						// CHECK FOR DUPLICATES BEFORE CREATING RECORD
@@ -570,9 +570,9 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							VALUES
 							($revision, $article_id, '$currImportFile', '$fileType', $fileSize, '" . mysql_real_escape_string($currImportFile) . "', '$type', '$dateUploaded', '$dateUploaded', $round)								
 							";
-							
+
 							//echo "     insertArticleFileQuery: $insertArticleFileQuery\n";
-							
+
 							$result = mysql_query($insertArticleFileQuery);
 							if(!$result) {
 								die("\nInvalid query: " . mysql_error() . "\n");
@@ -582,7 +582,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 								$typeGalleyRecsCreated++;
 							}
 							//echo "\nfile_id: $file_id\n";
-							
+
 							if($file_id == 0) {
 								die("ERROR: Could not get file_id after INSERT INTO article_files for file: $fullPath$currImportFile");
 							}
@@ -593,14 +593,14 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							$newFileName = $article_id . '-' . $file_id . '-' . $revision . '-' . $typeAbbr . '.' . $extension;
 							//echo "Current Import File: $currImportFile\n";
 							//echo "New File name: $newFileName\n";
-							
+
 							$updateFileNameQuery = "UPDATE article_files SET file_name = '$newFileName' WHERE file_id = $file_id AND article_id = $article_id AND type = '$type'";
 							//echo "\nupdateFileNameQuery: $updateFileNameQuery\n";
 							$result = mysql_query($updateFileNameQuery);
 							if(!$result) {
 								die("\nInvalid query: " . mysql_error() . "\n");
 							}	
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							// 
 							// CREATE article_galleys RECORD
@@ -611,9 +611,9 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							VALUES
 							('en_US', $article_id, $file_id, 'PDF')
 							";
-							
+
 							//echo "     insertGalleyQuery: $insertGalleyQuery\n";
-							
+
 							$insertGalleyResult = mysql_query($insertGalleyQuery);
 							if(!$insertGalleyResult) {
 								die("\nInvalid query: " . mysql_error() . "\ninsertGalleyQuery: $insertGalleyQuery\n");
@@ -627,7 +627,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							//echo "Current Import File: $currFullPathImportFile\n";							
 							//echo "     Upload Path: $uploadPath\n";
 							//die("DIE - testing\n\n");
-							
+
 							//
 							// create dirs and subdirs if necessary
 							//
@@ -635,26 +635,26 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 								//echo "\n     Creating Directory!!!\n\n";
 								mkdir($uploadPath,0755,1);
 							}
-							
+
 							//
 							// copy file to dir
 							//
 							copy($currFullPathImportFile,$uploadPath.$newFileName);		
-							
+
 						}
 					} //end if($isGalley)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					//
 					// END GALLEY VERSION IMPORT
 					//					
-					
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 					// IMPORT EDITOR VERSIONS
 					// Editor Versions: 	submission/editor - all text.* files , sorted based on timestamp - ED
 					// every file but the original should be Editor versions
 					// the last should also be review version.
 					// 
-					
+
 					$importEditorVersions = 1;
 					if($importEditorVersions && !$isOrig) {						
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -664,7 +664,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 						$type = 'submission/editor';
 						$typeAbbr = 'ED';
 						$round = 1;				
-						
+
 						// CREATE DATABASE RECORD
 						// (no way to check for record already existing??)
 						//
@@ -675,8 +675,8 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 						if($editor_file_id != 0) $insertArticleFileQuery .= "$editor_file_id, ";
 						$insertArticleFileQuery .= "$editorRevision, $article_id, '$currImportFile', '$fileType', $fileSize, '" . mysql_real_escape_string($currImportFile) . "', '$type', '$dateUploaded', '$dateUploaded', $round)";
 						//echo "\ninsertArticleFileQuery: $insertArticleFileQuery\n";
-						
-						
+
+
 						$result = mysql_query($insertArticleFileQuery);
 						if(!$result) {
 							die("\nInvalid query: " . mysql_error() . "\n");
@@ -685,13 +685,13 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							$recsCreated++;
 							$typeEditorRecsCreated++;
 						}
-						
+
 						//echo "\nfile_id: $editor_file_id\n";
-						
+
 						if($editor_file_id == 0) {
 							die("ERROR: Could not get file_id after INSERT INTO article_files for file: $fullPath$currImportFile\n");
 						}	
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//
 						// RENAME FILE FOR OJS
@@ -699,14 +699,14 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 						$newFileName = $article_id . '-' . $editor_file_id . '-' . $editorRevision . '-' . $typeAbbr . '.' . $extension;
 						//echo "Current Import File: $currImportFile\n";
 						//echo "New File name: $newFileName\n";
-						
+
 						$updateFileNameQuery = "UPDATE article_files SET file_name = '$newFileName' WHERE file_id = $editor_file_id AND revision = $editorRevision AND article_id = $article_id AND type = '$type'";
 						//echo "\nupdateFileNameQuery: $updateFileNameQuery\n";
 						$result = mysql_query($updateFileNameQuery);
 						if(!$result) {
 							die("\nInvalid query: " . mysql_error() . "\n");
 						}
-								
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//
 						// ENTER FILE ID IN ARTICLES TABLE AS EDITOR VERSION
@@ -717,7 +717,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 						if(!$result) {
 							die("\nInvalid query: " . mysql_error() . "\n");
 						}	
-							
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 						//
 						// UPLOAD FILE TO FILESYSTEM
@@ -726,7 +726,7 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 						//echo "Current Import File: $currFullPathImportFile\n";							
 						//echo "Upload Path: $uploadPath\n";
 						//die("DIE - testing\n\n");
-						
+
 						//
 						// create dirs and subdirs if necessary
 						//
@@ -734,15 +734,15 @@ function import_article_versions($importHome,$importParentDir,$unpublished,$base
 							//echo "\n     Creating Directory!!!\n\n";
 							mkdir($uploadPath,0755,1);
 						}
-						
+
 						//
 						// copy file to dir
 						//
 						copy($currFullPathImportFile,$uploadPath.$newFileName);
 						//echo "------------------------------\n\n";
-						
+
 						$editorRevision++;
-								
+
 					} //end if(!$isOrig)			
 				}//end foreach($articleFiles as $currImportFile)
 			}//end if(substr($dir,0,1) != '.')

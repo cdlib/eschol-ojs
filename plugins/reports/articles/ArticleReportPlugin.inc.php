@@ -45,11 +45,11 @@ class ArticleReportPlugin extends ReportPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.reports.articles.displayName');
+		return \OjsLocale::translate('plugins.reports.articles.displayName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.reports.articles.description');
+		return \OjsLocale::translate('plugins.reports.articles.description');
 	}
 
 	function display(&$args) {
@@ -70,43 +70,43 @@ class ArticleReportPlugin extends ReportPlugin {
 			}
 		}
 
-		Locale::requireComponents(array(LOCALE_COMPONENT_OJS_EDITOR, LOCALE_COMPONENT_PKP_SUBMISSION));
+		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_OJS_EDITOR, LOCALE_COMPONENT_PKP_SUBMISSION));
 
 		import('classes.article.Article');
 		$decisionMessages = array(
-			SUBMISSION_EDITOR_DECISION_ACCEPT => Locale::translate('editor.article.decision.accept'),
-			SUBMISSION_EDITOR_DECISION_PENDING_REVISIONS => Locale::translate('editor.article.decision.pendingRevisions'),
-			SUBMISSION_EDITOR_DECISION_RESUBMIT => Locale::translate('editor.article.decision.resubmit'),
-			SUBMISSION_EDITOR_DECISION_DECLINE => Locale::translate('editor.article.decision.decline'),
-			null => Locale::translate('plugins.reports.articles.nodecision')
+			SUBMISSION_EDITOR_DECISION_ACCEPT => \OjsLocale::translate('editor.article.decision.accept'),
+			SUBMISSION_EDITOR_DECISION_PENDING_REVISIONS => \OjsLocale::translate('editor.article.decision.pendingRevisions'),
+			SUBMISSION_EDITOR_DECISION_RESUBMIT => \OjsLocale::translate('editor.article.decision.resubmit'),
+			SUBMISSION_EDITOR_DECISION_DECLINE => \OjsLocale::translate('editor.article.decision.decline'),
+			null => \OjsLocale::translate('plugins.reports.articles.nodecision')
 		);
 
 		$columns = array(
-			'article_id' => Locale::translate('article.submissionId'),
-			'title' => Locale::translate('article.title'),
-			'abstract' => Locale::translate('article.abstract')
+			'article_id' => \OjsLocale::translate('article.submissionId'),
+			'title' => \OjsLocale::translate('article.title'),
+			'abstract' => \OjsLocale::translate('article.abstract')
 		);
 			
 		for ($a = 1; $a <= $maxAuthors; $a++) {
 			$columns = array_merge($columns, array(
-				'fname' . $a => Locale::translate('user.firstName') . " (" . Locale::translate('user.role.author') . " $a)",
-				'mname' . $a => Locale::translate('user.middleName') . " (" . Locale::translate('user.role.author') . " $a)",
-				'lname' . $a => Locale::translate('user.lastName') . " (" . Locale::translate('user.role.author') . " $a)",
-				'country' . $a => Locale::translate('common.country') . " (" . Locale::translate('user.role.author') . " $a)",
-				'affiliation' . $a => Locale::translate('user.affiliation') . " (" . Locale::translate('user.role.author') . " $a)",
-				'email' . $a => Locale::translate('user.email') . " (" . Locale::translate('user.role.author') . " $a)",
-				'url' . $a => Locale::translate('user.url') . " (" . Locale::translate('user.role.author') . " $a)",
-				'biography' . $a => Locale::translate('user.biography') . " (" . Locale::translate('user.role.author') . " $a)"
+				'fname' . $a => \OjsLocale::translate('user.firstName') . " (" . \OjsLocale::translate('user.role.author') . " $a)",
+				'mname' . $a => \OjsLocale::translate('user.middleName') . " (" . \OjsLocale::translate('user.role.author') . " $a)",
+				'lname' . $a => \OjsLocale::translate('user.lastName') . " (" . \OjsLocale::translate('user.role.author') . " $a)",
+				'country' . $a => \OjsLocale::translate('common.country') . " (" . \OjsLocale::translate('user.role.author') . " $a)",
+				'affiliation' . $a => \OjsLocale::translate('user.affiliation') . " (" . \OjsLocale::translate('user.role.author') . " $a)",
+				'email' . $a => \OjsLocale::translate('user.email') . " (" . \OjsLocale::translate('user.role.author') . " $a)",
+				'url' . $a => \OjsLocale::translate('user.url') . " (" . \OjsLocale::translate('user.role.author') . " $a)",
+				'biography' . $a => \OjsLocale::translate('user.biography') . " (" . \OjsLocale::translate('user.role.author') . " $a)"
 			));
 		}
 			
 		$columns = array_merge($columns, array(
-			'section_title' => Locale::translate('section.title'),
-			'language' => Locale::translate('common.language'),
-			'editor_decision' => Locale::translate('submission.editorDecision'),
-			'status' => Locale::translate('common.status'),
-			'submission_date' =>Locale::translate('article.submissionDate'),
-			'publication_date' =>Locale::translate('article.publicationDate')
+			'section_title' => \OjsLocale::translate('section.title'),
+			'language' => \OjsLocale::translate('common.language'),
+			'editor_decision' => \OjsLocale::translate('submission.editorDecision'),
+			'status' => \OjsLocale::translate('common.status'),
+			'submission_date' =>\OjsLocale::translate('article.submissionDate'),
+			'publication_date' =>\OjsLocale::translate('article.publicationDate')
 		));
 
 		$fp = fopen('php://output', 'wt');
@@ -127,7 +127,7 @@ class ArticleReportPlugin extends ReportPlugin {
 						$columns[$index] = $decisionMessages[null];
 					}
 				} elseif ($index == 'status') {
-					$columns[$index] = Locale::translate($statusMap[$row[$index]]);
+					$columns[$index] = \OjsLocale::translate($statusMap[$row[$index]]);
 				} elseif ($index == 'abstract') {
 					$columns[$index] = html_entity_decode(strip_tags($row[$index]));
 				} elseif (strstr($index, 'biography') !== false) {

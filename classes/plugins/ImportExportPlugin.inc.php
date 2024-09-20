@@ -113,7 +113,7 @@ class ImportExportPlugin extends Plugin {
 		return array(
 			array(
 				'importexport',
-				Locale::translate('manager.importExport')
+				\OjsLocale::translate('manager.importExport')
 			)
 		);
 	}

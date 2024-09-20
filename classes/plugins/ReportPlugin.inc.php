@@ -94,7 +94,7 @@ class ReportPlugin extends Plugin {
 		return array(
 			array(
 				'reports',
-				Locale::translate('manager.statistics.reports')
+				\OjsLocale::translate('manager.statistics.reports')
 			)
 		);
 	}

@@ -31,14 +31,14 @@ class InformationBlockPlugin extends BlockPlugin {
 	 * @return String
 	 */
 	function getDisplayName() {
-		return Locale::translate('plugins.block.information.displayName');
+		return \OjsLocale::translate('plugins.block.information.displayName');
 	}
 
 	/**
 	 * Get a description of the plugin.
 	 */
 	function getDescription() {
-		return Locale::translate('plugins.block.information.description');
+		return \OjsLocale::translate('plugins.block.information.description');
 	}
 
 	/**

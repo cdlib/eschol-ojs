@@ -34,15 +34,15 @@ class AbntCitationPlugin extends CitationPlugin {
 	}
 
 	function getDisplayName() {
-		return Locale::translate('plugins.citationFormats.abnt.displayName');
+		return \OjsLocale::translate('plugins.citationFormats.abnt.displayName');
 	}
 
 	function getCitationFormatName() {
-		return Locale::translate('plugins.citationFormats.abnt.citationFormatName');
+		return \OjsLocale::translate('plugins.citationFormats.abnt.citationFormatName');
 	}
 
 	function getDescription() {
-		return Locale::translate('plugins.citationFormats.abnt.description');
+		return \OjsLocale::translate('plugins.citationFormats.abnt.description');
 	}
 
 }
