@@ -43,7 +43,7 @@ class AuthorSubmitForm extends Form {
 		// of symbolic names => readable names.)
 		$supportedSubmissionLocales = $journal->getSetting('supportedSubmissionLocales');
 		if (empty($supportedSubmissionLocales)) $supportedSubmissionLocales = array($journal->getPrimaryLocale());
-		parent::Form(
+		parent::__construct(
 			sprintf('author/submit/step%d.tpl', $step),
 			true,
 			$article?$article->getLocale():\OjsLocale::getLocale(),

@@ -26,7 +26,7 @@ class ProfileForm extends Form {
 	 * Constructor.
 	 */
 	function ProfileForm() {
-		parent::Form('user/profile.tpl');
+		parent::__construct('user/profile.tpl');
 
 		$user =& Request::getUser();
 		$this->user =& $user;

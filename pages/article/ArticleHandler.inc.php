@@ -34,7 +34,7 @@ class ArticleHandler extends Handler {
 	 * @param $request Request
 	 */
 	function ArticleHandler(&$request) {
-		parent::Handler($request);
+		parent::__construct($request);
 		$router =& $request->getRouter();
 
 		$this->addCheck(new HandlerValidatorJournal($this));

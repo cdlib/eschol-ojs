@@ -33,7 +33,7 @@ class ReferralForm extends Form {
 		$this->referralId = isset($referralId) ? (int) $referralId : null;
 		$this->article =& $article;
 
-		parent::Form($plugin->getTemplatePath() . 'referralForm.tpl');
+		parent::__construct($plugin->getTemplatePath() . 'referralForm.tpl');
 
 		// Name is provided
 		$this->addCheck(new FormValidatorLocale($this, 'name', 'required', 'plugins.generic.referral.nameRequired'));

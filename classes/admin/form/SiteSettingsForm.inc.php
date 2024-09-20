@@ -24,7 +24,7 @@ class SiteSettingsForm extends PKPSiteSettingsForm {
 	 * Constructor.
 	 */
 	function SiteSettingsForm() {
-		parent::PKPSiteSettingsForm();
+		parent::__construct();
 	}
 
 	/**

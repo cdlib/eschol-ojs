@@ -26,7 +26,7 @@ class AuthorAction extends Action {
 	 * Constructor.
 	 */
 	function AuthorAction() {
-		parent::Action();
+		parent::__construct();
 	}
 
 	/**

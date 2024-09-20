@@ -29,7 +29,7 @@ class ArticleXMLGalleyDAO extends ArticleGalleyDAO {
 	 */
 	function ArticleXMLGalleyDAO($parentPluginName) {
 		$this->parentPluginName = $parentPluginName;
-		parent::ArticleGalleyDAO();
+		parent::__construct();
 	}
 
 	/**

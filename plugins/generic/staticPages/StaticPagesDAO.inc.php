@@ -22,7 +22,7 @@ class StaticPagesDAO extends DAO {
 	 */
 	function StaticPagesDAO($parentPluginName) {
 		$this->parentPluginName = $parentPluginName;
-		parent::DAO();
+		parent::__construct();
 	}
 
 	function getStaticPage($staticPageId) {

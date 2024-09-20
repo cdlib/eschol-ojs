@@ -22,7 +22,7 @@ class Request extends PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::getRequestedContextPath()
 	 */
-	function getRequestedJournalPath() {
+	static function getRequestedJournalPath() {
 		static $journal;
 		$_this =& PKPRequest::_checkThis();
 
@@ -38,7 +38,7 @@ class Request extends PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::getContext()
 	 */
-	function &getJournal() {
+	static function &getJournal() {
 		$_this =& PKPRequest::_checkThis();
 		$returner = $_this->_delegateToRouter('getContext', 1);
 		return $returner;
@@ -48,7 +48,7 @@ class Request extends PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::getRequestedContextPath()
 	 */
-	function getRequestedContextPath($contextLevel = null) {
+	static function getRequestedContextPath($contextLevel = null) {
 		$_this =& PKPRequest::_checkThis();
 
 		// Emulate the old behavior of getRequestedContextPath for
@@ -64,7 +64,7 @@ class Request extends PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::getContext()
 	 */
-	function &getContext($level = 1) {
+	static function &getContext($level = 1) {
 		$_this =& PKPRequest::_checkThis();
 		$returner = $_this->_delegateToRouter('getContext', $level);
 		return $returner;
@@ -74,7 +74,7 @@ class Request extends PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::getContextByName()
 	 */
-	function &getContextByName($contextName) {
+	static function &getContextByName($contextName) {
 		$_this =& PKPRequest::_checkThis();
 		$returner = $_this->_delegateToRouter('getContextByName', $contextName);
 		return $returner;
@@ -84,7 +84,7 @@ class Request extends PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::url()
 	 */
-	function url($journalPath = null, $page = null, $op = null, $path = null,
+	static function url($journalPath = null, $page = null, $op = null, $path = null,
 			$params = null, $anchor = null, $escape = false) {
 		$_this =& PKPRequest::_checkThis();
 		return $_this->_delegateToRouter('url', $journalPath, $page, $op, $path,
@@ -95,7 +95,7 @@ class Request extends PKPRequest {
 	 * Deprecated
 	 * @see PageRouter::redirectHome()
 	 */
-	function redirectHome() {
+	static function redirectHome() {
 		$_this =& PKPRequest::_checkThis();
 		return $_this->_delegateToRouter('redirectHome');
 	}

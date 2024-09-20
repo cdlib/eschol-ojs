@@ -23,7 +23,7 @@ class ImportExportHandler extends ManagerHandler {
 	 * Constructor
 	 **/
 	function ImportExportHandler() {
-		parent::ManagerHandler();
+		parent::__construct();
 	}
 	function importexport($args) {
 		$this->validate();

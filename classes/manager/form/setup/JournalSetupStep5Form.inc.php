@@ -22,7 +22,7 @@ class JournalSetupStep5Form extends JournalSetupForm {
 	 * Constructor.
 	 */
 	function JournalSetupStep5Form() {
-		parent::JournalSetupForm(
+		parent::__construct(
 			5,
 			array(
 				'homeHeaderTitleType' => 'int',

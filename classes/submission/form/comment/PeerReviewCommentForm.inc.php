@@ -30,7 +30,7 @@ class PeerReviewCommentForm extends CommentForm {
 	 * @param $article object
 	 */
 	function PeerReviewCommentForm($article, $reviewId, $roleId) {
-		parent::CommentForm($article, COMMENT_TYPE_PEER_REVIEW, $roleId, $reviewId);
+		parent::__construct($article, COMMENT_TYPE_PEER_REVIEW, $roleId, $reviewId);
 		$this->reviewId = $reviewId;
 	}
 

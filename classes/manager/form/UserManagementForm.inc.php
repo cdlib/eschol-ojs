@@ -29,7 +29,7 @@ class UserManagementForm extends Form {
 	 * Constructor.
 	 */
 	function UserManagementForm($userId = null) {
-		parent::Form('manager/people/userProfileForm.tpl');
+		parent::__construct('manager/people/userProfileForm.tpl');
 
 		if (!Validation::isJournalManager()) $userId = null;
 		$this->userId = isset($userId) ? (int) $userId : null;

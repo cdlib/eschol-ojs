@@ -27,7 +27,7 @@ class ArticleXMLGalley extends ArticleHTMLGalley {
 	 */
 	function ArticleXMLGalley($parentPluginName) {
 		$this->parentPluginName = $parentPluginName;
-		parent::ArticleHTMLGalley();
+		parent::__construct();
 	}
 
 	/**

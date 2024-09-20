@@ -28,7 +28,7 @@ class RTHandler extends ArticleHandler {
 	 * @param $request Request
 	 */
 	function RTHandler(&$request) {
-		parent::ArticleHandler($request);
+		parent::__construct($request);
 	}
 	/**
 	 * Display an author biography

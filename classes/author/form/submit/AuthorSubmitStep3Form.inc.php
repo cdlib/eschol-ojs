@@ -21,7 +21,7 @@ class AuthorSubmitStep3Form extends AuthorSubmitForm {
 	 * Constructor.
 	 */
 	function AuthorSubmitStep3Form(&$article, &$journal) {
-		parent::AuthorSubmitForm($article, 3, $journal);
+		parent::__construct($article, 3, $journal);
 
 		// Validation checks for this form
 		$this->addCheck(new FormValidatorCustom($this, 'authors', 'required', 'author.submit.form.authorRequired', create_function('$authors', 'return count($authors) > 0;')));

@@ -24,7 +24,7 @@ class IssueManagementHandler extends EditorHandler {
 	 * Constructor
 	 **/
 	function IssueManagementHandler() {
-		parent::EditorHandler();
+		parent::__construct();
 	}
 
 	/**

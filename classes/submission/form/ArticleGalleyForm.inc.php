@@ -38,7 +38,7 @@ class ArticleGalleyForm extends Form {
 	 * @param $galleyId int (optional)
 	 */
 	function ArticleGalleyForm($articleId, $galleyId = null) {
-		parent::Form('submission/layout/galleyForm.tpl');
+		parent::__construct('submission/layout/galleyForm.tpl');
 		$journal =& Request::getJournal();
 		$this->articleId = $articleId;
 

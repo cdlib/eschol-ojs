@@ -24,7 +24,7 @@ class Note extends PKPNote {
 	 * Constructor.
 	 */
 	function Note() {
-		parent::PKPNote();
+		parent::__construct();
 	}
 
 	/**

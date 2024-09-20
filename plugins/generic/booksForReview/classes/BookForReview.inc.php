@@ -36,7 +36,7 @@ class BookForReview extends DataObject {
 	 * Constructor.
 	 */
 	function BookForReview() {
-		parent::DataObject();
+		parent::__construct();
 		$this->authors = array();
 		$this->removedAuthors = array();
 	}

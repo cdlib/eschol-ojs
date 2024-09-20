@@ -29,7 +29,7 @@ class SettingsForm extends Form {
 	 */
 	function SettingsForm(&$plugin, $journalId) {
 
-		parent::Form($plugin->getTemplatePath() . 'settingsForm.tpl');
+		parent::__construct($plugin->getTemplatePath() . 'settingsForm.tpl');
 
 		$this->journalId = $journalId;
 		$this->plugin =& $plugin;

@@ -25,7 +25,7 @@ class OJSInstallTool extends InstallTool {
 	 * @param $argv array command-line arguments
 	 */
 	function OJSInstallTool($argv = array()) {
-		parent::InstallTool($argv);
+		parent::__construct($argv);
 	}
 
 	/**

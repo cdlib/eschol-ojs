@@ -21,7 +21,7 @@ class AdminLanguagesHandler extends AdminHandler {
 	 * Constructor
 	 **/
 	function AdminLanguagesHandler() {
-		parent::AdminHandler();
+		parent::__construct();
 	}
 
 	/**

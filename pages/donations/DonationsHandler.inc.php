@@ -27,7 +27,7 @@ class DonationsHandler extends Handler {
 	 * Constructor
 	 **/
 	function DonationsHandler() {
-		parent::Handler();
+		parent::__construct();
 	}
 	function index( $args ) {
 		import('classes.payment.ojs.OJSPaymentManager');

@@ -37,7 +37,7 @@ class JournalRT extends RT {
 	var $sharingLogoBackground;
 	var $sharingLogoColor;
 
-	function JournalRT($journalId) {
+	function __construct($journalId) {
 		$this->setJournalId($journalId);
 	}
 

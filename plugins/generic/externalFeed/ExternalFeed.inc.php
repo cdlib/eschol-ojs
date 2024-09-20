@@ -22,7 +22,7 @@ define('EXTERNAL_FEED_DISPLAY_BLOCK_ALL',		2);
 class ExternalFeed extends DataObject {
 
 	function ExternalFeed() {
-		parent::DataObject();
+		parent::__construct();
 	}
 
 	//

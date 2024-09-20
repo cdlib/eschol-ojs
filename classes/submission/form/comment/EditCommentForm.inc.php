@@ -37,7 +37,7 @@ class EditCommentForm extends Form {
 	 * @param $comment object
 	 */
 	function EditCommentForm(&$article, &$comment) {
-		parent::Form('submission/comment/editComment.tpl');
+		parent::__construct('submission/comment/editComment.tpl');
 		$this->addCheck(new FormValidatorPost($this));
 
 		$this->comment = $comment;

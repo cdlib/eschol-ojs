@@ -23,7 +23,7 @@ class OjsSubmissionAccessPolicy extends JournalPolicy {
 	 * @param $submissionParameterName string
 	 */
 	function OjsSubmissionAccessPolicy(&$request, &$args, $roleAssignments, $submissionParameterName = 'articleId') {
-		parent::JournalPolicy($request);
+		parent::__construct($request);
 
 		// Create a "permit overrides" policy set that specifies
 		// editor and copyeditor access to submissions.

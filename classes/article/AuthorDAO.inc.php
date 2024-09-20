@@ -25,7 +25,7 @@ class AuthorDAO extends PKPAuthorDAO {
 	 * Constructor
 	 */
 	function AuthorDAO() {
-		parent::PKPAuthorDAO();
+		parent::__construct();
 	}
 
 	/**

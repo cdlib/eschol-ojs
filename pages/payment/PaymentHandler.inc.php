@@ -22,7 +22,7 @@ class PaymentHandler extends Handler {
 	 * Constructor
 	 **/
 	function PaymentHandler() {
-		parent::Handler();
+		parent::__construct();
 	}
 		 
 	/**

@@ -20,7 +20,7 @@ class SectionEditorSubmissionRequiredPolicy extends SubmissionRequiredPolicy {
 	 * @param $request PKPRequest
 	 */
 	function SectionEditorSubmissionRequiredPolicy(&$request, &$args, $submissionParameterName = 'articleId') {
-		parent::SubmissionRequiredPolicy($request, $args, $submissionParameterName, 'user.authorization.invalidSectionEditorSubmission');
+		parent::__construct($request, $args, $submissionParameterName, 'user.authorization.invalidSectionEditorSubmission');
 	}
 
 	//

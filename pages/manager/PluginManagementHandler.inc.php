@@ -28,7 +28,7 @@ class PluginManagementHandler extends ManagerHandler {
 	 * Constructor
 	 **/
 	function PluginManagementHandler() {
-		parent::ManagerHandler();
+		parent::__construct();
 	}
 
 	/**

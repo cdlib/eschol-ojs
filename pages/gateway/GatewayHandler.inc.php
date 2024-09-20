@@ -22,7 +22,7 @@ class GatewayHandler extends Handler {
 	 * Constructor
 	 **/
 	function GatewayHandler() {
-		parent::Handler();
+		parent::__construct();
 	}
 
 	function index($args, $request) {

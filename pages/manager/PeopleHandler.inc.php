@@ -26,7 +26,7 @@ class PeopleHandler extends ManagerHandler {
 	 * Constructor
 	 **/
 	function PeopleHandler() {
-		parent::ManagerHandler();
+		parent::__construct();
 	}
 
 	/**

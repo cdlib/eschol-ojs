@@ -23,7 +23,7 @@ class AnnouncementTypeForm extends PKPAnnouncementTypeForm {
 	 * @param typeId int leave as default for new announcement type
 	 */
 	function AnnouncementTypeForm($typeId = null) {
-		parent::PKPAnnouncementTypeForm($typeId);
+		parent::__construct($typeId);
 	}
 
 	/**

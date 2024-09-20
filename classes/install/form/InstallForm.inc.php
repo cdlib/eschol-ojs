@@ -48,7 +48,7 @@ class InstallForm extends Form {
 	 * Constructor.
 	 */
 	function InstallForm() {
-		parent::Form('install/install.tpl');
+		parent::__construct('install/install.tpl');
 
 		// FIXME Move the below options to an external configuration file?
 		$this->supportedLocales = \OjsLocale::getAllLocales();

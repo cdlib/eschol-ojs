@@ -19,7 +19,7 @@ class SetupHandler extends ManagerHandler {
 	 * Constructor
 	 **/
 	function SetupHandler() {
-		parent::ManagerHandler();
+		parent::__construct();
 	}
 
 	/**

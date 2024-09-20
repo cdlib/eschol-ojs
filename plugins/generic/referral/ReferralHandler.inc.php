@@ -22,7 +22,7 @@ class ReferralHandler extends Handler {
 	 * Constructor
 	 **/
 	function ReferralHandler() {
-		parent::Handler();
+		parent::__construct();
 	}
 	
 	function setupTemplate() {

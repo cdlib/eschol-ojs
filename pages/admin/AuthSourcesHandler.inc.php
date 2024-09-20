@@ -23,7 +23,7 @@ class AuthSourcesHandler extends AdminHandler {
 	 * Constructor
 	 **/
 	function AuthSourcesHandler() {
-		parent::AdminHandler();
+		parent::__construct();
 	}
 
 	/**

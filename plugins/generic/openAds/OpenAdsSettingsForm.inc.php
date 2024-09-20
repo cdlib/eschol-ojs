@@ -36,7 +36,7 @@ class OpenAdsSettingsForm extends Form {
 	function OpenAdsSettingsForm(&$plugin, $openAdsConnection, $journalId) {
 		$templateMgr =& TemplateManager::getManager();
 
-		parent::Form($plugin->getTemplatePath() . 'settingsForm.tpl');
+		parent::__construct($plugin->getTemplatePath() . 'settingsForm.tpl');
 
 		$this->journalId = $journalId;
 		$this->plugin =& $plugin;

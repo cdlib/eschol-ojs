@@ -31,7 +31,7 @@ class SubmissionEditHandler extends SectionEditorHandler {
 	 * Constructor
 	 **/
 	function SubmissionEditHandler() {
-		parent::SectionEditorHandler();
+		parent::__construct();
 	}
 
 	function getFrom($default = 'submissionEditing') {

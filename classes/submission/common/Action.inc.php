@@ -44,7 +44,7 @@ class Action extends PKPAction {
 	 * Constructor.
 	 */
 	function Action() {
-		parent::PKPAction();
+		parent::__construct();
 	}
 
 	//

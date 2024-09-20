@@ -29,7 +29,7 @@ class dbXMLtoSQL extends XmlToSqlTool {
 	 * 	If specified, the first argument should be the file to parse
 	 */
 	function dbXMLtoSQL($argv = array()) {
-		parent::XmlToSqlTool($argv);
+		parent::__construct($argv);
 	}
 }
 

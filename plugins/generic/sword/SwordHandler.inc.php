@@ -22,7 +22,7 @@ class SwordHandler extends Handler {
 	 * Constructor
 	 **/
 	function SwordHandler() {
-		parent::Handler();
+		parent::__construct();
 	}
 
 	/**

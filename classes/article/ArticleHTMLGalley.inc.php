@@ -23,7 +23,7 @@ class ArticleHTMLGalley extends ArticleGalley {
 	 * Constructor.
 	 */
 	function ArticleHTMLGalley() {
-		parent::ArticleGalley();
+		parent::__construct();
 	}
 
 	/**

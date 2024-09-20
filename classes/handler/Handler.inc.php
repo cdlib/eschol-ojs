@@ -19,7 +19,7 @@ import('classes.handler.validation.HandlerValidatorSubmissionComment');
 
 class Handler extends PKPHandler {
 	function Handler() {
-		parent::PKPHandler();
+		parent::__construct();
 	}
 }
 

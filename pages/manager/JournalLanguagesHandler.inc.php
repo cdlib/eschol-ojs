@@ -21,7 +21,7 @@ class JournalLanguagesHandler extends ManagerHandler {
 	 * Constructor
 	 **/
 	function JournalLanguagesHandler() {
-		parent::ManagerHandler();
+		parent::__construct();
 	}
 
 	/**

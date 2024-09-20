@@ -24,7 +24,7 @@ class ArticleNote extends Note {
 	 */
 	function ArticleNote() {
 		if (Config::getVar('debug', 'deprecation_warnings')) trigger_error('Deprecated class ArticleNote. Use Note instead');
-		parent::Note();
+		parent::__construct();
 	}
 }
 

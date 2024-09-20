@@ -27,7 +27,7 @@ class SubmitterForm extends Form {
 
 		// check that user is allowed to edit
 
-		parent::Form('submission/submitter/submitterEdit.tpl');
+		parent::__construct('submission/submitter/submitterEdit.tpl');
 	}
 
         /**

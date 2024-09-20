@@ -34,7 +34,7 @@ class TemplateManager extends PKPTemplateManager {
 		}
 		assert(is_a($request, 'PKPRequest'));
 
-		parent::PKPTemplateManager($request);
+		parent::__construct($request);
 
 		// Retrieve the router
 		$router =& $request->getRouter();

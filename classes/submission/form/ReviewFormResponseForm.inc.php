@@ -31,7 +31,7 @@ class ReviewFormResponseForm extends Form {
 	 * @param $type string
 	 */
 	function ReviewFormResponseForm($reviewId, $reviewFormId) {
-		parent::Form('submission/reviewForm/reviewFormResponse.tpl');
+		parent::__construct('submission/reviewForm/reviewFormResponse.tpl');
 
 		$this->reviewId = $reviewId;
 		$this->reviewFormId = $reviewFormId;

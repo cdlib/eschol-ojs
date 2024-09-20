@@ -32,7 +32,7 @@ class ContextForm extends Form {
 	 * Constructor.
 	 */
 	function ContextForm($contextId, $versionId) {
-		parent::Form('rtadmin/context.tpl');
+		parent::__construct('rtadmin/context.tpl');
 		$this->addCheck(new FormValidatorPost($this));
 
 		$rtDao =& DAORegistry::getDAO('RTDAO');

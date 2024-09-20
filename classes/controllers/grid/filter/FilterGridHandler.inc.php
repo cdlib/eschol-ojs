@@ -23,7 +23,7 @@ class FilterGridHandler extends PKPFilterGridHandler {
 	 * Constructor
 	 */
 	function FilterGridHandler() {
-		parent::PKPFilterGridHandler();
+		parent::__construct();
 		$this->addRoleAssignment(
 				ROLE_ID_JOURNAL_MANAGER,
 				array('fetchGrid', 'addFilter', 'editFilter', 'updateFilter', 'deleteFilter'));

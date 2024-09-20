@@ -34,7 +34,7 @@ class StaticPagesEditForm extends Form {
 	 */
 	function StaticPagesEditForm(&$plugin, $journalId, $staticPageId = null) {
 
-		parent::Form($plugin->getTemplatePath() . 'editStaticPageForm.tpl');
+		parent::__construct($plugin->getTemplatePath() . 'editStaticPageForm.tpl');
 
 		$this->journalId = $journalId;
 		$this->plugin =& $plugin;

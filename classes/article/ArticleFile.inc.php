@@ -24,7 +24,7 @@ class ArticleFile extends SubmissionFile {
 	 * Constructor.
 	 */
 	function ArticleFile() {
-		parent::SubmissionFile();
+		parent::__construct();
 	}
 
 	/**

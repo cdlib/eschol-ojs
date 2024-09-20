@@ -47,7 +47,7 @@ class ThesisDAO extends DAO {
 	 */
 	function ThesisDAO($parentPluginName) {
 		$this->parentPluginName = $parentPluginName;
-		parent::DAO();
+		parent::__construct();
 	}
 
 	/**

@@ -24,7 +24,7 @@ class SubmitHandler extends AuthorHandler {
 	 * Constructor
 	 **/
 	function SubmitHandler() {
-		parent::AuthorHandler();
+		parent::__construct();
 	}
 
 	/**

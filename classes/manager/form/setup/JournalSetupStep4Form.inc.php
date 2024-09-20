@@ -22,7 +22,7 @@ class JournalSetupStep4Form extends JournalSetupForm {
 	 * Constructor.
 	 */
 	function JournalSetupStep4Form() {
-		parent::JournalSetupForm(
+		parent::__construct(
 			4,
 			array(
 				'disableUserReg' => 'bool',

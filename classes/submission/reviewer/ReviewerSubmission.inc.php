@@ -33,7 +33,7 @@ class ReviewerSubmission extends Article {
 	 * Constructor.
 	 */
 	function ReviewerSubmission() {
-		parent::Article();
+		parent::__construct();
 	}
 
 	/**

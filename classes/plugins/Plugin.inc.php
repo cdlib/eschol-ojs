@@ -22,7 +22,7 @@ class Plugin extends PKPPlugin {
 	 * Constructor
 	 */
 	function Plugin() {
-		parent::PKPPlugin();
+		parent::__construct();
 	}
 
 	/**

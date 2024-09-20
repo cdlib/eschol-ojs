@@ -35,7 +35,7 @@ class genTestLocale extends CommandLineTool {
 	 * 		and the second parameter the output locale (default "te_ST")
 	 */
 	function genTestLocale($argv = array()) {
-		parent::CommandLineTool($argv);
+		parent::__construct($argv);
 
 		if (count($this->argv) == 2) {
 			$this->inLocale = $this->argv[0];

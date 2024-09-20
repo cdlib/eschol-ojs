@@ -19,7 +19,7 @@ import('classes.plugins.Plugin');
 
 class GatewayPlugin extends Plugin {
 	function GatewayPlugin() {
-		parent::Plugin();
+		parent::__construct();
 	}
 
 	/**

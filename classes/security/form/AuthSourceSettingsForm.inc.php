@@ -35,7 +35,7 @@ class AuthSourceSettingsForm extends Form {
 	 * @param $authId int
 	 */
 	function AuthSourceSettingsForm($authId) {
-		parent::Form('admin/auth/sourceSettings.tpl');
+		parent::__construct('admin/auth/sourceSettings.tpl');
 		$this->addCheck(new FormValidatorPost($this));
 		$this->authId = $authId;
 	}

@@ -22,7 +22,7 @@ class WebFeedBlockPlugin extends BlockPlugin {
 	var $parentPluginName;
 
 	function WebFeedBlockPlugin($parentPluginName) {
-		parent::BlockPlugin();
+		parent::__construct();
 		$this->parentPluginName = $parentPluginName;
 	}
 

@@ -25,7 +25,7 @@ class CopyeditorSubmissionAssignmentPolicy extends AuthorizationPolicy {
 	 * @param $request PKPRequest
 	 */
 	function CopyeditorSubmissionAssignmentPolicy(&$request) {
-		parent::AuthorizationPolicy('user.authorization.copyeditorAssignmentMissing');
+		parent::__construct('user.authorization.copyeditorAssignmentMissing');
 		$this->_request =& $request;
 	}
 

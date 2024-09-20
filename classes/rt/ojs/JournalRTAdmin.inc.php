@@ -30,7 +30,7 @@ class JournalRTAdmin extends RTAdmin {
 	var $dao;
 
 
-	function JournalRTAdmin($journalId) {
+	function __construct($journalId) {
 		$this->journalId = $journalId;
 		$this->dao =& DAORegistry::getDAO('RTDAO');
 	}

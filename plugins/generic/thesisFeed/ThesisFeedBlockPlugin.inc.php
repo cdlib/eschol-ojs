@@ -25,7 +25,7 @@ class ThesisFeedBlockPlugin extends BlockPlugin {
 	 * Constructor
 	 */
 	function ThesisFeedBlockPlugin($parentPluginName) {
-		parent::BlockPlugin();
+		parent::__construct();
 		$this->parentPluginName = $parentPluginName;
 	}
 

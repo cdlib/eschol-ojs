@@ -35,7 +35,7 @@ class SearchForm extends Form {
 	 * Constructor.
 	 */
 	function SearchForm($searchId, $contextId, $versionId) {
-		parent::Form('rtadmin/search.tpl');
+		parent::__construct('rtadmin/search.tpl');
 		$this->addCheck(new FormValidatorPost($this));
 
 		$rtDao =& DAORegistry::getDAO('RTDAO');

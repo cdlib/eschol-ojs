@@ -23,7 +23,7 @@ class RTSearchHandler extends RTAdminHandler {
 	 * Constructor
 	 **/
 	function RTSearchHandler() {
-		parent::RTAdminHandler();
+		parent::__construct();
 	}
 
 	function createSearch($args) {

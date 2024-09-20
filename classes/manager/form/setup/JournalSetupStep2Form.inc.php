@@ -22,7 +22,7 @@ class JournalSetupStep2Form extends JournalSetupForm {
 	 * Constructor.
 	 */
 	function JournalSetupStep2Form() {
-		parent::JournalSetupForm(
+		parent::__construct(
 			2,
 			array(
 				'useDefaults' => 'bool',

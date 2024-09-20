@@ -33,7 +33,7 @@ class PaymentSettingsForm extends Form {
 	 */
 	function PaymentSettingsForm() {
 
-		parent::Form('payments/paymentSettings.tpl');
+		parent::__construct('payments/paymentSettings.tpl');
 
 		$this->settings = array(
 							'journalPaymentsEnabled' => 'bool',

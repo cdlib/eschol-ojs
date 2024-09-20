@@ -21,8 +21,8 @@ class IndexHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function IndexHandler() {
-		parent::Handler();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

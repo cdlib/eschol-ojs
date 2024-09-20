@@ -22,7 +22,7 @@ class ManagerHandler extends Handler {
 	 * Constructor
 	 **/
 	function ManagerHandler() {
-		parent::Handler();
+		parent::__construct();
 		
 		$hvj = new HandlerValidatorJournal($this);
 		$this->addCheck($hvj);

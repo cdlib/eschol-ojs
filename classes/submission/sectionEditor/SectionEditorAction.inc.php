@@ -28,7 +28,7 @@ class SectionEditorAction extends Action {
 	 * Constructor.
 	 */
 	function SectionEditorAction() {
-		parent::Action();
+		parent::__construct();
 	}
 
 	/**

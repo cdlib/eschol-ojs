@@ -19,7 +19,7 @@ class BookForReviewAuthor extends DataObject {
 	 * Constructor.
 	 */
 	function BookForReviewAuthor() {
-		parent::DataObject();
+		parent::__construct();
 		$this->setId(0);
 	}
 

@@ -21,7 +21,7 @@ import('lib.pkp.classes.user.PKPUser');
 class User extends PKPUser {
 
 	function User() {
-		parent::PKPUser();
+		parent::__construct();
 	}
 
 	/**

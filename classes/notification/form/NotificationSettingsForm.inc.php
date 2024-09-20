@@ -25,7 +25,7 @@ class NotificationSettingsForm extends PKPNotificationSettingsForm {
 	 * Constructor.
 	 */
 	function NotificationSettingsForm() {
-		parent::PKPNotificationSettingsForm();
+		parent::__construct();
 	}
 
 	/**

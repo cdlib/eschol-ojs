@@ -21,7 +21,7 @@ class EmailHandler extends UserHandler {
 	 * Constructor
 	 **/
 	function EmailHandler() {
-		parent::UserHandler();
+		parent::__construct();
 	}
 	
 	function email($args) {

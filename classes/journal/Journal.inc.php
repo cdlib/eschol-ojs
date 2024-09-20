@@ -27,7 +27,7 @@ class Journal extends DataObject {
 	 * Constructor.
 	 */
 	function Journal() {
-		parent::DataObject();
+		parent::__construct();
 	}
 
 	/**

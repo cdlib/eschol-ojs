@@ -31,7 +31,7 @@ class CommentHandler extends Handler {
 	 * Constructor
 	 **/
 	function CommentHandler() {
-		parent::Handler();
+		parent::__construct();
 	}
 
 	function view($args) {

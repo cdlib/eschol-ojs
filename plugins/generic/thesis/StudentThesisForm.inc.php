@@ -54,7 +54,7 @@ class StudentThesisForm extends Form {
 
 		$this->uploadCodeEnabled = $thesisPlugin->getSetting($journalId, 'enableUploadCode');
 
-		parent::Form($thesisPlugin->getTemplatePath() . 'studentThesisForm.tpl');
+		parent::__construct($thesisPlugin->getTemplatePath() . 'studentThesisForm.tpl');
 
 
 		// Captcha support if enabled

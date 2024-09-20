@@ -21,7 +21,7 @@ class SectionHandler extends ManagerHandler {
 	 * Constructor
 	 **/
 	function SectionHandler() {
-		parent::ManagerHandler();
+		parent::__construct();
 	}
 	/**
 	 * Display a list of the sections within the current journal.

@@ -42,7 +42,7 @@ class SectionEditorSubmission extends Article {
 	 * Constructor.
 	 */
 	function SectionEditorSubmission() {
-		parent::Article();
+		parent::__construct();
 		$this->reviewAssignments = array();
 		$this->removedReviewAssignments = array();
 	}

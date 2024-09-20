@@ -31,7 +31,7 @@ class MailTemplate extends PKPMailTemplate {
 	 * @param $ignorePostedData boolean optional
 	 */
 	function MailTemplate($emailKey = null, $locale = null, $enableAttachments = null, $journal = null, $includeSignature = true, $ignorePostedData = false) {
-		parent::PKPMailTemplate($emailKey, $locale, $enableAttachments, $includeSignature);
+		parent::__construct($emailKey, $locale, $enableAttachments, $includeSignature);
 
 		// If a journal wasn't specified, use the current request.
 		if ($journal === null) $journal =& Request::getJournal();

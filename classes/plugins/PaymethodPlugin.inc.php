@@ -22,7 +22,7 @@ class PaymethodPlugin extends Plugin {
 	 * Constructor
 	 */
 	function PaymethodPlugin() {
-		parent::plugin();
+		parent::__construct();
 	}
 
 	/**

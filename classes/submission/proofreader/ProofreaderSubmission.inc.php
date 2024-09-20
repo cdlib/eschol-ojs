@@ -28,7 +28,7 @@ class ProofreaderSubmission extends Article {
 	 * Constructor.
 	 */
 	function ProofreaderSubmission() {
-		parent::Article();
+		parent::__construct();
 	}
 
 	//

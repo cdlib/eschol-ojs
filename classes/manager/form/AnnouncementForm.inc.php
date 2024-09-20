@@ -26,7 +26,7 @@ class AnnouncementForm extends PKPAnnouncementForm {
 	 * @param announcementId int leave as default for new announcement
 	 */
 	function AnnouncementForm($announcementId = null) {
-		parent::PKPAnnouncementForm($announcementId);
+		parent::__construct($announcementId);
 		$journal =& Request::getJournal();
 
 		// If provided, announcement type is valid

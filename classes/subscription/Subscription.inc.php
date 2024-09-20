@@ -38,7 +38,7 @@ define('SUBSCRIPTION_YEAR_OFFSET_FUTURE',	'+10');
 class Subscription extends DataObject {
 
 	function Subscription() {
-		parent::DataObject();
+		parent::__construct();
 	}
 
 	//

@@ -27,7 +27,7 @@ class InstitutionalSubscriptionForm extends SubscriptionForm {
 	 */
 	function InstitutionalSubscriptionForm($subscriptionId = null, $userId = null) {
 		parent::Form('subscription/institutionalSubscriptionForm.tpl');
-		parent::SubscriptionForm($subscriptionId, $userId);
+		parent::__construct($subscriptionId, $userId);
 
 		$subscriptionId = isset($subscriptionId) ? (int) $subscriptionId : null;
 		$userId = isset($userId) ? (int) $userId : null;

@@ -35,7 +35,7 @@ class ThesisFeedGatewayPlugin extends GatewayPlugin {
 	 * Constructor
 	 */
 	function ThesisFeedGatewayPlugin($parentPluginName) {
-		parent::GatewayPlugin();
+		parent::__construct();
 		$this->parentPluginName = $parentPluginName;
 	}
 

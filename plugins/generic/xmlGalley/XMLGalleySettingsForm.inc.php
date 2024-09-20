@@ -32,7 +32,7 @@ class XMLGalleySettingsForm extends Form {
 	function XMLGalleySettingsForm(&$plugin, $journalId) {
 		$templateMgr =& TemplateManager::getManager();
 
-		parent::Form($plugin->getTemplatePath() . 'settingsForm.tpl');
+		parent::__construct($plugin->getTemplatePath() . 'settingsForm.tpl');
 
 		$this->journalId = $journalId;
 		$this->plugin =& $plugin;

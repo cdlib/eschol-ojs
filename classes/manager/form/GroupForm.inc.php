@@ -30,7 +30,7 @@ class GroupForm extends Form {
 	function GroupForm($group = null) {
 		$journal =& Request::getJournal();
 
-		parent::Form('manager/groups/groupForm.tpl');
+		parent::__construct('manager/groups/groupForm.tpl');
 
 		// Group title is provided
 		$this->addCheck(new FormValidatorLocale($this, 'title', 'required', 'manager.groups.form.groupTitleRequired'));

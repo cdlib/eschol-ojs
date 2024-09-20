@@ -21,7 +21,7 @@ class StatisticsHandler extends ManagerHandler {
 	 * Constructor
 	 **/
 	function StatisticsHandler() {
-		parent::ManagerHandler();
+		parent::__construct();
 	}
 	/**
 	 * Display a list of journal statistics.

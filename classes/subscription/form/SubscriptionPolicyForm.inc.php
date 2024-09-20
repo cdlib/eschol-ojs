@@ -70,7 +70,7 @@ class SubscriptionPolicyForm extends Form {
 			$this->validNumWeeksAfterExpiry[$i] = $i;
 		}
 
-		parent::Form('subscription/subscriptionPolicyForm.tpl');
+		parent::__construct('subscription/subscriptionPolicyForm.tpl');
 
 		// If provided, subscription contact email is valid
 		$this->addCheck(new FormValidatorEmail($this, 'subscriptionEmail', 'optional', 'manager.subscriptionPolicies.subscriptionContactEmailValid'));

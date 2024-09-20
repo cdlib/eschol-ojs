@@ -22,7 +22,7 @@ import('classes.note.NoteDAO');
 class ArticleNoteDAO extends NoteDAO {
 	function ArticleNoteDAO() {
 		if (Config::getVar('debug', 'deprecation_warnings')) trigger_error('Deprecated class ArticleNoteDAO; use NoteDAO instead.');
-		parent::NoteDAO();
+		parent::__construct();
 	}
 
 	/**

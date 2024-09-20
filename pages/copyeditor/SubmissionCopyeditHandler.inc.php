@@ -20,7 +20,7 @@ class SubmissionCopyeditHandler extends CopyeditorHandler {
 	 * Constructor
 	 **/
 	function SubmissionCopyeditHandler() {
-		parent::CopyeditorHandler();
+		parent::__construct();
 	}
 	/** submission associated with the request **/
 	var $submission;

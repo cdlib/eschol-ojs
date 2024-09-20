@@ -74,7 +74,7 @@ class BookForReviewForm extends Form {
 		$this->validEditions = array_merge( array(0 => ''), range(1,20));
 
 		$journal =& Request::getJournal();
-		parent::Form($bfrPlugin->getTemplatePath() . 'editor' . '/' . 'bookForReviewForm.tpl');
+		parent::__construct($bfrPlugin->getTemplatePath() . 'editor' . '/' . 'bookForReviewForm.tpl');
 
 		// Title is provided
 		$this->addCheck(new FormValidatorLocale($this, 'title', 'required', 'plugins.generic.booksForReview.editor.form.titleRequired'));

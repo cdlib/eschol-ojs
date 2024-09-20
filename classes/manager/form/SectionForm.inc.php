@@ -42,7 +42,7 @@ class SectionForm extends Form {
 	 * @param $journalId int omit for a new journal
 	 */
 	function SectionForm($sectionId = null) {
-		parent::Form('manager/sections/sectionForm.tpl');
+		parent::__construct('manager/sections/sectionForm.tpl');
 
 		$journal =& Request::getJournal();
 		$this->sectionId = $sectionId;

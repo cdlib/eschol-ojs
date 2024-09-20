@@ -32,7 +32,7 @@ class OpenAdsConnection {
 	 * @var $plugin object
 	 * @var $installPath Full path to OpenAds installation
 	 */
-	function OpenAdsConnection(&$plugin, $installPath) {
+	function __construct(&$plugin, $installPath) {
 		$this->plugin =& $plugin;
 		$this->installPath = $installPath;
 		$this->errors = array();

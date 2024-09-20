@@ -22,7 +22,7 @@ class HandlerValidatorJournal extends HandlerValidator {
 	 * @param $additionalArgs Array URL arguments to include in request
 	 */
 	function HandlerValidatorJournal(&$handler, $redirectToLogin = false, $message = null, $additionalArgs = array()) {
-		parent::HandlerValidator($handler, $redirectToLogin, $message, $additionalArgs);
+		parent::__construct($handler, $redirectToLogin, $message, $additionalArgs);
 	}
 
 	/**

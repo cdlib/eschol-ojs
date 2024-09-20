@@ -24,7 +24,7 @@ class TrackSubmissionHandler extends AuthorHandler {
 	 * Constructor
 	 **/
 	function TrackSubmissionHandler() {
-		parent::AuthorHandler();
+		parent::__construct();
 	}
 
 	/**

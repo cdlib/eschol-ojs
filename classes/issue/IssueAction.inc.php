@@ -21,7 +21,7 @@ class IssueAction {
 	/**
 	 * Constructor.
 	 */
-	function IssueAction() {
+	function __construct() {
 	}
 
 	/**

@@ -731,7 +731,7 @@ class SimplePie
 	 * @param string $cache_location This is where you want the cache to be stored.
 	 * @param int $cache_duration This is the number of seconds that you want to store the cache file for.
 	 */
-	function SimplePie($feed_url = null, $cache_location = null, $cache_duration = null)
+	function __construct($feed_url = null, $cache_location = null, $cache_duration = null)
 	{
 		// Other objects, instances created here so we can set options on them
 		$this->sanitize = new SimplePie_Sanitize;
@@ -3111,7 +3111,7 @@ class SimplePie_Item
 	var $feed;
 	var $data = array();
 
-	function SimplePie_Item($feed, $data)
+	function __construct($feed, $data)
 	{
 		$this->feed = $feed;
 		$this->data = $data;
@@ -5727,7 +5727,7 @@ class SimplePie_Source
 	var $item;
 	var $data = array();
 
-	function SimplePie_Source($item, $data)
+	function __construct($item, $data)
 	{
 		$this->item = $item;
 		$this->data = $data;
@@ -6280,7 +6280,7 @@ class SimplePie_Author
 	var $email;
 
 	// Constructor, used to input the data
-	function SimplePie_Author($name = null, $link = null, $email = null)
+	function __construct($name = null, $link = null, $email = null)
 	{
 		$this->name = $name;
 		$this->link = $link;
@@ -6337,7 +6337,7 @@ class SimplePie_Category
 	var $label;
 
 	// Constructor, used to input the data
-	function SimplePie_Category($term = null, $scheme = null, $label = null)
+	function __construct($term = null, $scheme = null, $label = null)
 	{
 		$this->term = $term;
 		$this->scheme = $scheme;
@@ -6418,7 +6418,7 @@ class SimplePie_Enclosure
 	var $width;
 
 	// Constructor, used to input the data
-	function SimplePie_Enclosure($link = null, $type = null, $length = null, $javascript = null, $bitrate = null, $captions = null, $categories = null, $channels = null, $copyright = null, $credits = null, $description = null, $duration = null, $expression = null, $framerate = null, $hashes = null, $height = null, $keywords = null, $lang = null, $medium = null, $player = null, $ratings = null, $restrictions = null, $samplingrate = null, $thumbnails = null, $title = null, $width = null)
+	function __construct($link = null, $type = null, $length = null, $javascript = null, $bitrate = null, $captions = null, $categories = null, $channels = null, $copyright = null, $credits = null, $description = null, $duration = null, $expression = null, $framerate = null, $hashes = null, $height = null, $keywords = null, $lang = null, $medium = null, $player = null, $ratings = null, $restrictions = null, $samplingrate = null, $thumbnails = null, $title = null, $width = null)
 	{
 		$this->bitrate = $bitrate;
 		$this->captions = $captions;
@@ -7351,7 +7351,7 @@ class SimplePie_Caption
 	var $text;
 
 	// Constructor, used to input the data
-	function SimplePie_Caption($type = null, $lang = null, $startTime = null, $endTime = null, $text = null)
+	function __construct($type = null, $lang = null, $startTime = null, $endTime = null, $text = null)
 	{
 		$this->type = $type;
 		$this->lang = $lang;
@@ -7434,7 +7434,7 @@ class SimplePie_Credit
 	var $name;
 
 	// Constructor, used to input the data
-	function SimplePie_Credit($role = null, $scheme = null, $name = null)
+	function __construct($role = null, $scheme = null, $name = null)
 	{
 		$this->role = $role;
 		$this->scheme = $scheme;
@@ -7490,7 +7490,7 @@ class SimplePie_Copyright
 	var $label;
 
 	// Constructor, used to input the data
-	function SimplePie_Copyright($url = null, $label = null)
+	function __construct($url = null, $label = null)
 	{
 		$this->url = $url;
 		$this->label = $label;
@@ -7533,7 +7533,7 @@ class SimplePie_Rating
 	var $value;
 
 	// Constructor, used to input the data
-	function SimplePie_Rating($scheme = null, $value = null)
+	function __construct($scheme = null, $value = null)
 	{
 		$this->scheme = $scheme;
 		$this->value = $value;
@@ -7577,7 +7577,7 @@ class SimplePie_Restriction
 	var $value;
 
 	// Constructor, used to input the data
-	function SimplePie_Restriction($relationship = null, $type = null, $value = null)
+	function __construct($relationship = null, $type = null, $value = null)
 	{
 		$this->relationship = $relationship;
 		$this->type = $type;
@@ -7642,7 +7642,7 @@ class SimplePie_File
 	var $error;
 	var $method = SIMPLEPIE_FILE_SOURCE_NONE;
 
-	function SimplePie_File($url, $timeout = 10, $redirects = 5, $headers = null, $useragent = null, $force_fsockopen = false)
+	function __construct($url, $timeout = 10, $redirects = 5, $headers = null, $useragent = null, $force_fsockopen = false)
 	{
 		if (class_exists('idna_convert'))
 		{
@@ -7961,7 +7961,7 @@ class SimplePie_HTTP_Parser
 	 * @access public
 	 * @param string $data Input data
 	 */
-	function SimplePie_HTTP_Parser($data)
+	function __construct($data)
 	{
 		$this->data = $data;
 		$this->data_length = strlen($this->data);
@@ -8418,7 +8418,7 @@ class SimplePie_gzdecode
 	 *
 	 * @access public
 	 */
-	function SimplePie_gzdecode($data)
+	function __construct($data)
 	{
 		$this->compressed_data = $data;
 		$this->compressed_size = strlen($data);
@@ -8607,7 +8607,7 @@ class SimplePie_Cache
 	 *
 	 * @access private
 	 */
-	function SimplePie_Cache()
+	function __construct()
 	{
 		trigger_error('Please call SimplePie_Cache::create() instead of the constructor', E_USER_ERROR);
 	}
@@ -8643,7 +8643,7 @@ class SimplePie_Cache_File
 	var $extension;
 	var $name;
 
-	function SimplePie_Cache_File($location, $filename, $extension)
+	function __construct($location, $filename, $extension)
 	{
 		$this->location = $location;
 		$this->filename = $filename;
@@ -8803,7 +8803,7 @@ class SimplePie_Cache_MySQL extends SimplePie_Cache_DB
 	var $options;
 	var $id;
 
-	function SimplePie_Cache_MySQL($mysql_location, $name, $extension)
+	function __construct($mysql_location, $name, $extension)
 	{
 		$host = $mysql_location->get_host();
 		if (SimplePie_Misc::stripos($host, 'unix(') === 0 && substr($host, -1) === ')')
@@ -11358,7 +11358,7 @@ function embed_flv(width, height, link, placeholder, loop, player) {
 function embed_wmedia(width, height, link) {
 	document.writeln('<embed type="application/x-mplayer2" src="'+link+'" autosize="1" width="'+width+'" height="'+height+'" showcontrols="1" showstatusbar="0" showdisplay="0" autostart="0"></embed>');
 }
-		<?php
+<?php
 	}
 }
 
@@ -11401,7 +11401,7 @@ class SimplePie_Decode_HTML_Entities
 	 * @access public
 	 * @param string $data Input data
 	 */
-	function SimplePie_Decode_HTML_Entities($data)
+	function __construct($data)
 	{
 		$this->data = $data;
 	}
@@ -11655,7 +11655,7 @@ class SimplePie_IRI
 	 * @param string $iri
 	 * @return SimplePie_IRI
 	 */
-	function SimplePie_IRI($iri)
+	function __construct($iri)
 	{
 		$iri = (string) $iri;
 		if ($iri !== '')
@@ -13014,7 +13014,7 @@ class SimplePie_Parse_Date
 	 *
 	 * @access private
 	 */
-	function SimplePie_Parse_Date()
+	function __construct()
 	{
 		$this->day_pcre = '(' . implode(array_keys($this->day), '|') . ')';
 		$this->month_pcre = '(' . implode(array_keys($this->month), '|') . ')';
@@ -13477,7 +13477,7 @@ class SimplePie_Content_Type_Sniffer
 	 * @access public
 	 * @param SimplePie_Content_Type_Sniffer $file Input file
 	 */
-	function SimplePie_Content_Type_Sniffer($file)
+	function __construct($file)
 	{
 		$this->file = $file;
 	}
@@ -13801,7 +13801,7 @@ class SimplePie_XML_Declaration_Parser
 	 * @access public
 	 * @param string $data Input data
 	 */
-	function SimplePie_XML_Declaration_Parser($data)
+	function __construct($data)
 	{
 		$this->data = $data;
 		$this->data_length = strlen($this->data);
@@ -14065,7 +14065,7 @@ class SimplePie_Locator
 	var $max_checked_feeds = 10;
 	var $content_type_sniffer_class = 'SimplePie_Content_Type_Sniffer';
 
-	function SimplePie_Locator(&$file, $timeout = 10, $useragent = null, $file_class = 'SimplePie_File', $max_checked_feeds = 10, $content_type_sniffer_class = 'SimplePie_Content_Type_Sniffer')
+	function __construct(&$file, $timeout = 10, $useragent = null, $file_class = 'SimplePie_File', $max_checked_feeds = 10, $content_type_sniffer_class = 'SimplePie_Content_Type_Sniffer')
 	{
 		$this->file =& $file;
 		$this->file_class = $file_class;

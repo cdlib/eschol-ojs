@@ -22,13 +22,13 @@ class UserHandler extends Handler {
 	 * Constructor
 	 **/
 	function UserHandler() {
-		parent::Handler();
+		parent::__construct();
 	}
 
 	/**
 	 * Display user index page.
 	 */
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 
 		$sessionManager =& SessionManager::getManager();
@@ -333,7 +333,8 @@ class UserHandler extends Handler {
 	 * Redirects to login form if not logged in.
 	 * @param $loginCheck boolean check if user is logged in
 	 */
-	function validate($loginCheck = true) {
+        function validate($requiredContexts = null, $request = null) {
+                $loginCheck = true;
 		parent::validate();
 		if ($loginCheck && !Validation::isLoggedIn()) {
 			Validation::redirectLogin();

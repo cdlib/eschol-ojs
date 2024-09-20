@@ -30,7 +30,7 @@ class GroupHandler extends ManagerHandler {
 	 * Constructor
 	 **/
 	function GroupHandler() {
-		parent::ManagerHandler();
+		parent::__construct();
 	}
 
 	/**

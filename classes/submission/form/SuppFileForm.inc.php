@@ -36,7 +36,7 @@ class SuppFileForm extends Form {
 		$supportedSubmissionLocales = $journal->getSetting('supportedSubmissionLocales');
 		if (empty($supportedSubmissionLocales)) $supportedSubmissionLocales = array($journal->getPrimaryLocale());
 
-		parent::Form(
+		parent::__construct(
 			'submission/suppFile/suppFile.tpl',
 			true,
 			$article->getLocale(),

@@ -25,7 +25,7 @@ class SwordImportExportPlugin extends ImportExportPlugin {
 	 * Constructor
 	 */
 	function SwordImportExportPlugin($parentPluginName) {
-		parent::ImportExportPlugin();
+		parent::__construct();
 		$this->parentPluginName = $parentPluginName;
 	}
 

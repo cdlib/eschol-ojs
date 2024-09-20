@@ -40,7 +40,7 @@ class OAIDAO extends DAO {
 	 * Constructor.
 	 */
 	function OAIDAO() {
-		parent::DAO();
+		parent::__construct();
 		$this->journalDao =& DAORegistry::getDAO('JournalDAO');
 		$this->sectionDao =& DAORegistry::getDAO('SectionDAO');
 		$this->publishedArticleDao =& DAORegistry::getDAO('PublishedArticleDAO');

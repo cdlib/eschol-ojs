@@ -39,7 +39,7 @@ class DepositPointForm extends Form {
 		$this->depositPointId = $depositPointId;
 		$this->plugin =& $plugin;
 
-		parent::Form($plugin->getTemplatePath() . 'depositPointForm.tpl');
+		parent::__construct($plugin->getTemplatePath() . 'depositPointForm.tpl');
 		$this->addCheck(new FormValidatorPost($this));
 	}
 

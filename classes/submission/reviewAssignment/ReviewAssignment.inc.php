@@ -23,7 +23,7 @@ class ReviewAssignment extends PKPReviewAssignment {
 	 * Constructor.
 	 */
 	function ReviewAssignment() {
-		parent::PKPReviewAssignment();
+		parent::__construct();
 	}
 
 	//

@@ -34,7 +34,7 @@ class SettingsForm extends Form {
 		$this->journalId = $journalId;
 		$this->plugin =& $plugin;
 
-		parent::Form($plugin->getTemplatePath() . 'settingsForm.tpl');
+		parent::__construct($plugin->getTemplatePath() . 'settingsForm.tpl');
 		$this->addCheck(new FormValidatorPost($this));
 	}
 

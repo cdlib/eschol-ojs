@@ -23,7 +23,7 @@ class AuthorHandler extends Handler {
 	 * Constructor
 	 **/
 	function AuthorHandler() {
-		parent::Handler();
+		parent::__construct();
 
 		$this->addCheck(new HandlerValidatorJournal($this));		
 	}

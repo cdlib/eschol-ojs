@@ -22,7 +22,7 @@ class AdminHandler extends Handler {
 	 * Constructor
 	 **/
 	function AdminHandler() {
-		parent::Handler();
+		parent::__construct();
 		
 		$this->addCheck(new HandlerValidatorRoles($this, true, null, null, array(ROLE_ID_SITE_ADMIN)));
 		$this->addCheck(new HandlerValidatorCustom($this, true, null, null, create_function(null, 'return Request::getRequestedJournalPath() == \'index\';')));

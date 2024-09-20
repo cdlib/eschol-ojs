@@ -32,7 +32,7 @@ class LanguageAction {
 	/**
 	 * Constructor.
 	 */
-	function LanguageAction() {
+	function __construct() {
 	}
 
 	/**

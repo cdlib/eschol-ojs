@@ -21,7 +21,7 @@ class FilesHandler extends ManagerHandler {
 	 * Constructor
 	 **/
 	function FilesHandler() {
-		parent::ManagerHandler();
+		parent::__construct();
 	}
 
 	/**

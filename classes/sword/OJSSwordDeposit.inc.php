@@ -39,7 +39,7 @@ class OJSSwordDeposit {
 	 * Constructor.
 	 * Create a SWORD deposit object for an OJS article.
 	 */
-	function OJSSwordDeposit(&$article) {
+	function __construct(&$article) {
 		// Create a directory for deposit contents
 		$this->outPath = tempnam('/tmp', 'sword');
 		unlink($this->outPath);

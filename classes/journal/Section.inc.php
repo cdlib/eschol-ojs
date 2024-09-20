@@ -22,7 +22,7 @@ class Section extends DataObject {
 	 * Constructor.
 	 */
 	function Section() {
-		parent::DataObject();
+		parent::__construct();
 	}
 
 	/**

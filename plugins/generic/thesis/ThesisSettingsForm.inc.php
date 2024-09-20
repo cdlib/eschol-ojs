@@ -48,7 +48,7 @@ class ThesisSettingsForm extends Form {
 			THESIS_ORDER_TITLE_DESC => \OjsLocale::translate('plugins.generic.thesis.settings.order.titleDesc')
 		);
 
-		parent::Form($plugin->getTemplatePath() . 'settingsForm.tpl');
+		parent::__construct($plugin->getTemplatePath() . 'settingsForm.tpl');
 
 		$this->addCheck(new FormValidator($this, 'thesisName', 'required', 'plugins.generic.thesis.settings.thesisNameRequired'));
 		$this->addCheck(new FormValidatorEmail($this, 'thesisEmail', 'required', 'plugins.generic.thesis.settings.thesisEmailRequired'));

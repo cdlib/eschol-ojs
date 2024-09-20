@@ -20,7 +20,7 @@ class JournalPolicy extends PolicySet {
 	 * @param $request PKPRequest
 	 */
 	function JournalPolicy(&$request) {
-		parent::PolicySet();
+		parent::__construct();
 
 		// Ensure that we have a journal in the context.
 		import('lib.pkp.classes.security.authorization.ContextRequiredPolicy');

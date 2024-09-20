@@ -24,7 +24,7 @@ class LayoutCommentForm extends CommentForm {
 	 * @param $article object
 	 */
 	function LayoutCommentForm($article, $roleId) {
-		parent::CommentForm($article, COMMENT_TYPE_LAYOUT, $roleId, $article->getId());
+		parent::__construct($article, COMMENT_TYPE_LAYOUT, $roleId, $article->getId());
 	}
 
 	/**

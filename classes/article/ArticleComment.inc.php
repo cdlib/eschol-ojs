@@ -28,7 +28,7 @@ class ArticleComment extends DataObject {
 	 * Constructor.
 	 */
 	function ArticleComment() {
-		parent::DataObject();
+		parent::__construct();
 	}
 
 	/**

@@ -22,7 +22,7 @@ class QuickSubmitForm extends Form {
 	 * @param $plugin object
 	 */
 	function QuickSubmitForm(&$plugin) {
-		parent::Form($plugin->getTemplatePath() . 'index.tpl');
+		parent::__construct($plugin->getTemplatePath() . 'index.tpl');
 		$journal =& Request::getJournal();
 
 		$this->addCheck(new FormValidatorPost($this));

@@ -25,7 +25,7 @@ class AdminFunctionsHandler extends AdminHandler {
 	 * Constructor
 	 **/
 	function AdminFunctionsHandler() {
-		parent::AdminHandler();
+		parent::__construct();
 	}
 
 	/**

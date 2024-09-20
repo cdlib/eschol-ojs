@@ -48,7 +48,7 @@ class BooksForReviewSettingsForm extends Form {
 		$this->validDueWeeks = range(0,50);
 		$this->validNumDays = range(0,30);
 
-		parent::Form($plugin->getTemplatePath() . 'editor' . '/' . 'settingsForm.tpl');
+		parent::__construct($plugin->getTemplatePath() . 'editor' . '/' . 'settingsForm.tpl');
 
 		// Management mode provided and valid
 		$this->addCheck(new FormValidator($this, 'mode', 'required', 'plugins.generic.booksForReview.settings.modeRequired'));

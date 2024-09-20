@@ -25,7 +25,7 @@ class SectionSubmissionAssignmentPolicy extends AuthorizationPolicy {
 	 * @param $request PKPRequest
 	 */
 	function SectionSubmissionAssignmentPolicy(&$request) {
-		parent::AuthorizationPolicy('user.authorization.sectionAssignment');
+		parent::__construct('user.authorization.sectionAssignment');
 		$this->_request =& $request;
 	}
 

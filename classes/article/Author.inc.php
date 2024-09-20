@@ -21,7 +21,7 @@ class Author extends PKPAuthor {
 	 * Constructor.
 	 */
 	function Author() {
-		parent::PKPAuthor();
+		parent::__construct();
 	}
 
 	//

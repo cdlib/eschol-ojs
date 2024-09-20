@@ -31,7 +31,7 @@ class EmailTemplateForm extends Form {
 	 * @param $emailKey string
 	 */
 	function EmailTemplateForm($emailKey, &$journal) {
-		parent::Form('manager/emails/emailTemplateForm.tpl');
+		parent::__construct('manager/emails/emailTemplateForm.tpl');
 
 		$this->journal = $journal;
 		$this->emailKey = $emailKey;

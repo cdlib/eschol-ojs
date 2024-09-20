@@ -28,7 +28,7 @@ class LayoutEditorSubmission extends Article {
 	 * Constructor.
 	 */
 	function LayoutEditorSubmission() {
-		parent::Article();
+		parent::__construct();
 	}
 
 	//

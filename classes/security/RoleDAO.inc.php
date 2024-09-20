@@ -23,7 +23,7 @@ class RoleDAO extends DAO {
 	 * Constructor.
 	 */
 	function RoleDAO() {
-		parent::DAO();
+		parent::__construct();
 		$this->userDao =& DAORegistry::getDAO('UserDAO');
 	}
 

@@ -26,7 +26,7 @@ class ExternalFeedDAO extends DAO {
 	 */
 	function ExternalFeedDAO($parentPluginName) {
 		$this->parentPluginName = $parentPluginName;
-		parent::DAO();
+		parent::__construct();
 	}
 
 	/**

@@ -24,7 +24,7 @@ class TemporaryFileManager extends PKPTemporaryFileManager {
 	 * Create a manager for handling temporary file uploads.
 	 */
 	function TemporaryFileManager() {
-		parent::PKPTemporaryFileManager();
+		parent::__construct();
 	}
 
 	/**

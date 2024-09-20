@@ -20,7 +20,7 @@ class OjsJournalAccessPolicy extends JournalPolicy {
 	 * @param $roleAssignments array
 	 */
 	function OjsJournalAccessPolicy(&$request, $roleAssignments) {
-		parent::JournalPolicy($request);
+		parent::__construct($request);
 
 		// On journal level we don't have role-specific conditions
 		// so we can simply add all role assignments. It's ok if

@@ -23,7 +23,7 @@ class ReviewerHandler extends Handler {
 	 * Constructor
 	 **/
 	function ReviewerHandler() {
-		parent::Handler();
+		parent::__construct();
 
 		$this->addCheck(new HandlerValidatorJournal($this));
 		$this->addCheck(new HandlerValidatorRoles($this, true, null, null, array(ROLE_ID_REVIEWER)));		

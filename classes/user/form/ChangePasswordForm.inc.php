@@ -23,7 +23,7 @@ class ChangePasswordForm extends Form {
 	 * Constructor.
 	 */
 	function ChangePasswordForm() {
-		parent::Form('user/changePassword.tpl');
+		parent::__construct('user/changePassword.tpl');
 		$user =& Request::getUser();
 		$site =& Request::getSite();
 

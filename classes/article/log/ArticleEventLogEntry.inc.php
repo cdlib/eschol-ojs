@@ -109,7 +109,7 @@ class ArticleEventLogEntry extends DataObject {
 	 * Constructor.
 	 */
 	function ArticleEventLogEntry() {
-		parent::DataObject();
+		parent::__construct();
 	}
 
 	/**

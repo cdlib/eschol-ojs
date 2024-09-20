@@ -21,7 +21,7 @@ class AnnouncementHandler extends PKPAnnouncementHandler {
 	 * Constructor
 	 **/
 	function AnnouncementHandler() {
-		parent::PKPAnnouncementHandler();
+		parent::__construct();
 	}
 	/**
 	 * Display a list of announcements for the current journal.

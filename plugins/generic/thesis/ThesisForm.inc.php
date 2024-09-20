@@ -54,7 +54,7 @@ class ThesisForm extends Form {
 		$this->thesisId = isset($thesisId) ? (int) $thesisId : null;
 
 		$journal =& Request::getJournal();
-		parent::Form($thesisPlugin->getTemplatePath() . 'thesisForm.tpl');
+		parent::__construct($thesisPlugin->getTemplatePath() . 'thesisForm.tpl');
 
 
 		// Status is provided and is valid value

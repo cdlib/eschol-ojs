@@ -26,7 +26,7 @@ class AuthorSubmitStep5Form extends AuthorSubmitForm {
 	 * Constructor.
 	 */
 	function AuthorSubmitStep5Form(&$article, &$journal) {
-		parent::AuthorSubmitForm($article, 5, $journal);
+		parent::__construct($article, 5, $journal);
 
 		$this->addCheck(new FormValidatorCustom($this, 'qualifyForWaiver', 'optional', 'author.submit.mustEnterWaiverReason', array(&$this, 'checkWaiverReason')));
 	}

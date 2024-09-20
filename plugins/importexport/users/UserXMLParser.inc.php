@@ -39,7 +39,7 @@ class UserXMLParser {
 	 * Constructor.
 	 * @param $journalId int assumed to be a valid journal ID
 	 */
-	function UserXMLParser($journalId) {
+	function __construct($journalId) {
 		$this->parser = new XMLParser();
 		$this->journalId = $journalId;
 	}
@@ -391,7 +391,7 @@ class ImportedUser extends User {
 	 */
 	function ImportedUser() {
 		$this->roles = array();
-		parent::User();
+		parent::__construct();
 	}
 
 	/**
