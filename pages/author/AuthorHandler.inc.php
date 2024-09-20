@@ -31,7 +31,7 @@ class AuthorHandler extends Handler {
 	/**
 	 * Display journal author index page.
 	 */
-	function index($args) {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 		
@@ -108,7 +108,7 @@ class AuthorHandler extends Handler {
 	 * Validate that user has author permissions in the selected journal.
 	 * Redirects to user index page if not properly authenticated.
 	 */
-	function validate($reason = null) {
+	function validate($reason = null, $request = null) {
 		$this->addCheck(new HandlerValidatorRoles($this, true, $reason, null, array(ROLE_ID_AUTHOR)));		
 		return parent::validate();
 	}

@@ -30,7 +30,7 @@ class SearchHandler extends Handler {
 	/**
 	 * Show the advanced form
 	 */
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		$this->advanced();
 	}

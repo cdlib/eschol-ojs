@@ -28,7 +28,7 @@ class InformationHandler extends Handler {
 	/**
 	 * Display the information page for the journal..
 	 */
-	function index($args) {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 		$journal = Request::getJournal();

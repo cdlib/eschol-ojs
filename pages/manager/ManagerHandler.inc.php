@@ -32,7 +32,7 @@ class ManagerHandler extends Handler {
 	/**
 	 * Display journal management index page.
 	 */
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 		$journal =& Request::getJournal();

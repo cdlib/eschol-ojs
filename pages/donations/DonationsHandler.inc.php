@@ -29,7 +29,7 @@ class DonationsHandler extends Handler {
 	function DonationsHandler() {
 		parent::__construct();
 	}
-	function index( $args ) {
+	function index($args, &$request) {
 		import('classes.payment.ojs.OJSPaymentManager');
 		$paymentManager =& OJSPaymentManager::getManager();
 		$journal =& Request::getJournal();

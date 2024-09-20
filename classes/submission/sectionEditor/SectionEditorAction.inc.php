@@ -2428,7 +2428,7 @@ class SectionEditorAction extends Action {
 	 * @param $parentPage name of submission component
 	 * @return array
 	 */
-	function submissionBreadcrumb($articleId, $parentPage, $section) {
+	static function submissionBreadcrumb($articleId, $parentPage, $section) {
 		$breadcrumb = array();
 		if ($articleId) {
 			$breadcrumb[] = array(Request::url(null, $section, 'submission', $articleId), "#$articleId", true);

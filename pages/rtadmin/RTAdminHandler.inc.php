@@ -34,7 +34,7 @@ class RTAdminHandler extends Handler {
 	 * If no journal is selected, display list of journals.
 	 * Otherwise, display the index page for the selected journal.
 	 */
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		$journal = Request::getJournal();
 		$user = Request::getUser();

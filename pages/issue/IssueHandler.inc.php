@@ -32,7 +32,7 @@ class IssueHandler extends Handler {
 	/**
 	 * Display about index page.
 	 */
-	function index($args) {
+	function index($args, &$request) {
 		$this->current();
 	}
 

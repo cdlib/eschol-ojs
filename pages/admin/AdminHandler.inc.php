@@ -31,7 +31,7 @@ class AdminHandler extends Handler {
 	/**
 	 * Display site admin index page.
 	 */
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 

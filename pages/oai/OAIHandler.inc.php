@@ -28,7 +28,7 @@ class OAIHandler extends Handler {
 		parent::__construct();
 	}
 
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		PluginRegistry::loadCategory('oaiMetadataFormats', true);
 

@@ -25,7 +25,7 @@ class SitemapHandler extends Handler {
 	 * Generate an XML sitemap for webcrawlers
 	 * Creates a sitemap index if in site context, else creates a sitemap
 	 */
-	function index() {
+	function index($args, &$request) {
 		if (Request::getRequestedJournalPath() == 'index') {
 			$doc = SitemapHandler::createSitemapIndex();
 			header("Content-Type: application/xml");

@@ -21,7 +21,7 @@ class WebFeedBlockPlugin extends BlockPlugin {
 	/** @var $parentPluginName string Name of parent plugin */
 	var $parentPluginName;
 
-	function WebFeedBlockPlugin($parentPluginName) {
+	function __construct($parentPluginName) {
 		parent::__construct();
 		$this->parentPluginName = $parentPluginName;
 	}

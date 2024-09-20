@@ -28,7 +28,7 @@ class ThesisHandler extends Handler {
 	/**
 	 * Display thesis index page.
 	 */
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 		$journal =& Request::getJournal();

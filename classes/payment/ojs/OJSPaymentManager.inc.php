@@ -29,7 +29,7 @@ define('PAYMENT_TYPE_PUBLICATION',		0x000000007 );
 define('PAYMENT_TYPE_PURCHASE_SUBSCRIPTION',	0x000000008 );
 
 class OJSPaymentManager extends PaymentManager {
-	function &getManager() {
+	static function &getManager() {
 		static $manager;
 		if (!isset($manager)) {
 			$manager = new OJSPaymentManager();

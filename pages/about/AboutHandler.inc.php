@@ -28,7 +28,7 @@ class AboutHandler extends Handler {
 	/**
 	 * Display about index page.
 	 */
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 

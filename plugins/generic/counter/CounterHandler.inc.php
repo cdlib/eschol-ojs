@@ -30,7 +30,7 @@ class CounterHandler extends Handler {
 	/**
 	 * Display the main log analyzer page.
 	 */
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 		$plugin =& $this->plugin;

@@ -36,7 +36,7 @@ class CustomLocaleHandler extends Handler {
 		$this->plugin =& $plugin;		
 	}
 
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		$plugin =& $this->plugin;
 		$this->setupTemplate($plugin, false);

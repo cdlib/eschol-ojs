@@ -31,7 +31,7 @@ class LayoutEditorHandler extends Handler {
 	/**
 	 * Display layout editor index page.
 	 */
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 

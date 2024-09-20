@@ -32,7 +32,7 @@ class ProofreaderHandler extends Handler {
 	/**
 	 * Display proofreader index page.
 	 */
-	function index($args) {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 

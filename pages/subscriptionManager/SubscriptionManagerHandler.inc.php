@@ -27,7 +27,7 @@ class SubscriptionManagerHandler extends Handler {
 		$this->addCheck(new HandlerValidatorRoles($this, true, null, null, array(ROLE_ID_SUBSCRIPTION_MANAGER)));
 	}
 
-	function index() {
+	function index($args, &$request) {
 		$this->subscriptionsSummary();
 	}
 

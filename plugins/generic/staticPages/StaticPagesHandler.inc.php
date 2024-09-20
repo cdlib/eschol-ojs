@@ -16,7 +16,7 @@
 import('classes.handler.Handler');
 
 class StaticPagesHandler extends Handler {
-	function index( $args ) {
+	function index($args, &$request) {
 		Request::redirect(null, null, 'view', Request::getRequestedOp());
 	}
 

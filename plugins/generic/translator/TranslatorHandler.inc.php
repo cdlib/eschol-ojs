@@ -36,7 +36,7 @@ class TranslatorHandler extends Handler {
 		return 'locale/' . $locale . '/emailTemplates.xml';
 	}
 
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		$plugin =& $this->plugin;
 		$this->setupTemplate(false);

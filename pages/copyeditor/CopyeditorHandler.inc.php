@@ -28,7 +28,7 @@ class CopyeditorHandler extends Handler {
 	/**
 	 * Display copyeditor index page.
 	 */
-	function index($args) {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 

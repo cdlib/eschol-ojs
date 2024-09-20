@@ -42,7 +42,7 @@ class SectionEditorHandler extends Handler {
 	/**
 	 * Display section editor index page.
 	 */
-	function index($args) {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 
