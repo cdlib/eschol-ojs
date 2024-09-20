@@ -12,3 +12,13 @@ files
 ojs_db_connect.php
 eschol/utilities/reports/*.csv
 *.swp
+vendor
+composer.json
+composer.lock
+rector.php
+plugins/generic/._ojs-janeway
+plugins/generic/janeway/
+plugins/generic/journalTransporter/
+plugins/generic/ojs-janeway/
+plugins/importexport/cdl-import-ojs-plugin/
+plugins/janeway-2.3.6_test/
