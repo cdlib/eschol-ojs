@@ -40,7 +40,7 @@ class Application extends PKPApplication {
 		return 1;
 	}
 
-	function getContextList() {
+	static function getContextList() {
 		return array('journal');
 	}
 	/**
