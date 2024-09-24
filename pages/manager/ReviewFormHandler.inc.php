@@ -19,7 +19,7 @@ class ReviewFormHandler extends ManagerHandler {
 	/**
 	 * Constructor
 	 **/
-	function ReviewFormHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

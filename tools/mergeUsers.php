@@ -29,7 +29,7 @@ class mergeUsers extends CommandLineTool {
 	 * Constructor.
 	 * @param $argv array command-line arguments
 	 */
-	function mergeUsers($argv = array()) {
+	function __construct($argv = array()) {
 		parent::__construct($argv);
 
 		if (!isset($this->argv[0]) || !isset($this->argv[1]) ) {

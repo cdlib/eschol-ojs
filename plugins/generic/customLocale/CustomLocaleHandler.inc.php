@@ -26,7 +26,7 @@ class CustomLocaleHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function CustomLocaleHandler($parentPluginName) {
+	function __construct($parentPluginName) {
 		parent::__construct();
 
 		$this->addCheck(new HandlerValidatorJournal($this));

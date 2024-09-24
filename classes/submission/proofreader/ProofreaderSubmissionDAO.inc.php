@@ -29,7 +29,7 @@ class ProofreaderSubmissionDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function ProofreaderSubmissionDAO() {
+	function __construct() {
 		parent::__construct();
 
 		$this->articleDao =& DAORegistry::getDAO('ArticleDAO');

@@ -26,7 +26,7 @@ class SubmissionLayoutHandler extends LayoutEditorHandler {
 	/**
 	 * Constructor
 	 **/
-	function SubmissionLayoutHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

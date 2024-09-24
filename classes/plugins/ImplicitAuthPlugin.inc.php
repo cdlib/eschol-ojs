@@ -20,7 +20,7 @@
 import('classes.plugins.Plugin');
 
 class ImplicitAuthPlugin extends Plugin {
-	function ImplicitAuthPlugin() {
+	function __construct() {
 		parent::__construct();
 	}
 

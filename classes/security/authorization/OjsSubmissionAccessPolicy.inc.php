@@ -22,7 +22,7 @@ class OjsSubmissionAccessPolicy extends JournalPolicy {
 	 * @param $roleAssignments array
 	 * @param $submissionParameterName string
 	 */
-	function OjsSubmissionAccessPolicy(&$request, &$args, $roleAssignments, $submissionParameterName = 'articleId') {
+	function __construct(&$request, &$args, $roleAssignments, $submissionParameterName = 'articleId') {
 		parent::__construct($request);
 
 		// Create a "permit overrides" policy set that specifies

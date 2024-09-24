@@ -32,7 +32,7 @@ class StaticPagesEditForm extends Form {
 	 * Constructor
 	 * @param $journalId int
 	 */
-	function StaticPagesEditForm(&$plugin, $journalId, $staticPageId = null) {
+	function __construct(&$plugin, $journalId, $staticPageId = null) {
 
 		parent::__construct($plugin->getTemplatePath() . 'editStaticPageForm.tpl');
 

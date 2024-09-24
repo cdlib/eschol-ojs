@@ -30,7 +30,7 @@ class SubmissionEditHandler extends SectionEditorHandler {
 	/**
 	 * Constructor
 	 **/
-	function SubmissionEditHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

@@ -20,7 +20,7 @@ class PluginHandler extends ManagerHandler {
 	/**
 	 * Constructor
 	 **/
-	function PluginHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 
@@ -97,7 +97,7 @@ class PluginHandler extends ManagerHandler {
 	 * Set the page's breadcrumbs
 	 * @param $subclass boolean
 	 */
-	function setBreadcrumbs($subclass = false) {
+	static function setBreadcrumbs($subclass = false) {
 		$templateMgr =& TemplateManager::getManager();
 		$pageCrumbs = array(
 			array(

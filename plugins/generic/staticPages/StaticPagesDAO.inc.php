@@ -20,7 +20,7 @@ class StaticPagesDAO extends DAO {
 	/**
 	 * Constructor
 	 */
-	function StaticPagesDAO($parentPluginName) {
+	function __construct($parentPluginName) {
 		$this->parentPluginName = $parentPluginName;
 		parent::__construct();
 	}

@@ -33,7 +33,7 @@ class MetadataForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function MetadataForm($article, $journal) {
+	function __construct($article, $journal) {
 		$roleDao =& DAORegistry::getDAO('RoleDAO');
 		$signoffDao =& DAORegistry::getDAO('SignoffDAO');
 

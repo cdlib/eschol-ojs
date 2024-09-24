@@ -21,7 +21,7 @@ class CopyeditorAction extends Action {
 	/**
 	 * Constructor.
 	 */
-	function CopyeditorAction() {
+	function __construct() {
 
 	}
 
@@ -33,7 +33,7 @@ class CopyeditorAction extends Action {
 	 * Copyeditor completes initial copyedit.
 	 * @param $copyeditorSubmission object
 	 */
-	function completeCopyedit($copyeditorSubmission, $send = false) {
+	static function completeCopyedit($copyeditorSubmission, $send = false) {
 		$copyeditorSubmissionDao =& DAORegistry::getDAO('CopyeditorSubmissionDAO');
 		$signoffDao =& DAORegistry::getDAO('SignoffDAO');
 		$userDao =& DAORegistry::getDAO('UserDAO');
@@ -99,7 +99,7 @@ class CopyeditorAction extends Action {
 	 * Copyeditor completes author copyedit.
 	 * @param $copyeditorSubmission object
 	 */
-	function completeAuthorCopyedit($copyeditorSubmission) {
+	static function completeAuthorCopyedit($copyeditorSubmission) {
 		$signoffDao =& DAORegistry::getDAO('SignoffDAO');
 		$userDao =& DAORegistry::getDAO('UserDAO');
 		$journal =& Request::getJournal();
@@ -129,7 +129,7 @@ class CopyeditorAction extends Action {
 	 * Copyeditor completes final copyedit.
 	 * @param $copyeditorSubmission object
 	 */
-	function completeFinalCopyedit($copyeditorSubmission, $send = false) {
+	static function completeFinalCopyedit($copyeditorSubmission, $send = false) {
 		$copyeditorSubmissionDao =& DAORegistry::getDAO('CopyeditorSubmissionDAO');
 		$signoffDao =& DAORegistry::getDAO('SignoffDAO');
 		$userDao =& DAORegistry::getDAO('UserDAO');
@@ -207,7 +207,7 @@ class CopyeditorAction extends Action {
 	/**
 	 * Set that the copyedit is underway.
 	 */
-	function copyeditUnderway(&$copyeditorSubmission) {
+	static function copyeditUnderway(&$copyeditorSubmission) {
 		if (!HookRegistry::call('CopyeditorAction::copyeditUnderway', array(&$copyeditorSubmission))) {
 			$copyeditorSubmissionDao =& DAORegistry::getDAO('CopyeditorSubmissionDAO');
 			$signoffDao =& DAORegistry::getDAO('SignoffDAO');
@@ -240,7 +240,7 @@ class CopyeditorAction extends Action {
 	 * Upload the copyedited version of an article.
 	 * @param $copyeditorSubmission object
 	 */
-	function uploadCopyeditVersion($copyeditorSubmission, $copyeditStage) {
+	static function uploadCopyeditVersion($copyeditorSubmission, $copyeditStage) {
 		import('classes.file.ArticleFileManager');
 		$articleFileDao =& DAORegistry::getDAO('ArticleFileDAO');
 		$copyeditorSubmissionDao =& DAORegistry::getDAO('CopyeditorSubmissionDAO');
@@ -303,7 +303,7 @@ class CopyeditorAction extends Action {
 	 * View layout comments.
 	 * @param $article object
 	 */
-	function viewLayoutComments($article) {
+	static function viewLayoutComments($article) {
 		if (!HookRegistry::call('CopyeditorAction::viewLayoutComments', array(&$article))) {
 			import('classes.submission.form.comment.LayoutCommentForm');
 
@@ -317,7 +317,7 @@ class CopyeditorAction extends Action {
 	 * Post layout comment.
 	 * @param $article object
 	 */
-	function postLayoutComment($article, $emailComment) {
+	static function postLayoutComment($article, $emailComment) {
 		if (!HookRegistry::call('CopyeditorAction::postLayoutComment', array(&$article, &$emailComment))) {
 			import('classes.submission.form.comment.LayoutCommentForm');
 
@@ -355,7 +355,7 @@ class CopyeditorAction extends Action {
 	 * View copyedit comments.
 	 * @param $article object
 	 */
-	function viewCopyeditComments($article) {
+	static function viewCopyeditComments($article) {
 		if (!HookRegistry::call('CopyeditorAction::viewCopyeditComments', array(&$article))) {
 			import('classes.submission.form.comment.CopyeditCommentForm');
 
@@ -369,7 +369,7 @@ class CopyeditorAction extends Action {
 	 * Post copyedit comment.
 	 * @param $article object
 	 */
-	function postCopyeditComment($article, $emailComment) {
+	static function postCopyeditComment($article, $emailComment) {
 		if (!HookRegistry::call('CopyeditorAction::postCopyeditComment', array(&$article, &$emailComment))) {
 			import('classes.submission.form.comment.CopyeditCommentForm');
 
@@ -413,7 +413,7 @@ class CopyeditorAction extends Action {
 	 * @param $fileId int
 	 * @param $revision int
 	 */
-	function downloadCopyeditorFile($copyeditorSubmission, $fileId, $revision = null) {
+	static function downloadCopyeditorFile($copyeditorSubmission, $fileId, $revision = null) {
 		$copyeditorSubmissionDao =& DAORegistry::getDAO('CopyeditorSubmissionDAO');
 
 		$canDownload = false;

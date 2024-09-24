@@ -25,7 +25,7 @@ class ProofreaderAction extends Action {
 	/**
 	 * Select a proofreader for submission
 	 */
-	function selectProofreader($userId, $article) {
+	static function selectProofreader($userId, $article) {
 		$signoffDao =& DAORegistry::getDAO('SignoffDAO');
 		$proofSignoff = $signoffDao->build('SIGNOFF_PROOFREADING_PROOFREADER', ASSOC_TYPE_ARTICLE, $article->getId());
 
@@ -51,7 +51,7 @@ class ProofreaderAction extends Action {
 	 * @param $actionPath string - form action
 	 * @return true iff ready for a redirect
 	 */
-	function proofreadEmail($articleId, $mailType, $actionPath = '') {
+	static function proofreadEmail($articleId, $mailType, $actionPath = '') {
 		$signoffDao =& DAORegistry::getDAO('SignoffDAO');
 		$sectionEditorSubmissionDao =& DAORegistry::getDAO('SectionEditorSubmissionDAO');
 		$sectionEditorSubmission =& $sectionEditorSubmissionDao->getSectionEditorSubmission($articleId);
@@ -372,7 +372,7 @@ class ProofreaderAction extends Action {
 	 * @param $articleId int
 	 * @param $signoffType int
 	 */
-	function proofreadingUnderway(&$submission, $signoffType) {
+	static function proofreadingUnderway(&$submission, $signoffType) {
 		$signoffDao =& DAORegistry::getDAO('SignoffDAO');
 		$signoff = $signoffDao->build($signoffType, ASSOC_TYPE_ARTICLE, $submission->getArticleId());
 
@@ -393,7 +393,7 @@ class ProofreaderAction extends Action {
 	 * @param $fileId int
 	 * @param $revision int
 	 */
-	function downloadProofreaderFile($submission, $fileId, $revision = null) {
+	static function downloadProofreaderFile($submission, $fileId, $revision = null) {
 		$canDownload = false;
 
 		// Proofreaders have access to:
@@ -429,7 +429,7 @@ class ProofreaderAction extends Action {
 	 * View proofread comments.
 	 * @param $article object
 	 */
-	function viewProofreadComments($article) {
+	static function viewProofreadComments($article) {
 		if (!HookRegistry::call('ProofreaderAction::viewProofreadComments', array(&$article))) {
 			import('classes.submission.form.comment.ProofreadCommentForm');
 
@@ -444,7 +444,7 @@ class ProofreaderAction extends Action {
 	 * @param $article object
 	 * @param $emailComment boolean
 	 */
-	function postProofreadComment($article, $emailComment) {
+	static function postProofreadComment($article, $emailComment) {
 		if (!HookRegistry::call('ProofreaderAction::postProofreadComment', array(&$article, &$emailComment))) {
 			import('classes.submission.form.comment.ProofreadCommentForm');
 
@@ -482,7 +482,7 @@ class ProofreaderAction extends Action {
 	 * View layout comments.
 	 * @param $article object
 	 */
-	function viewLayoutComments($article) {
+	static function viewLayoutComments($article) {
 		if (!HookRegistry::call('ProofreaderAction::viewLayoutComments', array(&$article))) {
 			import('classes.submission.form.comment.LayoutCommentForm');
 
@@ -497,7 +497,7 @@ class ProofreaderAction extends Action {
 	 * @param $article object
 	 * @param $emailComment boolean
 	 */
-	function postLayoutComment($article, $emailComment) {
+	static function postLayoutComment($article, $emailComment) {
 		if (!HookRegistry::call('ProofreaderAction::postLayoutComment', array(&$article, &$emailComment))) {
 			import('classes.submission.form.comment.LayoutCommentForm');
 

@@ -21,7 +21,7 @@ class InformationHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function InformationHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

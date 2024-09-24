@@ -37,7 +37,7 @@ class AuthorSubmitForm extends Form {
 	 * @param $article object
 	 * @param $step int
 	 */
-	function AuthorSubmitForm(&$article, $step, &$journal) {
+	function __construct(&$article, $step, &$journal) {
 		// Provide available submission languages. (Convert the array
 		// of locale symbolic names xx_XX into an associative array
 		// of symbolic names => readable names.)
@@ -103,7 +103,7 @@ class AuthorSubmitForm extends Form {
 	 * @param $article object
 	 * @return array of section editors
 	 */
-	function assignEditors(&$article) {
+	static function assignEditors(&$article) {
 		$sectionId = $article->getSectionId();
 		$journal =& Request::getJournal();
 

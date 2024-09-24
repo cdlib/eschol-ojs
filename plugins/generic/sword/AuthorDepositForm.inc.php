@@ -27,7 +27,7 @@ class AuthorDepositForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function AuthorDepositForm(&$swordPlugin, &$article) {
+	function __construct(&$swordPlugin, &$article) {
 		parent::__construct($swordPlugin->getTemplatePath() . '/authorDepositForm.tpl');
 
 		$this->swordPlugin =& $swordPlugin;

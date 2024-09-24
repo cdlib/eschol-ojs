@@ -33,7 +33,7 @@ class ArticleHandler extends Handler {
 	 * Constructor
 	 * @param $request Request
 	 */
-	function ArticleHandler(&$request) {
+	function __construct(&$request) {
 		parent::__construct($request);
 		$router =& $request->getRouter();
 

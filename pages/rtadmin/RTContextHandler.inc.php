@@ -22,7 +22,7 @@ class RTContextHandler extends RTAdminHandler {
 	/**
 	 * Constructor
 	 **/
-	function RTContextHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

@@ -38,7 +38,7 @@ class AuthorSubmission extends Article {
 	/**
 	 * Constructor.
 	 */
-	function AuthorSubmission() {
+	function __construct() {
 		parent::__construct();
 		$this->reviewAssignments = array();
 	}

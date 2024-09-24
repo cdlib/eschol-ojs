@@ -40,7 +40,7 @@ class ArticleSearch {
 	 * @param $query
 	 * @return array of the form ('+' => <required>, '' => <optional>, '-' => excluded)
 	 */
-	function parseQuery($query) {
+	static function parseQuery($query) {
 		$count = preg_match_all('/(\+|\-|)("[^"]+"|\(|\)|[^\s\)]+)/', $query, $matches);
 		$pos = 0;
 		$keywords = ArticleSearch::_parseQuery($matches[1], $matches[2], $pos, $count);
@@ -51,7 +51,7 @@ class ArticleSearch {
 	 * Query parsing helper routine.
 	 * Returned structure is based on that used by the Search::QueryParser Perl module.
 	 */
-	function _parseQuery($signTokens, $tokens, &$pos, $total) {
+	static function _parseQuery($signTokens, $tokens, &$pos, $total) {
 		$return = array('+' => array(), '' => array(), '-' => array());
 		$postBool = $preBool = '';
 
@@ -99,7 +99,7 @@ class ArticleSearch {
 	 * See implementation of retrieveResults for a description of this
 	 * function.
 	 */
-	function &_getMergedArray(&$journal, &$keywords, $publishedFrom, $publishedTo, &$resultCount) {
+	static function &_getMergedArray(&$journal, &$keywords, $publishedFrom, $publishedTo, &$resultCount) {
 		$resultsPerKeyword = Config::getVar('search', 'results_per_keyword');
 		$resultCacheHours = Config::getVar('search', 'result_cache_hours');
 		if (!is_numeric($resultsPerKeyword)) $resultsPerKeyword = 100;
@@ -123,7 +123,7 @@ class ArticleSearch {
 	/**
 	 * Recursive helper for _getMergedArray.
 	 */
-	function &_getMergedKeywordResults(&$journal, &$keyword, $type, $publishedFrom, $publishedTo, $resultsPerKeyword, $resultCacheHours) {
+	static function &_getMergedKeywordResults(&$journal, &$keyword, $type, $publishedFrom, $publishedTo, $resultsPerKeyword, $resultCacheHours) {
 		$mergedResults = null;
 
 		if (isset($keyword['type'])) {
@@ -177,7 +177,7 @@ class ArticleSearch {
 	/**
 	 * Recursive helper for _getMergedArray.
 	 */
-	function &_getMergedPhraseResults(&$journal, &$phrase, $type, $publishedFrom, $publishedTo, $resultsPerKeyword, $resultCacheHours) {
+	static function &_getMergedPhraseResults(&$journal, &$phrase, $type, $publishedFrom, $publishedTo, $resultsPerKeyword, $resultCacheHours) {
 		if (isset($phrase['+'])) {
 			$mergedResults =& ArticleSearch::_getMergedKeywordResults($journal, $phrase, $type, $publishedFrom, $publishedTo, $resultsPerKeyword, $resultCacheHours);
 			return $mergedResults;
@@ -210,7 +210,7 @@ class ArticleSearch {
 	 * See implementation of retrieveResults for a description of this
 	 * function.
 	 */
-	function &_getSparseArray(&$mergedResults, $resultCount) {
+	static function &_getSparseArray(&$mergedResults, $resultCount) {
 		$results = array();
 		$i = 0;
 		foreach ($mergedResults as $articleId => $count) {
@@ -227,7 +227,7 @@ class ArticleSearch {
 	 * Note that this function is also called externally to fetch
 	 * results for the title index, and possibly elsewhere.
 	 */
-	function &formatResults(&$results) {
+	static function &formatResults(&$results) {
 		$articleDao =& DAORegistry::getDAO('ArticleDAO');
 		$publishedArticleDao =& DAORegistry::getDAO('PublishedArticleDAO');
 		$issueDao =& DAORegistry::getDAO('IssueDAO');
@@ -301,7 +301,7 @@ class ArticleSearch {
 	 * @param $publishedTo object Search-to date
 	 * @param $rangeInfo Information on the range of results to return
 	 */
-	function &retrieveResults(&$journal, &$keywords, $publishedFrom = null, $publishedTo = null, $rangeInfo = null) {
+	static function &retrieveResults(&$journal, &$keywords, $publishedFrom = null, $publishedTo = null, $rangeInfo = null) {
 		// Fetch all the results from all the keywords into one array
 		// (mergedResults), where mergedResults[article_id]
 		// = sum of all the occurences for all keywords associated with

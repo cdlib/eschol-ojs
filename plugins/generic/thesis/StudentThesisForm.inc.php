@@ -36,7 +36,7 @@ class StudentThesisForm extends Form {
 	 * @param $parentPluginName string Name of parent plugin
 	 * @param $thesisId int leave as default for new thesis
 	 */
-	function StudentThesisForm($parentPluginName, $thesisId = null) {
+	function __construct($parentPluginName, $thesisId = null) {
 		$journal =& Request::getJournal();
 		$journalId = $journal->getId();
 		$this->parentPluginName = $parentPluginName;

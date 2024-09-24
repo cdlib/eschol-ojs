@@ -36,7 +36,7 @@ class AuthorSubmitSuppFileForm extends Form {
 	 * @param $journal object
 	 * @param $suppFileId int (optional)
 	 */
-	function AuthorSubmitSuppFileForm(&$article, &$journal, $suppFileId = null) {
+	function __construct(&$article, &$journal, $suppFileId = null) {
 		$supportedSubmissionLocales = $journal->getSetting('supportedSubmissionLocales');
 		if (empty($supportedSubmissionLocales)) $supportedSubmissionLocales = array($journal->getPrimaryLocale());
 

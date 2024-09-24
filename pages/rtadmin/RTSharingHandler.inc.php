@@ -20,7 +20,7 @@ import('pages.rtadmin.RTAdminHandler');
 import('classes.rt.ojs.SharingRT');
 
 class RTSharingHandler {
-	function settings() {
+	static function settings() {
 		$this->validate();
 		$journal = Request::getJournal();
 		if ($journal) {
@@ -50,7 +50,7 @@ class RTSharingHandler {
 		}
 	}
 
-	function saveSettings() {
+	static function saveSettings() {
 		$this->validate();
 
 		$journal = Request::getJournal();

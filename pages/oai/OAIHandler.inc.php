@@ -24,7 +24,7 @@ class OAIHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function OAIHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

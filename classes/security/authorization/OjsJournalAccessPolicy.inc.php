@@ -19,7 +19,7 @@ class OjsJournalAccessPolicy extends JournalPolicy {
 	 * @param $request PKPRequest
 	 * @param $roleAssignments array
 	 */
-	function OjsJournalAccessPolicy(&$request, $roleAssignments) {
+	function __construct(&$request, $roleAssignments) {
 		parent::__construct($request);
 
 		// On journal level we don't have role-specific conditions

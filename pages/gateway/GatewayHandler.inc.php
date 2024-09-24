@@ -21,7 +21,7 @@ class GatewayHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function GatewayHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

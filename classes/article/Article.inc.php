@@ -47,7 +47,7 @@ class Article extends Submission {
 	/**
 	 * Constructor.
 	 */
-	function Article() {
+	function __construct() {
 		parent::__construct();
 	}
 
@@ -454,7 +454,7 @@ class Article extends Submission {
 	 * Get an associative array matching RT comments status codes with locale strings.
 	 * @return array comments status => localeString
 	 */
-	function &getCommentsStatusOptions() {
+	static function &getCommentsStatusOptions() {
 		static $commentsStatusOptions = array(
 			COMMENTS_SECTION_DEFAULT => 'article.comments.sectionDefault',
 			COMMENTS_DISABLE => 'article.comments.disable',

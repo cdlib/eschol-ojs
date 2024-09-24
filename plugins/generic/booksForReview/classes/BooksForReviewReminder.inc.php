@@ -19,7 +19,7 @@ class BooksForReviewReminder extends ScheduledTask {
 	/**
 	 * Constructor.
 	 */
-	function BooksForReviewReminder() {
+	function __construct() {
 		$this->ScheduledTask();
 	}
 

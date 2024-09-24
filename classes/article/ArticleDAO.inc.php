@@ -38,7 +38,7 @@ class ArticleDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function ArticleDAO() {
+	function __construct() {
 		parent::__construct();
 		$this->authorDao =& DAORegistry::getDAO('AuthorDAO');
 	}

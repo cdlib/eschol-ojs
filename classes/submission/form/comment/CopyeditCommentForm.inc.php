@@ -24,7 +24,7 @@ class CopyeditCommentForm extends CommentForm {
 	 * Constructor.
 	 * @param $article object
 	 */
-	function CopyeditCommentForm($article, $roleId) {
+	function __construct($article, $roleId) {
 		parent::__construct($article, COMMENT_TYPE_COPYEDIT, $roleId, $article->getId());
 	}
 

@@ -31,7 +31,7 @@ class JournalSetupForm extends Form {
 	 * @param $step the step number
 	 * @param $settings an associative array with the setting names as keys and associated types as values
 	 */
-	function JournalSetupForm($step, $settings) {
+	function __construct($step, $settings) {
 		parent::__construct(sprintf('manager/setup/step%d.tpl', $step));
 		$this->addCheck(new FormValidatorPost($this));
 		$this->step = $step;

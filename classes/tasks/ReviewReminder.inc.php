@@ -22,7 +22,7 @@ class ReviewReminder extends ScheduledTask {
 	/**
 	 * Constructor.
 	 */
-	function ReviewReminder() {
+	function __construct() {
 		$this->ScheduledTask();
 	}
 

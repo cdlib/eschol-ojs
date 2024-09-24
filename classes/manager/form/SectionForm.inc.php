@@ -41,7 +41,7 @@ class SectionForm extends Form {
 	 * Constructor.
 	 * @param $journalId int omit for a new journal
 	 */
-	function SectionForm($sectionId = null) {
+	function __construct($sectionId = null) {
 		parent::__construct('manager/sections/sectionForm.tpl');
 
 		$journal =& Request::getJournal();

@@ -21,7 +21,7 @@
 import('classes.i18n.Locale');
 
 class SharingRT {
-	function getLanguages() {
+	static function getLanguages() {
 		return array (
 			'zh' => 'Chinese',
 			'da' => 'Danish',
@@ -43,7 +43,7 @@ class SharingRT {
 		);
 	}
 
-	function getBtnStyles() {
+	static function getBtnStyles() {
 		return array(
 			'share' => array (
 				'img' => 'lg-share-%lang%.gif',
@@ -84,7 +84,7 @@ class SharingRT {
 	 * Generate the information for the HTML tag for the sharing button
 	 * @return array(url, width, height)
 	 */
-	function sharingButtonImage($journalRt) {
+	static function sharingButtonImage($journalRt) {
 		$btnStyle = $journalRt->getSharingButtonStyle();
 		if ($journalRt->getSharingLanguage() != 'en') {
 			if ($btnStyle == 'bookmark' || $btnStyle == 'addthis' || $btnStyle == 'bookmark-sm') {
@@ -115,7 +115,7 @@ class SharingRT {
 	 * @return string
 	 * @param $default string
 	 */
-	function sharingLocale($default) {
+	static function sharingLocale($default) {
 		// getLocale() returns a string like 'en_US'.
 		$locale = \OjsLocale::getLocale();
 		$lang = substr($locale, 0, 2);

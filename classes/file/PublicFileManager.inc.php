@@ -23,7 +23,7 @@ class PublicFileManager extends PKPPublicFileManager {
 	 * @param $journalId int
 	 * @return string
 	 */
-	function getJournalFilesPath($journalId) {
+	static function getJournalFilesPath($journalId) {
 		return Config::getVar('files', 'public_files_dir') . '/journals/' . $journalId;
 	}
 

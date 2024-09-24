@@ -20,7 +20,7 @@ class EmailHandler extends UserHandler {
 	/**
 	 * Constructor
 	 **/
-	function EmailHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 	

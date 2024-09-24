@@ -34,7 +34,7 @@ class DepositPointForm extends Form {
 	 * @param $journalId int
 	 * @param $depositPointId int
 	 */
-	function DepositPointForm(&$plugin, $journalId, $depositPointId) {
+	function __construct(&$plugin, $journalId, $depositPointId) {
 		$this->journalId = $journalId;
 		$this->depositPointId = $depositPointId;
 		$this->plugin =& $plugin;

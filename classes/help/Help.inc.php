@@ -22,7 +22,7 @@ class Help extends PKPHelp {
 	/**
 	 * Constructor.
 	 */
-	function Help() {
+	function __construct() {
 		parent::__construct();
 		import('classes.help.OJSHelpMappingFile');
 		$mainMappingFile = new OJSHelpMappingFile();

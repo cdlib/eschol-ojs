@@ -28,7 +28,7 @@ class LanguageSettingsForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function LanguageSettingsForm() {
+	function __construct() {
 		parent::__construct('manager/languageSettings.tpl');
 
 		$this->settings = array(

@@ -31,21 +31,21 @@ class PubMedExportDom {
 	 * http://www.ncbi.nlm.nih.gov/entrez/query/static/spec.html
 	 */ 
 
-	function &generatePubMedDom() {
+	static function &generatePubMedDom() {
 		// create the output XML document in DOM with a root node
 		$doc =& XMLCustomWriter::createDocument('ArticleSet', PUBMED_DTD_ID, PUBMED_DTD_URL);
 
 		return $doc;
 	}
 
-	function &generateArticleSetDom(&$doc) {
+	static function &generateArticleSetDom(&$doc) {
 		$root =& XMLCustomWriter::createElement($doc, 'ArticleSet');
 		XMLCustomWriter::appendChild($doc, $root);
 
 		return $root;
 	}
 
-	function &generateArticleDom(&$doc, &$journal, &$issue, &$section, &$article) {
+	static function &generateArticleDom(&$doc, &$journal, &$issue, &$section, &$article) {
 
 		// register the editor submission DAO for use later
 		$editorSubmissionDao =& DAORegistry::getDAO('EditorSubmissionDAO');
@@ -206,7 +206,7 @@ class PubMedExportDom {
 		return $root;
 	}
 
-	function &generateAuthorDom(&$doc, &$author) {
+	static function &generateAuthorDom(&$doc, &$author) {
 		$root =& XMLCustomWriter::createElement($doc, 'Author');
 
 		XMLCustomWriter::createChildWithText($doc, $root, 'FirstName', ucfirst($author->getFirstName()));
@@ -220,7 +220,7 @@ class PubMedExportDom {
 		return $root;
 	}
 
-	function &generatePubDateDom(&$doc, $pubdate, $pubstatus) {
+	static function &generatePubDateDom(&$doc, $pubdate, $pubstatus) {
 		$root =& XMLCustomWriter::createElement($doc, 'PubDate');
 
 		XMLCustomWriter::setAttribute($root, 'PubStatus', $pubstatus);

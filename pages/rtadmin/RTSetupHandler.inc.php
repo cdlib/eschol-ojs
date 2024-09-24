@@ -22,7 +22,7 @@ class RTSetupHandler extends RTAdminHandler {
 	/**
 	 * Constructor
 	 **/
-	function RTSetupHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

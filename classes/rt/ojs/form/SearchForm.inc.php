@@ -34,7 +34,7 @@ class SearchForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function SearchForm($searchId, $contextId, $versionId) {
+	function __construct($searchId, $contextId, $versionId) {
 		parent::__construct('rtadmin/search.tpl');
 		$this->addCheck(new FormValidatorPost($this));
 

@@ -22,7 +22,7 @@ class RTVersionHandler extends RTAdminHandler {
 	/**
 	 * Constructor
 	 **/
-	function RTVersionHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 	

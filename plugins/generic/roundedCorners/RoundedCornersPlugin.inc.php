@@ -70,7 +70,7 @@ class RoundedCornersPlugin extends GenericPlugin {
 	 * look for the opening and closing divs with a particular $class in the $subject
 	 * Have to count opening and closing divs since regexes are not so good matching opening and closing tags
 	 */
-	function _getDivs($subject, $class) {
+	static function _getDivs($subject, $class) {
 		preg_match_all("/<div[^>]+class\=\"$class\"[^>]*>/is", $subject, $matches, PREG_OFFSET_CAPTURE);
 
 		$matches = $matches[0];

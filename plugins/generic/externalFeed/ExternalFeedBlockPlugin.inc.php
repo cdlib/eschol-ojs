@@ -21,7 +21,7 @@ class ExternalFeedBlockPlugin extends BlockPlugin {
 	/** @var $parentPluginName string Name of parent plugin */
 	var $parentPluginName;
 
-	function ExternalFeedBlockPlugin($parentPluginName) {
+	function __construct($parentPluginName) {
 		$this->parentPluginName = $parentPluginName;
 	}
 

@@ -21,7 +21,7 @@ class OpenAdsBlockPlugin extends BlockPlugin {
 	/** @var $parentPluginName string Name of parent plugin */
 	var $parentPluginName;
 
-	function OpenAdsBlockPlugin($parentPluginName) {
+	function __construct($parentPluginName) {
 		$this->parentPluginName = $parentPluginName;
 		parent::__construct();
 	}

@@ -26,7 +26,7 @@ class DonationsHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function DonationsHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 	function index($args, &$request) {

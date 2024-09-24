@@ -23,7 +23,7 @@ class CounterHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function CounterHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 	
@@ -66,7 +66,7 @@ class CounterHandler extends Handler {
 	/**
 	* Internal function to assign information for the Counter part of a report
 	*/
-	function _assignTemplateCounterXML($templateManager, $begin, $end='') {
+	static function _assignTemplateCounterXML($templateManager, $begin, $end='') {
 		$journal =& Request::getJournal();
 		
 		$counterReportDao =& DAORegistry::getDAO('CounterReportDAO');
@@ -216,7 +216,7 @@ class CounterHandler extends Handler {
 	/**
 	 * Internal function to form some of the CSV columns
 	 */
-	function _formColumns(&$cols, $entries) {
+	static function _formColumns(&$cols, $entries) {
 		$currTotal = '';
 		$htmlTotal = '';
 		$pdfTotal = '';

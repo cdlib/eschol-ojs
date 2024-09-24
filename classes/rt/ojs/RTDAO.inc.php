@@ -108,7 +108,7 @@ class RTDAO extends DAO {
 	 * @param $pagingInfo object DBResultRange (optional)
 	 * @return array RTVersion
 	 */
-	function &getVersions($journalId, $pagingInfo = null) {
+	static function &getVersions($journalId, $pagingInfo = null) {
 		$versions = array();
 
 		$result =& $this->retrieveRange(

@@ -51,7 +51,7 @@ class IssueAction {
 	 * @param $issue
 	 * @return bool
 	 */
-	function subscriptionRequired(&$issue) {
+	static function subscriptionRequired(&$issue) {
 		$currentJournal =& Request::getJournal();
 		if (!$issue) return false;
 		if (!$currentJournal || $currentJournal->getId() !== $issue->getJournalId()) {
@@ -77,7 +77,7 @@ class IssueAction {
 	 * @param $article object
 	 * @return bool
 	 */
-	function allowedPrePublicationAccess(&$journal, &$article) {
+	static function allowedPrePublicationAccess(&$journal, &$article) {
 		$roleDao =& DAORegistry::getDAO('RoleDAO');
 		$user =& Request::getUser();
 		if ($user && $journal) {
@@ -113,7 +113,7 @@ class IssueAction {
 	 * Checks if user has subscription
 	 * @return bool
 	 */
-	function subscribedUser(&$journal, $issueId = null, $articleId = null) {
+	static function subscribedUser(&$journal, $issueId = null, $articleId = null) {
 		$user =& Request::getUser();
 		$subscriptionDao =& DAORegistry::getDAO('IndividualSubscriptionDAO');
 		$publishedArticleDao =& DAORegistry::getDAO('PublishedArticleDAO');
@@ -152,7 +152,7 @@ class IssueAction {
 	 * Checks if remote client domain or ip is allowed
 	 * @return bool
 	 */
-	function subscribedDomain(&$journal, $issueId = null, $articleId = null) {
+	static function subscribedDomain(&$journal, $issueId = null, $articleId = null) {
 		$subscriptionDao =& DAORegistry::getDAO('InstitutionalSubscriptionDAO');
 		$result = false;
 		if (isset($journal)) {
@@ -187,7 +187,7 @@ class IssueAction {
 	 * @param $current bool retrieve current or not
 	 * @param $published bool retrieve published or non-published issues
 	 */
-	function getIssueOptions() {
+	static function getIssueOptions() {
 		$issueOptions = array();
 
 		$journal =& Request::getJournal();

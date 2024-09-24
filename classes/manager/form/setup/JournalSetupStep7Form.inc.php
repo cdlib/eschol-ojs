@@ -18,7 +18,7 @@ class JournalSetupStep7Form extends JournalSetupForm {
         /**
          * Constructor.
          */
-        function JournalSetupStep7Form() {
+        function __construct() {
                 parent::__construct(
                         7,
                         array()

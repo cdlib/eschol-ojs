@@ -32,7 +32,7 @@ class VersionForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function VersionForm($versionId, $journalId) {
+	function __construct($versionId, $journalId) {
 		parent::__construct('rtadmin/version.tpl');
 		$this->addCheck(new FormValidatorPost($this));
 

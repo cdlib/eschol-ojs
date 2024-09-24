@@ -23,7 +23,7 @@ class CustomBlockPlugin extends BlockPlugin {
 	/**
 	 * Constructor
 	 */
-	function CustomBlockPlugin($blockName, $parentPluginName) {
+	function __construct($blockName, $parentPluginName) {
 		$this->blockName = $blockName;
 		$this->parentPluginName = $parentPluginName;
 		parent::__construct();

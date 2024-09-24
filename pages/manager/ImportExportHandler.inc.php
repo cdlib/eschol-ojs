@@ -22,7 +22,7 @@ class ImportExportHandler extends ManagerHandler {
 	/**
 	 * Constructor
 	 **/
-	function ImportExportHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 	function importexport($args) {

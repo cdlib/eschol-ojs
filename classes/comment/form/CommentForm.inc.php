@@ -45,7 +45,7 @@ class CommentForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function CommentForm($commentId, $articleId, $galleyId, $parentId = null) {
+	function __construct($commentId, $articleId, $galleyId, $parentId = null) {
 		parent::__construct('comment/comment.tpl');
 
 		$this->articleId = $articleId;

@@ -26,7 +26,7 @@ class ArticleGalleyDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function ArticleGalleyDAO() {
+	function __construct() {
 		parent::__construct();
 		$this->articleFileDao =& DAORegistry::getDAO('ArticleFileDAO');
 	}

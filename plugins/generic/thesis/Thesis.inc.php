@@ -25,7 +25,7 @@ define('THESIS_APPROVED_DATE_DEFAULT_DAY',	'1');
 
 class Thesis extends DataObject {
 
-	function Thesis() {
+	function __construct() {
 		parent::__construct();
 	}
 

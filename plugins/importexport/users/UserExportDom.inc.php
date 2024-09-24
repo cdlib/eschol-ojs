@@ -21,7 +21,7 @@ define('USERS_DTD_URL', 'http://pkp.sfu.ca/ojs/dtds/users.dtd');
 define('USERS_DTD_ID', '-//PKP/OJS Users XML//EN');
 
 class UserExportDom {
-	function &exportUsers(&$journal, &$users, $allowedRoles = null) {
+	static function &exportUsers(&$journal, &$users, $allowedRoles = null) {
 		$roleDao =& DAORegistry::getDAO('RoleDAO');
 
 		$doc =& XMLCustomWriter::createDocument('users', USERS_DTD_ID, USERS_DTD_URL);

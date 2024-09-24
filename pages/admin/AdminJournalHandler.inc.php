@@ -20,7 +20,7 @@ class AdminJournalHandler extends AdminHandler {
 	/**
 	 * Constructor
 	 **/
-	function AdminJournalHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

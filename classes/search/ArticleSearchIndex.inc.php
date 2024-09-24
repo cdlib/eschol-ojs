@@ -32,7 +32,7 @@ class ArticleSearchIndex {
 	 * @param $text string
 	 * @param $position int
 	 */
-	function indexObjectKeywords($objectId, $text, &$position) {
+	static function indexObjectKeywords($objectId, $text, &$position) {
 		$searchDao =& DAORegistry::getDAO('ArticleSearchDAO');
 		$keywords =& ArticleSearchIndex::filterKeywords($text);
 		for ($i = 0, $count = count($keywords); $i < $count; $i++) {
@@ -49,7 +49,7 @@ class ArticleSearchIndex {
 	 * @param $text string
 	 * @param $assocId int optional
 	 */
-	function updateTextIndex($articleId, $type, $text, $assocId = null) {
+	static function updateTextIndex($articleId, $type, $text, $assocId = null) {
 		$searchDao =& DAORegistry::getDAO('ArticleSearchDAO');
 		$objectId = $searchDao->insertObject($articleId, $type, $assocId);
 		$position = 0;
@@ -62,7 +62,7 @@ class ArticleSearchIndex {
 	 * @param $type int
 	 * @param $fileId int
 	 */
-	function updateFileIndex($articleId, $type, $fileId) {
+	static function updateFileIndex($articleId, $type, $fileId) {
 		import('classes.file.ArticleFileManager');
 		$fileMgr = new ArticleFileManager($articleId);
 		$file =& $fileMgr->getFile($fileId);
@@ -91,7 +91,7 @@ class ArticleSearchIndex {
 	 * @param $type int optional
 	 * @param $assocId int optional
 	 */
-	function deleteTextIndex($articleId, $type = null, $assocId = null) {
+	static function deleteTextIndex($articleId, $type = null, $assocId = null) {
 		$searchDao =& DAORegistry::getDAO('ArticleSearchDAO');
 		return $searchDao->deleteArticleKeywords($articleId, $type, $assocId);
 	}
@@ -102,7 +102,7 @@ class ArticleSearchIndex {
 	 * @param $allowWildcards boolean
 	 * @return array of keywords
 	 */
-	function &filterKeywords($text, $allowWildcards = false) {
+	static function &filterKeywords($text, $allowWildcards = false) {
 		$minLength = Config::getVar('search', 'min_word_length');
 		$stopwords =& ArticleSearchIndex::loadStopwords();
 
@@ -137,7 +137,7 @@ class ArticleSearchIndex {
 	 * FIXME Should this be locale-specific?
 	 * @return array with stopwords as keys
 	 */
-	function &loadStopwords() {
+	static function &loadStopwords() {
 		static $searchStopwords;
 
 		if (!isset($searchStopwords)) {
@@ -153,7 +153,7 @@ class ArticleSearchIndex {
 	 * Index article metadata.
 	 * @param $article Article
 	 */
-	function indexArticleMetadata(&$article) {
+	static function indexArticleMetadata(&$article) {
 		// Build author keywords
 		$authorText = array();
 		$authors = $article->getAuthors();
@@ -189,7 +189,7 @@ class ArticleSearchIndex {
 	 * Index supp file metadata.
 	 * @param $suppFile object
 	 */
-	function indexSuppFileMetadata(&$suppFile) {
+	static function indexSuppFileMetadata(&$suppFile) {
 		// Update search index
 		$articleId = $suppFile->getArticleId();
 		ArticleSearchIndex::updateTextIndex(
@@ -211,7 +211,7 @@ class ArticleSearchIndex {
 	 * Index all article files (supplementary and galley).
 	 * @param $article Article
 	 */
-	function indexArticleFiles(&$article) {
+	static function indexArticleFiles(&$article) {
 		// Index supplementary files
 		$fileDao =& DAORegistry::getDAO('SuppFileDAO');
 		$files =& $fileDao->getSuppFilesByArticle($article->getId());
@@ -236,7 +236,7 @@ class ArticleSearchIndex {
 	/**
 	 * Rebuild the search index for all journals.
 	 */
-	function rebuildIndex($log = false) {
+	static function rebuildIndex($log = false) {
 		// Clear index
 		if ($log) echo 'Clearing index ... ';
 		$searchDao =& DAORegistry::getDAO('ArticleSearchDAO');

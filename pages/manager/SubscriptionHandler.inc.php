@@ -20,7 +20,7 @@ class SubscriptionHandler extends ManagerHandler {
 	/**
 	 * Constructor
 	 **/
-	function SubscriptionHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

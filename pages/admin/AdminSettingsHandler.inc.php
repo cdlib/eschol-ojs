@@ -20,7 +20,7 @@ class AdminSettingsHandler extends AdminHandler {
 	/**
 	 * Constructor
 	 **/
-	function AdminSettingsHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

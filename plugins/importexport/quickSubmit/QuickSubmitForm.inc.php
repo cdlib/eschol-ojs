@@ -21,7 +21,7 @@ class QuickSubmitForm extends Form {
 	 * Constructor
 	 * @param $plugin object
 	 */
-	function QuickSubmitForm(&$plugin) {
+	function __construct(&$plugin) {
 		parent::__construct($plugin->getTemplatePath() . 'index.tpl');
 		$journal =& Request::getJournal();
 

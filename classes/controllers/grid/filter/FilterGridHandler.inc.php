@@ -22,7 +22,7 @@ class FilterGridHandler extends PKPFilterGridHandler {
 	/**
 	 * Constructor
 	 */
-	function FilterGridHandler() {
+	function __construct() {
 		parent::__construct();
 		$this->addRoleAssignment(
 				ROLE_ID_JOURNAL_MANAGER,

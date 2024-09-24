@@ -21,7 +21,7 @@ class ThesisHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function ThesisHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

@@ -21,7 +21,7 @@ class AboutHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function AboutHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

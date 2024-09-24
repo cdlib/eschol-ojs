@@ -25,7 +25,7 @@ class AnnouncementForm extends PKPAnnouncementForm {
 	 * Constructor
 	 * @param announcementId int leave as default for new announcement
 	 */
-	function AnnouncementForm($announcementId = null) {
+	function __construct($announcementId = null) {
 		parent::__construct($announcementId);
 		$journal =& Request::getJournal();
 

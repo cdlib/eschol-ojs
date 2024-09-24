@@ -30,7 +30,7 @@ class GoogleAnalyticsSettingsForm extends Form {
 	 * @param $plugin object
 	 * @param $journalId int
 	 */
-	function GoogleAnalyticsSettingsForm(&$plugin, $journalId) {
+	function __construct(&$plugin, $journalId) {
 		$this->journalId = $journalId;
 		$this->plugin =& $plugin;
 

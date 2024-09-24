@@ -22,7 +22,7 @@ class ReviewAssignment extends PKPReviewAssignment {
 	/**
 	 * Constructor.
 	 */
-	function ReviewAssignment() {
+	function __construct() {
 		parent::__construct();
 	}
 
@@ -53,7 +53,7 @@ class ReviewAssignment extends PKPReviewAssignment {
 	 * (Includes default '' => "Choose One" string.)
 	 * @return array recommendation => localeString
 	 */
-	function &getReviewerRecommendationOptions() {
+	static function &getReviewerRecommendationOptions() {
 		// Bring in reviewer constants
 		import('classes.submission.reviewer.ReviewerSubmission');
 
@@ -73,7 +73,7 @@ class ReviewAssignment extends PKPReviewAssignment {
 	 * Get an associative array matching reviewer rating codes with locale strings.
 	 * @return array recommendation => localeString
 	 */
-	function &getReviewerRatingOptions() {
+	static function &getReviewerRatingOptions() {
 		static $reviewerRatingOptions = array(
 			SUBMISSION_REVIEWER_RATING_VERY_GOOD => 'editor.article.reviewerRating.veryGood',
 			SUBMISSION_REVIEWER_RATING_GOOD => 'editor.article.reviewerRating.good',

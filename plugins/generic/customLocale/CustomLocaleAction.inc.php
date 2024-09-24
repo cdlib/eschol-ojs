@@ -17,7 +17,7 @@
 
 class CustomLocaleAction {
 
-	function getLocaleFiles($locale) {
+	static function getLocaleFiles($locale) {
 		if (!\OjsLocale::isLocaleValid($locale)) return null;
 
 		$localeFiles =& \OjsLocale::makeComponentMap($locale);
@@ -31,7 +31,7 @@ class CustomLocaleAction {
 		return $localeFiles;
 	}
 
-	function isLocaleFile($locale, $filename) {
+	static function isLocaleFile($locale, $filename) {
 		if (in_array($filename, CustomLocaleAction::getLocaleFiles($locale))) return true;
 		return false;
 	}

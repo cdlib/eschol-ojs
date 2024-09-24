@@ -64,7 +64,7 @@ class ArticleFileManager extends FileManager {
 	 * Create a manager for handling article file uploads.
 	 * @param $articleId int
 	 */
-	function ArticleFileManager($articleId) {
+	function __construct($articleId) {
 		$this->articleId = $articleId;
 		$articleDao =& DAORegistry::getDAO('ArticleDAO');
 		$this->article =& $articleDao->getArticle($articleId);
@@ -502,7 +502,7 @@ class ArticleFileManager extends FileManager {
 	 * @param $type string
 	 * @return string
 	 */
-	function typeToPath($type) {
+	static function typeToPath($type) {
 		switch ($type) {
 			case ARTICLE_FILE_PUBLIC: return 'public';
 			case ARTICLE_FILE_SUPP: return 'supp';

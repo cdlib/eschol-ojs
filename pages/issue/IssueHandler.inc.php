@@ -22,7 +22,7 @@ class IssueHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function IssueHandler() {
+	function __construct() {
 		parent::__construct();
 		
 		$this->addCheck(new HandlerValidatorJournal($this));
@@ -181,7 +181,7 @@ class IssueHandler extends Handler {
 	 * 	the cover page will be displayed. Otherwise table of contents
 	 * 	will be displayed.
 	 */
-	function setupIssueTemplate(&$issue, $showToc = false) {
+	static function setupIssueTemplate(&$issue, $showToc = false) {
 		$journal =& Request::getJournal();
 		$journalId = $journal->getId();
 		$templateMgr =& TemplateManager::getManager();

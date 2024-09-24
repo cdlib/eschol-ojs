@@ -28,7 +28,7 @@ class IssueForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function IssueForm($template) {
+	function __construct($template) {
 		parent::__construct($template);
 		$this->addCheck(new FormValidatorPost($this));
 	}

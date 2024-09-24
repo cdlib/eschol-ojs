@@ -36,7 +36,7 @@ class UserIndividualSubscriptionForm extends Form {
 	 * @param userId int
 	 * @param subscriptionId int
 	 */
-	function UserIndividualSubscriptionForm($userId = null, $subscriptionId = null) {
+	function __construct($userId = null, $subscriptionId = null) {
 		parent::__construct('subscription/userIndividualSubscriptionForm.tpl');
 
 		$this->userId = isset($userId) ? (int) $userId : null;

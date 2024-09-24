@@ -24,7 +24,7 @@ class SubmissionCommentsHandler extends SectionEditorHandler {
 	/**
 	 * Constructor
 	 **/
-	function SubmissionCommentsHandler() {
+	function __construct() {
 		parent::SectionEditorHandler();
 	}
 
@@ -110,7 +110,7 @@ class SubmissionCommentsHandler extends SectionEditorHandler {
 	/**
 	 * Blind CC the reviews to reviewers.
 	 */
-	function blindCcReviewsToReviewers($args = array()) {
+	static function blindCcReviewsToReviewers($args = array()) {
 		$articleId = Request::getUserVar('articleId');
 		$submissionEditHandler = new SubmissionEditHandler();
 		$submissionEditHandler->validate($articleId);

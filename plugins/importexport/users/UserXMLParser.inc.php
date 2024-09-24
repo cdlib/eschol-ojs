@@ -389,7 +389,7 @@ class ImportedUser extends User {
 	/**
 	 * Constructor.
 	 */
-	function ImportedUser() {
+	function __construct() {
 		$this->roles = array();
 		parent::__construct();
 	}

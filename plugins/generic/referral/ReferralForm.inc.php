@@ -29,7 +29,7 @@ class ReferralForm extends Form {
 	 * Constructor
 	 * @param referralId int leave as default for new referral
 	 */
-	function ReferralForm(&$plugin, &$article, $referralId = null) {
+	function __construct(&$plugin, &$article, $referralId = null) {
 		$this->referralId = isset($referralId) ? (int) $referralId : null;
 		$this->article =& $article;
 

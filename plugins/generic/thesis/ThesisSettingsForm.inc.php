@@ -33,7 +33,7 @@ class ThesisSettingsForm extends Form {
 	 * @param $plugin object
 	 * @param $journalId int
 	 */
-	function ThesisSettingsForm(&$plugin, $journalId) {
+	function __construct(&$plugin, $journalId) {
 		$this->journalId = $journalId;
 		$this->plugin =& $plugin;
 

@@ -23,7 +23,7 @@ import('classes.subscription.Subscription');
 
 class IndividualSubscription extends Subscription {
 
-	function IndividualSubscription() {
+	function __construct() {
 		parent::__construct();
 	}
 

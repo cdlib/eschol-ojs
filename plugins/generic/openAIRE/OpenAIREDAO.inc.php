@@ -20,7 +20,7 @@ class OpenAIREDAO extends OAIDAO {
  	/**
 	 * Constructor.
 	 */
-	function OpenAIREDAO() {
+	function __construct() {
 		parent::__construct();
 	}
 

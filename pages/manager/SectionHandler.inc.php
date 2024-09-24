@@ -20,7 +20,7 @@ class SectionHandler extends ManagerHandler {
 	/**
 	 * Constructor
 	 **/
-	function SectionHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 	/**

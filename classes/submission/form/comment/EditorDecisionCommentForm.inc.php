@@ -23,7 +23,7 @@ class EditorDecisionCommentForm extends CommentForm {
 	 * Constructor.
 	 * @param $article object
 	 */
-	function EditorDecisionCommentForm($article, $roleId) {
+	function __construct($article, $roleId) {
 		parent::__construct($article, COMMENT_TYPE_EDITOR_DECISION, $roleId, $article->getId());
 	}
 

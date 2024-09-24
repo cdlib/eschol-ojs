@@ -24,7 +24,7 @@ class TranslatorHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function TranslatorHandler() {
+	function __construct() {
 		parent::__construct();
 		$this->addCheck(new HandlerValidatorRoles($this, true, null, null, array(ROLE_ID_SITE_ADMIN)));
 

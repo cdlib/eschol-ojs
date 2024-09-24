@@ -27,7 +27,7 @@ class EditorAction extends SectionEditorAction {
 	 * @param $articleId int
 	 * @return boolean true iff ready for redirect
 	 */
-	function assignEditor($articleId, $sectionEditorId, $isEditor = false, $send = false) {
+	static function assignEditor($articleId, $sectionEditorId, $isEditor = false, $send = false) {
 		$editorSubmissionDao =& DAORegistry::getDAO('EditorSubmissionDAO');
 		$editAssignmentDao =& DAORegistry::getDAO('EditAssignmentDAO');
 		$userDao =& DAORegistry::getDAO('UserDAO');
@@ -92,7 +92,7 @@ class EditorAction extends SectionEditorAction {
 	 * Rush a new submission into the end of the editing queue.
 	 * @param $article object
 	 */
-	function expediteSubmission($article) {
+	static function expediteSubmission($article) {
 		$user =& Request::getUser();
 
 		import('classes.submission.editor.EditorAction');

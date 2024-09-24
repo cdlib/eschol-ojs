@@ -20,7 +20,7 @@ class AdminPeopleHandler extends AdminHandler {
 	/**
 	 * Constructor
 	 **/
-	function AdminPeopleHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

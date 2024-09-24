@@ -22,7 +22,7 @@ class EditAssignment extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function EditAssignment() {
+	function __construct() {
 		parent::__construct();
 	}
 

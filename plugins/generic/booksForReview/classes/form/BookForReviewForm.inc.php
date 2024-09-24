@@ -39,7 +39,7 @@ class BookForReviewForm extends Form {
 	 * Constructor
 	 * @param bookId int leave as default for new book
 	 */
-	function BookForReviewForm($parentPluginName, $bookId = null) {
+	function __construct($parentPluginName, $bookId = null) {
 		$this->parentPluginName = $parentPluginName;
 		$bfrPlugin =& PluginRegistry::getPlugin('generic', $parentPluginName);
 		$bfrPlugin->import('classes.BookForReview');

@@ -76,7 +76,7 @@ class ArticleEmailLogEntry extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function ArticleEmailLogEntry() {
+	function __construct() {
 		parent::__construct();
 	}
 

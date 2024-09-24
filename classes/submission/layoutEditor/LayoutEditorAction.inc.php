@@ -36,7 +36,7 @@ class LayoutEditorAction extends Action {
 	 * @param $galleyId int
 	 * @param $direction char u = up, d = down
 	 */
-	function orderGalley($article, $galleyId, $direction) {
+	static function orderGalley($article, $galleyId, $direction) {
 		$galleyDao =& DAORegistry::getDAO('ArticleGalleyDAO');
 		$galley =& $galleyDao->getGalley($galleyId, $article->getId());
 
@@ -52,7 +52,7 @@ class LayoutEditorAction extends Action {
 	 * @param $article object
 	 * @param $galleyId int
 	 */
-	function deleteGalley($article, $galleyId) {
+	static function deleteGalley($article, $galleyId) {
 		import('classes.file.ArticleFileManager');
 
 		$galleyDao =& DAORegistry::getDAO('ArticleGalleyDAO');
@@ -84,7 +84,7 @@ class LayoutEditorAction extends Action {
 	 * @param $fileId int
 	 * @param $revision int (optional)
 	 */
-	function deleteArticleImage($submission, $fileId, $revision) {
+	static function deleteArticleImage($submission, $fileId, $revision) {
 		import('classes.file.ArticleFileManager');
 		$articleGalleyDao =& DAORegistry::getDAO('ArticleGalleyDAO');
 		if (HookRegistry::call('LayoutEditorAction::deleteArticleImage', array(&$submission, &$fileId, &$revision))) return;
@@ -106,7 +106,7 @@ class LayoutEditorAction extends Action {
 	 * @param $suppFileId int
 	 * @param $direction char u = up, d = down
 	 */
-	function orderSuppFile($article, $suppFileId, $direction) {
+	static function orderSuppFile($article, $suppFileId, $direction) {
 		$suppFileDao =& DAORegistry::getDAO('SuppFileDAO');
 		$suppFile =& $suppFileDao->getSuppFile($suppFileId, $article->getId());
 
@@ -122,7 +122,7 @@ class LayoutEditorAction extends Action {
 	 * @param $article object
 	 * @param $suppFileId int
 	 */
-	function deleteSuppFile($article, $suppFileId) {
+	static function deleteSuppFile($article, $suppFileId) {
 		import('classes.file.ArticleFileManager');
 
 		$suppFileDao =& DAORegistry::getDAO('SuppFileDAO');
@@ -144,7 +144,7 @@ class LayoutEditorAction extends Action {
 	 * @param $submission object
 	 * @param $send boolean
 	 */
-	function completeLayoutEditing($submission, $send = false) {
+	static function completeLayoutEditing($submission, $send = false) {
 		$signoffDao =& DAORegistry::getDAO('SignoffDAO');
 		$userDao =& DAORegistry::getDAO('UserDAO');
 		$journal =& Request::getJournal();
@@ -206,7 +206,7 @@ class LayoutEditorAction extends Action {
 	 * Upload the layout version of an article.
 	 * @param $submission object
 	 */
-	function uploadLayoutVersion($submission) {
+	static function uploadLayoutVersion($submission) {
 		import('classes.file.ArticleFileManager');
 		$articleFileManager = new ArticleFileManager($submission->getArticleId());
 		$signoffDao =& DAORegistry::getDAO('SignoffDAO');
@@ -230,7 +230,7 @@ class LayoutEditorAction extends Action {
 	 * Copy the layout version of an article to galley format as PDF.
 	 * @param $submission object
 	 */
-	function copyLayoutToGalleyAsPdf($submission) {
+	static function copyLayoutToGalleyAsPdf($submission) {
 		import('classes.file.ArticleFileManager');
 		$articleFileManager = new ArticleFileManager($submission->getArticleId()); 
 		$layoutFile = $submission->getFileBySignoffType('SIGNOFF_LAYOUT');
@@ -246,7 +246,7 @@ class LayoutEditorAction extends Action {
 	 * View layout comments.
 	 * @param $article object
 	 */
-	function viewLayoutComments($article) {
+	static function viewLayoutComments($article) {
 		if (!HookRegistry::call('LayoutEditorAction::viewLayoutComments', array(&$article))) {
 			import('classes.submission.form.comment.LayoutCommentForm');
 
@@ -260,7 +260,7 @@ class LayoutEditorAction extends Action {
 	 * Post layout comment.
 	 * @param $article object
 	 */
-	function postLayoutComment($article, $emailComment) {
+	static function postLayoutComment($article, $emailComment) {
 		if (!HookRegistry::call('LayoutEditorAction::postLayoutComment', array(&$article, &$emailComment))) {
 			import('classes.submission.form.comment.LayoutCommentForm');
 
@@ -298,7 +298,7 @@ class LayoutEditorAction extends Action {
 	 * View proofread comments.
 	 * @param $article object
 	 */
-	function viewProofreadComments($article) {
+	static function viewProofreadComments($article) {
 		if (!HookRegistry::call('LayoutEditorAction::viewProofreadComments', array(&$article))) {
 			import('classes.submission.form.comment.ProofreadCommentForm');
 
@@ -312,7 +312,7 @@ class LayoutEditorAction extends Action {
 	 * Post proofread comment.
 	 * @param $article object
 	 */
-	function postProofreadComment($article, $emailComment) {
+	static function postProofreadComment($article, $emailComment) {
 		if (!HookRegistry::call('LayoutEditorAction::postProofreadComment', array(&$article, &$emailComment))) {
 			import('classes.submission.form.comment.ProofreadCommentForm');
 
@@ -358,7 +358,7 @@ class LayoutEditorAction extends Action {
 	 * @param $revision int optional
 	 * @return boolean
 	 */
-	function downloadFile($article, $fileId, $revision = null) {
+	static function downloadFile($article, $fileId, $revision = null) {
 		$canDownload = false;
 
 		$galleyDao =& DAORegistry::getDAO('ArticleGalleyDAO');

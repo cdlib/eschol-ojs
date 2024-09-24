@@ -21,7 +21,7 @@ class ReferralHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function ReferralHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 	

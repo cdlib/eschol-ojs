@@ -22,7 +22,7 @@ class RTSearchHandler extends RTAdminHandler {
 	/**
 	 * Constructor
 	 **/
-	function RTSearchHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

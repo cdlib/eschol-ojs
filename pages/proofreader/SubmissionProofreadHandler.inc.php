@@ -23,7 +23,7 @@ class SubmissionProofreadHandler extends ProofreaderHandler {
 	/**
 	 * Constructor
 	 **/
-	function SubmissionProofreadHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

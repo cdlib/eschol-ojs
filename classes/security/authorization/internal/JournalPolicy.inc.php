@@ -19,7 +19,7 @@ class JournalPolicy extends PolicySet {
 	 * Constructor
 	 * @param $request PKPRequest
 	 */
-	function JournalPolicy(&$request) {
+	function __construct(&$request) {
 		parent::__construct();
 
 		// Ensure that we have a journal in the context.

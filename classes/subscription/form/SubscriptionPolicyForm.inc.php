@@ -48,7 +48,7 @@ class SubscriptionPolicyForm extends Form {
 	/**
 	 * Constructor
 	 */
-	function SubscriptionPolicyForm() {
+	function __construct() {
 
 		for ($i=SUBSCRIPTION_OPEN_ACCESS_DELAY_MIN; $i<=SUBSCRIPTION_OPEN_ACCESS_DELAY_MAX; $i++) {
 			$this->validDuration[$i] = $i;

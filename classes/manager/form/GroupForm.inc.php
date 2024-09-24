@@ -27,7 +27,7 @@ class GroupForm extends Form {
 	 * Constructor
 	 * @param group Group object; null to create new
 	 */
-	function GroupForm($group = null) {
+	function __construct($group = null) {
 		$journal =& Request::getJournal();
 
 		parent::__construct('manager/groups/groupForm.tpl');

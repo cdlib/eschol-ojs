@@ -39,7 +39,7 @@ class Notification extends PKPNotification {
 	/**
 	 * Constructor.
 	 */
-	function Notification() {
+	function __construct() {
 		parent::__construct();
 	}
 
@@ -88,7 +88,7 @@ class Notification extends PKPNotification {
 	 * @param $password string the user's password
 	 * @param $template string The mail template to use
 	 */
-	function sendMailingListEmail($email, $password, $template) {
+	static function sendMailingListEmail($email, $password, $template) {
 		import('classes.mail.MailTemplate');
 		$journal = Request::getJournal();
 		$site = Request::getSite();
@@ -116,7 +116,7 @@ class Notification extends PKPNotification {
 	 * Returns an array of information on the journal's subscription settings
 	 * @return array
 	 */
-	function getSubscriptionSettings() {
+	static function getSubscriptionSettings() {
 		$journal = Request::getJournal();
 		if (!$journal) return array();
 

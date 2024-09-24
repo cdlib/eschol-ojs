@@ -38,7 +38,7 @@ class RegistrationForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function RegistrationForm() {
+	function __construct() {
 		parent::__construct('user/register.tpl');
 		$this->implicitAuth = Config::getVar('security', 'implicit_auth');
 

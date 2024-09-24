@@ -24,7 +24,7 @@ class AnnouncementFeedGatewayPlugin extends GatewayPlugin {
 	/**
 	 * Constructor
 	 */
-	function AnnouncementFeedGatewayPlugin($parentPluginName) {
+	function __construct($parentPluginName) {
 		$this->parentPluginName = $parentPluginName;
 	}
 

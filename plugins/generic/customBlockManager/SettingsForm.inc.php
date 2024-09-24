@@ -27,7 +27,7 @@ class SettingsForm extends Form {
 	 * Constructor
 	 * @param $journalId int
 	 */
-	function SettingsForm(&$plugin, $journalId) {
+	function __construct(&$plugin, $journalId) {
 
 		parent::__construct($plugin->getTemplatePath() . 'settingsForm.tpl');
 

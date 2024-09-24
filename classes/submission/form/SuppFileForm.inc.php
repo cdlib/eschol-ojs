@@ -32,7 +32,7 @@ class SuppFileForm extends Form {
 	 * @param $article object
 	 * @param $suppFileId int (optional)
 	 */
-	function SuppFileForm($article, $journal, $suppFileId = null) {
+	function __construct($article, $journal, $suppFileId = null) {
 		$supportedSubmissionLocales = $journal->getSetting('supportedSubmissionLocales');
 		if (empty($supportedSubmissionLocales)) $supportedSubmissionLocales = array($journal->getPrimaryLocale());
 

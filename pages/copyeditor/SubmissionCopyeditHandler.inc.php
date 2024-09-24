@@ -19,7 +19,7 @@ class SubmissionCopyeditHandler extends CopyeditorHandler {
 	/**
 	 * Constructor
 	 **/
-	function SubmissionCopyeditHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 	/** submission associated with the request **/
@@ -125,7 +125,7 @@ class SubmissionCopyeditHandler extends CopyeditorHandler {
 	 * View a file (inlines file).
 	 * @param $args array ($articleId, $fileId, [$revision])
 	 */
-	function viewFile($args) {
+	static function viewFile($args) {
 		$articleId = isset($args[0]) ? $args[0] : 0;
 		$fileId = isset($args[1]) ? $args[1] : 0;
 		$revision = isset($args[2]) ? $args[2] : null;

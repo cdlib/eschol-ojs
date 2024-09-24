@@ -25,7 +25,7 @@ class AuthorAction extends Action {
 	/**
 	 * Constructor.
 	 */
-	function AuthorAction() {
+	function __construct() {
 		parent::__construct();
 	}
 
@@ -38,7 +38,7 @@ class AuthorAction extends Action {
 	 * @param $authorSubmission object
 	 * @param $designate boolean
 	 */
-	function designateReviewVersion($authorSubmission, $designate = false) {
+	static function designateReviewVersion($authorSubmission, $designate = false) {
 		import('classes.file.ArticleFileManager');
 		$articleFileManager = new ArticleFileManager($authorSubmission->getId());
 		$authorSubmissionDao =& DAORegistry::getDAO('AuthorSubmissionDAO');
@@ -63,7 +63,7 @@ class AuthorAction extends Action {
 	 * @param $authorSubmission object
 	 * @param $designate boolean
 	 */
-	function designateEditorVersion($authorSubmission, $designate = false) {
+	static function designateEditorVersion($authorSubmission, $designate = false) {
 		import('classes.file.ArticleFileManager');
 		$articleFileManager = new ArticleFileManager($authorSubmission->getId());
 		$authorSubmissionDao =& DAORegistry::getDAO('AuthorSubmissionDAO');
@@ -89,7 +89,7 @@ class AuthorAction extends Action {
 	 * @param $fileId int
 	 * @param $revisionId int
 	 */
-	function deleteArticleFile($article, $fileId, $revisionId) {
+	static function deleteArticleFile($article, $fileId, $revisionId) {
 		import('classes.file.ArticleFileManager');
 
 		$articleFileManager = new ArticleFileManager($article->getId());
@@ -118,7 +118,7 @@ class AuthorAction extends Action {
 	 * Upload the revised version of an article.
 	 * @param $authorSubmission object
 	 */
-	function uploadRevisedVersion($authorSubmission) {
+	static function uploadRevisedVersion($authorSubmission) {
 		import('classes.file.ArticleFileManager');
 		$articleFileManager = new ArticleFileManager($authorSubmission->getId());
 		$authorSubmissionDao =& DAORegistry::getDAO('AuthorSubmissionDAO');
@@ -150,7 +150,7 @@ class AuthorAction extends Action {
 	 * Author completes editor / author review.
 	 * @param $authorSubmission object
 	 */
-	function completeAuthorCopyedit($authorSubmission, $send = false) {
+	static function completeAuthorCopyedit($authorSubmission, $send = false) {
 		$authorSubmissionDao =& DAORegistry::getDAO('AuthorSubmissionDAO');
 		$signoffDao =& DAORegistry::getDAO('SignoffDAO');
 		$userDao =& DAORegistry::getDAO('UserDAO');
@@ -234,7 +234,7 @@ class AuthorAction extends Action {
 	/**
 	 * Set that the copyedit is underway.
 	 */
-	function copyeditUnderway($authorSubmission) {
+	static function copyeditUnderway($authorSubmission) {
 		$authorSubmissionDao =& DAORegistry::getDAO('AuthorSubmissionDAO');
 		$signoffDao =& DAORegistry::getDAO('SignoffDAO');
 
@@ -251,7 +251,7 @@ class AuthorAction extends Action {
 	 * @param $authorSubmission object
 	 * @param $copyeditStage string
 	 */
-	function uploadCopyeditVersion($authorSubmission, $copyeditStage) {
+	static function uploadCopyeditVersion($authorSubmission, $copyeditStage) {
 		import('classes.file.ArticleFileManager');
 		$articleFileManager = new ArticleFileManager($authorSubmission->getId());
 		$authorSubmissionDao =& DAORegistry::getDAO('AuthorSubmissionDAO');
@@ -290,7 +290,7 @@ class AuthorAction extends Action {
 	 * View layout comments.
 	 * @param $article object
 	 */
-	function viewLayoutComments($article) {
+	static function viewLayoutComments($article) {
 		if (!HookRegistry::call('AuthorAction::viewLayoutComments', array(&$article))) {
 			import('classes.submission.form.comment.LayoutCommentForm');
 			$commentForm = new LayoutCommentForm($article, ROLE_ID_EDITOR);
@@ -304,7 +304,7 @@ class AuthorAction extends Action {
 	 * @param $article object
 	 * @param $emailComment boolean
 	 */
-	function postLayoutComment($article, $emailComment) {
+	static function postLayoutComment($article, $emailComment) {
 		if (!HookRegistry::call('AuthorAction::postLayoutComment', array(&$article, &$emailComment))) {
 			import('classes.submission.form.comment.LayoutCommentForm');
 
@@ -342,7 +342,7 @@ class AuthorAction extends Action {
 	 * View editor decision comments.
 	 * @param $article object
 	 */
-	function viewEditorDecisionComments($article) {
+	static function viewEditorDecisionComments($article) {
 		if (!HookRegistry::call('AuthorAction::viewEditorDecisionComments', array(&$article))) {
 			import('classes.submission.form.comment.EditorDecisionCommentForm');
 
@@ -357,7 +357,7 @@ class AuthorAction extends Action {
 	 * @param $authorSubmission object
 	 * @param $send boolean
 	 */
-	function emailEditorDecisionComment($authorSubmission, $send) {
+	static function emailEditorDecisionComment($authorSubmission, $send) {
 		$userDao =& DAORegistry::getDAO('UserDAO');
 		$journal =& Request::getJournal();
 
@@ -412,7 +412,7 @@ class AuthorAction extends Action {
          * @param $authorSubmission object
          * @param $send boolean
          */
-        function emailEditorRevisionUpload($authorSubmission, $send) {
+        static function emailEditorRevisionUpload($authorSubmission, $send) {
                 $userDao =& DAORegistry::getDAO('UserDAO');
                 $journal =& Request::getJournal();
 
@@ -465,7 +465,7 @@ class AuthorAction extends Action {
 	 * View copyedit comments.
 	 * @param $article object
 	 */
-	function viewCopyeditComments($article) {
+	static function viewCopyeditComments($article) {
 		if (!HookRegistry::call('AuthorAction::viewCopyeditComments', array(&$article))) {
 			import('classes.submission.form.comment.CopyeditCommentForm');
 
@@ -479,7 +479,7 @@ class AuthorAction extends Action {
 	 * Post copyedit comment.
 	 * @param $article object
 	 */
-	function postCopyeditComment($article, $emailComment) {
+	static function postCopyeditComment($article, $emailComment) {
 		if (!HookRegistry::call('AuthorAction::postCopyeditComment', array(&$article, &$emailComment))) {
 			import('classes.submission.form.comment.CopyeditCommentForm');
 
@@ -517,7 +517,7 @@ class AuthorAction extends Action {
 	 * View proofread comments.
 	 * @param $article object
 	 */
-	function viewProofreadComments($article) {
+	static function viewProofreadComments($article) {
 		if (!HookRegistry::call('AuthorAction::viewProofreadComments', array(&$article))) {
 			import('classes.submission.form.comment.ProofreadCommentForm');
 
@@ -532,7 +532,7 @@ class AuthorAction extends Action {
 	 * @param $article object
 	 * @param $emailComment boolean
 	 */
-	function postProofreadComment($article, $emailComment) {
+	static function postProofreadComment($article, $emailComment) {
 		if (!HookRegistry::call('AuthorAction::postProofreadComment', array(&$article, &$emailComment))) {
 			import('classes.submission.form.comment.ProofreadCommentForm');
 
@@ -577,7 +577,7 @@ class AuthorAction extends Action {
 	 * @return boolean
 	 * TODO: Complete list of files author has access to
 	 */
-	function downloadAuthorFile($article, $fileId, $revision = null) {
+	static function downloadAuthorFile($article, $fileId, $revision = null) {
 		$signoffDao =& DAORegistry::getDAO('SignoffDAO');
 		$authorSubmissionDao =& DAORegistry::getDAO('AuthorSubmissionDAO');
 

@@ -30,7 +30,7 @@ class LayoutEditorSubmissionDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function LayoutEditorSubmissionDAO() {
+	function __construct() {
 		parent::__construct();
 
 		$this->articleDao =& DAORegistry::getDAO('ArticleDAO');

@@ -39,7 +39,7 @@ class CommentForm extends Form {
 	 * Constructor.
 	 * @param $article object
 	 */
-	function CommentForm($article, $commentType, $roleId, $assocId = null) {
+	function __construct($article, $commentType, $roleId, $assocId = null) {
 		if ($commentType == COMMENT_TYPE_PEER_REVIEW) {
 			parent::Form('submission/comment/peerReviewComment.tpl');
 		} else if ($commentType == COMMENT_TYPE_EDITOR_DECISION) {

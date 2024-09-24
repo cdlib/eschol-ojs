@@ -48,7 +48,7 @@ class ArticleMailTemplate extends MailTemplate {
 	 * @param $ignorePostedData boolean optional
 	 * @see MailTemplate::MailTemplate()
 	 */
-	function ArticleMailTemplate($article, $emailKey = null, $locale = null, $enableAttachments = null, $journal = null, $includeSignature = true, $ignorePostedData = false) {
+	function __construct($article, $emailKey = null, $locale = null, $enableAttachments = null, $journal = null, $includeSignature = true, $ignorePostedData = false) {
 		parent::__construct($emailKey, $locale, $enableAttachments, $journal, $includeSignature, $ignorePostedData);
 		$this->article = $article;
 	}

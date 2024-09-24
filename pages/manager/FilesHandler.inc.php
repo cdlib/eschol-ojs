@@ -20,7 +20,7 @@ class FilesHandler extends ManagerHandler {
 	/**
 	 * Constructor
 	 **/
-	function FilesHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 
@@ -141,23 +141,23 @@ class FilesHandler extends ManagerHandler {
 	// FIXME Move some of these functions into common class (FileManager?)
 	//
 
-	function parseDirArg($args, &$currentDir, &$parentDir) {
+	static function parseDirArg($args, &$currentDir, &$parentDir) {
 		$pathArray = array_filter($args, array('FilesHandler', 'fileNameFilter'));
 		$currentDir = join($pathArray, '/');
 		array_pop($pathArray);
 		$parentDir = join($pathArray, '/');
 	}
 
-	function getRealFilesDir($currentDir) {
+	static function getRealFilesDir($currentDir) {
 		$journal =& Request::getJournal();
 		return Config::getVar('files', 'files_dir') . '/journals/' . $journal->getId() .'/' . $currentDir;
 	}
 
-	function fileNameFilter($var) {
+	static function fileNameFilter($var) {
 		return (!empty($var) && $var != '..' && $var != '.');
 	}
 
-	function cleanFileName($var) {
+	static function cleanFileName($var) {
 		$var = OjsString::regexp_replace('/[^\w\-\.]/', '', $var);
 		if (!FilesHandler::fileNameFilter($var)) {
 			$var = time() . '';
@@ -165,7 +165,7 @@ class FilesHandler extends ManagerHandler {
 		return $var;
 	}
 
-	function fileMimeType($filePath) {
+	static function fileMimeType($filePath) {
 		return OjsString::mime_content_type($filePath);
 	}
 

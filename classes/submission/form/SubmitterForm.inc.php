@@ -22,7 +22,7 @@ class SubmitterForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function SubmitterForm($article, $journal) {
+	function __construct($article, $journal) {
 		$this->article = $article;
 
 		// check that user is allowed to edit

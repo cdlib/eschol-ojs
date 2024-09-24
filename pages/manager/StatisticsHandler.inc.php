@@ -20,7 +20,7 @@ class StatisticsHandler extends ManagerHandler {
 	/**
 	 * Constructor
 	 **/
-	function StatisticsHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 	/**
@@ -114,7 +114,7 @@ class StatisticsHandler extends ManagerHandler {
 		Request::redirect(null, null, 'statistics', null, array('statisticsYear' => Request::getUserVar('statisticsYear')));
 	}
 
-	function getPublicStatisticsNames() {
+	static function getPublicStatisticsNames() {
 		return array(
 			'statNumPublishedIssues',
 			'statItemsPublished',

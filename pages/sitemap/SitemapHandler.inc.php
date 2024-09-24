@@ -45,7 +45,7 @@ class SitemapHandler extends Handler {
 	 * Construct a sitemap index listing each journal's individual sitemap
 	 * @return XMLNode
 	 */
-	function createSitemapIndex() {
+	static function createSitemapIndex() {
 		$journalDao =& DAORegistry::getDAO('JournalDAO');
 		
 		$doc =& XMLCustomWriter::createDocument();
@@ -69,7 +69,7 @@ class SitemapHandler extends Handler {
 	 * Construct the sitemap
 	 * @return XMLNode
 	 */
-	function createJournalSitemap() {
+	static function createJournalSitemap() {
 		$issueDao =& DAORegistry::getDAO('IssueDAO');
 		$publishedArticleDao =& DAORegistry::getDAO('PublishedArticleDAO');
 		$galleyDao =& DAORegistry::getDAO('ArticleGalleyDAO');

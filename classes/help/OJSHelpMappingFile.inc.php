@@ -21,7 +21,7 @@ class OJSHelpMappingFile extends HelpMappingFile {
 	/**
 	 * Constructor
 	 */
-	function OJSHelpMappingFile() {
+	function __construct() {
 		parent::__construct('help/help.xml');
 	}
 

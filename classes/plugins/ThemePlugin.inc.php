@@ -18,7 +18,7 @@
 import('classes.plugins.Plugin');
 
 class ThemePlugin extends Plugin {
-	function ThemePlugin() {
+	function __construct() {
 		parent::__construct();
 	}
 

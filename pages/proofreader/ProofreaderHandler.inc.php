@@ -22,7 +22,7 @@ class ProofreaderHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function ProofreaderHandler() {
+	function __construct() {
 		parent::__construct();
 
 		$this->addCheck(new HandlerValidatorJournal($this));

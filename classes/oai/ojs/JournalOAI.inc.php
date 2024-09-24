@@ -42,7 +42,7 @@ class JournalOAI extends OAI {
 	/**
 	 * @see OAI#OAI
 	 */
-	function JournalOAI($config) {
+	function __construct($config) {
 		parent::__construct($config);
 
 		$this->site =& Request::getSite();

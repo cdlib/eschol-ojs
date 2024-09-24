@@ -23,7 +23,7 @@ class ArticleFile extends SubmissionFile {
 	/**
 	 * Constructor.
 	 */
-	function ArticleFile() {
+	function __construct() {
 		parent::__construct();
 	}
 

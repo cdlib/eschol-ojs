@@ -24,7 +24,7 @@ class SubmissionCommentsHandler extends CopyeditorHandler {
 	/**
 	 * Constructor
 	 **/
-	function SubmissionCommentsHandler() {
+	function __construct() {
 		parent::CopyeditorHandler();
 	}
 	

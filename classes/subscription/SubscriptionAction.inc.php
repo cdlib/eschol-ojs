@@ -18,7 +18,7 @@ class SubscriptionAction {
 	/**
 	 * Display subscriptions summary page for the current journal.
 	 */
-	function subscriptionsSummary() {
+	static function subscriptionsSummary() {
 		$journal =& Request::getJournal();
 		$journalId = $journal->getId();
 
@@ -59,7 +59,7 @@ class SubscriptionAction {
 	/**
 	 * Display a list of subscriptions for the current journal.
 	 */
-	function subscriptions($institutional = false) {
+	static function subscriptions($institutional = false) {
 		$journal =& Request::getJournal();
 		$rangeInfo =& PKPHandler::getRangeInfo('subscriptions');
 
@@ -114,7 +114,7 @@ class SubscriptionAction {
 	 * based on supplied user data).
 	 * @return array
 	 */
-	function getSearchFormDuplicateParameters() {
+	static function getSearchFormDuplicateParameters() {
 		return array(
 			'searchField', 'searchMatch', 'search',
 			'dateFromMonth', 'dateFromDay', 'dateFromYear',
@@ -127,7 +127,7 @@ class SubscriptionAction {
 	 * Get the list of individual fields that can be searched by contents.
 	 * @return array
 	 */
-	function getIndividualSearchFieldOptions() {
+	static function getIndividualSearchFieldOptions() {
 		return array(
 			SUBSCRIPTION_USER => 'manager.subscriptions.user',
 			SUBSCRIPTION_MEMBERSHIP => 'manager.subscriptions.membership',
@@ -140,7 +140,7 @@ class SubscriptionAction {
 	 * Get the list of institutional fields that can be searched by contents.
 	 * @return array
 	 */
-	function getInstitutionalSearchFieldOptions() {
+	static function getInstitutionalSearchFieldOptions() {
 		return array(
 			SUBSCRIPTION_INSTITUTION_NAME => 'manager.subscriptions.institutionName',
 			SUBSCRIPTION_USER => 'manager.subscriptions.contact',
@@ -156,7 +156,7 @@ class SubscriptionAction {
 	 * Get the list of date fields that can be searched.
 	 * @return array
 	 */
-	function getDateFieldOptions() {
+	static function getDateFieldOptions() {
 		return array(
 			SUBSCRIPTION_DATE_START => 'manager.subscriptions.dateStartSearch',
 			SUBSCRIPTION_DATE_END => 'manager.subscriptions.dateEndSearch'
@@ -167,7 +167,7 @@ class SubscriptionAction {
 	 * Delete a subscription.
 	 * @param $args array first parameter is the ID of the subscription to delete
 	 */
-	function deleteSubscription($args, $institutional = false) {
+	static function deleteSubscription($args, $institutional = false) {
 		$journal =& Request::getJournal();
 		$subscriptionId = empty($args[0]) ? null : (int) $args[0];
 
@@ -187,7 +187,7 @@ class SubscriptionAction {
 	 * Renew a subscription.
 	 * @param $args array first parameter is the ID of the subscription to renew
 	 */
-	function renewSubscription($args, $institutional = false) {
+	static function renewSubscription($args, $institutional = false) {
 		$journal =& Request::getJournal();
 		$subscriptionId = empty($args[0]) ? null : (int) $args[0];
 
@@ -208,7 +208,7 @@ class SubscriptionAction {
 	 * Display form to edit a subscription.
 	 * @param $args array second parameter is the ID of the subscription to edit
 	 */
-	function editSubscription($args, $institutional = false) {
+	static function editSubscription($args, $institutional = false) {
 		$journal =& Request::getJournal();
 		$userId = Request::getUserVar('userId') == null ? null : (int) Request::getUserVar('userId');
 		$subscriptionId = empty($args[0]) ? null : (int) $args[0];
@@ -260,7 +260,7 @@ class SubscriptionAction {
 	/**
 	 * Display a list of users from which to choose a subscriber/subscription contact.
 	 */
-	function selectSubscriber($args = array(), $institutional = false) {
+	static function selectSubscriber($args = array(), $institutional = false) {
 		$templateMgr =& TemplateManager::getManager();
 
 		if ($institutional) {
@@ -317,7 +317,7 @@ class SubscriptionAction {
 	/**
 	 * Save changes to a subscription.
 	 */
-	function updateSubscription($args, $institutional = false) {
+	static function updateSubscription($args, $institutional = false) {
 		$journal =& Request::getJournal();
 		$subscriptionId = Request::getUserVar('subscriptionId') == null ? null : (int) Request::getUserVar('subscriptionId');
 
@@ -387,7 +387,7 @@ class SubscriptionAction {
 	/**
 	 * Display a list of subscription types for the current journal.
 	 */
-	function subscriptionTypes() {
+	static function subscriptionTypes() {
 		$journal =& Request::getJournal();
 		$rangeInfo =& Handler::getRangeInfo('subscriptionTypes');
 		$subscriptionTypeDao =& DAORegistry::getDAO('SubscriptionTypeDAO');
@@ -403,7 +403,7 @@ class SubscriptionAction {
 	/**
 	 * Rearrange the order of subscription types.
 	 */
-	function moveSubscriptionType($args) {
+	static function moveSubscriptionType($args) {
 		$subscriptionTypeId = Request::getUserVar('id');
 		$journal =& Request::getJournal();
 
@@ -440,7 +440,7 @@ class SubscriptionAction {
 	 * Delete a subscription type.
 	 * @param $args array first parameter is the ID of the subscription type to delete
 	 */
-	function deleteSubscriptionType($args) {
+	static function deleteSubscriptionType($args) {
 		$subscriptionTypeId = isset($args[0])?$args[0]:0;
 		$journal =& Request::getJournal();
 
@@ -456,7 +456,7 @@ class SubscriptionAction {
 	 * Display form to edit a subscription type.
 	 * @param $args array optional, first parameter is the ID of the subscription type to edit
 	 */
-	function editSubscriptionType($args) {
+	static function editSubscriptionType($args) {
 		$journal =& Request::getJournal();
 		$subscriptionTypeId = !isset($args) || empty($args) ? null : (int) $args[0];
 		$subscriptionTypeDao =& DAORegistry::getDAO('SubscriptionTypeDAO');
@@ -499,7 +499,7 @@ class SubscriptionAction {
 	/**
 	 * Save changes to a subscription type.
 	 */
-	function updateSubscriptionType() {
+	static function updateSubscriptionType() {
 		import('classes.subscription.form.SubscriptionTypeForm');
 
 		$journal =& Request::getJournal();
@@ -532,7 +532,7 @@ class SubscriptionAction {
 	/**
 	 * Display subscription policies for the current journal.
 	 */
-	function subscriptionPolicies() {
+	static function subscriptionPolicies() {
 		import('classes.subscription.form.SubscriptionPolicyForm');
 
 		$templateMgr =& TemplateManager::getManager();
@@ -558,7 +558,7 @@ class SubscriptionAction {
 	/**
 	 * Save subscription policies for the current journal.
 	 */
-	function saveSubscriptionPolicies($args = array()) {
+	static function saveSubscriptionPolicies($args = array()) {
 		import('classes.subscription.form.SubscriptionPolicyForm');
 
 		$subscriptionPolicyForm = new SubscriptionPolicyForm();
@@ -587,7 +587,7 @@ class SubscriptionAction {
 	/**
 	 * Send notification email to Subscription Manager when online payment is completed.
 	 */
-	function sendOnlinePaymentNotificationEmail(&$subscription, $mailTemplateKey) {
+	static function sendOnlinePaymentNotificationEmail(&$subscription, $mailTemplateKey) {
 		$validKeys = array(
 			'SUBSCRIPTION_PURCHASE_INDL',
 			'SUBSCRIPTION_PURCHASE_INSTL',

@@ -31,7 +31,7 @@ class PaymentSettingsForm extends Form {
 	 * Constructor
 	 * @param $journalId int
 	 */
-	function PaymentSettingsForm() {
+	function __construct() {
 
 		parent::__construct('payments/paymentSettings.tpl');
 

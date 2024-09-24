@@ -29,7 +29,7 @@ class ReviewFormElementForm extends Form {
 	 * @param $reviewFormId int
 	 * @param $reviewFormElementId int
 	 */
-	function ReviewFormElementForm($reviewFormId, $reviewFormElementId = null) {
+	function __construct($reviewFormId, $reviewFormElementId = null) {
 		parent::__construct('manager/reviewForms/reviewFormElementForm.tpl');
 
 		$this->reviewFormId = $reviewFormId;

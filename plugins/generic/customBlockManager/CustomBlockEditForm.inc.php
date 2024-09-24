@@ -29,7 +29,7 @@ class CustomBlockEditForm extends Form {
 	 * Constructor
 	 * @param $journalId int
 	 */
-	function CustomBlockEditForm(&$plugin, $journalId) {
+	function __construct(&$plugin, $journalId) {
 
 		parent::__construct($plugin->getTemplatePath() . 'editCustomBlockForm.tpl');
 

@@ -27,7 +27,7 @@ class ReviewAssignmentDAO extends PKPReviewAssignmentDAO {
 	/**
 	 * Constructor.
 	 */
-	function ReviewAssignmentDAO() {
+	function __construct() {
 		parent::__construct();
 		$this->articleFileDao =& DAORegistry::getDAO('ArticleFileDAO');
 		$this->suppFileDao =& DAORegistry::getDAO('SuppFileDAO');

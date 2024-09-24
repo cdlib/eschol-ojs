@@ -31,7 +31,7 @@ class CopyeditorSubmissionDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function CopyeditorSubmissionDAO() {
+	function __construct() {
 		parent::__construct();
 		$this->articleDao =& DAORegistry::getDAO('ArticleDAO');
 		$this->authorDao =& DAORegistry::getDAO('AuthorDAO');

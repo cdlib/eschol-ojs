@@ -30,7 +30,7 @@ class CreateReviewerForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function CreateReviewerForm($articleId) {
+	function __construct($articleId) {
 		parent::__construct('sectionEditor/createReviewerForm.tpl');
 		$this->addCheck(new FormValidatorPost($this));
 

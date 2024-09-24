@@ -20,7 +20,7 @@ class EmailHandler extends ManagerHandler {
 	/**
 	 * Constructor
 	 **/
-	function EmailHandler() {
+	function __construct() {
 		parent::ManagerHandler();
 	}
 
@@ -55,7 +55,7 @@ class EmailHandler extends ManagerHandler {
 	 * Display form to create/edit an email.
 	 * @param $args array optional, if set the first parameter is the key of the email template to edit
 	 */
-	function editEmail($args = array()) {
+	static function editEmail($args = array()) {
 		$this->validate();
 		$this->setupTemplate(true);
 

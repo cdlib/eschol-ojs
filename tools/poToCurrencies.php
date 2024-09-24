@@ -30,7 +30,7 @@ class poToCurrencies extends CommandLineTool {
 	/**
 	 * Constructor
 	 */
-	function poToCurrencies($argv = array()) {
+	function __construct($argv = array()) {
 		parent::__construct($argv);
 
 		$toolName = array_shift($argv);

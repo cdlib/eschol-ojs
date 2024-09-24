@@ -30,7 +30,7 @@ class CommentHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function CommentHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

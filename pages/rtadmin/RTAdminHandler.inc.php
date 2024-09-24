@@ -23,7 +23,7 @@ class RTAdminHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function RTAdminHandler() {
+	function __construct() {
 		parent::__construct();
 
 		$this->addCheck(new HandlerValidatorJournal($this));

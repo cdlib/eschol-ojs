@@ -22,7 +22,7 @@ class SubscriptionExpiryReminder extends ScheduledTask {
 	/**
 	 * Constructor.
 	 */
-	function SubscriptionExpiryReminder() {
+	function __construct() {
 		$this->ScheduledTask();
 	}
 

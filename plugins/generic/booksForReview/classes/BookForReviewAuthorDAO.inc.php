@@ -20,7 +20,7 @@ class BookForReviewAuthorDAO extends DAO {
 	/**
 	 * Constructor
 	 */
-	function BookForReviewAuthorDAO($parentPluginName){
+	function __construct($parentPluginName){
 		$this->parentPluginName = $parentPluginName;
 		parent::__construct();
 	}

@@ -30,7 +30,7 @@ class PhpMyVisitesSettingsForm extends Form {
 	 * @param $plugin object
 	 * @param $journalId int
 	 */
-	function PhpMyVisitesSettingsForm(&$plugin, $journalId) {
+	function __construct(&$plugin, $journalId) {
 		$this->journalId = $journalId;
 		$this->plugin =& $plugin;
 

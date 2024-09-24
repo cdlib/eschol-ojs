@@ -22,7 +22,7 @@ class LayoutEditorHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function LayoutEditorHandler() {
+	function __construct() {
 		parent::__construct();
 		
 		$this->addCheck(new HandlerValidatorJournal($this));

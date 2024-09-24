@@ -34,7 +34,7 @@ class Role extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function Role() {
+	function __construct() {
 		parent::__construct();
 	}
 

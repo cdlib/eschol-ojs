@@ -76,7 +76,7 @@ class PDFCreatorPlugin extends GenericPlugin {
 		return false; 
 	}
 
-	function convertArticleFileToPdf($articleFile) {
+	static function convertArticleFileToPdf($articleFile) {
 
 		$LiveDocxUsername = 'barbarahui';
 		$LiveDocxPassword = 'sub11s0js';

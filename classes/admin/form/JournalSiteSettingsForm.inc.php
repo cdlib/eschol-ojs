@@ -27,7 +27,7 @@ class JournalSiteSettingsForm extends Form {
 	 * Constructor.
 	 * @param $journalId omit for a new journal
 	 */
-	function JournalSiteSettingsForm($journalId = null) {
+	function __construct($journalId = null) {
 		parent::__construct('admin/journalSettings.tpl');
 
 		$this->journalId = isset($journalId) ? (int) $journalId : null;

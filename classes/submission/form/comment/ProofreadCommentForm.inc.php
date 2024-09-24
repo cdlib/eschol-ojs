@@ -23,7 +23,7 @@ class ProofreadCommentForm extends CommentForm {
 	 * Constructor.
 	 * @param $article object
 	 */
-	function ProofreadCommentForm($article, $roleId) {
+	function __construct($article, $roleId) {
 		parent::__construct($article, COMMENT_TYPE_PROOFREAD, $roleId, $article->getId());
 	}
 

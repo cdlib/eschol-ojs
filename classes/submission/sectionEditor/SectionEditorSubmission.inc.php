@@ -41,7 +41,7 @@ class SectionEditorSubmission extends Article {
 	/**
 	 * Constructor.
 	 */
-	function SectionEditorSubmission() {
+	function __construct() {
 		parent::__construct();
 		$this->reviewAssignments = array();
 		$this->removedReviewAssignments = array();
@@ -465,7 +465,7 @@ class SectionEditorSubmission extends Article {
 	 * (Includes default mapping '' => "Choose One".)
 	 * @return array decision => localeString
 	 */
-	function &getEditorDecisionOptions() {
+	static function &getEditorDecisionOptions() {
 		static $editorDecisionOptions = array(
 			'' => 'common.chooseOne',
 			SUBMISSION_EDITOR_DECISION_ACCEPT => 'editor.article.decision.accept',

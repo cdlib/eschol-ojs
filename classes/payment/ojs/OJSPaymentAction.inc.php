@@ -18,7 +18,7 @@ class OJSPaymentAction {
 	/**
 	 * Display Payments Settings Form (main payments page)
 	 */
-	 function payments($args) {
+	 static function payments($args) {
 		import('classes.payment.ojs.form.PaymentSettingsForm');
 		$form = new PaymentSettingsForm();
 
@@ -37,7 +37,7 @@ class OJSPaymentAction {
 	 /**
 	  * Execute the form or display it again if there are problems
 	  */
-	 function savePaymentSettings($args) {
+	 static function savePaymentSettings($args) {
 		import('classes.payment.ojs.form.PaymentSettingsForm');
 		$settingsForm = new PaymentSettingsForm();
 
@@ -59,7 +59,7 @@ class OJSPaymentAction {
 	 /** 
 	  * Display all payments previously made
 	  */
-	 function viewPayments($args) {
+	 static function viewPayments($args) {
 		$rangeInfo =& Handler::getRangeInfo('payments');
 		$paymentDao =& DAORegistry::getDAO('OJSCompletedPaymentDAO');
 		$journal =& Request::getJournal();
@@ -79,7 +79,7 @@ class OJSPaymentAction {
 	 /** 
 	  * Display a single Completed payment 
 	  */
-	 function viewPayment($args) {
+	 static function viewPayment($args) {
 		$paymentDao =& DAORegistry::getDAO('OJSCompletedPaymentDAO');
 		$completedPaymentId = $args[0];
 		$payment =& $paymentDao->getCompletedPayment($completedPaymentId);
@@ -99,7 +99,7 @@ class OJSPaymentAction {
 	/**
 	 * Display form to edit program settings.
 	 */
-	function payMethodSettings() {
+	static function payMethodSettings() {
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->assign('helpTopicId', 'journal.managementPages.payments');
 
@@ -114,7 +114,7 @@ class OJSPaymentAction {
 	/**
 	 * Save changes to payment settings.
 	 */
-	function savePayMethodSettings() {
+	static function savePayMethodSettings() {
 		$journal =& Request::getJournal();
 		import('classes.payment.ojs.form.PayMethodSettingsForm');
 

@@ -23,7 +23,7 @@ class SubmitHandler extends AuthorHandler {
 	/**
 	 * Constructor
 	 **/
-	function SubmitHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 
@@ -198,7 +198,7 @@ class SubmitHandler extends AuthorHandler {
 	/**
 	 * Create new supplementary file with a uploaded file.
 	 */
-	function submitUploadSuppFile($args, $request) {
+	static function submitUploadSuppFile($args, $request) {
 		$articleId = $request->getUserVar('articleId');
 		$journal =& $request->getJournal();
 

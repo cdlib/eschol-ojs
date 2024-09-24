@@ -20,7 +20,7 @@ import('lib.pkp.classes.plugins.BlockPlugin');
 class AnnouncementFeedBlockPlugin extends BlockPlugin {
     var $parentPluginName;
     
-    function AnnouncementFeedBlockPlugin($parentPluginName) {
+    function __construct($parentPluginName) {
         $this->parentPluginName = $parentPluginName;
     }
 	/**

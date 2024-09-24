@@ -18,7 +18,7 @@
 import('classes.plugins.Plugin');
 
 class CitationPlugin extends Plugin {
-	function CitationPlugin() {
+	function __construct() {
 		parent::__construct();
 	}
 

@@ -26,7 +26,7 @@ class ArticleLog {
 	 * @param $articleId int
 	 * @param $entry ArticleEventLogEntry
 	 */
-	function logEventEntry($articleId, &$entry) {
+	static function logEventEntry($articleId, &$entry) {
 		$articleDao =& DAORegistry::getDAO('ArticleDAO');
 		$journalId = $articleDao->getArticleJournalId($articleId);
 
@@ -62,7 +62,7 @@ class ArticleLog {
 	 * @param $messageKey string
 	 * @param $messageParams array
 	 */
-	function logEvent($articleId, $eventType, $assocType = 0, $assocId = 0, $messageKey = null, $messageParams = array()) {
+	static function logEvent($articleId, $eventType, $assocType = 0, $assocId = 0, $messageKey = null, $messageParams = array()) {
 		return ArticleLog::logEventLevel($articleId, ARTICLE_LOG_LEVEL_NOTICE, $eventType, $assocType, $assocId, $messageKey, $messageParams);
 	}
 
@@ -76,7 +76,7 @@ class ArticleLog {
 	 * @param $messageKey string
 	 * @param $messageParams array
 	 */
-	function logEventLevel($articleId, $logLevel, $eventType, $assocType = 0, $assocId = 0, $messageKey = null, $messageParams = array()) {
+	static function logEventLevel($articleId, $logLevel, $eventType, $assocType = 0, $assocId = 0, $messageKey = null, $messageParams = array()) {
 		$entry = new ArticleEventLogEntry();
 		$entry->setLogLevel($logLevel);
 		$entry->setEventType($eventType);
@@ -95,7 +95,7 @@ class ArticleLog {
 	 * @param $articleId int
 	 * @return array ArticleEventLogEntry
 	 */
-	function &getEventLogEntries($articleId, $rangeInfo = null) {
+	static function &getEventLogEntries($articleId, $rangeInfo = null) {
 		$logDao =& DAORegistry::getDAO('ArticleEventLogDAO');
 		$returner =& $logDao->getArticleLogEntries($articleId, $rangeInfo);
 		return $returner;
@@ -106,7 +106,7 @@ class ArticleLog {
 	 * @param $articleId int
 	 * @param $entry ArticleEmailLogEntry
 	 */
-	function logEmailEntry($articleId, &$entry) {
+	static function logEmailEntry($articleId, &$entry) {
 		$articleDao =& DAORegistry::getDAO('ArticleDAO');
 		$journalId = $articleDao->getArticleJournalId($articleId);
 
@@ -138,7 +138,7 @@ class ArticleLog {
 	 * @param $articleId int
 	 * @return array ArticleEmailLogEntry
 	 */
-	function &getEmailLogEntries($articleId, $rangeInfo = null) {
+	static function &getEmailLogEntries($articleId, $rangeInfo = null) {
 		$logDao =& DAORegistry::getDAO('ArticleEmailLogDAO');
 		$result =& $logDao->getArticleLogEntries($articleId, $rangeInfo);
 		return $result;

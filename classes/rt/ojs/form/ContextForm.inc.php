@@ -31,7 +31,7 @@ class ContextForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function ContextForm($contextId, $versionId) {
+	function __construct($contextId, $versionId) {
 		parent::__construct('rtadmin/context.tpl');
 		$this->addCheck(new FormValidatorPost($this));
 

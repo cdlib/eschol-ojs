@@ -29,7 +29,7 @@ class OJSCompletedPayment extends Payment {
 	/**
 	 * Constructor
 	 */
-	function OJSCompletedPayment() {
+	function __construct() {
 	}
 
 	/**

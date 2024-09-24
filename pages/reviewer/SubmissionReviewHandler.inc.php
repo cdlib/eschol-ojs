@@ -26,7 +26,7 @@ class SubmissionReviewHandler extends ReviewerHandler {
 	/**
 	 * Constructor
 	 **/
-	function SubmissionReviewHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

@@ -40,7 +40,7 @@ class SectionEditorSubmissionDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function SectionEditorSubmissionDAO() {
+	function __construct() {
 		parent::__construct();
 		$this->articleDao =& DAORegistry::getDAO('ArticleDAO');
 		$this->authorDao =& DAORegistry::getDAO('AuthorDAO');

@@ -11,7 +11,7 @@ class EditReviewerForm extends Form {
         /**
          * Constructor.
          */
-        function EditReviewerForm($userId, $articleId) {
+        function __construct($userId, $articleId) {
 		parent::__construct('sectionEditor/editReviewerForm.tpl');
 		//$this->addCheck(new FormValidatorPost($this));
 

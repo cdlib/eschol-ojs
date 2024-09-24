@@ -47,7 +47,7 @@ class InstallForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function InstallForm() {
+	function __construct() {
 		parent::__construct('install/install.tpl');
 
 		// FIXME Move the below options to an external configuration file?

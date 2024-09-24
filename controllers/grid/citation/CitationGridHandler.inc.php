@@ -22,7 +22,7 @@ class CitationGridHandler extends PKPCitationGridHandler {
 	/**
 	 * Constructor
 	 */
-	function CitationGridHandler() {
+	function __construct() {
 		parent::__construct();
 		$this->addRoleAssignment(
 				array(ROLE_ID_EDITOR, ROLE_ID_SECTION_EDITOR),

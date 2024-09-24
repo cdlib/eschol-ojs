@@ -36,7 +36,7 @@ class ThesisForm extends Form {
 	 * @param $parentPluginName string Name of parent plugin
 	 * @param $thesisId int leave as default for new thesis
 	 */
-	function ThesisForm($parentPluginName, $thesisId = null) {
+	function __construct($parentPluginName, $thesisId = null) {
 		$this->parentPluginName = $parentPluginName;
 		$thesisPlugin =& PluginRegistry::getPlugin('generic', $parentPluginName);
 		$thesisPlugin->import('Thesis');

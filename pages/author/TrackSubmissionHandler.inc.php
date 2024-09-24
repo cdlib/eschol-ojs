@@ -23,7 +23,7 @@ class TrackSubmissionHandler extends AuthorHandler {
 	/**
 	 * Constructor
 	 **/
-	function TrackSubmissionHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 
@@ -582,7 +582,7 @@ class TrackSubmissionHandler extends AuthorHandler {
 	 * View a file (inlines file).
 	 * @param $args array ($articleId, $fileId, [$revision])
 	 */
-	function viewFile($args) {
+	static function viewFile($args) {
 		$articleId = isset($args[0]) ? $args[0] : 0;
 		$fileId = isset($args[1]) ? $args[1] : 0;
 		$revision = isset($args[2]) ? $args[2] : null;

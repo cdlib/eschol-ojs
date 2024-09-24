@@ -31,7 +31,7 @@ class ExternalFeedForm extends Form {
 	 * @param $journalId int
 	 * @param $feedId int
 	 */
-	function ExternalFeedForm(&$plugin, $feedId) {
+	function __construct(&$plugin, $feedId) {
 		$this->plugin =& $plugin;
 		$this->feedId = isset($feedId) ? $feedId : null;
 

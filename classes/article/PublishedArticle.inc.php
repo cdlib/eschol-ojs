@@ -27,7 +27,7 @@ class PublishedArticle extends Article {
 	/**
 	 * Constructor.
 	 */
-	function PublishedArticle() {
+	function __construct() {
 		parent::__construct();
 	}
 

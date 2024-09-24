@@ -27,7 +27,7 @@ class RTHandler extends ArticleHandler {
 	 * Constructor
 	 * @param $request Request
 	 */
-	function RTHandler(&$request) {
+	function __construct(&$request) {
 		parent::__construct($request);
 	}
 	/**
@@ -480,7 +480,7 @@ class RTHandler extends ArticleHandler {
 	/**
 	 * Get parameter values: Used internally for RT searches
 	 */
-	function getParameterNames($value) {
+	static function getParameterNames($value) {
 		$matches = null;
 		OjsString::regexp_match_all('/\{\$([a-zA-Z0-9]+)\}/', $value, $matches);
 		// Remove the entire string from the matches list

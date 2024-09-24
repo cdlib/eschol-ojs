@@ -18,7 +18,7 @@
 import('classes.plugins.Plugin');
 
 class ReportPlugin extends Plugin {
-	function ReportPlugin() {
+	function __construct() {
 		parent::__construct();
 	}
 

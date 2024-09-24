@@ -23,7 +23,7 @@ class SuppFile extends ArticleFile {
 	/**
 	 * Constructor.
 	 */
-	function SuppFile() {
+	function __construct() {
 		parent::DataObject();
 	}
 

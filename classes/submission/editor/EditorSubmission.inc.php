@@ -23,7 +23,7 @@ class EditorSubmission extends SectionEditorSubmission {
 	/**
 	 * Constructor.
 	 */
-	function EditorSubmission() {
+	function __construct() {
 		parent::__construct();
 	}
 }

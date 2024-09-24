@@ -22,7 +22,7 @@ class ArticleNote extends Note {
 	/**
 	 * Constructor.
 	 */
-	function ArticleNote() {
+	function __construct() {
 		if (Config::getVar('debug', 'deprecation_warnings')) trigger_error('Deprecated class ArticleNote. Use Note instead');
 		parent::__construct();
 	}

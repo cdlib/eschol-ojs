@@ -20,7 +20,7 @@ class AnnouncementHandler extends PKPAnnouncementHandler {
 	/**
 	 * Constructor
 	 **/
-	function AnnouncementHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 	/**

@@ -23,7 +23,7 @@ class CopyeditorSubmission extends Article {
 	/**
 	 * Constructor.
 	 */
-	function CopyeditorSubmission() {
+	function __construct() {
 		parent::__construct();
 	}
 

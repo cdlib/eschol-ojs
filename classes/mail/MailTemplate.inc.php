@@ -30,7 +30,7 @@ class MailTemplate extends PKPMailTemplate {
 	 * @param $includeSignature boolean optional
 	 * @param $ignorePostedData boolean optional
 	 */
-	function MailTemplate($emailKey = null, $locale = null, $enableAttachments = null, $journal = null, $includeSignature = true, $ignorePostedData = false) {
+	function __construct($emailKey = null, $locale = null, $enableAttachments = null, $journal = null, $includeSignature = true, $ignorePostedData = false) {
 		parent::__construct($emailKey, $locale, $enableAttachments, $includeSignature);
 
 		// If a journal wasn't specified, use the current request.
@@ -144,7 +144,7 @@ class MailTemplate extends PKPMailTemplate {
 	 * the persistent attachments if they are used.
 	 * @param $clearAttachments boolean Whether to delete attachments after
 	 */
-	function send($clearAttachments = true) {
+	static function send($clearAttachments = true) {
 		if (isset($this->journal)) {
 			//If {$templateSignature} exists in the body of the
 			// message, replace it with the journal signature;

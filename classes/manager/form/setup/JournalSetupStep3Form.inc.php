@@ -20,7 +20,7 @@ class JournalSetupStep3Form extends JournalSetupForm {
 	/**
 	 * Constructor.
 	 */
-	function JournalSetupStep3Form() {
+	function __construct() {
 		parent::__construct(
 			3,
 			array(

@@ -22,7 +22,7 @@ class ReviewerAction extends Action {
 	/**
 	 * Constructor.
 	 */
-	function ReviewerAction() {
+	function __construct() {
 
 	}
 
@@ -37,7 +37,7 @@ class ReviewerAction extends Action {
 	 * @param $decline boolean
 	 * @param $send boolean
 	 */
-	function confirmReview($reviewerSubmission, $decline, $send) {
+	static function confirmReview($reviewerSubmission, $decline, $send) {
 		$reviewAssignmentDao =& DAORegistry::getDAO('ReviewAssignmentDAO');
 		$userDao =& DAORegistry::getDAO('UserDAO');
 
@@ -125,7 +125,7 @@ class ReviewerAction extends Action {
 	 * @param $recommendation int
 	 * @param $send boolean
 	 */
-	function recordRecommendation(&$reviewerSubmission, $recommendation, $send) {
+	static function recordRecommendation(&$reviewerSubmission, $recommendation, $send) {
 		$reviewAssignmentDao =& DAORegistry::getDAO('ReviewAssignmentDAO');
 		$userDao =& DAORegistry::getDAO('UserDAO');
 
@@ -209,7 +209,7 @@ class ReviewerAction extends Action {
 	 * Upload the annotated version of an article.
 	 * @param $reviewId int
 	 */
-	function uploadReviewerVersion($reviewId) {
+	static function uploadReviewerVersion($reviewId) {
 		import('classes.file.ArticleFileManager');
 		$reviewAssignmentDao =& DAORegistry::getDAO('ReviewAssignmentDAO');		
 		$reviewAssignment =& $reviewAssignmentDao->getById($reviewId);
@@ -261,7 +261,7 @@ class ReviewerAction extends Action {
 	 * @param $fileId int
 	 * @param $revision int If null, then all revisions are deleted.
 	 */
-	function deleteReviewerVersion($reviewId, $fileId, $revision = null) {
+	static function deleteReviewerVersion($reviewId, $fileId, $revision = null) {
 		import('classes.file.ArticleFileManager');
 
 		$articleId = Request::getUserVar('articleId');
@@ -280,7 +280,7 @@ class ReviewerAction extends Action {
 	 * @param $article object
 	 * @param $reviewId int
 	 */
-	function viewPeerReviewComments(&$user, &$article, $reviewId) {
+	static function viewPeerReviewComments(&$user, &$article, $reviewId) {
 		if (!HookRegistry::call('ReviewerAction::viewPeerReviewComments', array(&$user, &$article, &$reviewId))) {
 			import('classes.submission.form.comment.PeerReviewCommentForm');
 
@@ -299,7 +299,7 @@ class ReviewerAction extends Action {
 	 * @param $reviewId int
 	 * @param $emailComment boolean
 	 */
-	function postPeerReviewComment(&$user, &$article, $reviewId, $emailComment) {
+	static function postPeerReviewComment(&$user, &$article, $reviewId, $emailComment) {
 		if (!HookRegistry::call('ReviewerAction::postPeerReviewComment', array(&$user, &$article, &$reviewId, &$emailComment))) {
 			import('classes.submission.form.comment.PeerReviewCommentForm');
 
@@ -339,7 +339,7 @@ class ReviewerAction extends Action {
 	 * @param $reviewId int
 	 * @param $reviewFormId int
 	 */
-	function editReviewFormResponse($reviewId, $reviewFormId) {
+	static function editReviewFormResponse($reviewId, $reviewFormId) {
 		if (!HookRegistry::call('ReviewerAction::editReviewFormResponse', array($reviewId, $reviewFormId))) {
 			import('classes.submission.form.ReviewFormResponseForm');
 
@@ -354,7 +354,7 @@ class ReviewerAction extends Action {
 	 * @param $reviewId int
 	 * @param $reviewFormId int
 	 */
-	function saveReviewFormResponse($reviewId, $reviewFormId) {
+	static function saveReviewFormResponse($reviewId, $reviewFormId) {
 		if (!HookRegistry::call('ReviewerAction::saveReviewFormResponse', array($reviewId, $reviewFormId))) {
 			import('classes.submission.form.ReviewFormResponseForm');
 
@@ -399,7 +399,7 @@ class ReviewerAction extends Action {
 	 * @param $fileId int
 	 * @param $revision int
 	 */
-	function downloadReviewerFile($reviewId, $article, $fileId, $revision = null) {
+	static function downloadReviewerFile($reviewId, $article, $fileId, $revision = null) {
 		$reviewAssignmentDao =& DAORegistry::getDAO('ReviewAssignmentDAO');		
 		$reviewAssignment =& $reviewAssignmentDao->getById($reviewId);
 		$journal =& Request::getJournal();
@@ -441,7 +441,7 @@ class ReviewerAction extends Action {
 	 * Edit comment.
 	 * @param $commentId int
 	 */
-	function editComment ($article, $comment, $reviewId) {
+	static function editComment ($article, $comment, $reviewId) {
 		if (!HookRegistry::call('ReviewerAction::editComment', array(&$article, &$comment, &$reviewId))) {
 			import ('classes.submission.form.comment.EditCommentForm');
 

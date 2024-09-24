@@ -22,7 +22,7 @@ class RoleDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function RoleDAO() {
+	function __construct() {
 		parent::__construct();
 		$this->userDao =& DAORegistry::getDAO('UserDAO');
 	}
@@ -464,7 +464,7 @@ class RoleDAO extends DAO {
 	 * @param $rolePath string
 	 * @return int
 	 */
-	function getRoleIdFromPath($rolePath) {
+	static function getRoleIdFromPath($rolePath) {
 		switch ($rolePath) {
 			case 'admin':
 				return ROLE_ID_SITE_ADMIN;

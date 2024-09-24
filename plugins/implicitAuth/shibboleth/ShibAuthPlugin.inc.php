@@ -208,7 +208,7 @@ class ShibAuthPlugin extends ImplicitAuthPlugin {
 	// If they are not in the list - make sure they are not an admin. This is so you can
 	// take someone off the admin list - and their admin privelege will be revoked.
 	
-	function implicitAuthAdmin($userID, $authStr) {
+	static function implicitAuthAdmin($userID, $authStr) {
 	
 		$adminstr=Config::getVar('security', "implicit_auth_admin_list");
 		

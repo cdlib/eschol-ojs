@@ -26,7 +26,7 @@ class MetsExportDom {
 	/**
 	 * creates the METS:structMap element for an issue with multiple issues
 	 */
-	function generateStructMap(&$doc, &$root, &$journal , &$issues) {
+	static function generateStructMap(&$doc, &$root, &$journal , &$issues) {
 		$structMap =& XMLCustomWriter::createElement($doc, 'METS:structMap');
 		XMLCustomWriter::setAttribute($structMap, 'TYPE', 'logical');
 		$sDiv =& XMLCustomWriter::createElement($doc, 'METS:div');
@@ -39,7 +39,7 @@ class MetsExportDom {
 		XMLCustomWriter::appendChild($root, $structMap);
 	}
 
-	function generateIssueDiv(&$doc, &$root, &$issue) {
+	static function generateIssueDiv(&$doc, &$root, &$issue) {
 		$pDiv =& XMLCustomWriter::createElement($doc, 'METS:div');
 		XMLCustomWriter::setAttribute($pDiv, 'TYPE', 'issue');
 		XMLCustomWriter::setAttribute($pDiv, 'DMDID', 'I-'.$issue->getId());
@@ -53,7 +53,7 @@ class MetsExportDom {
 		XMLCustomWriter::appendChild($root, $pDiv);
 	}
 
-	function generateSectionDiv(&$doc, &$root, &$section, &$issue) {
+	static function generateSectionDiv(&$doc, &$root, &$section, &$issue) {
 		$pDiv =& XMLCustomWriter::createElement($doc, 'METS:div');
 		XMLCustomWriter::setAttribute($pDiv, 'TYPE', 'section');
 		XMLCustomWriter::setAttribute($pDiv, 'DMDID', 'S-'.$section->getId());
@@ -70,7 +70,7 @@ class MetsExportDom {
 	/**
 	 * creates the METS:div element for a submission
 	 */
-	function generateArticleDiv(&$doc, &$root, &$article, &$issue) {
+	static function generateArticleDiv(&$doc, &$root, &$article, &$issue) {
 		$pDiv =& XMLCustomWriter::createElement($doc, 'METS:div');
 		XMLCustomWriter::setAttribute($pDiv, 'TYPE', 'article');
 		XMLCustomWriter::setAttribute($pDiv, 'DMDID', 'A-'.$article->getId());
@@ -100,13 +100,13 @@ class MetsExportDom {
 	/**
 	 * creates the METS:fptr element for a ArticleGalley
 	 */
-	function generateArticleFileDiv(&$doc, &$root, $file) {
+	static function generateArticleFileDiv(&$doc, &$root, $file) {
 		$fDiv =& XMLCustomWriter::createElement($doc, 'METS:fptr');
 		XMLCustomWriter::setAttribute($fDiv, 'FILEID', 'F'.$file->getFileId().'-A'.$file->getArticleId());
 		XMLCustomWriter::appendChild($root, $fDiv);
 	}
 
-	function generateArticleHtmlGalleyImageFileDiv(&$doc, &$root, &$imageFile, &$article) {
+	static function generateArticleHtmlGalleyImageFileDiv(&$doc, &$root, &$imageFile, &$article) {
 		$fDiv =& XMLCustomWriter::createElement($doc, 'METS:fptr');
 		XMLCustomWriter::setAttribute($fDiv, 'FILEID', 'F'.$imageFile->getFileId().'-A'.$article->getId());
 		XMLCustomWriter::appendChild($root, $fDiv);
@@ -115,7 +115,7 @@ class MetsExportDom {
 	/**
 	 * creates the METS:div @TYPE=additional_material for the Supp Files
 	 */
-	function generateArticleSuppFilesDiv(&$doc, &$root, $suppFile) {
+	static function generateArticleSuppFilesDiv(&$doc, &$root, $suppFile) {
 		$sDiv =& XMLCustomWriter::createElement($doc, 'METS:div');
 		XMLCustomWriter::setAttribute($sDiv, 'TYPE', 'additional_material');
 		XMLCustomWriter::setAttribute($sDiv, 'DMDID', 'DMD-SF'.$suppFile->getFileId().'-A'.$suppFile->getArticleId());
@@ -128,7 +128,7 @@ class MetsExportDom {
 	/**
 	 * creates the METS:dmdSec element for the Journal
 	 */
-	function generateJournalDmdSecDom(&$doc, $root, &$journal) {
+	static function generateJournalDmdSecDom(&$doc, $root, &$journal) {
 		$dmdSec =& XMLCustomWriter::createElement($doc, 'METS:dmdSec');
 		XMLCustomWriter::setAttribute($dmdSec, 'ID', 'J-'.$journal->getId());
 		$mdWrap =& XMLCustomWriter::createElement($doc, 'METS:mdWrap');
@@ -150,7 +150,7 @@ class MetsExportDom {
 	/**
 	 * creates the METS:dmdSec element for an Issue
 	 */
-	function generateIssueDmdSecDom(&$doc, &$root, &$issue, &$journal) {
+	static function generateIssueDmdSecDom(&$doc, &$root, &$issue, &$journal) {
 		$dmdSec =& XMLCustomWriter::createElement($doc, 'METS:dmdSec');
 		XMLCustomWriter::setAttribute($dmdSec, 'ID', 'I-'.$issue->getId());
 		$mdWrap =& XMLCustomWriter::createElement($doc, 'METS:mdWrap');
@@ -218,7 +218,7 @@ class MetsExportDom {
 	/**
 	 * creates the METS:dmdSec element for a Section
 	 */
-	function generateSectionDmdSecDom(&$doc, &$root, &$section, &$issue) {
+	static function generateSectionDmdSecDom(&$doc, &$root, &$section, &$issue) {
 		$dmdSec =& XMLCustomWriter::createElement($doc, 'METS:dmdSec');
 		XMLCustomWriter::setAttribute($dmdSec, 'ID', 'S-'.$section->getId());
 		$mdWrap =& XMLCustomWriter::createElement($doc, 'METS:mdWrap');
@@ -254,7 +254,7 @@ class MetsExportDom {
 	/**
 	 * creates the METS:dmdSec element for a published Paper
 	 */
-	function generateArticleDmdSecDom(&$doc, &$root, &$article, &$issue) {
+	static function generateArticleDmdSecDom(&$doc, &$root, &$article, &$issue) {
 		$dmdSec =& XMLCustomWriter::createElement($doc, 'METS:dmdSec');
 		XMLCustomWriter::setAttribute($dmdSec, 'ID', 'A-'.$article->getId());
 		$mdWrap =& XMLCustomWriter::createElement($doc, 'METS:mdWrap');
@@ -349,7 +349,7 @@ class MetsExportDom {
 	/**
 	 * creates the METS:dmdSec element for Supplementary Files
 	 */
-	function generateArticleSuppFilesDmdSecDom(&$doc, &$root, $suppFile) {
+	static function generateArticleSuppFilesDmdSecDom(&$doc, &$root, $suppFile) {
 		$dmdSec =& XMLCustomWriter::createElement($doc, 'METS:dmdSec');
 		XMLCustomWriter::setAttribute($dmdSec, 'ID', 'DMD-SF'.$suppFile->getFileId().'-A'.$suppFile->getArticleId());
 		$mdWrap =& XMLCustomWriter::createElement($doc, 'METS:mdWrap');
@@ -416,7 +416,7 @@ class MetsExportDom {
 	/**
 	 * finds all files associated with this Issue by going through all Articles
 	 */
-	function generateIssueFileSecDom(&$doc, &$root, &$issue) {
+	static function generateIssueFileSecDom(&$doc, &$root, &$issue) {
 		$publishedArticleDao =& DAORegistry::getDAO('PublishedArticleDAO');
 		$publishedArticleArray = $publishedArticleDao->getPublishedArticles($issue->getId());
 		$i = 0;
@@ -426,7 +426,7 @@ class MetsExportDom {
 		}
 	}
 
-	function generateIssueHtmlGalleyFileSecDom(&$doc, &$root, &$issue) {
+	static function generateIssueHtmlGalleyFileSecDom(&$doc, &$root, &$issue) {
 		$publishedArticleDao =& DAORegistry::getDAO('PublishedArticleDAO');
 		$publishedArticleArray = $publishedArticleDao->getPublishedArticles($issue->getId());
 		$i = 0;
@@ -439,7 +439,7 @@ class MetsExportDom {
 	/**
 	 * finds all files associated with this published Papers
 	 */
-	function generateArticleFilesDom(&$doc, $root, $article, &$issue) {
+	static function generateArticleFilesDom(&$doc, $root, $article, &$issue) {
 		$articleGalleyDao =& DAORegistry::getDAO('ArticleGalleyDAO');
 		$i = 0;
 		$galleysArray =& $articleGalleyDao->getGalleysByArticle($article->getId());
@@ -456,7 +456,7 @@ class MetsExportDom {
 		}
 	}
 
-	function generateArticleHtmlGalleyFilesDom(&$doc, $root, $article, &$issue) {
+	static function generateArticleHtmlGalleyFilesDom(&$doc, $root, $article, &$issue) {
 		$articleGalleyDao =& DAORegistry::getDAO('ArticleGalleyDAO');
 		$i = 0;
 		$galleysArray =& $articleGalleyDao->getGalleysByArticle($article->getId());
@@ -472,7 +472,7 @@ class MetsExportDom {
 		}
 	}
 
-	function generateArticleHtmlGalleyImageFileDom(&$doc, &$root, $article, $galley, $imageFile, $useAttribute) {
+	static function generateArticleHtmlGalleyImageFileDom(&$doc, &$root, $article, $galley, $imageFile, $useAttribute) {
 		import('classes.file.PublicFileManager');
 		import('lib.pkp.classes.file.FileManager');
 		$contentWrapper = $this->getSetting($this->journalId, 'contentWrapper');
@@ -509,7 +509,7 @@ class MetsExportDom {
 	 * Creates a METS:file for the paperfile
 	 * checks if METS:FContent or METS:FLocat should be used
 	 */
-	function generateArticleFileDom(&$doc, &$root, $article, &$galleyFile, $useAttribute) {
+	static function generateArticleFileDom(&$doc, &$root, $article, &$galleyFile, $useAttribute) {
 		import('classes.file.PublicFileManager');
 		import('lib.pkp.classes.file.FileManager');
 		$contentWrapper = $this->getSetting($this->journalId, 'contentWrapper');
@@ -542,7 +542,7 @@ class MetsExportDom {
 	 * Creates a METS:file for the Supplementary File
 	 * checks if METS:FContent or METS:FLocat should be used
 	 */
-	function generateArticleSuppFileDom(&$doc, &$root, $article, &$suppFile) {
+	static function generateArticleSuppFileDom(&$doc, &$root, $article, &$suppFile) {
 		import('classes.file.PublicFileManager');
 		import('lib.pkp.classes.file.FileManager');
 		$contentWrapper = $this->getSetting($this->journalId, 'contentWrapper');
@@ -573,7 +573,7 @@ class MetsExportDom {
 	/**
 	 * Create mods:name for a presenter
 	 */
-	function &generateAuthorDom(&$doc, $author) {
+	static function &generateAuthorDom(&$doc, $author) {
 		$presenterNode =& XMLCustomWriter::createElement($doc, 'mods:name');
 		XMLCustomWriter::setAttribute($presenterNode, 'type', 'personal');
 		$fNameNode =&XMLCustomWriter::createChildWithText($doc, $presenterNode, 'mods:namePart', $author->getFirstName().' '.$author->getMiddleName());
@@ -590,7 +590,7 @@ class MetsExportDom {
 	/**
 	 * Create METS:amdSec for the Conference
 	 */
-	function createmetsamdSec($doc, &$root, &$journal) {
+	static function createmetsamdSec($doc, &$root, &$journal) {
 		$amdSec =& XMLCustomWriter::createElement($doc, 'METS:amdSec');
 		$techMD =& XMLCustomWriter::createElement($doc, 'METS:techMD');
 		XMLCustomWriter::setAttribute($techMD, 'ID', 'A-'.$journal->getId());
@@ -620,7 +620,7 @@ class MetsExportDom {
 	/**
 	 * Create METS:metsHdr for export
 	 */
-	function createmetsHdr($doc) {
+	static function createmetsHdr($doc) {
 		$root =& XMLCustomWriter::createElement($doc, 'METS:metsHdr');
 		XMLCustomWriter::setAttribute($root, 'CREATEDATE', date('c'));
 		XMLCustomWriter::setAttribute($root, 'LASTMODDATE', date('c'));
@@ -656,7 +656,7 @@ class MetsExportDom {
 	 * getPublicFilePath had to be added due to problems in the current
 	 * $paperFile->getFilePath(); for Galley Files
 	 */
-	function getPublicFilePath(&$file, $pathComponent) {
+	static function getPublicFilePath(&$file, $pathComponent) {
 		$articleId = $file->getArticleId();
 		$articleDao =& DAORegistry::getDAO('ArticleDAO');
 		$article =& $articleDao->getArticle($articleId);
@@ -668,7 +668,7 @@ class MetsExportDom {
 	/**
 	 * getPublicFileUrl !!!! must be a better way....
 	 */
-	function getPublicFileUrl(&$file) {
+	static function getPublicFileUrl(&$file) {
 		import('classes.config.Config');
 		$base_url =& Config::getVar('general','base_url');
 		$articleDao =& DAORegistry::getDAO('ArticleDAO');
@@ -683,7 +683,7 @@ class MetsExportDom {
 	/**
 	 * getPublicSuppFileUrl !!!! must be a better way....
 	 */
-	function getPublicSuppFileUrl(&$file) {
+	static function getPublicSuppFileUrl(&$file) {
 		import('classes.config.Config');
 		$base_url =& Config::getVar('general','base_url');
 		$articleDao =& DAORegistry::getDAO('ArticleDAO');

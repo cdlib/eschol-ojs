@@ -25,7 +25,7 @@ class Ad extends DataObject {
 	 * Constructor
 	 * @param $openAdsConnection object
 	 */
-	function Ad(&$openAdsConnection) {
+	function __construct(&$openAdsConnection) {
 		$this->openAdsConnection =& $openAdsConnection;
 	}
 

@@ -19,7 +19,7 @@ import('classes.plugins.Plugin');
 import('lib.pkp.classes.oai.OAIStruct');
 
 class OAIMetadataFormatPlugin extends Plugin {
-	function OAIMetadataFormatPlugin() {
+	function __construct() {
 		parent::__construct();
 	}
 

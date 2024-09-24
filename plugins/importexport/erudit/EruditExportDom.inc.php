@@ -18,7 +18,7 @@
 import('lib.pkp.classes.xml.XMLCustomWriter');
 
 class EruditExportDom {
-	function &generateArticleDom(&$doc, &$journal, &$issue, &$article, &$galley) {
+	static function &generateArticleDom(&$doc, &$journal, &$issue, &$article, &$galley) {
 		$unavailableString = \OjsLocale::translate('plugins.importexport.erudit.unavailable');
 
 		$root =& XMLCustomWriter::createElement($doc, 'article');

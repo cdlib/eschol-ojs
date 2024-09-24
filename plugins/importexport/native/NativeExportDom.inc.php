@@ -18,7 +18,7 @@
 import('lib.pkp.classes.xml.XMLCustomWriter');
 
 class NativeExportDom {
-	function &generateIssueDom(&$doc, &$journal, &$issue, $embedFiles = false) {
+	static function &generateIssueDom(&$doc, &$journal, &$issue, $embedFiles = false) {
 		$root =& XMLCustomWriter::createElement($doc, 'issue');
 
 		XMLCustomWriter::setAttribute($root, 'published', $issue->getPublished()?'true':'false');
@@ -110,7 +110,7 @@ class NativeExportDom {
 		return $root;
 	}
 
-	function &createEmbedElement(&$doc, &$parent, &$embedFiles, &$data, $fullPath) {
+	static function &createEmbedElement(&$doc, &$parent, &$embedFiles, &$data, $fullPath) {
 		if ($embedFiles) {
 			$embedNode =& XMLCustomWriter::createChildWithText($doc, $parent, 'embed', base64_encode($data));
 			XMLCustomWriter::setAttribute($embedNode, 'encoding', 'base64');
@@ -122,7 +122,7 @@ class NativeExportDom {
 		}
 	}
 
-	function &generateSectionDom(&$doc, &$journal, &$issue, &$section, $embedFiles) {
+	static function &generateSectionDom(&$doc, &$journal, &$issue, &$section, $embedFiles) {
 		$root =& XMLCustomWriter::createElement($doc, 'section');
 
 		if (is_array($section->getTitle(null))) foreach ($section->getTitle(null) as $locale => $title) {
@@ -163,7 +163,7 @@ class NativeExportDom {
 		return $root;
 	}
 
-	function &generateArticleDom(&$doc, &$journal, &$issue, &$section, &$article, $embedFiles = false) {
+	static function &generateArticleDom(&$doc, &$journal, &$issue, &$section, &$article, $embedFiles = false) {
 		$root =& XMLCustomWriter::createElement($doc, 'article');
 		if ($doi = $article->getDOI()) {
 			$idNode =& XMLCustomWriter::createChildWithText($doc, $root, 'id', $doi);
@@ -440,7 +440,7 @@ class NativeExportDom {
 		return $root;
 	}
 
-	function &generateAuthorDom(&$doc, &$journal, &$issue, &$article, &$author) {
+	static function &generateAuthorDom(&$doc, &$journal, &$issue, &$article, &$author) {
 		$root =& XMLCustomWriter::createElement($doc, 'author');
 		if ($author->getPrimaryContact()) XMLCustomWriter::setAttribute($root, 'primary_contact', 'true');
 
@@ -485,7 +485,7 @@ class NativeExportDom {
 		return $root;
 	}
 
-	function &generateGalleyDom(&$doc, &$journal, &$issue, &$article, &$galley, $embedFiles = false) {
+	static function &generateGalleyDom(&$doc, &$journal, &$issue, &$article, &$galley, $embedFiles = false) {
 		$isHtml = $galley->isHTMLGalley();
 
 		import('classes.file.ArticleFileManager');
@@ -535,7 +535,7 @@ class NativeExportDom {
 		return $root;
 	}
 	
-	function &generateSuppFileDom(&$doc, &$journal, &$issue, &$article, &$suppFile, $embedFiles = false) {
+	static function &generateSuppFileDom(&$doc, &$journal, &$issue, &$article, &$suppFile, $embedFiles = false) {
 		$root =& XMLCustomWriter::createElement($doc, 'supplemental_file');
 
 		// FIXME: These should be constants!

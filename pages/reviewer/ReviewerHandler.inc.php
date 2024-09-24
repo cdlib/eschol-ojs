@@ -22,7 +22,7 @@ class ReviewerHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function ReviewerHandler() {
+	function __construct() {
 		parent::__construct();
 
 		$this->addCheck(new HandlerValidatorJournal($this));
@@ -142,7 +142,7 @@ class ReviewerHandler extends Handler {
 	 * Setup common template variables.
 	 * @param $subclass boolean set to true if caller is below this handler in the hierarchy
 	 */
-	function setupTemplate($subclass = false, $articleId = 0, $reviewId = 0) {
+	static function setupTemplate($subclass = false, $articleId = 0, $reviewId = 0) {
 		parent::setupTemplate();
 		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_PKP_SUBMISSION, LOCALE_COMPONENT_OJS_EDITOR));
 		$templateMgr =& TemplateManager::getManager();

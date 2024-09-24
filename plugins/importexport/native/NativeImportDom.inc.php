@@ -18,7 +18,7 @@
 import('lib.pkp.classes.xml.XMLCustomWriter');
 
 class NativeImportDom {
-	function importArticles(&$journal, &$nodes, &$issue, &$section, &$articles, &$errors, &$user, $isCommandLine) {
+	static function importArticles(&$journal, &$nodes, &$issue, &$section, &$articles, &$errors, &$user, $isCommandLine) {
 		$articles = array();
 		$dependentItems = array();
 		$hasErrors = false;
@@ -38,7 +38,7 @@ class NativeImportDom {
 		return true;
 	}
 
-	function importArticle(&$journal, &$node, &$issue, &$section, &$article, &$errors, &$user, $isCommandLine) {
+	static function importArticle(&$journal, &$node, &$issue, &$section, &$article, &$errors, &$user, $isCommandLine) {
 		$dependentItems = array();
 		$result = NativeImportDom::handleArticleNode($journal, $node, $issue, $section, $article, $publishedArticle, $errors, $user, $isCommandLine, $dependentItems);
 		if (!$result) {
@@ -47,7 +47,7 @@ class NativeImportDom {
 		return $result;
 	}
 
-	function importIssues(&$journal, &$issueNodes, &$issues, &$errors, &$user, $isCommandLine) {
+	static function importIssues(&$journal, &$issueNodes, &$issues, &$errors, &$user, $isCommandLine) {
 		$dependentItems = array();
 		$errors = array();
 		$issues = array();
@@ -81,7 +81,7 @@ class NativeImportDom {
 		return true;
 	}
 
-	function importIssue(&$journal, &$issueNode, &$issue, &$errors, &$user, $isCommandLine, &$dependentItems, $cleanupErrors = true) {
+	static function importIssue(&$journal, &$issueNode, &$issue, &$errors, &$user, $isCommandLine, &$dependentItems, $cleanupErrors = true) {
 		$errors = array();
 		$issue = null;
 		$hasErrors = false;
@@ -297,7 +297,7 @@ class NativeImportDom {
 		return true;
 	}
 
-	function handleCoverNode(&$journal, &$coverNode, &$issue, &$errors, $isCommandLine) {
+	static function handleCoverNode(&$journal, &$coverNode, &$issue, &$errors, $isCommandLine) {
 		$errors = array();
 		$hasErrors = false;
 
@@ -367,7 +367,7 @@ class NativeImportDom {
 		return true;
 	}
 	
-	function handleArticleCoverNode(&$journal, &$coverNode, &$article, &$errors, $isCommandLine) {
+	static function handleArticleCoverNode(&$journal, &$coverNode, &$article, &$errors, $isCommandLine) {
 		$errors = array();
 		$hasErrors = false;
 
@@ -437,14 +437,14 @@ class NativeImportDom {
 		return true;
 	}
 
-	function isRelativePath($url) {
+	static function isRelativePath($url) {
 		// FIXME This is not very comprehensive, but will work for now.
 		if (NativeImportDom::isAllowedMethod($url)) return false;
 		if ($url[0] == '/') return false;
 		return true;
 	}
 
-	function isAllowedMethod($url) {
+	static function isAllowedMethod($url) {
 		$allowedPrefixes = array(
 			'http://',
 			'ftp://',
@@ -457,7 +457,7 @@ class NativeImportDom {
 		return false;
 	}
 
-	function handleSectionNode(&$journal, &$sectionNode, &$issue, &$errors, &$user, $isCommandLine, &$dependentItems, $sectionIndex = null) {
+	static function handleSectionNode(&$journal, &$sectionNode, &$issue, &$errors, &$user, $isCommandLine, &$dependentItems, $sectionIndex = null) {
 		$sectionDao =& DAORegistry::getDAO('SectionDAO');
 
 		$errors = array();
@@ -631,7 +631,7 @@ class NativeImportDom {
 		return true;
 	}
 
-	function handleArticleNode(&$journal, &$articleNode, &$issue, &$section, &$article, &$publishedArticle, &$errors, &$user, $isCommandLine, &$dependentItems) {
+	static function handleArticleNode(&$journal, &$articleNode, &$issue, &$section, &$article, &$publishedArticle, &$errors, &$user, $isCommandLine, &$dependentItems) {
 		$errors = array();
 
 		$journalSupportedLocales = array_keys($journal->getSupportedLocaleNames()); // => journal locales must be set up before
@@ -963,7 +963,7 @@ class NativeImportDom {
 		return true;
 	}
 
-	function handleAuthorNode(&$journal, &$authorNode, &$issue, &$section, &$article, &$errors) {
+	static function handleAuthorNode(&$journal, &$authorNode, &$issue, &$section, &$article, &$errors) {
 		$errors = array();
 
 		$journalSupportedLocales = array_keys($journal->getSupportedLocaleNames()); // => journal locales must be set up before
@@ -1024,7 +1024,7 @@ class NativeImportDom {
 
 	}
 
-	function handleGalleyNode(&$journal, &$galleyNode, &$issue, &$section, &$article, &$errors, $isCommandLine, $isHtml, $galleyCount, &$articleFileManager) {
+	static function handleGalleyNode(&$journal, &$galleyNode, &$issue, &$section, &$article, &$errors, $isCommandLine, $isHtml, $galleyCount, &$articleFileManager) {
 		$errors = array();
 
 		$journalSupportedLocales = array_keys($journal->getSupportedLocaleNames()); // => journal locales must be set up before
@@ -1107,7 +1107,7 @@ class NativeImportDom {
 	 * and image files. FIXME: The parameter lists, here and elsewhere, are getting
 	 * ridiculous.
 	 */
-	function handleHtmlGalleyNodes(&$galleyNode, &$articleFileManager, &$galley, &$errors, &$isCommandLine) {
+	static function handleHtmlGalleyNodes(&$galleyNode, &$articleFileManager, &$galley, &$errors, &$isCommandLine) {
 		$articleGalleyDao =& DAORegistry::getDAO('ArticleGalleyDAO');
 
 		foreach ($galleyNode->children as $node) {
@@ -1153,7 +1153,7 @@ class NativeImportDom {
 		return true;
 	}
 
-	function handleSuppFileNode(&$journal, &$suppNode, &$issue, &$section, &$article, &$errors, $isCommandLine, &$articleFileManager) {
+	static function handleSuppFileNode(&$journal, &$suppNode, &$issue, &$section, &$article, &$errors, $isCommandLine, &$articleFileManager) {
 		$errors = array();
 
 		$journalSupportedLocales = array_keys($journal->getSupportedLocaleNames()); // => journal locales must be set up before
@@ -1309,7 +1309,7 @@ class NativeImportDom {
 		
 	}
 	
-	function cleanupFailure (&$dependentItems) {
+	static function cleanupFailure (&$dependentItems) {
 		$issueDao =& DAORegistry::getDAO('IssueDAO');
 		$articleDao =& DAORegistry::getDAO('ArticleDAO');
 

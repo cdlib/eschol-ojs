@@ -23,7 +23,7 @@ class DOAJExportDom {
 	 * @param $doc object DOM object
 	 * @param $journal object Journal to export
 	 */
-	function &generateJournalDom(&$doc, &$journal) {
+	static function &generateJournalDom(&$doc, &$journal) {
 		$issueDao =& DAORegistry::getDAO('IssueDAO');
 		$sectionDao =& DAORegistry::getDAO('SectionDAO');
 		$pubArticleDao =& DAORegistry::getDAO('PublishedArticleDAO');
@@ -58,7 +58,7 @@ class DOAJExportDom {
 	 * Get the eScholarship ARK for an article.
 	 * @param $article object Article
 	 */
-	function getEscholArk($article) {
+	static function getEscholArk($article) {
                 $eschol_ark = '';
                 $eschol_fullArk = '';
 
@@ -90,7 +90,7 @@ class DOAJExportDom {
 	 * @param $section object Section
 	 * @param $article object Article
 	 */
-	function &generateArticleDom(&$doc, &$journal, &$issue, &$section, &$article, $eschol_ark, $eschol_fullArk) {
+	static function &generateArticleDom(&$doc, &$journal, &$issue, &$section, &$article, $eschol_ark, $eschol_fullArk) {
 		$root =& XMLCustomWriter::createElement($doc, 'record');
 
 		/* --- Article Language --- */
@@ -205,7 +205,7 @@ class DOAJExportDom {
 	 * @param $author object Author
 	 * @param $affilList array List of author affiliations
 	 */
-	function &generateAuthorDom(&$doc, &$journal, &$issue, &$article, &$author, &$affilList) {
+	static function &generateAuthorDom(&$doc, &$journal, &$issue, &$article, &$author, &$affilList) {
 		$root =& XMLCustomWriter::createElement($doc, 'author');
 
 		XMLCustomWriter::createChildWithText($doc, $root, 'name', $author->getFullName());
@@ -222,7 +222,7 @@ class DOAJExportDom {
 	 * Generate a list of affiliations among all authors of an article.
 	 * @param $authors object Array of article authors
 	 */
-	function &generateAffiliationsList($authors) {
+	static function &generateAffiliationsList($authors) {
 		$affilList = array();
 	
 		foreach ($authors as $author) {

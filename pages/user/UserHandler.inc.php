@@ -21,7 +21,7 @@ class UserHandler extends Handler {
 	/**
 	 * Constructor
 	 **/
-	function UserHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

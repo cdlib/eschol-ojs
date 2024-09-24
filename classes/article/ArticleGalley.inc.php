@@ -23,7 +23,7 @@ class ArticleGalley extends ArticleFile {
 	/**
 	 * Constructor.
 	 */
-	function ArticleGalley() {
+	function __construct() {
 		parent::DataObject();
 	}
 

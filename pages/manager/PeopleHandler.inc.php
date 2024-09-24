@@ -25,7 +25,7 @@ class PeopleHandler extends ManagerHandler {
 	/**
 	 * Constructor
 	 **/
-	function PeopleHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 
@@ -480,7 +480,7 @@ class PeopleHandler extends ManagerHandler {
 	 * Display form to create/edit a user profile.
 	 * @param $args array optional, if set the first parameter is the ID of the user to edit
 	 */
-	function editUser($args, &$request) {
+	static function editUser($args, &$request) {
 		$this->validate();
 		$this->setupTemplate(true);
 

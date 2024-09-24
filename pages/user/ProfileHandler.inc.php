@@ -20,7 +20,7 @@ class ProfileHandler extends UserHandler {
 	/**
 	 * Constructor
 	 **/
-	function ProfileHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 

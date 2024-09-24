@@ -19,7 +19,7 @@ class CopyeditorSubmissionRequiredPolicy extends SubmissionRequiredPolicy {
 	 * Constructor
 	 * @param $request PKPRequest
 	 */
-	function CopyeditorSubmissionRequiredPolicy(&$request, &$args, $submissionParameterName = 'articleId') {
+	function __construct(&$request, &$args, $submissionParameterName = 'articleId') {
 		parent::__construct($request, $args, $submissionParameterName, 'user.authorization.invalidCopyditorSubmission');
 	}
 

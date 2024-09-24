@@ -31,7 +31,7 @@ class EditorHandler extends SectionEditorHandler {
 	/**
 	 * Constructor
 	 **/
-	function EditorHandler() {
+	function __construct() {
 		parent::__construct();
 
 		$this->addCheck(new HandlerValidatorJournal($this));

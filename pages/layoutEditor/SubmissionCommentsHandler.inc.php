@@ -24,7 +24,7 @@ class SubmissionCommentsHandler extends LayoutEditorHandler {
 	/**
 	 * Constructor
 	 **/
-	function SubmissionCommentsHandler() {
+	function __construct() {
 		parent::__construct();
 	}
 	

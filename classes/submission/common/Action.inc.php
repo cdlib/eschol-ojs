@@ -43,7 +43,7 @@ class Action extends PKPAction {
 	/**
 	 * Constructor.
 	 */
-	function Action() {
+	function __construct() {
 		parent::__construct();
 	}
 
@@ -207,7 +207,7 @@ class Action extends PKPAction {
 	 * @param $fileId int
 	 * @param $revision int
 	 */
-	function downloadFile($articleId, $fileId, $revision = null) {
+	static function downloadFile($articleId, $fileId, $revision = null) {
 		import('classes.file.ArticleFileManager');
 		$articleFileManager = new ArticleFileManager($articleId);
 		return $articleFileManager->downloadFile($fileId, $revision);
@@ -219,7 +219,7 @@ class Action extends PKPAction {
 	 * @param $fileId int
 	 * @param $revision int
 	 */
-	function viewFile($articleId, $fileId, $revision = null) {
+	static function viewFile($articleId, $fileId, $revision = null) {
 		import('classes.file.ArticleFileManager');
 		$articleFileManager = new ArticleFileManager($articleId);
 		return $articleFileManager->viewFile($fileId, $revision);

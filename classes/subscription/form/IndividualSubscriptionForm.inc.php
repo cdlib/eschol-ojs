@@ -26,7 +26,7 @@ class IndividualSubscriptionForm extends SubscriptionForm {
 	 * Constructor
 	 * @param subscriptionId int leave as default for new subscription
 	 */
-	function IndividualSubscriptionForm($subscriptionId = null, $userId = null) {
+	function __construct($subscriptionId = null, $userId = null) {
 		parent::Form('subscription/individualSubscriptionForm.tpl');
 		parent::__construct($subscriptionId, $userId);
 

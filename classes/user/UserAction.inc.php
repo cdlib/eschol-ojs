@@ -31,7 +31,7 @@ class UserAction {
 	/**
 	 * Merge user accounts, including attributed articles etc.
 	 */
-	function mergeUsers($oldUserId, $newUserId) {
+	static function mergeUsers($oldUserId, $newUserId) {
 		// Need both user ids for merge
 		if (empty($oldUserId) || empty($newUserId)) {
 			return false;
