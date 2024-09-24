@@ -43,7 +43,7 @@ class AuthSourceSettingsForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->assign('authId', $this->authId);
 		$templateMgr->assign('helpTopicId', 'site.siteManagement');

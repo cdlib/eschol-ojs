@@ -112,7 +112,7 @@ class InstallForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->assign('localeOptions', $this->supportedLocales);
 		$templateMgr->assign('localesComplete', $this->localesComplete);

@@ -31,7 +31,7 @@ class CopyeditCommentForm extends CommentForm {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \NULL, $template = \NULL) {
 		$article = $this->article;
 
 		$templateMgr =& TemplateManager::getManager();

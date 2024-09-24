@@ -515,7 +515,7 @@ class EditorHandler extends SectionEditorHandler {
 	 * Setup common template variables.
 	 * @param $level int set to 0 if caller is at the same level as this handler in the hierarchy; otherwise the number of levels below this handler
 	 */
-	function setupTemplate($level = EDITOR_SECTION_HOME, $articleId = 0, $parentPage = null) {
+	function setupTemplate($level = EDITOR_SECTION_HOME, $articleId = 0, $parentPage = null, $showSidebar = \true) {
 		parent::setupTemplate();
 
 		// Layout Editors have access to some Issue Mgmt functions. Make sure we give them

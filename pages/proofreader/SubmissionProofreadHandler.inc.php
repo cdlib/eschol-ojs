@@ -94,7 +94,7 @@ class SubmissionProofreadHandler extends ProofreaderHandler {
 	 * Validate that the user is the assigned proofreader for the submission.
 	 * Redirects to proofreader index page if validation fails.
 	 */
-	function validate($articleId) {
+	function validate($articleId, $request = \null) {
 		parent::validate();
 
 		$isValid = false;

@@ -288,7 +288,7 @@ class MetadataForm extends Form {
 	 * @param $request PKPRequest
 	 * @return int the article ID
 	 */
-	function execute(&$request) {
+	function execute(&$request = null) {
 		$articleDao =& DAORegistry::getDAO('ArticleDAO');
 		$authorDao =& DAORegistry::getDAO('AuthorDAO');
 		$sectionDao =& DAORegistry::getDAO('SectionDAO');

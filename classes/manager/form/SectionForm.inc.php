@@ -97,7 +97,7 @@ class SectionForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$journal =& Request::getJournal();
 		$templateMgr =& TemplateManager::getManager();
 

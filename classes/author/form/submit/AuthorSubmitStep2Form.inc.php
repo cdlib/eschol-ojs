@@ -52,7 +52,7 @@ class AuthorSubmitStep2Form extends AuthorSubmitForm {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \NULL, $template = \NULL) {
 		$templateMgr =& TemplateManager::getManager();
 
 		// Get supplementary files for this article

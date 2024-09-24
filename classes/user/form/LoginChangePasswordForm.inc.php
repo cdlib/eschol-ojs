@@ -37,7 +37,7 @@ class LoginChangePasswordForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$templateMgr =& TemplateManager::getManager();
 		$site =& Request::getSite();
 		$templateMgr->assign('minPasswordLength', $site->getMinPasswordLength());

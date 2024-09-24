@@ -37,7 +37,7 @@ class AuthorDepositForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$templateMgr =& TemplateManager::getManager();
 
 		$depositPoints = $this->_getDepositableDepositPoints();

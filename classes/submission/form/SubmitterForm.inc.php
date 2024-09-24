@@ -113,7 +113,7 @@ class SubmitterForm extends Form {
 	/**
 	 * Save changes to submitter
 	 */
-	function execute(&$request) {
+	function execute(&$request = null) {
                 $articleDao =& DAORegistry::getDAO('ArticleDAO');
 		$article =& $this->article;
 		$submitterId = $this->getData('submitter');

@@ -107,7 +107,7 @@ class ReferralHandler extends Handler {
 		Request::redirect(null, 'author');
 	}
 
-	function validate($referralId = null) {
+	function validate($referralId = null, $request = \null) {
 		parent::validate();
 		
 		if ($referralId) {

@@ -26,7 +26,7 @@ class EmailTemplateDAO extends PKPEmailTemplateDAO {
 	 * @param $journalId int
 	 * @return BaseEmailTemplate
 	 */
-	function &getBaseEmailTemplate($emailKey, $journalId) {
+	function &getBaseEmailTemplate($emailKey, $journalId, $assocId) {
 		$returner =& parent::getBaseEmailTemplate($emailKey, ASSOC_TYPE_JOURNAL, $journalId);
 		return $returner;
 	}
@@ -37,7 +37,7 @@ class EmailTemplateDAO extends PKPEmailTemplateDAO {
 	 * @param $journalId int
 	 * @return LocaleEmailTemplate
 	 */
-	function &getLocaleEmailTemplate($emailKey, $journalId) {
+	function &getLocaleEmailTemplate($emailKey, $journalId, $assocId) {
 		$returner =& parent::getLocaleEmailTemplate($emailKey, ASSOC_TYPE_JOURNAL, $journalId);
 		return $returner;
 	}
@@ -49,7 +49,7 @@ class EmailTemplateDAO extends PKPEmailTemplateDAO {
 	 * @param $journalId int
 	 * @return EmailTemplate
 	 */
-	function &getEmailTemplate($emailKey, $locale, $journalId) {
+	function &getEmailTemplate($emailKey, $locale, $journalId, $assocId) {
 		$returner =& parent::getEmailTemplate($emailKey, $locale, ASSOC_TYPE_JOURNAL, $journalId);
 		return $returner;
 	}
@@ -59,7 +59,7 @@ class EmailTemplateDAO extends PKPEmailTemplateDAO {
 	 * @param $emailKey string
 	 * @param $journalId int
 	 */
-	function deleteEmailTemplateByKey($emailKey, $journalId) {
+	function deleteEmailTemplateByKey($emailKey, $journalId, $assocId) {
 		return parent::deleteEmailTemplateByKey($emailKey, ASSOC_TYPE_JOURNAL, $journalId);
 	}
 
@@ -89,7 +89,7 @@ class EmailTemplateDAO extends PKPEmailTemplateDAO {
 	 * @param $journalId int
 	 * @return boolean
 	 */
-	function templateExistsByKey($emailKey, $journalId = null) {
+	function templateExistsByKey($emailKey, $journalId = null, $assocId = \null) {
 		return parent::templateExistsByKey($emailKey, $journalId!==null?ASSOC_TYPE_JOURNAL:null, $journalId);
 	}
 
@@ -99,7 +99,7 @@ class EmailTemplateDAO extends PKPEmailTemplateDAO {
 	 * @param $journalId int
 	 * @return boolean
 	 */
-	function customTemplateExistsByKey($emailKey, $journalId) {
+	function customTemplateExistsByKey($emailKey, $journalId, $assocId) {
 		return parent::customTemplateExistsByKey($emailKey, ASSOC_TYPE_JOURNAL, $journalId);
 	}
 }

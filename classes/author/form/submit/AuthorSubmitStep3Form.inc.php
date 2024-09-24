@@ -143,7 +143,7 @@ class AuthorSubmitStep3Form extends AuthorSubmitForm {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \NULL, $template = \NULL) {
 		$templateMgr =& TemplateManager::getManager();
 
 		$countryDao =& DAORegistry::getDAO('CountryDAO');
@@ -162,7 +162,7 @@ class AuthorSubmitStep3Form extends AuthorSubmitForm {
 	 * @param $request Request
 	 * @return int the article ID
 	 */
-	function execute(&$request) {
+	function execute(&$request = null) {
 		$articleDao =& DAORegistry::getDAO('ArticleDAO');
 		$authorDao =& DAORegistry::getDAO('AuthorDAO');
 		$article =& $this->article;

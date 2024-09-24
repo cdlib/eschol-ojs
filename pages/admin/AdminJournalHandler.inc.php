@@ -184,7 +184,7 @@ class AdminJournalHandler extends AdminHandler {
 	/**
 	 * Set up the template.
 	 */
-	function setupTemplate() {
+	function setupTemplate($subclass = \false) {
 		parent::setupTemplate(true);
 		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_OJS_MANAGER));
 	}

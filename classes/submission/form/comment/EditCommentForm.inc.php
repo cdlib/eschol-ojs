@@ -63,7 +63,7 @@ class EditCommentForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display($additionalHiddenParams = null) {
+	function display($additionalHiddenParams = null, $template = \null) {
 		$hiddenFormParams = array(
 			'articleId' => $this->article->getArticleId(),
 			'commentId' => $this->comment->getCommentId()

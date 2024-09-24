@@ -167,7 +167,7 @@ class CommentHandler extends Handler {
 	/**
 	 * Validation
 	 */
-	function validate($articleId) {
+	function validate($articleId, $request = \null) {
 		parent::validate();
 
 		$journal =& Request::getJournal();
@@ -207,7 +207,7 @@ class CommentHandler extends Handler {
 		return true;
 	}
 
-	function setupTemplate($article, $galleyId, $comment = null) {
+	function setupTemplate($article = null, $galleyId = null, $comment = null) {
 		parent::setupTemplate();
 		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_PKP_READER));
 		$templateMgr =& TemplateManager::getManager();

@@ -30,7 +30,7 @@ class LayoutCommentForm extends CommentForm {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \NULL, $template = \NULL) {
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->assign('pageTitle', 'submission.comments.comments');
 		$templateMgr->assign('commentAction', 'postLayoutComment');

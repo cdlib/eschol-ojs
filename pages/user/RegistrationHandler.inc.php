@@ -163,7 +163,7 @@ class RegistrationHandler extends UserHandler {
 	 * Validation check.
 	 * Checks if journal allows user registration.
 	 */	
-	function validate() {
+	function validate($requiredContexts = \null, $request = \null) {
 		parent::validate(false);
 		$journal = Request::getJournal();
 		if ($journal != null) {

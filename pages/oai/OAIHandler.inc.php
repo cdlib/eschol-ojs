@@ -36,7 +36,7 @@ class OAIHandler extends Handler {
 		$oai->execute();
 	}
 
-	function validate() {
+	function validate($requiredContexts = \null, $request = \null) {
 		// Site validation checks not applicable
 		//parent::validate();
 

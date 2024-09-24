@@ -115,7 +115,7 @@ class StudentThesisForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$thesisPlugin =& PluginRegistry::getPlugin('generic', $this->parentPluginName);
 		$thesisPlugin->import('Thesis');
 		$templateMgr =& TemplateManager::getManager();

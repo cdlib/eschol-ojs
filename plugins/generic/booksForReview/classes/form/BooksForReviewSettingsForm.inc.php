@@ -66,7 +66,7 @@ class BooksForReviewSettingsForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->assign('validDueWeeks', $this->validDueWeeks);
 		$templateMgr->assign('validNumDays', $this->validNumDays);

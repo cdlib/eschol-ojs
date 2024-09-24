@@ -42,7 +42,7 @@ class AuthorSubmitStep5Form extends AuthorSubmitForm {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \NULL, $template = \NULL) {
 		$journal =& Request::getJournal();
 		$user =& Request::getUser();
 		$templateMgr =& TemplateManager::getManager();

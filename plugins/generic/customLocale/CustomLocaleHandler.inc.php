@@ -204,7 +204,7 @@ class CustomLocaleHandler extends Handler {
 		return str_replace("\r\n", "\n", $value);
 	}
 
-	function setupTemplate(&$plugin, $subclass = true) {
+	function setupTemplate(&$plugin = null, $subclass = true) {
 		parent::setupTemplate();
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->register_function('plugin_url', array($plugin, 'smartyPluginUrl'));

@@ -97,7 +97,7 @@ class ProfileForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$user =& Request::getUser();
 
 		$templateMgr =& TemplateManager::getManager();
@@ -177,7 +177,7 @@ class ProfileForm extends Form {
 	/**
 	 * Initialize form data from current settings.
 	 */
-	function initData(&$args, &$request) {
+	function initData(&$args = null, &$request = null) {
 		$user =& $request->getUser();
 		$interestDao =& DAORegistry::getDAO('InterestDAO');
 

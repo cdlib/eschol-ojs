@@ -319,7 +319,7 @@ class CounterHandler extends Handler {
 	 * Redirects to the user index page if not properly authenticated.
 	 * @param $canRedirect boolean Whether or not to redirect if the user cannot be validated; if not, the script simply terminates.
 	 */
-	function validate($canRedirect = true) {
+	function validate($canRedirect = true, $request = \null) {
 		parent::validate();
 		$journal =& Request::getJournal();
 		if (!Validation::isSiteAdmin()) {

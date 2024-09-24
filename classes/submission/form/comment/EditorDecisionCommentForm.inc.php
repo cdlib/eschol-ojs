@@ -30,7 +30,7 @@ class EditorDecisionCommentForm extends CommentForm {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \NULL, $template = \NULL) {
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->assign('pageTitle', 'submission.comments.editorAuthorCorrespondence');
 		$templateMgr->assign('articleId', $this->article->getArticleId());

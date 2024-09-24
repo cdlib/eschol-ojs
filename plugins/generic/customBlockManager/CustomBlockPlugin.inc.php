@@ -96,7 +96,7 @@ class CustomBlockPlugin extends BlockPlugin {
 	/**
 	 * Perform management functions
 	 */
-	function manage($verb, $args) {
+	function manage($verb, $args, &$message) {
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->register_function('plugin_url', array(&$this, 'smartyPluginUrl'));
 

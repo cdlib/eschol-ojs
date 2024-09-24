@@ -52,7 +52,7 @@ class GroupForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->assign_by_ref('group', $this->group);
 		$templateMgr->assign('helpTopicId', 'journal.managementPages.groups');

@@ -167,7 +167,7 @@ class StaticPagesEditForm extends Form {
 		}
 	}
 
-	function display() {
+	function display($request = \null, $template = \null) {
 		$templateMgr =& TemplateManager::getManager();
 
 		parent::display();

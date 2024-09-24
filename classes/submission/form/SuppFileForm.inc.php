@@ -82,7 +82,7 @@ class SuppFileForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$journal =& Request::getJournal();
 
 		$templateMgr =& TemplateManager::getManager();
@@ -125,7 +125,7 @@ class SuppFileForm extends Form {
 	/**
 	 * Validate the form
 	 */
-	function validate() {
+	function validate($callHooks = \true) {
 		$journal =& Request::getJournal();
 		$suppFileDao =& DAORegistry::getDAO('SuppFileDAO');
 

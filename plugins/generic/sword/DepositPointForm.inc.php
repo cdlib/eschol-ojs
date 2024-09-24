@@ -62,7 +62,7 @@ class DepositPointForm extends Form {
 		$this->readUserVars(array('depositPoint'));
 	}
 
-	function display() {
+	function display($request = \null, $template = \null) {
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->assign('depositPointId', $this->depositPointId);
 		$templateMgr->assign('depositPointTypes', $this->plugin->getTypeMap());

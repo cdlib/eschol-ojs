@@ -38,7 +38,7 @@ class ChangePasswordForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$user =& Request::getUser();
 		$templateMgr =& TemplateManager::getManager();
 		$site =& Request::getSite();

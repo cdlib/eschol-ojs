@@ -109,7 +109,7 @@ class BookForReviewForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		if ($this->book != null) {
 			$book =& $this->book;
 
@@ -243,7 +243,7 @@ class BookForReviewForm extends Form {
 	/**
 	 * Check to ensure that the form is correctly validated.
 	 */
-	function validate() {
+	function validate($callHooks = \true) {
 		// Verify that book cover image, if supplied, is actually an image.
 		import('classes.file.PublicFileManager');
 		$publicFileManager = new PublicFileManager();

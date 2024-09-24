@@ -146,7 +146,7 @@ class SubmissionCopyeditHandler extends CopyeditorHandler {
 	 * the article.
 	 * Redirects to copyeditor index page if validation fails.
 	 */
-	function validate($articleId) {
+	function validate($articleId, $request = \null) {
 		parent::validate();
 
 		$copyeditorSubmissionDao =& DAORegistry::getDAO('CopyeditorSubmissionDAO');

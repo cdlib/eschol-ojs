@@ -60,7 +60,7 @@ class ExternalFeedSettingsForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$journalId = $this->journalId;
 		$plugin =& $this->plugin;
 

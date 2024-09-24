@@ -37,7 +37,7 @@ class CustomThemeSettingsForm extends Form {
 		parent::__construct($plugin->getTemplatePath() . 'settingsForm.tpl');
 	}
 
-	function display() {
+	function display($request = \null, $template = \null) {
 		$templateMgr =& TemplateManager::getManager();
 		$additionalHeadData = $templateMgr->get_template_vars('additionalHeadData');
 		$additionalHeadData .= '<script type="text/javascript" src="' . Request::getBaseUrl() . '/plugins/themes/custom/picker.js"></script>' . "\n";
