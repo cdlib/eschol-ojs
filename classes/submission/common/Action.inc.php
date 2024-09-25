@@ -54,7 +54,7 @@ class Action extends PKPAction {
          * Change submitter of an article.
          * @param $article object
          */
-        function changeSubmitter($article, $journal) {
+        static function changeSubmitter($article, $journal) {
                 if (!HookRegistry::call('Action::changeSubmitter', array(&$article, &$journal))) {
                         import('classes.submission.form.SubmitterForm');
                         $submitterForm = new SubmitterForm($article, $journal);
@@ -229,7 +229,7 @@ class Action extends PKPAction {
 	 * Display submission management instructions.
 	 * @param $type string the type of instructions (copy, layout, or proof).
 	 */
-	function instructions($type, $allowed = array('copy', 'layout', 'proof', 'referenceLinking')) {
+	static function instructions($type, $allowed = array('copy', 'layout', 'proof', 'referenceLinking')) {
 		$journal =& Request::getJournal();
 		$templateMgr =& TemplateManager::getManager();
 

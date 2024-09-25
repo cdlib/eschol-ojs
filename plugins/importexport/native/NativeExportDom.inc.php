@@ -626,7 +626,7 @@ class NativeExportDom {
 		return $root;
 	}
 
-	function formatDate($date) {
+	static function formatDate($date) {
 		if ($date == '') return null;
 		return date('Y-m-d', strtotime($date));
 	}

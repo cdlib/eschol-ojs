@@ -1059,7 +1059,7 @@ class IssueManagementHandler extends EditorHandler {
 	 * Setup common template variables.
 	 * @param $level int set to one of EDITOR_SECTION_? defined in EditorHandler.
 	 */
-	function setupTemplate($level = EDITOR_SECTION_HOME, $articleId = 0, $parentPage = NULL) {
+	function setupTemplate($level = EDITOR_SECTION_HOME, $articleId = 0, $parentPage = NULL, $showSidebar = true) {
 		parent::setupTemplate($level);
 
 		$templateMgr =& TemplateManager::getManager();
