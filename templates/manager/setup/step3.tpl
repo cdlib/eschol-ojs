@@ -363,7 +363,7 @@
 		<p>{translate key="manager.setup.citationOutputStyleDescription"}</p>
 		{fbvSelect id="metaCitationOutputFilterSelect" name="metaCitationOutputFilterId"
 				from=$metaCitationOutputFilters translate=false selected=$metaCitationOutputFilterId|escape
-				defaultValue="-1" defaultLabel="manager.setup.filter.pleaseSelect"|translate}
+				defaultValue="-1" defaultLabel="manager.setup.filter.pleaseSelect"}
 	</div>
 	{literal}<script type='text/javascript'>
 		$(function(){
