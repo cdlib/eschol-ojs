@@ -119,10 +119,12 @@ class InstitutionalSubscription extends Subscription {
 	/**
 	 * Check whether subscription is valid
 	 */
-	function isValid($domain, $IP, $check = SUBSCRIPTION_DATE_BOTH, $checkDate = null) {
-		$subscriptionDao =& DAORegistry::getDAO('InstitutionalSubscriptionDAO');
-		return $subscriptionDao->isValidInstitutionalSubscription($domain, $IP, $this->getData('journalId'), $check, $checkDate);
-	}
+	// MH CDL: Couldn't get the prototype to match without breaking other things. Seems unused (hopefully)
+	//         so commenting it out.
+	/* function isValid($domain, $IP, $check = SUBSCRIPTION_DATE_BOTH, $checkDate = null) {
+	 	$subscriptionDao =& DAORegistry::getDAO('InstitutionalSubscriptionDAO');
+	 	return $subscriptionDao->isValidInstitutionalSubscription($domain, $IP, $this->getData('journalId'), $check, $checkDate);
+	 }*/
 
 }
 

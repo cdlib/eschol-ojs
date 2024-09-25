@@ -69,7 +69,7 @@ class JournalSetupStep3Form extends JournalSetupForm {
 	 * @param $request Request
 	 * @param $dispatcher Dispatcher
 	 */
-	function display($request, $dispatcher) {
+	function display($request=null, $dispatcher=null) {
 		$templateMgr =& TemplateManager::getManager($request);
 		// Add extra style sheets required for ajax components
 		// FIXME: Must be removed after OMP->OJS backporting

@@ -43,7 +43,7 @@ class JournalFileManager extends FileManager {
 		return parent::uploadFile($fileName, $this->filesDir . $destFileName);
 	}
 
-	function downloadFile($filePath, $fileType, $inline = false) {
+	function downloadFile($filePath, $fileType = null, $inline = false) {
 		return parent::downloadFile($this->filesDir . $filePath, $fileType, $inline);
 	}
 

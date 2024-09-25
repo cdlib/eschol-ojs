@@ -114,7 +114,7 @@ class ManagerHandler extends Handler {
 	 * @param $journalId int Journal ID of the journal from which the settings will be obtained
 	 * @return array
 	 */	
-	function &retrieveRoleAssignmentPreferences($journalId) {
+	static function &retrieveRoleAssignmentPreferences($journalId) {
 		$journalSettingsDao =& DAORegistry::getDAO('JournalSettingsDAO');
 		$journalSettings = $journalSettingsDao->getJournalSettings($journalId);
   		$returner = array('disableSectionEditorDecisions'=>0,'useLayoutEditors'=>0,'useCopyeditors'=>0,'useProofreaders'=>0);

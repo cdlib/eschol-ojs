@@ -62,7 +62,7 @@ class AnnouncementHandler extends PKPAnnouncementHandler {
 	 * @param $announcementId int
 	 * return bool
 	 */	
-	function _announcementIsValid($announcementId) {
+	function _announcementIsValid($announcementId=null) {
 		if ($announcementId == null) 
 			return true;
 
@@ -83,7 +83,7 @@ class AnnouncementHandler extends PKPAnnouncementHandler {
 	 * @param $typeId int
 	 * return bool
 	 */
-	function _announcementTypeIsValid($typeId) {
+	function _announcementTypeIsValid($typeId=null) {
 		$journal =& Request::getJournal();
 		$announcementTypeDao =& DAORegistry::getDAO('AnnouncementTypeDAO');
 		return (($typeId != null && $announcementTypeDao->getAnnouncementTypeAssocId($typeId) == $journal->getId()) || $typeId == null);

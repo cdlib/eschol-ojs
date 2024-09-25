@@ -62,7 +62,7 @@ class JournalSetupStep5Form extends JournalSetupForm {
 	/**
 	 * Display the form.
 	 */
-	function display($request, $dispatcher) {
+	function display($request=null, $dispatcher=null) {
 		$journal =& $request->getJournal();
 
 		$allThemes =& PluginRegistry::loadCategory('themes');
