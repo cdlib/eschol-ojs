@@ -144,7 +144,7 @@ class ReviewerHandler extends Handler {
 	 * Setup common template variables.
 	 * @param $subclass boolean set to true if caller is below this handler in the hierarchy
 	 */
-	static function setupTemplate($subclass = false, $articleId = 0, $reviewId = 0) {
+	function setupTemplate($subclass = false, $articleId = 0, $reviewId = 0) {
 		parent::setupTemplate();
 		\OjsLocale::requireComponents(array(LOCALE_COMPONENT_PKP_SUBMISSION, LOCALE_COMPONENT_OJS_EDITOR));
 		$templateMgr =& TemplateManager::getManager();

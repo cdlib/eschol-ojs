@@ -441,7 +441,7 @@ class ReviewerAction extends Action {
 	 * Edit comment.
 	 * @param $commentId int
 	 */
-	static function editComment ($article, $comment, $reviewId = null) {
+	function editComment ($article, $comment, $reviewId = null) {
 		if (!HookRegistry::call('ReviewerAction::editComment', array(&$article, &$comment, &$reviewId))) {
 			import ('classes.submission.form.comment.EditCommentForm');
 
