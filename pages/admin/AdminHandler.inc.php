@@ -24,8 +24,12 @@ class AdminHandler extends Handler {
 	function __construct() {
 		parent::__construct();
 		
-		$this->addCheck(new HandlerValidatorRoles($this, true, null, null, array(ROLE_ID_SITE_ADMIN)));
-		$this->addCheck(new HandlerValidatorCustom($this, true, null, null, create_function(null, 'return Request::getRequestedJournalPath() == \'index\';')));
+                $this->addCheck(new HandlerValidatorRoles($this, true, null, null, array(ROLE_ID_SITE_ADMIN)));
+                // MH CDL: refactor courtesy ChatGPT
+                /*$this->addCheck(new HandlerValidatorCustom($this, true, null, null, create_function(null, 'return Request::getRequestedJournalPath() == \'index\';')));*/
+                $this->addCheck(new HandlerValidatorCustom($this, true, null, null, function() {
+                    return Request::getRequestedJournalPath() == 'index';
+                }));
 	}
 
 	/**
