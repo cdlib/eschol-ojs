@@ -21,7 +21,7 @@ class EmailHandler extends ManagerHandler {
 	 * Constructor
 	 **/
 	function __construct() {
-		parent::ManagerHandler();
+		parent::__construct();
 	}
 
 	/**

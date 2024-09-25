@@ -26,6 +26,8 @@ for cf in codefiles:
         if '*/' in line:
             incomment = False
         if m := re.search(r'\b([\w_]+::[\w_]+)\s*\(', line):
+            if funcname == "__construct" and 'parent::' in m.group(1) and '__construct' not in m.group(1):
+                print(f"{cf}: {fullname}: Suspicious call to parent function in constructor: {line.strip()}")
             if (not '@see' in line and not re.match(r'^\s*#',line) 
                     and not re.match(r'^\s*//',line)
                     and not incomment

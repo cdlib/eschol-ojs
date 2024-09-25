@@ -25,7 +25,7 @@ class SubmissionCommentsHandler extends ReviewerHandler {
 	 * Constructor
 	 **/
 	function __construct() {
-		parent::ReviewerHandler();
+		parent::__construct();
 	}
 
 	/**

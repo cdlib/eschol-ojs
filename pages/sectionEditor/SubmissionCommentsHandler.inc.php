@@ -25,7 +25,7 @@ class SubmissionCommentsHandler extends SectionEditorHandler {
 	 * Constructor
 	 **/
 	function __construct() {
-		parent::SectionEditorHandler();
+		parent::__construct();
 	}
 
 	/**

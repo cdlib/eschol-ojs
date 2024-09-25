@@ -25,7 +25,7 @@ class SubmissionCommentsHandler extends AuthorHandler {
 	 * Constructor
 	 **/
 	function __construct() {
-		parent::AuthorHandler();
+		parent::__construct();
 	}
 
 	/**

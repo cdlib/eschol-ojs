@@ -25,7 +25,7 @@ class SubmissionCommentsHandler extends ProofreaderHandler {
 	 * Constructor
 	 **/
 	function __construct() {
-		parent::ProofreaderHandler();
+		parent::__construct();
 	}
 
 	/**
