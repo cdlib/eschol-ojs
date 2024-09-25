@@ -30,7 +30,10 @@ class AnnouncementForm extends PKPAnnouncementForm {
 		$journal =& Request::getJournal();
 
 		// If provided, announcement type is valid
-		$this->addCheck(new FormValidatorCustom($this, 'typeId', 'optional', 'manager.announcements.form.typeIdValid', create_function('$typeId, $journalId', '$announcementTypeDao =& DAORegistry::getDAO(\'AnnouncementTypeDAO\'); return $announcementTypeDao->announcementTypeExistsByTypeId($typeId, ASSOC_TYPE_JOURNAL, $journalId);'), array($journal->getId())));
+		$this->addCheck(new FormValidatorCustom($this, 'typeId', 'optional', 'manager.announcements.form.typeIdValid', function ($typeId, $journalId) use ($announcementTypeDao) {
+      $announcementTypeDao =& DAORegistry::getDAO('AnnouncementTypeDAO');
+      return $announcementTypeDao->announcementTypeExistsByTypeId($typeId, ASSOC_TYPE_JOURNAL, $journalId);
+  }, array($journal->getId())));
 	}
 
 	/**

@@ -40,7 +40,9 @@ class LanguageSettingsForm extends Form {
 		$site =& Request::getSite();
 		$this->availableLocales = $site->getSupportedLocales();
 
-		$localeCheck = create_function('$locale,$availableLocales', 'return in_array($locale,$availableLocales);');
+		$localeCheck = function ($locale, $availableLocales) {
+      return in_array($locale, $availableLocales);
+  };
 
 		// Validation checks for this form
 		$this->addCheck(new FormValidator($this, 'primaryLocale', 'required', 'manager.languages.form.primaryLocaleRequired'), array('Locale', 'isLocaleValid'));

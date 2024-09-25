@@ -91,7 +91,9 @@ class BookForReviewForm extends Form {
 
 		// Year is provided and is a valid value
 		$this->addCheck(new FormValidator($this, 'year', 'required', 'plugins.generic.booksForReview.editor.form.yearRequired'));
-		$this->addCheck(new FormValidatorCustom($this, 'year', 'required', 'plugins.generic.booksForReview.editor.form.yearValid', create_function('$year', 'return $year > 1900 && $year < 2100 ? true : false;'), array()));
+		$this->addCheck(new FormValidatorCustom($this, 'year', 'required', 'plugins.generic.booksForReview.editor.form.yearValid', function ($year) {
+      return $year > 1900 && $year < 2100 ? true : false;
+  }, array()));
 
 		// Language is provided and is valid value
 		$this->addCheck(new FormValidator($this, 'language', 'required', 'plugins.generic.booksForReview.editor.form.languageRequired'));	
@@ -101,7 +103,9 @@ class BookForReviewForm extends Form {
 		$this->addCheck(new FormValidatorInSet($this, 'edition', 'optional', 'plugins.generic.booksForReview.editor.form.editionValid', array_keys($this->validEditions)));
 
 		// If provided, pages is a valid value
-		$this->addCheck(new FormValidatorCustom($this, 'pages', 'optional', 'plugins.generic.booksForReview.editor.form.pagesValid', create_function('$pages', 'return $pages > 0 && $pages < 10000 ? true : false;'), array()));
+		$this->addCheck(new FormValidatorCustom($this, 'pages', 'optional', 'plugins.generic.booksForReview.editor.form.pagesValid', function ($pages) {
+      return $pages > 0 && $pages < 10000 ? true : false;
+  }, array()));
 
 		$this->addCheck(new FormValidatorPost($this));
 	}
@@ -236,7 +240,9 @@ class BookForReviewForm extends Form {
 
 		// If a url is provided, ensure it includes a proper prefix (i.e. http:// or https://).
 		if (!empty($this->_data['url'])) {
-			$this->addCheck(new FormValidatorCustom($this, 'url', 'required', 'plugins.generic.booksForReview.editor.form.urlPrefixIncluded', create_function('$url', 'return strpos(trim(strtolower($url)), \'http://\') === 0 || strpos(trim(strtolower($url)), \'https://\') === 0 ? true : false;'), array()));
+			$this->addCheck(new FormValidatorCustom($this, 'url', 'required', 'plugins.generic.booksForReview.editor.form.urlPrefixIncluded', function ($url) {
+       return strpos(trim(strtolower($url)), 'http://') === 0 || strpos(trim(strtolower($url)), 'https://') === 0 ? true : false;
+   }, array()));
 		}
 	}
 

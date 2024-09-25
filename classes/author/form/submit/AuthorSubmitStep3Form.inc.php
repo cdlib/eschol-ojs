@@ -24,15 +24,21 @@ class AuthorSubmitStep3Form extends AuthorSubmitForm {
 		parent::__construct($article, 3, $journal);
 
 		// Validation checks for this form
-		$this->addCheck(new FormValidatorCustom($this, 'authors', 'required', 'author.submit.form.authorRequired', create_function('$authors', 'return count($authors) > 0;')));
+		$this->addCheck(new FormValidatorCustom($this, 'authors', 'required', 'author.submit.form.authorRequired', function ($authors) {
+      return count($authors) > 0;
+  }));
 		// if individual author, require lastname, firstname
 		$this->addCheck(new FormValidatorArray($this, 'authors', 'required', 'author.submit.form.authorRequiredFields', array('firstName', 'lastName')));
 		// if corporate author, require last name only
 		// 20120123 BLH Removing email requirement for form
 		//$this->addCheck(new FormValidatorArrayCustom($this, 'authors', 'required', 'author.submit.form.authorRequiredFields', create_function('$email, $regExp', 'return OjsString::regexp_match($regExp, $email);'), array(ValidatorEmail::getRegexp()), false, array('email')));
 		// 20120123 BLH adding valid email format check
-		$this->addCheck(new FormValidatorArrayCustom($this, 'authors', 'required', 'user.profile.form.emailInvalid', create_function('$email, $regExp', 'return empty($email) ? true : OjsString::regexp_match($regExp, $email);'), array(ValidatorEmail::getRegexp()), false, array('email')));
-		$this->addCheck(new FormValidatorArrayCustom($this, 'authors', 'required', 'user.profile.form.urlInvalid', create_function('$url, $regExp', 'return empty($url) ? true : OjsString::regexp_match($regExp, $url);'), array(ValidatorUrl::getRegexp()), false, array('url')));
+		$this->addCheck(new FormValidatorArrayCustom($this, 'authors', 'required', 'user.profile.form.emailInvalid', function ($email, $regExp) {
+      return empty($email) ? true : OjsString::regexp_match($regExp, $email);
+  }, array(ValidatorEmail::getRegexp()), false, array('email')));
+		$this->addCheck(new FormValidatorArrayCustom($this, 'authors', 'required', 'user.profile.form.urlInvalid', function ($url, $regExp) {
+      return empty($url) ? true : OjsString::regexp_match($regExp, $url);
+  }, array(ValidatorUrl::getRegexp()), false, array('url')));
 		$this->addCheck(new FormValidatorLocale($this, 'title', 'required', 'author.submit.form.titleRequired', $this->getRequiredLocale()));
 		$this->addCheck(new FormValidatorLocale($this, 'discipline', 'required', 'author.submit.form.disciplineRequired', $this->getRequiredLocale()));
 
@@ -40,7 +46,11 @@ class AuthorSubmitStep3Form extends AuthorSubmitForm {
 		$section = $sectionDao->getSection($article->getSectionId());
 		$abstractWordCount = $section->getAbstractWordCount();
 		if (isset($abstractWordCount) && $abstractWordCount > 0) {
-			$this->addCheck(new FormValidatorCustom($this, 'abstract', 'required', 'author.submit.form.wordCountAlert', create_function('$abstract, $wordCount', 'foreach ($abstract as $localizedAbstract) {return count(explode(" ",$localizedAbstract)) < $wordCount; }'), array($abstractWordCount)));
+			$this->addCheck(new FormValidatorCustom($this, 'abstract', 'required', 'author.submit.form.wordCountAlert', function ($abstract, $wordCount) use ($localizedAbstract) {
+       foreach ($abstract as $localizedAbstract) {
+           return count(explode(" ", $localizedAbstract)) < $wordCount;
+       }
+   }, array($abstractWordCount)));
 		}
 
 	}

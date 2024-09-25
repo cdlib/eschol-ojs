@@ -66,11 +66,21 @@ class PaymentSettingsForm extends Form {
 						  	'acceptSubscriptionPayments' => 'bool'
 		);
 
-		$this->addCheck(new FormValidatorCustom($this, 'submissionFee', 'optional', 'manager.payment.form.numeric', create_function('$submissionFee', 'return is_numeric($submissionFee) && $submissionFee >= 0;')));
-		$this->addCheck(new FormValidatorCustom($this, 'publicationFee', 'optional', 'manager.payment.form.numeric', create_function('$publicationFee', 'return is_numeric($publicationFee) && $publicationFee >= 0;')));
-		$this->addCheck(new FormValidatorCustom($this, 'fastTrackFee', 'optional', 'manager.payment.form.numeric', create_function('$fastTrackFee', 'return is_numeric($fastTrackFee) && $fastTrackFee >= 0;')));
-		$this->addCheck(new FormValidatorCustom($this, 'purchaseArticleFee', 'optional', 'manager.payment.form.numeric', create_function('$purchaseArticleFee', 'return is_numeric($purchaseArticleFee) && $purchaseArticleFee >= 0;')));
-		$this->addCheck(new FormValidatorCustom($this, 'membershipFee', 'optional', 'manager.payment.form.numeric', create_function('$membershipFee', 'return is_numeric($membershipFee) && $membershipFee >= 0;')));
+		$this->addCheck(new FormValidatorCustom($this, 'submissionFee', 'optional', 'manager.payment.form.numeric', function ($submissionFee) {
+      return is_numeric($submissionFee) && $submissionFee >= 0;
+  }));
+		$this->addCheck(new FormValidatorCustom($this, 'publicationFee', 'optional', 'manager.payment.form.numeric', function ($publicationFee) {
+      return is_numeric($publicationFee) && $publicationFee >= 0;
+  }));
+		$this->addCheck(new FormValidatorCustom($this, 'fastTrackFee', 'optional', 'manager.payment.form.numeric', function ($fastTrackFee) {
+      return is_numeric($fastTrackFee) && $fastTrackFee >= 0;
+  }));
+		$this->addCheck(new FormValidatorCustom($this, 'purchaseArticleFee', 'optional', 'manager.payment.form.numeric', function ($purchaseArticleFee) {
+      return is_numeric($purchaseArticleFee) && $purchaseArticleFee >= 0;
+  }));
+		$this->addCheck(new FormValidatorCustom($this, 'membershipFee', 'optional', 'manager.payment.form.numeric', function ($membershipFee) {
+      return is_numeric($membershipFee) && $membershipFee >= 0;
+  }));
 
 		// grab valid currencies and add Validator
 		$currencyDao =& DAORegistry::getDAO('CurrencyDAO');

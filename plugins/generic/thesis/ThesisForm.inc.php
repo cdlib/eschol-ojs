@@ -73,13 +73,21 @@ class ThesisForm extends Form {
 
 		// Approval date is provided and valid
 		$this->addCheck(new FormValidator($this, 'dateApprovedYear', 'required', 'plugins.generic.thesis.manager.form.dateApprovedRequired'));
-		$this->addCheck(new FormValidatorCustom($this, 'dateApprovedYear', 'required', 'plugins.generic.thesis.manager.form.dateApprovedValid', create_function('$dateApprovedYear', '$minYear = date(\'Y\') + THESIS_APPROVED_YEAR_OFFSET_PAST; $maxYear = date(\'Y\'); return ($dateApprovedYear >= $minYear && $dateApprovedYear <= $maxYear) ? true : false;')));
+		$this->addCheck(new FormValidatorCustom($this, 'dateApprovedYear', 'required', 'plugins.generic.thesis.manager.form.dateApprovedValid', function ($dateApprovedYear) {
+      $minYear = date('Y') + THESIS_APPROVED_YEAR_OFFSET_PAST;
+      $maxYear = date('Y');
+      return $dateApprovedYear >= $minYear && $dateApprovedYear <= $maxYear ? true : false;
+  }));
 
 		$this->addCheck(new FormValidator($this, 'dateApprovedMonth', 'required', 'plugins.generic.thesis.manager.form.dateApprovedRequired'));
-		$this->addCheck(new FormValidatorCustom($this, 'dateApprovedMonth', 'required', 'plugins.generic.thesis.manager.form.dateApprovedValid', create_function('$dateApprovedMonth', 'return ($dateApprovedMonth >= 1 && $dateApprovedMonth <= 12) ? true : false;')));
+		$this->addCheck(new FormValidatorCustom($this, 'dateApprovedMonth', 'required', 'plugins.generic.thesis.manager.form.dateApprovedValid', function ($dateApprovedMonth) {
+      return $dateApprovedMonth >= 1 && $dateApprovedMonth <= 12 ? true : false;
+  }));
 
 		$this->addCheck(new FormValidator($this, 'dateApprovedDay', 'required', 'plugins.generic.thesis.manager.form.dateApprovedRequired'));
-		$this->addCheck(new FormValidatorCustom($this, 'dateApprovedDay', 'required', 'plugins.generic.thesis.manager.form.dateApprovedValid', create_function('$dateApprovedDay', 'return ($dateApprovedDay >= 1 && $dateApprovedDay <= 31) ? true : false;')));
+		$this->addCheck(new FormValidatorCustom($this, 'dateApprovedDay', 'required', 'plugins.generic.thesis.manager.form.dateApprovedValid', function ($dateApprovedDay) {
+      return $dateApprovedDay >= 1 && $dateApprovedDay <= 31 ? true : false;
+  }));
 
 		// Title is provided
 		$this->addCheck(new FormValidator($this, 'title', 'required', 'plugins.generic.thesis.manager.form.titleRequired'));
@@ -179,7 +187,9 @@ class ThesisForm extends Form {
 
 		// If a url is provided, ensure it includes a proper prefix (i.e. http:// or ftp://).
 		if (!empty($this->_data['url'])) {
-			$this->addCheck(new FormValidatorCustom($this, 'url', 'required', 'plugins.generic.thesis.manager.form.urlPrefixIncluded', create_function('$url', 'return strpos(trim(strtolower($url)), \'http://\') === 0 || strpos(trim(strtolower($url)), \'ftp://\') === 0 ? true : false;'), array()));
+			$this->addCheck(new FormValidatorCustom($this, 'url', 'required', 'plugins.generic.thesis.manager.form.urlPrefixIncluded', function ($url) {
+       return strpos(trim(strtolower($url)), 'http://') === 0 || strpos(trim(strtolower($url)), 'ftp://') === 0 ? true : false;
+   }, array()));
 		}
 	}
 

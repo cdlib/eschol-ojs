@@ -217,7 +217,9 @@ class RTHandler extends ArticleHandler {
 		$templateMgr->assign('galleyId', $galleyId);
 
 		$citationPlugins =& PluginRegistry::loadCategory('citationFormats');
-		uasort($citationPlugins, create_function('$a, $b', 'return strcmp($a->getDisplayName(), $b->getDisplayName());'));
+		uasort($citationPlugins, function ($a, $b) {
+      return strcmp($a->getDisplayName(), $b->getDisplayName());
+  });
 		$templateMgr->assign_by_ref('citationPlugins', $citationPlugins);
 		if (isset($citationPlugins[$citeType])) {
 			// A citation type has been selected; display citation.

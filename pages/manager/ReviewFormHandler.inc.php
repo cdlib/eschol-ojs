@@ -412,7 +412,9 @@ class ReviewFormHandler extends ManagerHandler {
 		// Reorder response items
 		$response = $reviewFormElementForm->getData('possibleResponses');
 		if (isset($response[$formLocale]) && is_array($response[$formLocale])) {
-			usort($response[$formLocale], create_function('$a,$b','return $a[\'order\'] == $b[\'order\'] ? 0 : ($a[\'order\'] < $b[\'order\'] ? -1 : 1);'));
+			usort($response[$formLocale], function ($a, $b) {
+       return $a['order'] == $b['order'] ? 0 : ($a['order'] < $b['order'] ? -1 : 1);
+   });
 		}
 		$reviewFormElementForm->setData('possibleResponses', $response);
 

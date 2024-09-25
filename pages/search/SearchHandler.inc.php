@@ -24,7 +24,9 @@ class SearchHandler extends Handler {
 	 **/
 	function __construct() {
 		parent::__construct();
-		$this->addCheck(new HandlerValidatorCustom($this, false, null, null, create_function('$journal', 'return !$journal || $journal->getSetting(\'publishingMode\') != PUBLISHING_MODE_NONE;'), array(Request::getJournal())));
+		$this->addCheck(new HandlerValidatorCustom($this, false, null, null, function ($journal) {
+      return !$journal || $journal->getSetting('publishingMode') != PUBLISHING_MODE_NONE;
+  }, array(Request::getJournal())));
 	}
 
 	/**

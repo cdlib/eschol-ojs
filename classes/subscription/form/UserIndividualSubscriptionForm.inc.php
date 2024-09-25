@@ -58,13 +58,20 @@ class UserIndividualSubscriptionForm extends Form {
 		$this->subscriptionTypes =& $subscriptionTypes->toArray();
 
 		// Ensure subscription type is valid
-		$this->addCheck(new FormValidatorCustom($this, 'typeId', 'required', 'user.subscriptions.form.typeIdValid', create_function('$typeId, $journalId', '$subscriptionTypeDao =& DAORegistry::getDAO(\'SubscriptionTypeDAO\'); return ($subscriptionTypeDao->subscriptionTypeExistsByTypeId($typeId, $journalId) && $subscriptionTypeDao->getSubscriptionTypeInstitutional($typeId) == 0) && $subscriptionTypeDao->getSubscriptionTypeDisablePublicDisplay($typeId) == 0;'), array($journal->getId())));
+		$this->addCheck(new FormValidatorCustom($this, 'typeId', 'required', 'user.subscriptions.form.typeIdValid', function ($typeId, $journalId) use ($subscriptionTypeDao) {
+      $subscriptionTypeDao =& DAORegistry::getDAO('SubscriptionTypeDAO');
+      return $subscriptionTypeDao->subscriptionTypeExistsByTypeId($typeId, $journalId) && $subscriptionTypeDao->getSubscriptionTypeInstitutional($typeId) == 0 && $subscriptionTypeDao->getSubscriptionTypeDisablePublicDisplay($typeId) == 0;
+  }, array($journal->getId())));
 
 		// Ensure that user does not already have a subscription for this journal
 		if (!isset($subscriptionId)) {
 			$this->addCheck(new FormValidatorCustom($this, 'userId', 'required', 'user.subscriptions.form.subscriptionExists', array(DAORegistry::getDAO('IndividualSubscriptionDAO'), 'subscriptionExistsByUserForJournal'), array($journalId), true));
 		} else {
-			$this->addCheck(new FormValidatorCustom($this, 'userId', 'required', 'user.subscriptions.form.subscriptionExists', create_function('$userId, $journalId, $subscriptionId', '$subscriptionDao =& DAORegistry::getDAO(\'IndividualSubscriptionDAO\'); $checkId = $subscriptionDao->getSubscriptionIdByUser($userId, $journalId); return ($checkId == 0 || $checkId == $subscriptionId) ? true : false;'), array($journalId, $subscriptionId)));
+			$this->addCheck(new FormValidatorCustom($this, 'userId', 'required', 'user.subscriptions.form.subscriptionExists', function ($userId, $journalId, $subscriptionId) use ($subscriptionDao) {
+       $subscriptionDao =& DAORegistry::getDAO('IndividualSubscriptionDAO');
+       $checkId = $subscriptionDao->getSubscriptionIdByUser($userId, $journalId);
+       return $checkId == 0 || $checkId == $subscriptionId ? true : false;
+   }, array($journalId, $subscriptionId)));
 		}
 
 		// Form was POSTed

@@ -38,7 +38,9 @@ class ArticleHandler extends Handler {
 		$router =& $request->getRouter();
 
 		$this->addCheck(new HandlerValidatorJournal($this));
-		$this->addCheck(new HandlerValidatorCustom($this, false, null, null, create_function('$journal', 'return $journal->getSetting(\'publishingMode\') != PUBLISHING_MODE_NONE;'), array($router->getContext($request))));
+		$this->addCheck(new HandlerValidatorCustom($this, false, null, null, function ($journal) {
+      return $journal->getSetting('publishingMode') != PUBLISHING_MODE_NONE;
+  }, array($router->getContext($request))));
 	}
 
 	/**

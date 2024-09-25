@@ -389,7 +389,9 @@ class ArticleFileDAO extends DAO {
 	 */
 	function isInlineable(&$articleFile) {
 		if (!isset($this->inlineableTypes)) {
-			$this->inlineableTypes = array_filter(file(INLINEABLE_TYPES_FILE), create_function('&$a', 'return ($a = trim($a)) && !empty($a) && $a[0] != \'#\';'));
+			$this->inlineableTypes = array_filter(file(INLINEABLE_TYPES_FILE), function (&$a) {
+       return ($a = trim($a)) && !empty($a) && $a[0] != '#';
+   });
 		}
 		return in_array($articleFile->getFileType(), $this->inlineableTypes);
 	}

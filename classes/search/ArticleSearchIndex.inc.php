@@ -142,7 +142,9 @@ class ArticleSearchIndex {
 
 		if (!isset($searchStopwords)) {
 			// Load stopwords only once per request (FIXME Cache?)
-			$searchStopwords = array_count_values(array_filter(file(SEARCH_STOPWORDS_FILE), create_function('&$a', 'return ($a = trim($a)) && !empty($a) && $a[0] != \'#\';')));
+			$searchStopwords = array_count_values(array_filter(file(SEARCH_STOPWORDS_FILE), function (&$a) {
+       return ($a = trim($a)) && !empty($a) && $a[0] != '#';
+   }));
 			$searchStopwords[''] = 1;
 		}
 

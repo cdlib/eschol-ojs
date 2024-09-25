@@ -27,16 +27,26 @@ class QuickSubmitForm extends Form {
 
 		$this->addCheck(new FormValidatorPost($this));
 		$this->addCheck(new FormValidator($this, 'sectionId', 'required', 'author.submit.form.sectionRequired'));
-		$this->addCheck(new FormValidatorCustom($this, 'tempFileId', 'required', 'plugins.importexport.quickSubmit.submissionRequired', create_function('$tempFileId', 'return $tempFileId > 0;')));
+		$this->addCheck(new FormValidatorCustom($this, 'tempFileId', 'required', 'plugins.importexport.quickSubmit.submissionRequired', function ($tempFileId) {
+      return $tempFileId > 0;
+  }));
 		$this->addCheck(new FormValidatorCustom($this, 'sectionId', 'required', 'author.submit.form.sectionRequired', array(DAORegistry::getDAO('SectionDAO'), 'sectionExists'), array($journal->getId())));
-		$this->addCheck(new FormValidatorCustom($this, 'authors', 'required', 'author.submit.form.authorRequired', create_function('$authors', 'return count($authors) > 0;')));
-		$this->addCheck(new FormValidatorCustom($this, 'destination', 'required', 'plugins.importexport.quickSubmit.issueRequired', create_function('$destination, $form', 'return $destination == \'queue\'? true : ($form->getData(\'issueId\') > 0);'), array(&$this)));
+		$this->addCheck(new FormValidatorCustom($this, 'authors', 'required', 'author.submit.form.authorRequired', function ($authors) {
+      return count($authors) > 0;
+  }));
+		$this->addCheck(new FormValidatorCustom($this, 'destination', 'required', 'plugins.importexport.quickSubmit.issueRequired', function ($destination, $form) {
+      return $destination == 'queue' ? true : $form->getData('issueId') > 0;
+  }, array(&$this)));
 		$this->addCheck(new FormValidatorArray($this, 'authors', 'required', 'author.submit.form.authorRequiredFields', array('firstName', 'lastName')));
 		# $this->addCheck(new FormValidatorArrayCustom($this, 'authors', 'required', 'user.profile.form.emailRequired', create_function('$email, $regExp', 'return OjsString::regexp_match($regExp, $email);'), array(ValidatorEmail::getRegexp()), false, array('email')));
-		$this->addCheck(new FormValidatorArrayCustom($this, 'authors', 'required', 'user.profile.form.urlInvalid', create_function('$url, $regExp', 'return empty($url) ? true : OjsString::regexp_match($regExp, $url);'), array(ValidatorUrl::getRegexp()), false, array('url')));
+		$this->addCheck(new FormValidatorArrayCustom($this, 'authors', 'required', 'user.profile.form.urlInvalid', function ($url, $regExp) {
+      return empty($url) ? true : OjsString::regexp_match($regExp, $url);
+  }, array(ValidatorUrl::getRegexp()), false, array('url')));
 		$this->addCheck(new FormValidatorLocale($this, 'title', 'required', 'author.submit.form.titleRequired'));
 		/* if($journal->getPath() == 'limn') { */
-			$this->addCheck(new FormValidatorCustom($this, 'fileType', 'required', 'plugins.importexport.quickSubmit.pdfOrHtmlRequired', create_function('$fileType', 'return $fileType == \'application/pdf\' || $fileType == \'text/html\';')));
+			$this->addCheck(new FormValidatorCustom($this, 'fileType', 'required', 'plugins.importexport.quickSubmit.pdfOrHtmlRequired', function ($fileType) {
+       return $fileType == 'application/pdf' || $fileType == 'text/html';
+   }));
 		/* } else {
         		$this->addCheck(new FormValidatorCustom($this, 'fileType', 'required', 'plugins.importexport.quickSubmit.pdfRequired', create_function('$fileType', 'return $fileType == \'application/pdf\';')));
 		} */

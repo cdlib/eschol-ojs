@@ -62,7 +62,9 @@ class AuthorHandler extends Handler {
 
 			// Sort all submissions by status, which is too complex to do in the DB
 			$submissionsArray = $unsortedSubmissions->toArray();
-			$compare = create_function('$s1, $s2', 'return strcmp($s1->getSubmissionStatus(), $s2->getSubmissionStatus());');
+			$compare = function ($s1, $s2) {
+       return strcmp($s1->getSubmissionStatus(), $s2->getSubmissionStatus());
+   };
 			usort ($submissionsArray, $compare);
 			if($sortDirection == SORT_DIRECTION_DESC) {
 				$submissionsArray = array_reverse($submissionsArray);

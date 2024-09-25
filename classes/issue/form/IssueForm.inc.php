@@ -67,15 +67,21 @@ class IssueForm extends Form {
 	 */
 	function validate($issueId = 0) {
 		if ($this->getData('showVolume')) {
-			$this->addCheck(new FormValidatorCustom($this, 'volume', 'required', 'editor.issues.volumeRequired', create_function('$volume', 'return ($volume > 0);')));
+			$this->addCheck(new FormValidatorCustom($this, 'volume', 'required', 'editor.issues.volumeRequired', function ($volume) {
+       return $volume > 0;
+   }));
 		}
 
 		if ($this->getData('showNumber')) {
-			$this->addCheck(new FormValidatorCustom($this, 'number', 'required', 'editor.issues.numberRequired', create_function('$number', 'return ($number > 0);')));
+			$this->addCheck(new FormValidatorCustom($this, 'number', 'required', 'editor.issues.numberRequired', function ($number) {
+       return $number > 0;
+   }));
 		}
 
 		if ($this->getData('showYear')) {
-			$this->addCheck(new FormValidatorCustom($this, 'year', 'required', 'editor.issues.yearRequired', create_function('$year', 'return ($year > 0);')));
+			$this->addCheck(new FormValidatorCustom($this, 'year', 'required', 'editor.issues.yearRequired', function ($year) {
+       return $year > 0;
+   }));
 		}
 
 		if ($this->getData('showTitle')) {
@@ -265,7 +271,9 @@ class IssueForm extends Form {
 
 		$this->readUserDateVars(array('datePublished', 'openAccessDate'));
 
-		$this->addCheck(new FormValidatorCustom($this, 'showVolume', 'required', 'editor.issues.issueIdentificationRequired', create_function('$showVolume, $showNumber, $showYear, $showTitle', 'return $showVolume || $showNumber || $showYear || $showTitle ? true : false;'), array($this->getData('showNumber'), $this->getData('showYear'), $this->getData('showTitle'))));
+		$this->addCheck(new FormValidatorCustom($this, 'showVolume', 'required', 'editor.issues.issueIdentificationRequired', function ($showVolume, $showNumber, $showYear, $showTitle) {
+      return $showVolume || $showNumber || $showYear || $showTitle ? true : false;
+  }, array($this->getData('showNumber'), $this->getData('showYear'), $this->getData('showTitle'))));
 
 	}
 
@@ -308,7 +316,9 @@ class IssueForm extends Form {
 		$issue->setShowTitle(empty($showTitle) ? 0 : $showTitle);
 		$issue->setCoverPageDescription($this->getData('coverPageDescription'), null); // Localized
 		$issue->setCoverPageAltText($this->getData('coverPageAltText'), null); // Localized
-		$showCoverPage = array_map(create_function('$arrayElement', 'return (int)$arrayElement;'), (array) $this->getData('showCoverPage'));
+		$showCoverPage = array_map(function ($arrayElement) {
+      return (int) $arrayElement;
+  }, (array) $this->getData('showCoverPage'));
 		foreach (array_keys($this->getData('coverPageDescription')) as $locale) {
 			if (!array_key_exists($locale, $showCoverPage)) {
 				$showCoverPage[$locale] = 0;
@@ -316,7 +326,9 @@ class IssueForm extends Form {
 		}
 		$issue->setShowCoverPage($showCoverPage, null); // Localized
 
-		$hideCoverPageArchives = array_map(create_function('$arrayElement', 'return (int)$arrayElement;'), (array) $this->getData('hideCoverPageArchives'));
+		$hideCoverPageArchives = array_map(function ($arrayElement) {
+      return (int) $arrayElement;
+  }, (array) $this->getData('hideCoverPageArchives'));
 		foreach (array_keys($this->getData('coverPageDescription')) as $locale) {
 			if (!array_key_exists($locale, $hideCoverPageArchives)) {
 				$hideCoverPageArchives[$locale] = 0;
@@ -324,7 +336,9 @@ class IssueForm extends Form {
 		}
 		$issue->setHideCoverPageArchives($hideCoverPageArchives, null); // Localized
 
-		$hideCoverPageCover = array_map(create_function('$arrayElement', 'return (int)$arrayElement;'), (array) $this->getData('hideCoverPageCover'));
+		$hideCoverPageCover = array_map(function ($arrayElement) {
+      return (int) $arrayElement;
+  }, (array) $this->getData('hideCoverPageCover'));
 		foreach (array_keys($this->getData('coverPageDescription')) as $locale) {
 			if (!array_key_exists($locale, $hideCoverPageCover)) {
 				$hideCoverPageCover[$locale] = 0;

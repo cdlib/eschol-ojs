@@ -58,7 +58,9 @@ class RegistrationForm extends Form {
 
 			if ($this->existingUser) {
 				// Existing user -- check login
-				$this->addCheck(new FormValidatorCustom($this, 'username', 'required', 'user.login.loginError', create_function('$username,$form', 'return Validation::checkCredentials($form->getData(\'username\'), $form->getData(\'password\'));'), array(&$this)));
+				$this->addCheck(new FormValidatorCustom($this, 'username', 'required', 'user.login.loginError', function ($username, $form) {
+        return Validation::checkCredentials($form->getData('username'), $form->getData('password'));
+    }, array(&$this)));
 			} else {
 				// New user -- check required profile fields
 				$site =& Request::getSite();
@@ -66,12 +68,16 @@ class RegistrationForm extends Form {
 				$this->addCheck(new FormValidatorCustom($this, 'username', 'required', 'user.register.form.usernameExists', array(DAORegistry::getDAO('UserDAO'), 'userExistsByUsername'), array(), true));
 				$this->addCheck(new FormValidatorAlphaNum($this, 'username', 'required', 'user.register.form.usernameAlphaNumeric'));
 				$this->addCheck(new FormValidatorLength($this, 'password', 'required', 'user.register.form.passwordLengthTooShort', '>=', $site->getMinPasswordLength()));
-				$this->addCheck(new FormValidatorCustom($this, 'password', 'required', 'user.register.form.passwordsDoNotMatch', create_function('$password,$form', 'return $password == $form->getData(\'password2\');'), array(&$this)));
+				$this->addCheck(new FormValidatorCustom($this, 'password', 'required', 'user.register.form.passwordsDoNotMatch', function ($password, $form) {
+        return $password == $form->getData('password2');
+    }, array(&$this)));
 				$this->addCheck(new FormValidator($this, 'firstName', 'required', 'user.profile.form.firstNameRequired'));
 				$this->addCheck(new FormValidator($this, 'lastName', 'required', 'user.profile.form.lastNameRequired'));
 				$this->addCheck(new FormValidatorUrl($this, 'userUrl', 'optional', 'user.profile.form.urlInvalid'));
 				$this->addCheck(new FormValidatorEmail($this, 'email', 'required', 'user.profile.form.emailRequired'));
-				$this->addCheck(new FormValidatorCustom($this, 'email', 'required', 'user.register.form.emailsDoNotMatch', create_function('$email,$form', 'return $email == $form->getData(\'confirmEmail\');'), array(&$this)));
+				$this->addCheck(new FormValidatorCustom($this, 'email', 'required', 'user.register.form.emailsDoNotMatch', function ($email, $form) {
+        return $email == $form->getData('confirmEmail');
+    }, array(&$this)));
 				$this->addCheck(new FormValidatorCustom($this, 'email', 'required', 'user.register.form.emailExists', array(DAORegistry::getDAO('UserDAO'), 'userExistsByEmail'), array(), true));
 				if ($this->captchaEnabled) {
 					$this->addCheck(new FormValidatorCaptcha($this, 'captcha', 'captchaId', 'common.captchaField.badCaptcha'));
@@ -80,7 +86,9 @@ class RegistrationForm extends Form {
 				$authDao =& DAORegistry::getDAO('AuthSourceDAO');
 				$this->defaultAuth =& $authDao->getDefaultPlugin();
 				if (isset($this->defaultAuth)) {
-					$this->addCheck(new FormValidatorCustom($this, 'username', 'required', 'user.register.form.usernameExists', create_function('$username,$form,$auth', 'return (!$auth->userExists($username) || $auth->authenticate($username, $form->getData(\'password\')));'), array(&$this, $this->defaultAuth)));
+					$this->addCheck(new FormValidatorCustom($this, 'username', 'required', 'user.register.form.usernameExists', function ($username, $form, $auth) {
+         return !$auth->userExists($username) || $auth->authenticate($username, $form->getData('password'));
+     }, array(&$this, $this->defaultAuth)));
 				}
 			}
 		}

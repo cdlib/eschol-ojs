@@ -39,7 +39,14 @@ class ReviewFormResponseForm extends Form {
 		$reviewFormElementDao =& DAORegistry::getDAO('ReviewFormElementDAO');
 		$requiredReviewFormElementIds = $reviewFormElementDao->getRequiredReviewFormElementIds($this->reviewFormId);
 
-		$this->addCheck(new FormValidatorCustom($this, 'reviewFormResponses', 'required', 'reviewer.article.reviewFormResponse.form.responseRequired', create_function('$reviewFormResponses, $requiredReviewFormElementIds', 'foreach ($requiredReviewFormElementIds as $requiredReviewFormElementId) { if (!isset($reviewFormResponses[$requiredReviewFormElementId]) || $reviewFormResponses[$requiredReviewFormElementId] == \'\') return false; } return true;'), array($requiredReviewFormElementIds)));
+		$this->addCheck(new FormValidatorCustom($this, 'reviewFormResponses', 'required', 'reviewer.article.reviewFormResponse.form.responseRequired', function ($reviewFormResponses, $requiredReviewFormElementIds) use ($requiredReviewFormElementId) {
+      foreach ($requiredReviewFormElementIds as $requiredReviewFormElementId) {
+          if (!isset($reviewFormResponses[$requiredReviewFormElementId]) || $reviewFormResponses[$requiredReviewFormElementId] == '') {
+              return false;
+          }
+      }
+      return true;
+  }, array($requiredReviewFormElementIds)));
 		$this->addCheck(new FormValidatorPost($this));
 	}
 
