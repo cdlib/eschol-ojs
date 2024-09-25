@@ -51,7 +51,7 @@
 				{$authorProofreadSignoff->getDateUnderway()|date_format:$dateFormatShort|default:"&mdash;"}
 		</td>
                 <td>
-                        {if !$authorProofreadSignoff->getDateCompleted() && $authorProofreadSignoff-->getDateNotified()}
+                        {if !$authorProofreadSignoff->getDateCompleted() && $authorProofreadSignoff->getDateNotified()}
                                 <a href="{url op="editorCompleteAuthor" articleId=$submission->getId()}" class="action">{translate key="common.complete"}</a>
                         {else}
                                 {$authorProofreadSignoff->getDateCompleted()|date_format:$dateFormatShort|default:"&mdash;"}
