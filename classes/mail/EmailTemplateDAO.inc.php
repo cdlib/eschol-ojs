@@ -49,7 +49,7 @@ class EmailTemplateDAO extends PKPEmailTemplateDAO {
 	 * @param $journalId int
 	 * @return EmailTemplate
 	 */
-	function &getEmailTemplate($emailKey, $locale, $journalId, $assocId) {
+	function &getEmailTemplate($emailKey, $locale, $journalId, $assocId = null) {
 		$returner =& parent::getEmailTemplate($emailKey, $locale, ASSOC_TYPE_JOURNAL, $journalId);
 		return $returner;
 	}
@@ -70,7 +70,7 @@ class EmailTemplateDAO extends PKPEmailTemplateDAO {
 	 * @param $rangeInfo object optional
 	 * @return array Email templates
 	 */
-	function &getEmailTemplates($locale, $journalId, $rangeInfo = null) {
+	function &emtdao_getEmailTemplates($locale, $journalId, $rangeInfo = null) {
 		$returner =& parent::getEmailTemplates($locale, ASSOC_TYPE_JOURNAL, $journalId, $rangeInfo);
 		return $returner;
 	}

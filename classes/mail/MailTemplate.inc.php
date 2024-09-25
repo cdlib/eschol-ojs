@@ -144,7 +144,7 @@ class MailTemplate extends PKPMailTemplate {
 	 * the persistent attachments if they are used.
 	 * @param $clearAttachments boolean Whether to delete attachments after
 	 */
-	static function send($clearAttachments = true) {
+	function send($clearAttachments = true) {
 		if (isset($this->journal)) {
 			//If {$templateSignature} exists in the body of the
 			// message, replace it with the journal signature;

@@ -59,7 +59,7 @@ class FilesHandler extends ManagerHandler {
 							'isDir' => $isDir,
 							'mimetype' => $isDir ? '' : FilesHandler::fileMimeType($filePath),
 							'mtime' => filemtime($filePath),
-							'size' => $isDir ? '' : FileManager::getNiceFileSize(filesize($filePath)),
+							'size' => $isDir ? '' : FileManager::static_getNiceFileSize(filesize($filePath)),
 						);
 						$files[$file] = $info;
 					}

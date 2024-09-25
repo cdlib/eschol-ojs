@@ -198,7 +198,7 @@ class SubmitHandler extends AuthorHandler {
 	/**
 	 * Create new supplementary file with a uploaded file.
 	 */
-	static function submitUploadSuppFile($args, $request) {
+	function submitUploadSuppFile($args, $request) {
 		$articleId = $request->getUserVar('articleId');
 		$journal =& $request->getJournal();
 
