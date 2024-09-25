@@ -40,7 +40,7 @@ class UserXMLParser {
 	 * @param $journalId int assumed to be a valid journal ID
 	 */
 	function __construct($journalId) {
-		$this->parser = new XMLParser();
+		$this->parser = new PKPXMLParser();
 		$this->journalId = $journalId;
 	}
 

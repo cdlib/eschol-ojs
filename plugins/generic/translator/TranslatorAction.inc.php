@@ -97,7 +97,7 @@ class TranslatorAction {
 		$files = TranslatorAction::getEmailFileMap($locale);
 		$returner = array();
 		foreach ($files as $templateFile => $templateDataFile) {
-			$xmlParser = new XMLParser();
+			$xmlParser = new PKPXMLParser();
 			$data = null;
 			if (file_exists($templateDataFile)) $data =& $xmlParser->parse($templateDataFile, array('email'));
 			if ($data) foreach ($data->getChildren() as $emailNode) {

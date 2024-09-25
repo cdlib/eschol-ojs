@@ -266,7 +266,7 @@ class NativeImportExportPlugin extends ImportExportPlugin {
 	}
 
 	function &getDocument($fileName) {
-		$parser = new XMLParser();
+		$parser = new PKPXMLParser();
 		$returner =& $parser->parse($fileName);
 		return $returner;
 	}

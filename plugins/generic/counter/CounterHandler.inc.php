@@ -168,7 +168,7 @@ class CounterHandler extends Handler {
 		if (strlen($sushiPrefix)>0)   $sushiPrefix .= ':';
 		if (strlen($counterPrefix)>0) $counterPrefix .= ':';
 
-		$parser = new XMLParser();
+		$parser = new PKPXMLParser();
 		$tree = $parser->parseText($SOAPRequest);
 		$parser->destroy(); // is this necessary?
 

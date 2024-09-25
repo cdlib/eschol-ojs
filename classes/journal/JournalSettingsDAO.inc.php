@@ -208,7 +208,7 @@ class JournalSettingsDAO extends DAO {
 	 * @param $paramArray array Optional parameters for variable replacement in settings
 	 */
 	function installSettings($journalId, $filename, $paramArray = array()) {
-		$xmlParser = new XMLParser();
+		$xmlParser = new PKPXMLParser();
 		$tree = $xmlParser->parse($filename);
 
 		if (!$tree) {
@@ -297,7 +297,7 @@ class JournalSettingsDAO extends DAO {
 	 * @param $locale string locale id for which settings will be loaded
 	 */
 	function reloadLocalizedDefaultSettings($journalId, $filename, $paramArray, $locale) {
-		$xmlParser = new XMLParser();
+		$xmlParser = new PKPXMLParser();
 		$tree = $xmlParser->parse($filename);
 
 		if (!$tree) {
