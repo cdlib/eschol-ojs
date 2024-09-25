@@ -2941,7 +2941,7 @@ class SubmissionEditHandler extends SectionEditorHandler {
 	 * @param $articleId int Article ID to validate
 	 * @param $access int Optional name of access level required -- see SECTION_EDITOR_ACCESS_... constants
 	 */
-	function validate($articleId, $access = null) {
+	function validate($articleId = null, $access = null) {
 		parent::validate();
 		$isValid = true;
 
