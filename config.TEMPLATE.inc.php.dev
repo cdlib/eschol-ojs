@@ -102,7 +102,7 @@ citation_checking_max_processes = 3
 
 driver = mysql
 host = RDS_HOST
-username = RDS_RW_USER
+username = RDS_RW_USERNAME
 password = "RDS_RW_PASSWORD"
 name = ojs
 
