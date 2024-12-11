@@ -28,7 +28,7 @@ class importExport extends CommandLineTool {
 	 * @param $argv array command-line arguments (see usage)
 	 */
 	function importExport($argv = array()) {
-		parent::CommandLineTool($argv);
+		parent::__construct($argv);
 		$this->command = array_shift($this->argv);
 		$this->parameters = $this->argv;
 	}
