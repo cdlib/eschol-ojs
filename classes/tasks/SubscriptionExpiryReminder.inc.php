@@ -23,7 +23,7 @@ class SubscriptionExpiryReminder extends ScheduledTask {
 	 * Constructor.
 	 */
 	function __construct() {
-		$this->ScheduledTask();
+		parent::__construct();
 	}
 
 	function sendReminder ($subscription, $journal, $emailKey) {

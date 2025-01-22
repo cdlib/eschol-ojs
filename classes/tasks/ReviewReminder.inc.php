@@ -22,8 +22,8 @@ class ReviewReminder extends ScheduledTask {
 	/**
 	 * Constructor.
 	 */
-	function __construct() {
-		$this->ScheduledTask();
+	public function __construct() {
+		parent::__construct();
 	}
 
 	function sendReminder ($reviewAssignment, $article, $journal) {
