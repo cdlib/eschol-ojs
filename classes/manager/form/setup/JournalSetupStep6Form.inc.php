@@ -37,7 +37,7 @@ class JournalSetupStep6Form extends JournalSetupForm {
 	/**
 	 * Display the form.
 	 */
-	function display($request, $dispatcher) {
+	function display($request=null, $dispatcher=null) {
 		$journal =& $request->getJournal();
 
 		$allThemes =& PluginRegistry::loadCategory('themes');
@@ -52,7 +52,7 @@ class JournalSetupStep6Form extends JournalSetupForm {
 
 		# Special URL is used to reach Subi's brand file configuration page.
 		$templateMgr->assign('subiURL',
-			 ($_SERVER["HTTPS"] ? 'https://' : 'http://') . $_SERVER["SERVER_NAME"] . 
+			'https://' . $_SERVER["SERVER_NAME"] . 
 			'/subi/configure?configView=compact&entity=' . $journal->getPath());
 
 		// Make lists of the sidebar blocks available.
