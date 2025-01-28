@@ -15,6 +15,15 @@
 
 // $Id$
 
+// CDL PHP 8 fix - copied following defs from ArticleEventLogEntry.inc.php
+// Log entry associative types. All types must be defined here
+define('ARTICLE_LOG_TYPE_DEFAULT', 			0);
+define('ARTICLE_LOG_TYPE_AUTHOR', 			0x01);
+define('ARTICLE_LOG_TYPE_EDITOR', 			0x02);
+define('ARTICLE_LOG_TYPE_REVIEW', 			0x03);
+define('ARTICLE_LOG_TYPE_COPYEDIT', 			0x04);
+define('ARTICLE_LOG_TYPE_LAYOUT', 			0x05);
+define('ARTICLE_LOG_TYPE_PROOFREAD', 			0x06);
 
 // Email associative types. All types must be defined here
 define('ARTICLE_EMAIL_TYPE_DEFAULT', 		0);

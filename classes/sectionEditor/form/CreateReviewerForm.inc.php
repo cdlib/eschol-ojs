@@ -65,7 +65,7 @@ class CreateReviewerForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display(&$args, &$request) {
+	function display($request = null, $template = null) {
 		$templateMgr =& TemplateManager::getManager();
 		$site =& Request::getSite();
 		$templateMgr->assign('articleId', $this->articleId);

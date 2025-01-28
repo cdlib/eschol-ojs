@@ -156,10 +156,12 @@ class TinyMCEPlugin extends GenericPlugin {
 				$fields[] = 'description';
 				break;
 			case 'manager/importexport':
-				$count = max(1, count($templateMgr->get_template_vars('authors')));
-				for ($i=0; $i<$count; $i++) {
-					$fields[] = "authors-$i-biography";
-					$fields[] = "authors-$i-competingInterests";
+				if ($templateMgr->get_template_vars('authors')) {
+					$count = max(1, count($templateMgr->get_template_vars('authors')));
+					for ($i=0; $i<$count; $i++) {
+						$fields[] = "authors-$i-biography";
+						$fields[] = "authors-$i-competingInterests";
+					}
 				}
 				$fields[] = 'abstract';
 				break;

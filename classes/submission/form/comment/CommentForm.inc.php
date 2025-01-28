@@ -40,13 +40,12 @@ class CommentForm extends Form {
 	 * @param $article object
 	 */
 	function __construct($article, $commentType, $roleId, $assocId = null) {
-		if ($commentType == COMMENT_TYPE_PEER_REVIEW) {
-			parent::Form('submission/comment/peerReviewComment.tpl');
-		} else if ($commentType == COMMENT_TYPE_EDITOR_DECISION) {
-			parent::Form('submission/comment/editorDecisionComment.tpl');
-		} else {
-			parent::Form('submission/comment/comment.tpl');
-		}
+		$template = match ($commentType) {
+			COMMENT_TYPE_PEER_REVIEW => 'submission/comment/peerReviewComment.tpl',
+			COMMENT_TYPE_EDITOR_DECISION => 'submission/comment/editorDecisionComment.tpl',
+			default => 'submission/comment/comment.tpl',
+		};
+		parent::__construct($template);
 
 		$this->article = $article;
 		$this->commentType = $commentType;
