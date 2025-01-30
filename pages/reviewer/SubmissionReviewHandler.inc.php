@@ -255,7 +255,7 @@ class SubmissionReviewHandler extends ReviewerHandler {
 	 * the article.
 	 * Redirects to reviewer index page if validation fails.
 	 */
-	function validate($reviewId, $request = \null) {
+	function validate($reviewId = null, $request = null) {
 		$reviewerSubmissionDao =& DAORegistry::getDAO('ReviewerSubmissionDAO');
 		$journal =& Request::getJournal();
 		$user =& Request::getUser();

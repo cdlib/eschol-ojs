@@ -89,7 +89,7 @@ class ManagerHandler extends Handler {
 						}
 					}
 				}
-				if (count($email->getRecipients())==0) $email->addRecipient($user->getEmail(), $user->getFullName());
+				if (count($email->getRecipients() ?? [])==0) $email->addRecipient($user->getEmail(), $user->getFullName());
 			}
 			$email->displayEditForm(Request::url(null, null, 'email'), array(), 'manager/people/email.tpl');
 		}

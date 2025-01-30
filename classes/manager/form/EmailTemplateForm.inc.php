@@ -51,7 +51,7 @@ class EmailTemplateForm extends Form {
 
 		$journal =& Request::getJournal();
 		$emailTemplateDao =& DAORegistry::getDAO('EmailTemplateDAO');
-		$emailTemplate =& $emailTemplateDao->getBaseEmailTemplate($this->emailKey, $journal->getId());
+		$emailTemplate =& $emailTemplateDao->getBaseEmailTemplate($this->emailKey, $journal->getId(), null);
 		$templateMgr->assign('canDisable', $emailTemplate?$emailTemplate->getCanDisable():false);
 		$templateMgr->assign('supportedLocales', $journal->getSupportedLocaleNames());
 		$templateMgr->assign('helpTopicId','journal.managementPages.emails');
@@ -64,7 +64,7 @@ class EmailTemplateForm extends Form {
 	function initData() {
 		$journal =& Request::getJournal();
 		$emailTemplateDao =& DAORegistry::getDAO('EmailTemplateDAO');
-		$emailTemplate =& $emailTemplateDao->getLocaleEmailTemplate($this->emailKey, $journal->getId());
+		$emailTemplate =& $emailTemplateDao->getLocaleEmailTemplate($this->emailKey, $journal->getId(), null);
 		$thisLocale = \OjsLocale::getLocale();
 
 		if ($emailTemplate) {
@@ -100,7 +100,7 @@ class EmailTemplateForm extends Form {
 
 		$journalId = $this->journal->getJournalId();
 		$emailTemplateDao =& DAORegistry::getDAO('EmailTemplateDAO');
-		$emailTemplate =& $emailTemplateDao->getLocaleEmailTemplate($this->emailKey, $journalId);
+		$emailTemplate =& $emailTemplateDao->getLocaleEmailTemplate($this->emailKey, $journalId, null);
 		if (!$emailTemplate) $this->_data['isNewTemplate'] = true;
 	}
 
@@ -111,7 +111,7 @@ class EmailTemplateForm extends Form {
 		$journal =& Request::getJournal();
 
 		$emailTemplateDao =& DAORegistry::getDAO('EmailTemplateDAO');
-		$emailTemplate =& $emailTemplateDao->getLocaleEmailTemplate($this->emailKey, $journal->getId());
+		$emailTemplate =& $emailTemplateDao->getLocaleEmailTemplate($this->emailKey, $journal->getId(), null);
 
 		if (!$emailTemplate) {
 			$emailTemplate = new LocaleEmailTemplate();
