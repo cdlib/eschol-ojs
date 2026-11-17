@@ -82,7 +82,8 @@ class TinyMCEPlugin extends GenericPlugin {
 				switch (array_shift(Request::getRequestedArgs())) {
 					case 1: $fields[] = 'commentsToEditor'; break;
 					case 3:
-						$count = max(1, count($templateMgr->get_template_vars('authors')));
+						$authors = $templateMgr->get_template_vars('authors');
+						$count = max(1, is_array($authors) ? count($authors) : 0);
 						for ($i=0; $i<$count; $i++) {
 							$fields[] = "authors-$i-biography";
 							$fields[] = "authors-$i-competingInterests";
@@ -156,12 +157,12 @@ class TinyMCEPlugin extends GenericPlugin {
 				$fields[] = 'description';
 				break;
 			case 'manager/importexport':
-				if ($templateMgr->get_template_vars('authors')) {
-					$count = max(1, count($templateMgr->get_template_vars('authors')));
-					for ($i=0; $i<$count; $i++) {
-						$fields[] = "authors-$i-biography";
-						$fields[] = "authors-$i-competingInterests";
-					}
+				// authors is only set for some import plugins; null under PHP 8 must not be count()'d
+				$authors = $templateMgr->get_template_vars('authors');
+				$count = max(1, is_array($authors) ? count($authors) : 0);
+				for ($i=0; $i<$count; $i++) {
+					$fields[] = "authors-$i-biography";
+					$fields[] = "authors-$i-competingInterests";
 				}
 				$fields[] = 'abstract';
 				break;
@@ -282,7 +283,8 @@ class TinyMCEPlugin extends GenericPlugin {
 			case 'editor/saveMetadata':
 			case 'copyeditor/viewMetadata':
 			case 'copyeditor/saveMetadata':
-				$count = max(1, count($templateMgr->get_template_vars('authors')));
+				$authors = $templateMgr->get_template_vars('authors');
+				$count = max(1, is_array($authors) ? count($authors) : 0);
 				for ($i=0; $i<$count; $i++) {
 					$fields[] = "authors-$i-biography";
 					$fields[] = "authors-$i-competingInterests";
